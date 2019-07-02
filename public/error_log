@@ -1,0 +1,11 @@
+[21-May-2018 20:28:58 UTC] PHP Fatal error:  Class 'App\Vendor' not found in /home/spxce/public_html/simplepos/app/Http/Controllers/VendorController.php on line 57
+[25-May-2018 22:00:59 UTC] PHP Fatal error:  Class 'PHPMailer\PHPMailer\PHPMailer' not found in /home/spxce/public_html/simplepos/app/Http/Controllers/MailController.php on line 13
+[23-Jul-2018 21:17:25 UTC] PHP Fatal error:  Call to a member function delete() on null in /home/spxce/public_html/simplepos/app/Http/Controllers/CounterDisplayAuthorizedPCController.php on line 118
+[23-Jul-2018 21:17:26 UTC] PHP Fatal error:  Call to a member function delete() on null in /home/spxce/public_html/simplepos/app/Http/Controllers/CounterDisplayAuthorizedPCController.php on line 118
+[17-Aug-2018 11:18:59 UTC] PHP Fatal error:  Class 'App\Payout' not found in /home/spxce/public_html/simplepos/app/Http/Controllers/InvoiceController.php on line 903
+[17-Aug-2018 11:19:10 UTC] PHP Fatal error:  Class 'App\Payout' not found in /home/spxce/public_html/simplepos/app/Http/Controllers/InvoiceController.php on line 254
+[17-Aug-2018 11:19:23 UTC] PHP Fatal error:  Class 'App\Payout' not found in /home/spxce/public_html/simplepos/app/Http/Controllers/InvoiceController.php on line 254
+[31-Aug-2018 17:56:20 UTC] PHP Fatal error:  Call to undefined method stdClass::delete() in /home/spxce/public_html/simplepos/app/Http/Controllers/RoleController.php on line 112
+[31-Aug-2018 17:56:24 UTC] PHP Fatal error:  Call to undefined method stdClass::delete() in /home/spxce/public_html/simplepos/app/Http/Controllers/RoleController.php on line 112
+[31-Aug-2018 18:01:18 UTC] PHP Fatal error:  Call to undefined method stdClass::delete() in /home/spxce/public_html/simplepos/app/Http/Controllers/RoleController.php on line 112
+[03-Oct-2018 00:00:16 UTC] PHP Fatal error:  Call to a member function delete() on null in /home/simpleretailpos/app/Http/Controllers/CategoryController.php on line 121
