@@ -34,6 +34,8 @@ class WarrantyController extends Controller
         $tab=Invoice::join('customers','invoices.customer_id','=','customers.id')
                      ->select('invoices.*','customers.name as customer_name')
                      ->where('invoices.store_id',$this->sdc->storeID())
+                     ->take(100)
+                     ->orderBy('invoices.id','DESC')
                      ->get();
         return view('apps.pages.warranty.list',['dataTable'=>$tab]);
     }
@@ -354,6 +356,8 @@ class WarrantyController extends Controller
     {
         $tab=$warranty::select('id','invoice_id','warranty_date','warranty_batch_quantity','created_at')
                      ->where('store_id',$this->sdc->storeID())
+                     ->take(100)
+                     ->orderBy('id','DESC')
                      ->get();
         return view('apps.pages.warranty.list-report',['dataTable'=>$tab]);
     }

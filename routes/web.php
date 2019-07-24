@@ -521,9 +521,26 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/authorize/net/payment/history/report','AuthorizeNetPaymentHistoryController@show');
 	Route::post('/authorize/net/payment/history/excel/report', 'AuthorizeNetPaymentHistoryController@ExcelReport');
 	Route::post('/authorize/net/payment/history/pdf/report', 'AuthorizeNetPaymentHistoryController@PdfReport');
+
+
+
+
+	Route::get('/stripe/payment/history', 'StripePaymentController@show');
+	Route::post('/stripe/payment/history/report','StripePaymentController@show');
+	Route::post('/stripe/payment/history/excel/report', 'StripePaymentController@ExcelReport');
+	Route::post('/stripe/payment/history/pdf/report', 'StripePaymentController@PdfReport');
+
+
+	Route::get('/stripe/account/setting', 'StripePaymentController@stripeSettings');
+	Route::post('/stripe/account/setting', 'StripePaymentController@stripeSettingsSave');
+	Route::post('/stripe/account/update/setting', 'StripePaymentController@stripeSettingsUpdate');
+
+
+	Route::post('stripe', 'InvoiceController@stripeCardPayment')->name('stripe.post');
 	//----------------Authorize.net Payment Route End-----------------------------//
 
 });
 
 Route::get('send-mail/invoice/email/instant', 'SendSalesEmailController@instantMailSend');
+Route::get('stripe', 'StripePaymentController@stripe');
 

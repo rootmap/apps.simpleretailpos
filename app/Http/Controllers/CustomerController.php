@@ -438,7 +438,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        $tab=$customer::where('store_id',$this->sdc->storeID())->get();
+        $tab=$customer::where('store_id',$this->sdc->storeID())->take(100)->orderBy('id','DESC')->get();
         return view('apps.pages.customer.list',['dataTable'=>$tab]);
     }
 

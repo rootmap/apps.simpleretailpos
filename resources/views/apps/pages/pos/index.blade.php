@@ -347,6 +347,15 @@
                         </div>
                         <div class="clearfix"></div>
 
+                        <style type="text/css">
+                            .select2-container--default .select2-selection--single .select2-selection__rendered
+                            {
+                                font-weight: bolder !important;
+                                text-align: center !important;
+                                font-size: 22px !important;
+                            }
+                        </style>
+
                         <div class="col-xs-12 button-group">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 button button2" @if($userguideInit==1) data-step="11" data-intro="Here you can select your customer. " @endif>
                                 <div class="input-group">
@@ -459,7 +468,8 @@
            @include('apps.include.modal.cashoutModal')
            @include('apps.include.modal.discountModal')
            @include('apps.include.modal.CustomerCardModal')
-           @include('apps.include.modal.paymodal')
+           @include('apps.include.modal.stripeCardModal',compact('stripe'))
+           @include('apps.include.modal.paymodal',compact('stripe'))
            @include('apps.include.modal.open-drawer')
            @include('apps.include.modal.close-drawer')
            @include('apps.include.modal.time_clock')
@@ -1367,6 +1377,185 @@
         $(".authorize_card_refund").click(function(){
             alert('Refund');
         });
+
+        //stripe start
+        $(".stripe_card_payment").click(function(){
+            var customerID=$.trim($("select[name=customer_id]").val());
+            if(customerID.length==0)
+            {
+                //$("#payModal").modal('hide');
+                $(".payModal-message-area").html(warningMessage("Please select a customer."));
+                return false;
+            }
+            var subTotalPrice=0;
+            $.each($("#dataCart").find("tr"),function(index,row){
+                var rowPrice=$(row).find("td:eq(2)").children("span").html();
+                subTotalPrice+=(rowPrice-0);      
+            });
+
+            subTotalPrice=parseFloat(subTotalPrice).toFixed(2);
+
+            if(subTotalPrice<1)
+            {
+                //$("#payModal").modal('hide');
+               // alert("Your cart is empty");
+                $(".payModal-message-area").html(warningMessage("Your cart is empty"));
+                return false;
+            }
+
+            
+
+            var amount_to_pay=$("input[name=amount_to_pay]").val();
+            if($.trim(amount_to_pay)>0)
+            {
+                $("#payModal").modal('hide');
+                $("#stripeCustomerCard").modal('show');
+
+                $(".cusStripeAm").html("$"+amount_to_pay);
+
+                var parseNewPayment=0;
+
+                var amount_to_pay=$("input[name=amount_to_pay]").val();                
+                var expaid=$("#posCartSummary tr:eq(4)").find("td:eq(1)").children("span").html();
+                if($.trim(expaid)==0)
+                {
+                    var parseNewPayment=parseFloat(amount_to_pay).toFixed(2);
+                }
+                else
+                {
+                    var newpayment=(expaid-0)+(amount_to_pay-0);
+                    var parseNewPayment=parseFloat(newpayment).toFixed(2);
+                }
+
+                $(".card-pay-due-amount").html(parseNewPayment);
+
+
+            }
+            else
+            {
+                $(".payModal-message-area").html(warningMessage("You don't have any due."));
+            }
+        });
+
+        $(".card-pay-stripe").click(function(){
+
+            var customerID=$.trim($("select[name=customer_id]").val());
+            if(customerID.length==0)
+            {
+                //$("#payModal").modal('hide');
+                $(".payModal-message-area").html(warningMessage("Please select a customer."));
+                return false;
+            }
+
+            var parseNewPayment=0;
+
+            var amount_to_pay=$("input[name=amount_to_pay]").val();                
+            var expaid=$("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html();
+            if($.trim(expaid)==0)
+            {
+                var parseNewPayment=parseFloat(amount_to_pay).toFixed(2);
+            }
+            else
+            {
+                var newpayment=(expaid-0)+(amount_to_pay-0);
+                var parseNewPayment=parseFloat(newpayment).toFixed(2);
+            }
+
+
+            var cardNumber=$.trim($(".authorize-card-number").val());
+            if(cardNumber.length==0)
+            {
+                $(".message-place-authorizenet").html(warningMessage("Please type card number."));
+                return false;
+            }
+
+            var cardHName=$.trim($(".authorize-card-holder-name").val());
+            if(cardHName.length==0)
+            {
+                $(".message-place-authorizenet").html(warningMessage("Please type card holder name."));
+                return false;
+            }
+
+            var cardExpire=$.trim($(".authorize-card-expiry").val());
+            if(cardExpire.length==0)
+            {
+                $(".message-place-authorizenet").html(warningMessage("Please type card expire month/Year."));
+                return false;
+            }
+
+            var cardcvc=$.trim($(".authorize-card-cvc").val());
+            if(cardcvc.length==0)
+            {
+                $(".message-place-authorizenet").html(warningMessage("Please type card cvc/cvc2 pin."));
+                return false;
+            }
+
+            $(".message-place-authorizenet").html(loadingOrProcessing("Authorizing payment please wait...."));
+
+
+
+            var addAuthrizePaymentURL="{{url('authorize/net/capture/pos/payment')}}";
+             $.ajax({
+                'async': true,
+                'type': "POST",
+                'global': false,
+                'dataType': 'json',
+                'url': addAuthrizePaymentURL,
+                'data': {
+                    'cardNumber':cardNumber,
+                    'cardHName':cardHName,
+                    'cardExpire':cardExpire,
+                    'cardcvc':cardcvc,
+                    'amountToPay':parseNewPayment,
+                    '_token':"{{csrf_token()}}"},
+                'success': function (data) {
+                    console.log("Authrizenet Print Sales ID : "+data);
+                    if(data==null)
+                    {
+                        $(".message-place-authorizenet").html(warningMessage("Failed to authorize payment. Please try again."));
+                    }
+                    else
+                    {
+                        console.log(data.status);
+                        if(data.status==1)
+                        {
+                            var amount_to_pay=$("input[name=amount_to_pay]").val();
+                            
+                            var expaid=$("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html();
+                            if($.trim(expaid)==0)
+                            {
+                                var parseNewPayment=parseFloat(amount_to_pay).toFixed(2);
+                                $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html(parseNewPayment);
+                            }
+                            else
+                            {
+                                var newpayment=(expaid-0)+(amount_to_pay-0);
+                                var parseNewPayment=parseFloat(newpayment).toFixed(2);
+                                $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html(parseNewPayment);
+                            }
+                            genarateSalesTotalCart();
+                            //------------------------Ajax POS Start-------------------------//
+                            var AddPOSUrl="{{url('sales/cart/payment')}}";
+                            $.post(AddPOSUrl,{'paymentID':8,'paidAmount':parseNewPayment,'_token':"{{csrf_token()}}"},function(response){
+                               // setTimeout(function(){ $("#CustomerCard").modal('show'); }, 3000);
+                            });
+                            //------------------------Ajax POS End---------------------------//
+                            $(".message-place-authorizenet").html(successMessage(data.message));
+
+                        }
+                        else
+                        {
+                            $(".message-place-authorizenet").html(warningMessage(data.message));
+                        }
+                    }
+                    //$(".message-place-authorizenet").html("dddd");
+                }
+            });
+            //------------------------Ajax Customer End---------------------------//
+        });
+        //stripe end
+
+
 
         $(".Paypal_Pay").click(function(){
 

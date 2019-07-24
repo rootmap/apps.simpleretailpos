@@ -201,16 +201,35 @@ ELSE IFNULL(TIME_FORMAT(TIMEDIFF(CONCAT(out_date, ' ', IF(LOCATE('PM',out_time) 
             $tabCount=CashierPunch::orderBy('id','ASC')->count();
             if($tabCount>0)
             {
-                $tab=CashierPunch::select('*',\DB::Raw("CASE WHEN out_time = '00:00:00' THEN '00:00:00' 
+                if(empty($dateString) && empty($userID))
+                {
+                    $tab=CashierPunch::select('*',\DB::Raw("CASE WHEN out_time = '00:00:00' THEN '00:00:00' 
     ELSE IFNULL(TIME_FORMAT(TIMEDIFF(CONCAT(out_date, ' ', IF(LOCATE('PM',out_time) > 0, ADDTIME(TIME(REPLACE(out_time, ' PM','')), '12:00:00'),  TIME(REPLACE(out_time, ' AM','')))),CONCAT(in_date, ' ', IF(LOCATE('PM',in_time) > 0, ADDTIME(TIME(REPLACE(in_time, ' PM','')), '12:00:00'),  TIME(REPLACE(in_time, ' AM',''))))),'%H:%i:%s'),'00:00:00') END AS elapsed_time"))
-                ->when($dateString, function ($query) use ($dateString) {
-                        return $query->whereRaw($dateString);
-                 })
-                ->when($userID, function ($query) use ($userID) {
-                        return $query->where('user_id',$userID);
-                 })
-                ->orderBy('id','DESC')
-                ->get();
+                    ->when($dateString, function ($query) use ($dateString) {
+                            return $query->whereRaw($dateString);
+                     })
+                    ->when($userID, function ($query) use ($userID) {
+                            return $query->where('user_id',$userID);
+                     })
+                    ->take(100)
+                    ->orderBy('id','DESC')
+                    ->get();
+                }
+                else
+                {
+                    $tab=CashierPunch::select('*',\DB::Raw("CASE WHEN out_time = '00:00:00' THEN '00:00:00' 
+    ELSE IFNULL(TIME_FORMAT(TIMEDIFF(CONCAT(out_date, ' ', IF(LOCATE('PM',out_time) > 0, ADDTIME(TIME(REPLACE(out_time, ' PM','')), '12:00:00'),  TIME(REPLACE(out_time, ' AM','')))),CONCAT(in_date, ' ', IF(LOCATE('PM',in_time) > 0, ADDTIME(TIME(REPLACE(in_time, ' PM','')), '12:00:00'),  TIME(REPLACE(in_time, ' AM',''))))),'%H:%i:%s'),'00:00:00') END AS elapsed_time"))
+                    ->when($dateString, function ($query) use ($dateString) {
+                            return $query->whereRaw($dateString);
+                     })
+                    ->when($userID, function ($query) use ($userID) {
+                            return $query->where('user_id',$userID);
+                     })
+                    ->orderBy('id','DESC')
+                    ->get();
+                }
+
+                
             }
         }
         else
@@ -218,17 +237,38 @@ ELSE IFNULL(TIME_FORMAT(TIMEDIFF(CONCAT(out_date, ' ', IF(LOCATE('PM',out_time) 
             $tabCount=CashierPunch::where('store_id',$storeId)->count();
             if($tabCount>0)
             {
-                $tab=CashierPunch::select('*',\DB::Raw("CASE WHEN out_time = '00:00:00' THEN '00:00:00' 
+
+                if(empty($dateString) && empty($userID))
+                {
+                    $tab=CashierPunch::select('*',\DB::Raw("CASE WHEN out_time = '00:00:00' THEN '00:00:00' 
     ELSE IFNULL(TIME_FORMAT(TIMEDIFF(CONCAT(out_date, ' ', IF(LOCATE('PM',out_time) > 0, ADDTIME(TIME(REPLACE(out_time, ' PM','')), '12:00:00'),  TIME(REPLACE(out_time, ' AM','')))),CONCAT(in_date, ' ', IF(LOCATE('PM',in_time) > 0, ADDTIME(TIME(REPLACE(in_time, ' PM','')), '12:00:00'),  TIME(REPLACE(in_time, ' AM',''))))),'%H:%i:%s'),'00:00:00') END AS elapsed_time"))
-                ->when($dateString, function ($query) use ($dateString) {
-                        return $query->whereRaw($dateString);
-                 })
-                 ->when($userID, function ($query) use ($userID) {
-                        return $query->where('user_id',$userID);
-                 })
-                ->where('store_id',$storeId)
-                ->orderBy('id','DESC')
-                ->get();
+                    ->when($dateString, function ($query) use ($dateString) {
+                            return $query->whereRaw($dateString);
+                     })
+                     ->when($userID, function ($query) use ($userID) {
+                            return $query->where('user_id',$userID);
+                     })
+                    ->where('store_id',$storeId)
+                    ->take(100)
+                    ->orderBy('id','DESC')
+                    ->get();
+                }
+                else
+                {
+                    $tab=CashierPunch::select('*',\DB::Raw("CASE WHEN out_time = '00:00:00' THEN '00:00:00' 
+    ELSE IFNULL(TIME_FORMAT(TIMEDIFF(CONCAT(out_date, ' ', IF(LOCATE('PM',out_time) > 0, ADDTIME(TIME(REPLACE(out_time, ' PM','')), '12:00:00'),  TIME(REPLACE(out_time, ' AM','')))),CONCAT(in_date, ' ', IF(LOCATE('PM',in_time) > 0, ADDTIME(TIME(REPLACE(in_time, ' PM','')), '12:00:00'),  TIME(REPLACE(in_time, ' AM',''))))),'%H:%i:%s'),'00:00:00') END AS elapsed_time"))
+                    ->when($dateString, function ($query) use ($dateString) {
+                            return $query->whereRaw($dateString);
+                     })
+                     ->when($userID, function ($query) use ($userID) {
+                            return $query->where('user_id',$userID);
+                     })
+                    ->where('store_id',$storeId)
+                    ->orderBy('id','DESC')
+                    ->get();
+                }
+
+                
             }
         }
 

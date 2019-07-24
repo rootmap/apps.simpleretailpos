@@ -79,7 +79,7 @@ class VendorController extends Controller
     {
 
 
-       $vendorInfo=Vendor::where('store_id',$this->sdc->storeID())->get();
+       $vendorInfo=Vendor::where('store_id',$this->sdc->storeID())->take(100)->orderBy('id','DESC')->get();
        return view('apps.pages.vendor.list',['dataTable'=>$vendorInfo]);
    }
 

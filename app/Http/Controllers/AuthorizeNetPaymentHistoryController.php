@@ -24,6 +24,7 @@ class AuthorizeNetPaymentHistoryController extends Controller
         $cardInfoData=AuthorizeNetPaymentHistory::select('*',\DB::Raw('(HOUR(TIMEDIFF(NOW(),created_at))) AS hour_gone'))
                                                 ->where('store_id',$this->sdc->storeID())
                                                 ->orderBy('id','DESC')
+                                                ->take(100)
                                                 ->get();
         return view('apps.pages.report.card-payment-history-authorizenet',
         	[

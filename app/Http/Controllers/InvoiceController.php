@@ -41,6 +41,10 @@ use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 //paypal lib 
 
+use Stripe;
+use App\StripeStoreSetting;
+use App\StripeTransactionHistory;
+
 class InvoiceController extends Controller
 {
     /**
@@ -1549,6 +1553,151 @@ class InvoiceController extends Controller
            
     }
 
+
+    public function stripeCardPayment(Request $request)
+    {
+        $stripe='';
+        $stripe_store_settings=\DB::table('stripe_store_settings')->where('module_status',1)->where('store_id',$this->sdc->storeID())->count();
+        if($stripe_store_settings>0)
+        {
+           $stripe=\DB::table('stripe_store_settings')->where('store_id',$this->sdc->storeID())->first();
+
+            $cart = Session::has('Pos') ? Session::get('Pos') : null;
+            $invoice_id=$cart->invoiceID;
+            $refId=$invoice_id;
+
+            //dd($request);
+
+
+            $customerInfo=Customer::find($cart->customerID);
+            $customerName=$customerInfo->name;
+
+            //dd($customerInfo);
+
+            $totalPrice=$cart->totalPrice;
+            $totalTax=$cart->totalTax;
+            $discountTotal=$cart->discountTotal;
+
+            $totalInvoicePayable=($totalPrice+$totalTax)-$discountTotal;
+
+            //dd($totalInvoicePayable);
+            $posData=serialize(json_encode($cart));
+
+            /*$checkEx=SessionInvoice::where('store_id',$this->sdc->storeID())->where('invoice_id',$cart->invoiceID)->count();
+
+            if($checkEx==0)
+            {
+                $sessionInvoice=new SessionInvoice();
+                $sessionInvoice->invoice_id=$cart->invoiceID;
+                $sessionInvoice->session_pos_data=$posData;
+                $sessionInvoice->store_id=$this->sdc->storeID();
+                $sessionInvoice->created_by=$this->sdc->UserID();
+                $sessionInvoice->save();
+            }
+            else
+            {
+                $sessionInvoice=SessionInvoice::where('store_id',$this->sdc->storeID())->where('invoice_id',$cart->invoiceID)->first();
+                $sessionInvoice->session_pos_data=$posData;
+                $sessionInvoice->updated_by=$this->sdc->UserID();
+                $sessionInvoice->save();
+            }*/
+
+
+            
+
+            if(empty($totalInvoicePayable))
+            {
+                return redirect(url('pos'))->with('error', 'Your Cart Amount is Empty.');
+            }
+
+            //dd($request->amountToPay);
+
+            Stripe\Stripe::setApiKey($stripe->secret_key);
+            $payment=Stripe\Charge::create ([
+                "amount" => $totalInvoicePayable * 100,
+                "currency" => "usd",
+                "source" => $request->stripeToken,
+                "description" => "INV - ".$invoice_id." payment from v4.nucleuspos.com." 
+            ]);
+
+            $paidAmount=$payment->amount/100;
+
+           //dd($payment);              
+           
+
+            if($payment->status=="succeeded")
+            {
+
+                /*$cardInfoData=new CardInfo;
+                $cardInfoData->card_info=$retData['CardType'];
+                $cardInfoData->card_number=$cardNumber;
+                $cardInfoData->card_name=$request->cardHName;
+                $cardInfoData->expriy_date=$expireDate;
+                $cardInfoData->pin_number=$request->cardcvc;
+                $cardInfoData->store_id=$this->sdc->storeID();
+                $cardInfoData->created_by=$this->sdc->UserID();
+                $cardInfoData->save();*/
+
+                $tab=new StripeTransactionHistory;
+                $tab->invoice_id=$invoice_id;
+                $tab->customer_id=$cart->customerID;
+                $tab->customer_name=$customerName;
+                $tab->transactionID=$payment->id;
+                
+                $tab->paid_amount=$paidAmount;
+                $tab->card_number=$payment->source->last4;
+                $tab->card_holder_name="";
+                $tab->card_expire_month=$payment->source->exp_month;
+                $tab->card_expire_year=$payment->source->exp_year;
+                $tab->card_cvc=$payment->source->last4;
+
+//brand
+                $tab->authCode=$payment->payment_method;
+                $tab->refTransID=$payment->refunds->url;
+                $tab->CardType=$payment->source->brand;
+                $tab->transactionHash=$payment->balance_transaction;
+                $tab->message=json_encode($payment);
+
+                $tab->store_id=$this->sdc->storeID();
+                $tab->created_by=$this->sdc->UserID();
+                $tab->save();
+
+
+
+
+                $tenderData=Tender::where('stripe',1)->first();
+                $payment_method=$tenderData->id;
+
+                $Ncart = new Pos($cart);
+                $Ncart->addPayment($paidAmount,$payment_method);
+                $request->session()->put('Pos', $Ncart);
+                //$cart =$request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+
+
+                return redirect(url('pos'))->with('status','Payment is successful');
+            }
+            else
+            {
+                return redirect(url('pos'))->with('error','Failed, Invalid Card / Insufficient Fund.');
+            }
+
+
+           
+
+
+        }
+        else
+        {
+            return redirect(url('pos'))->with('error', 'Please Setup Stripe Credential on settings.');
+        }
+
+
+
+        
+        
+    }
+
+
     public function AuthorizenetCardPayment(Request $request)
     {
         $cart = Session::has('Pos') ? Session::get('Pos') : null;
@@ -1787,15 +1936,27 @@ class InvoiceController extends Controller
 
         $catInfo=Category::where('store_id',$this->sdc->storeID())->get();
 
+        $stripe='';
+        $stripe_store_settings=\DB::table('stripe_store_settings')->where('module_status',1)->where('store_id',$this->sdc->storeID())->count();
+        if($stripe_store_settings>0)
+        {
+           $stripe=\DB::table('stripe_store_settings')->where('store_id',$this->sdc->storeID())->first();
+        }
+
         return view('apps.pages.pos.index',
-            ['product'=>$pro,
-            'tender'=>$tender,
-            'catInfo'=>$catInfo,
-            'addPartialPayment'=>0,
-            'payPaltender'=>$payPaltender,
-            'drawerStatus'=>$drawerStatus,
-            'authorizeNettender'=>$authorizeNettender,
-            'ps'=>$ps,'cart'=>$Cart,'customerData'=>$tab_customer,"last_invoice_id"=>$last_invoice_id,'CounterDisplay'=>$CounterDisplay]);
+            [
+                'product'=>$pro,
+                'tender'=>$tender,
+                'catInfo'=>$catInfo,
+                'addPartialPayment'=>0,
+                'payPaltender'=>$payPaltender,
+                'drawerStatus'=>$drawerStatus,
+                'authorizeNettender'=>$authorizeNettender,
+                'ps'=>$ps,'cart'=>$Cart,'customerData'=>$tab_customer,
+                "last_invoice_id"=>$last_invoice_id,
+                'CounterDisplay'=>$CounterDisplay,
+                'stripe'=>$stripe
+            ]);
     }
 
     public function loadPartialPaidInvoiceOnly()
@@ -4485,7 +4646,30 @@ class InvoiceController extends Controller
             $dateString="CAST(lsp_invoices.created_at as date) BETWEEN '".$start_date."' AND '".$end_date."'";
         }
 
-        $tab=$invoice::Leftjoin('customers','invoices.customer_id','=','customers.id')
+        if(empty($invoice_id) && empty($customer_id) && empty($start_date) && empty($end_date) && empty($dateString))
+        {
+            $tab=$invoice::Leftjoin('customers','invoices.customer_id','=','customers.id')
+                     ->select('invoices.*','customers.name as customer_name')
+                     ->where('invoices.store_id',$this->sdc->storeID())
+                     ->when($invoice_id, function ($query) use ($invoice_id) {
+                            return $query->where('invoices.invoice_id','=', $invoice_id);
+                     })
+                     ->when($invoice_status, function ($query) use ($invoice_status) {
+                            return $query->where('invoices.invoice_status','=', $invoice_status);
+                     })
+                     ->when($customer_id, function ($query) use ($customer_id) {
+                            return $query->where('invoices.customer_id','=', $customer_id);
+                     })
+                     ->when($dateString, function ($query) use ($dateString) {
+                            return $query->whereRaw($dateString);
+                     })
+                     ->take(100)
+                     ->orderBy("invoices.id","DESC")
+                     ->get();
+        }
+        else
+        {
+            $tab=$invoice::Leftjoin('customers','invoices.customer_id','=','customers.id')
                      ->select('invoices.*','customers.name as customer_name')
                      ->where('invoices.store_id',$this->sdc->storeID())
                      ->when($invoice_id, function ($query) use ($invoice_id) {
@@ -4502,6 +4686,9 @@ class InvoiceController extends Controller
                      })
                      ->orderBy("invoices.id","DESC")
                      ->get();
+        }
+
+        
          //dd($tab);      
         $tab_customer=Customer::where('store_id',$this->sdc->storeID())->get();            
         return view('apps.pages.sales.list',
@@ -4700,6 +4887,7 @@ class InvoiceController extends Controller
                      ->where('invoices.store_id',$this->sdc->storeID())
                      ->where('invoices.sales_return',0)
                      ->orderBy("invoices.id","DESC")
+                     ->take(100)
                      ->get();
         return view('apps.pages.sales.make-sales-return',['dataTable'=>$tab]);
     }
@@ -4708,6 +4896,7 @@ class InvoiceController extends Controller
     {
         $tab=$SalesReturn::where('store_id',$this->sdc->storeID())
                          ->orderBy("id","DESC")
+                         ->take(100)
                          ->get();
         return view('apps.pages.sales.make-sales-return-list',['dataTable'=>$tab]);
     }

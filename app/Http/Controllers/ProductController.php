@@ -23,7 +23,7 @@ class ProductController extends Controller
     public function index()
     {
         $existing_cat=Category::where('store_id',$this->sdc->storeID())->get();
-        $tab=Product::where('store_id',$this->sdc->storeID())->where('general_sale',0)->get();
+        $tab=Product::where('store_id',$this->sdc->storeID())->where('general_sale',0)->take(100)->orderBy('id','DESC')->get();
         return view('apps.pages.product.product',['dataTable'=>$tab,'existing_cat'=>$existing_cat]);
     }
 
@@ -269,7 +269,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $tab=$product::where('store_id',$this->sdc->storeID())->where('general_sale',0)->get();
+        $tab=$product::where('store_id',$this->sdc->storeID())->where('general_sale',0)->take(100)->orderBy('id','DESC')->get();
         return view('apps.pages.product.list',['dataTable'=>$tab]);
     }
 
@@ -303,12 +303,29 @@ class ProductController extends Controller
             $dateString="CAST(lsp_products.created_at as date) BETWEEN '".$start_date."' AND '".$end_date."'";
         }
 
-        $invoice = Product::where('products.store_id',$this->sdc->storeID())
+        if(empty($start_date) && empty($end_date) && empty($dateString))
+        {
+            $invoice = Product::where('products.store_id',$this->sdc->storeID())
+                     ->when($dateString, function ($query) use ($dateString) {
+                            return $query->whereRaw($dateString);
+                     })
+                     ->orderBy("products.id","DESC")
+                     ->take(100)
+                     ->get();
+        }
+        else
+        {
+            $invoice = Product::where('products.store_id',$this->sdc->storeID())
                      ->when($dateString, function ($query) use ($dateString) {
                             return $query->whereRaw($dateString);
                      })
                      ->orderBy("products.id","DESC")
                      ->get();
+        }
+
+        
+
+
          // dd($invoice);            
         return view('apps.pages.product.report',
             [
@@ -701,8 +718,22 @@ class ProductController extends Controller
             $dateString="CAST(created_at as date) BETWEEN '".$start_date."' AND '".$end_date."'";
         }
 
-
-        $invoice=Product::where('store_id',$this->sdc->storeID())
+        if(empty($product_id) && empty($start_date) && empty($end_date) && empty($dateString))
+        {
+            $invoice=Product::where('store_id',$this->sdc->storeID())
+                     ->when($product_id, function ($query) use ($product_id) {
+                            return $query->where('id','=', $product_id);
+                     })
+                     ->when($dateString, function ($query) use ($dateString) {
+                            return $query->whereRaw($dateString);
+                     })
+                     ->take(100)
+                     ->orderBy('id','DESC')
+                     ->get();
+        }
+        else
+        {
+            $invoice=Product::where('store_id',$this->sdc->storeID())
                      ->when($product_id, function ($query) use ($product_id) {
                             return $query->where('id','=', $product_id);
                      })
@@ -710,6 +741,10 @@ class ProductController extends Controller
                             return $query->whereRaw($dateString);
                      })
                      ->get();
+        }
+
+
+        
 
         return $invoice;
     }

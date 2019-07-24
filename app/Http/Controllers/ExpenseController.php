@@ -165,10 +165,22 @@ class ExpenseController extends Controller
             $dateString="CAST(lsp_expenses.created_at as date) BETWEEN '".$start_date."' AND '".$end_date."'";
         }
 
-
-
-
-        $invoice=Expense::where('store_id',$this->sdc->storeID())
+        if(empty($expense_id) && empty($start_date) && empty($end_date) && empty($dateString))
+        {
+            $invoice=Expense::where('store_id',$this->sdc->storeID())
+                         ->when($expense_id, function ($query) use ($expense_id) {
+                                return $query->where('expense_id','=', $expense_id);
+                         })
+                         ->when($dateString, function ($query) use ($dateString) {
+                                return $query->whereRaw($dateString);
+                         })
+                         ->orderBy('id','DESC')
+                         ->take(100)
+                         ->get();
+        }
+        else
+        {
+            $invoice=Expense::where('store_id',$this->sdc->storeID())
                          ->when($expense_id, function ($query) use ($expense_id) {
                                 return $query->where('expense_id','=', $expense_id);
                          })
@@ -176,6 +188,10 @@ class ExpenseController extends Controller
                                 return $query->whereRaw($dateString);
                          })
                          ->get();
+        }
+
+
+        
 
         return $invoice;
     }

@@ -70,9 +70,28 @@ class InvoicePaymentController extends Controller
         }
 
 
-
-
-        $invoice=InvoicePayment::where('store_id',$this->sdc->storeID())
+        if(empty($invoice_id) && empty($customer_id) && empty($tender_id) && empty($start_date) && empty($end_date))
+        {
+            $invoice=InvoicePayment::where('store_id',$this->sdc->storeID())
+                     ->when($invoice_id, function ($query) use ($invoice_id) {
+                            return $query->where('invoice_id','=', $invoice_id);
+                     })
+                     ->when($customer_id, function ($query) use ($customer_id) {
+                            return $query->where('customer_id','=', $customer_id);
+                     })
+                     ->when($tender_id, function ($query) use ($tender_id) {
+                            return $query->where('tender_id','=', $tender_id);
+                     })
+                     ->when($dateString, function ($query) use ($dateString) {
+                            return $query->whereRaw($dateString);
+                     })
+                     ->orderBy('id','DESC')
+                     ->take(100)
+                     ->get();
+        }
+        else
+        {
+            $invoice=InvoicePayment::where('store_id',$this->sdc->storeID())
                      ->when($invoice_id, function ($query) use ($invoice_id) {
                             return $query->where('invoice_id','=', $invoice_id);
                      })
@@ -86,6 +105,9 @@ class InvoicePaymentController extends Controller
                             return $query->whereRaw($dateString);
                      })
                      ->get();
+        }
+
+        
                      //->toSql();
 
         //dd($tender_id);              
@@ -317,9 +339,31 @@ class InvoicePaymentController extends Controller
         }
 
 
-
-
-        $invoice=InvoicePayment::LeftJoin('invoices','invoice_payments.invoice_id','=','invoices.invoice_id')
+        if(empty($invoice_id) && empty($customer_id) && empty($tender_id) && empty($start_date) && empty($end_date) && empty($dateString))
+        {
+            $invoice=InvoicePayment::LeftJoin('invoices','invoice_payments.invoice_id','=','invoices.invoice_id')
+                                 ->select('invoice_payments.*','invoices.Invoice_status as Invoice_status')
+                                 ->where('invoice_payments.store_id',$this->sdc->storeID())
+                                 ->where('invoice_payments.tender_name','Paypal')
+                                 ->when($invoice_id, function ($query) use ($invoice_id) {
+                                        return $query->where('invoice_id','=', $invoice_id);
+                                 })
+                                 ->when($customer_id, function ($query) use ($customer_id) {
+                                        return $query->where('customer_id','=', $customer_id);
+                                 })
+                                 ->when($tender_id, function ($query) use ($tender_id) {
+                                        return $query->where('tender_id','=', $tender_id);
+                                 })
+                                 ->when($dateString, function ($query) use ($dateString) {
+                                        return $query->whereRaw($dateString);
+                                 })
+                                 ->orderBy('invoice_payments.id','DESC')
+                                 ->take(100)
+                                 ->get();
+        }
+        else
+        {
+            $invoice=InvoicePayment::LeftJoin('invoices','invoice_payments.invoice_id','=','invoices.invoice_id')
                                  ->select('invoice_payments.*','invoices.Invoice_status as Invoice_status')
                                  ->where('invoice_payments.store_id',$this->sdc->storeID())
                                  ->where('invoice_payments.tender_name','Paypal')
@@ -336,6 +380,9 @@ class InvoicePaymentController extends Controller
                                         return $query->whereRaw($dateString);
                                  })
                                  ->get();
+        }
+
+        
                                  //->toSql();
 
         //dd($tender_id);              

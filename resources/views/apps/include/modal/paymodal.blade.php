@@ -44,13 +44,21 @@
                                                   margin: -0.2em 0 0 0;
                                               }
                                           </style>
-                                          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
+                                          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 button button1 authorizenet btn-group">
                                               @if(isset($authorizeNettender))
-                                                <a id="btn-payment-modal_modal_button" data-id="{{$authorizeNettender[0]->id}}" type="button" class="btn btn-info btn-lighten-1 btn-responsive margin-all-bottom-button {{$authorizeNettender[0]->tender_class}}" >
+                                                <a id="btn-payment-modal_modal_button" data-id="{{$authorizeNettender[0]->id}}" type="button" class="btn btn-green btn-lighten-1 btn-responsive margin-all-bottom-button {{$authorizeNettender[0]->tender_class}}" >
                                                     {{$authorizeNettender[0]->name}}
                                                 </a> 
                                               @endif
                                           </div>
+
+                                          @if(!empty($stripe))
+                                          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 button button1 authorizenet btn-group">
+                                                <a id="btn-payment-modal_modal_button" data-id="26" type="button" class="btn btn-green btn-lighten-1 btn-responsive margin-all-bottom-button stripe_card_payment" >
+                                                    Card Payment With Stripe
+                                                </a> 
+                                          </div>
+                                          @endif
 
                                           <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 button button1 authorizenet btn-group">
                                               @if(isset($payPaltender))

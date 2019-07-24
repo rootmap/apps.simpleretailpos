@@ -88,7 +88,7 @@ class CustomerLeadController extends Controller
      */
     public function show(CustomerLead $customerLead)
     {
-        $tab=$customerLead::where('store_id',$this->sdc->storeID())->get();
+        $tab=$customerLead::where('store_id',$this->sdc->storeID())->take(100)->orderBy('id','DESC')->get();
         return view('apps.pages.customer.customer-lead-list',['dataTable'=>$tab]);
     }
 

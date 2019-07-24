@@ -199,7 +199,7 @@ class ProductVarianceController extends Controller
      */
     public function show(ProductVariance $productVariance)
     {
-        $tab=$productVariance::where('store_id',$this->sdc->storeID())->get();
+        $tab=$productVariance::where('store_id',$this->sdc->storeID())->take(100)->orderBy('id','DESC')->get();
         return view('apps.pages.variance.list',['dataTable'=>$tab]);
     }
 

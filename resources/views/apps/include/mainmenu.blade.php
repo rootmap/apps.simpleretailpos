@@ -213,6 +213,11 @@
                     @if(in_array('authorize/net/payment/history', $dataMenuAssigned))
                     <li class="{{ Request::path() == '/authorize/net/payment/history' ? 'active' : '' }} border-bottom-purple"><a href="{{url('/authorize/net/payment/history')}}" class="menu-item">Authorize Payment Card History</a></li>
                     @endif 
+
+                    @if(in_array('stripe/payment/history', $dataMenuAssigned))
+                    <li class="{{ Request::path() == '/stripe/payment/history' ? 'active' : '' }} border-bottom-purple"><a href="{{url('/stripe/payment/history')}}" class="menu-item">Stripe Payment History</a></li>
+                    @endif 
+
                     @if(in_array('expense/voucher/report', $dataMenuAssigned))
                     <li class="{{ Request::path() == 'expense/voucher/report' ? 'active' : '' }} border-bottom-purple"><a href="{{url('/expense/voucher/report')}}" class="menu-item">Expense Voucher Report</a></li>
                     @endif 
@@ -260,6 +265,13 @@
                     @if(in_array('authorize/net/payment/setting', $dataMenuAssigned)) 
                     <li class="{{ Request::path() == 'authorize/net/payment/setting' ? 'active' : '' }} border-bottom-purple"><a href="{{url('/authorize/net/payment/setting')}}" class="menu-item">AuthorizeNet Account </a></li>
                     @endif 
+
+                    
+                    @if(in_array('stripe/account/setting', $dataMenuAssigned)) 
+                    <li class="{{ Request::path() == 'stripe/account/setting' ? 'active' : '' }} border-bottom-purple"><a href="{{url('/stripe/account/setting')}}" class="menu-item">Stripe Account Setting</a></li>
+                    @endif 
+                    
+                    
                     @if(in_array('category', $dataMenuAssigned)) 
                     <li class="{{ Request::path() == 'category' ? 'active' : '' }} border-bottom-purple"><a href="{{url('category')}}" class="menu-item">Category</a></li>
                     @endif 
