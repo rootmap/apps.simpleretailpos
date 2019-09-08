@@ -123,18 +123,16 @@ if(!empty($objSite))
 
         <div class="navbar-container content container-fluid">
           <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
-            
-            
-
+          
             <ul class="nav navbar-nav float-xs-right">
               
                 <li class="dropdown dropdown-user nav-item border-left-grey border-lighten-2">
                       <a href="javascript:void(0);"  data-toggle="dropdown" title="Profile" class="nav-link dropdown-user-link"  id="supportChatStart">
                       <span class="user-name"  style="line-height: 29px; font-size: 15px; font-weight: 700;">
-                        <i class="icon-comments-o"></i> Chat with support</span>
+                        <i class="icon-comments-o"></i> Chat with Support</span>
                       </a>
                 </li>
-                
+
                 <li class="dropdown dropdown-user nav-item  border-left-grey  border-right-grey border-lighten-2" title="Full Screen View" data-toggle="tooltip" data-placement="top" data-title="Fullscreen" style="padding-left:8px;">
                   <a id="fullscreen" title="" style="font-size: 20px" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-title="Fullscreen" data-original-title="Fullscreen View" class="nav-link" style=" padding-top: 20px;">
                       <i style="font-size: 25px;  color:#fff;" class="icon-desktop"></i>

@@ -140,7 +140,7 @@
 		<!-- Invoice Footer -->
 		<div id="invoice-footer">
 			<div class="row">
-				<div class="col-md-12 col-sm-12 text-xs-center" @if($userguideInit==1) data-step="3" data-intro="When click this button then update your stockin order detail." @endif>
+				<div class="col-md-12 col-sm-12 text-xs-center" @if($userguideInit==1) data-step="1" data-intro="When click this button then update your stockin order detail." @endif>
 					<button type="button" id="invoiceSubmit" class="btn btn-info">
 						<i class="icon-download"></i>  Modify Stockin Order Detail 
 					</button>

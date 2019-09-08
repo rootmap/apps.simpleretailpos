@@ -49,10 +49,10 @@
 
 
 							<div class="form-actions center">
-	                            <button type="button" class="btn btn-warning mr-1" @if($userguideInit==1) data-step="3" data-intro="if you want clear all information then click the cancel button." @endif>
+	                            <button type="button" class="btn btn-warning mr-1">
 	                            	<i class="icon-cross2"></i> Cancel
 	                            </button>
-	                            <button type="submit" class="btn btn-primary" @if($userguideInit==1) data-step="2" data-intro="When you fill up all information then click save button." @endif>
+	                            <button type="submit" class="btn btn-primary">
 	                                <i class="icon-check2"></i> Save
 	                            </button>
 	                        </div>

@@ -122,7 +122,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12" @if($userguideInit==1) data-step="4" data-intro="You are seeing your all system availablemenu list." @endif>
+		<div class="col-md-12" @if($userguideInit==1) data-step="4" data-intro="You are seeing all system available menu list in this table. You can edit/delete." @endif>
 			<div class="card">
 			<div class="card-header">
 				<h4 class="card-title"><i class="icon-users2"></i> System Available Menu List</h4>

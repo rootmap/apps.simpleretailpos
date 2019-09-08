@@ -9,12 +9,12 @@ use App\Cart;
 use Auth;
 use Illuminate\Http\Request;
 use App\PosSetting;
-use App\UserTour;
 use App\InvoiceLayoutOne;
 use App\InvoiceLayoutTwo;
 use App\PrinterPrintSize;
 use App\InvoiceEmailTeamplate;
 use App\SiteSetting;
+use App\UserTour;
 use App\Seo;
 use Mpdf\Mpdf;
 use Excel;
@@ -32,7 +32,6 @@ use PayPal\Api\Payer;
 use PayPal\Api\Payment;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
-
 use Illuminate\Support\Facades\URL;
 
 class StaticDataController extends Facade {
@@ -86,7 +85,7 @@ class StaticDataController extends Facade {
 
     public static function urlForChangeData()
     {
-        return "http://localhost/laravel/simpleretailpos/public/";
+        return "http://app.simpleretailpos.com/";
     }
 
     public static function userguideInit() 

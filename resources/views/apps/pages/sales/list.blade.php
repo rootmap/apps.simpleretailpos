@@ -180,6 +180,7 @@
                                         <button id="btnSearchDrop4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-info dropdown-toggle dropdown-menu-right"><i class="icon-cog3"></i></button>
                                         <span aria-labelledby="btnSearchDrop4" class="dropdown-menu mt-1 dropdown-menu-right">
                                             <a href="{{url('sales/invoice/'.$row->id)}}" title="View Invoice" class="dropdown-item"><i class="icon-file-text"></i> View Invoice</a>
+                                            <a href="javascript:attachmentAddView('{{$row->invoice_id}}');" title="Invoice Attachment" class="dropdown-item"><i class="icon-attachment"></i> Invoice Attachment</a>
                                             <a href="javascript:putInvoiceModal('{{$row->invoice_id}}');" title="Send Invoice" class="dropdown-item"><i class="icon-email2"></i> Send Invoice</a>
                                             <a href="{{url('sales/edit/'.$row->id)}}" title="Edit" class="dropdown-item"><i class="icon-pencil22"></i> Edit</a>
                                             <a href="{{url('sales/delete/'.$row->id)}}" title="Delete" class="dropdown-item"><i class="icon-cross"></i> Delete</a>
@@ -202,6 +203,7 @@
 </div>
 <!-- Both borders end -->
 @include('apps.include.modal.sendSlipModal')
+@include('apps.include.modal.invoiceAttachmentSlipModal')
 </section>
 
 @endsection

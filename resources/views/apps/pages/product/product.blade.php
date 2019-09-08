@@ -189,7 +189,7 @@
                                 <td>{{($row->cost*$row->quantity)}}</td>
                                 <td>
                                         <a href="{{url('product/edit/'.$row->id)}}" title="Edit" class="btn btn-sm btn-outline-info" @if($userguideInit==1) data-step="5" data-intro="If you want you can modify your information when you click this button." @endif><i class="icon-pencil22"></i></a>
-                                        <a  href="{{url('product/delete/'.$row->id)}}" title="Delete" class="btn btn-sm btn-outline-info btn-accent-2" @if($userguideInit==1) data-step="6" data-intro="If you want delect product then click this button." @endif><i class="icon-cross"></i></a>
+                                        <a  href="{{url('product/delete/'.$row->id)}}" title="Delete" class="btn btn-sm btn-outline-info btn-accent-2" @if($userguideInit==1) data-step="6" data-intro="If you want delect customer then click this button." @endif><i class="icon-cross"></i></a>
                                 </div>
                                 </td>
                             </tr>

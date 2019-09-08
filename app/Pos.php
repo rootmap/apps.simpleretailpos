@@ -2,7 +2,6 @@
 
 namespace App;
 use App\PosSetting;
-use App\Customer;
 class Pos {
 
     public $items = null;
@@ -87,8 +86,6 @@ class Pos {
             {
                 $this->sales_discount=$oldCart->sales_discount;
             }
-
-            
 
             $this->items = $oldCart->items;
             $this->invoiceID = $oldCart->invoiceID;

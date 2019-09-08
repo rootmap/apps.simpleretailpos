@@ -214,6 +214,7 @@
                     <li class="{{ Request::path() == '/authorize/net/payment/history' ? 'active' : '' }} border-bottom-purple"><a href="{{url('/authorize/net/payment/history')}}" class="menu-item">Authorize Payment Card History</a></li>
                     @endif 
 
+
                     @if(in_array('stripe/payment/history', $dataMenuAssigned))
                     <li class="{{ Request::path() == '/stripe/payment/history' ? 'active' : '' }} border-bottom-purple"><a href="{{url('/stripe/payment/history')}}" class="menu-item">Stripe Payment History</a></li>
                     @endif 

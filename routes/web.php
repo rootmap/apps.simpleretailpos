@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/ajax/message/send/', 'ChatController@index');
+
 //customer pay url
 Route::get('invoice/pay/{invoice_id}', 'InvoiceController@showCustomerInvoice');
 Route::post('capture/pos/payment/publicpayment','InvoiceController@AuthorizenetCardPaymentPublic');
@@ -61,8 +61,9 @@ Route::post('/initiate/save/sync', 'InvoiceController@curlPushData');
 Route::get('pdf', 'InvoiceController@GenaratePDF');
 
 Route::group(['middleware' => 'auth'], function () {
-	
-	Route::post('/chat/message/send', 'ChatController@store');
+
+
+    Route::post('/chat/message/send', 'ChatController@store');
 	Route::post('/chat/message/load', 'ChatController@index');
 	Route::get('/admin/chat', 'ChatController@master');
 	Route::get('/master/chat/alluser', 'ChatController@allchatUser');
@@ -71,7 +72,6 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	Route::post('/chat/conv/usr/image', 'ChatController@saveUserConvPhoto');
 	Route::post('/master/chat/conv/usr/image', 'ChatController@saveMasterConvPhoto');
-
 
 
 	Route::get('/login-activity', 'LoginActivityController@index');
@@ -306,6 +306,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/sales/edit/{id}', 'InvoiceController@edit');
 	Route::get('/sales/delete/{id}', 'InvoiceController@destroy');
 	Route::post('/sales/modify/{id}', 'InvoiceController@update');
+
+
+	//------------------------sales attachment ---------//
+	Route::post('/sales/add/attachment/invoice', 'InvoiceAttachmentController@attachment');
+	Route::get('/sales/attachment/{invoice_id}', 'InvoiceAttachmentController@show');
+	Route::get('/sales/attachment/download/{fileID}', 'InvoiceAttachmentController@download');
+	Route::get('/sales/attachment/delete/{fileID}', 'InvoiceAttachmentController@delete');
+
 
 	Route::post('/authorize/net/capture/pos/partial/payment','InvoiceController@AuthorizenetCardPartialPayment');
 

@@ -3,9 +3,9 @@
 @section('content')
 <section id="form-action-layouts">
 	<?php 
-	    $userguideInit=StaticDataController::userguideInit();
-	    //dd($dataMenuAssigned);
-	?>
+    $userguideInit=StaticDataController::userguideInit();
+    //dd($dataMenuAssigned);
+?>
 	<div class="row">
 		<div class="col-md-12 " @if($userguideInit==1) data-step="1" data-intro="In this section, you can added/modify company information." @endif>
 	        <div class="card">

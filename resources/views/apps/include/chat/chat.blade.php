@@ -1,7 +1,7 @@
-<div class="container text-center"  style="display: none;">
+<div class="container text-center" style="display: none;">
     <div class="row">
         <div class="round hollow text-right" style="position:fixed; z-index: 9999; bottom: 100px; right: 150px;">
-          <a href="javascript:void(0);"><span class="icon-android-chat"></span> Chat with support </a>
+          <a href="javascript:void(0);" id="supportChatStart"><span class="icon-android-chat"></span> Chat with support </a>
         </div>
     </div>
 </div>

@@ -54,7 +54,7 @@
 									 @if(!empty($invoice_id))
 	                                    	value="{{$invoice_id}}"  
 	                                 @endif 
-									 type="text" id="eventRegInput1" class="form-control border-green" placeholder="Invoice ID" name="invoice_id">
+									 type="text" id="eventRegInput1" class="form-control border-info" placeholder="Invoice ID" name="invoice_id">
 	                                </div>
 	                            </div>
 	                            <div class="col-md-3">
@@ -78,22 +78,22 @@
 									 @if(!empty($card_number))
 	                                    	value="{{$card_number}}"  
 	                                 @endif 
-									 type="text" id="eventRegInput1" class="form-control border-green" placeholder="Card Number" name="card_number">
+									 type="text" id="eventRegInput1" class="form-control border-info" placeholder="Card Number" name="card_number">
 	                                </div>
 	                            </div>
 	                            <div class="col-md-12">
 	                                
 	                                <div class="input-group" style="margin-top:32px;">
-	                                    <button type="submit" class="btn btn-green btn-darken-1 mr-1" @if($userguideInit==1) data-step="2" data-intro="If you click this button then it will generate your report." @endif>
+	                                    <button type="submit" class="btn btn-info btn-darken-1 mr-1" @if($userguideInit==1) data-step="2" data-intro="If you click this button then it will generate your report." @endif>
 											<i class="icon-check2"></i> Generate Report
 										</button>
-										<a href="javascript:void(0);" data-url="{{url('stripe/payment/history/excel/report')}}" class="btn btn-green btn-darken-2 mr-1 change-action" @if($userguideInit==1) data-step="3" data-intro="If you click this button then it will generate excel file." @endif>
+										<a href="javascript:void(0);" data-url="{{url('stripe/payment/history/excel/report')}}" class="btn btn-info btn-darken-2 mr-1 change-action" @if($userguideInit==1) data-step="3" data-intro="If you click this button then it will generate excel file." @endif>
 											<i class="icon-file-excel-o"></i> Generate Excel
 										</a>
-										<a href="javascript:void(0);" data-url="{{url('stripe/payment/history/pdf/report')}}" class="btn btn-green btn-darken-3 mr-1 change-action" @if($userguideInit==1) data-step="4" data-intro="If you click this button then it will generate pdf file." @endif>
+										<a href="javascript:void(0);" data-url="{{url('stripe/payment/history/pdf/report')}}" class="btn btn-info btn-darken-3 mr-1 change-action" @if($userguideInit==1) data-step="4" data-intro="If you click this button then it will generate pdf file." @endif>
 											<i class="icon-file-pdf-o"></i> Generate PDF
 										</a>
-										<a href="{{url('stripe/payment/history')}}" style="margin-left: 5px;" class="btn btn-green btn-darken-4" @if($userguideInit==1) data-step="5" data-intro="if you want clear all information then click the reset button." @endif>
+										<a href="{{url('stripe/payment/history')}}" style="margin-left: 5px;" class="btn btn-info btn-darken-4" @if($userguideInit==1) data-step="5" data-intro="if you want clear all information then click the reset button." @endif>
 											<i class="icon-refresh"></i> Reset
 										</a>
 	                                </div>
@@ -144,7 +144,7 @@
 	                            <tr>
 	                                <td>{{$row->id}}</td>
 	                                <td>{{$row->invoice_id}}</td>
-	                                <td>{{formatDate($row->created_at)}}</td>
+	                                <td>{{$row->created_at}}</td>
 	                                <td>
 	                                	{{$row->card_number}}
 	                                </td>
@@ -154,13 +154,13 @@
 	                                <td>
 	                                	@if($row->hour_gone>24)
 		                                	@if($row->refund_status==1)
-		                                	<button onclick="refundTransaction({{$row->id}})" type="button" class="btn btn-green"  @if($userguideInit==1) data-step="7" data-intro="Payment could be refund using click on this button." @endif><i class="icon-moneybag"></i> Refund Amount</button>
+		                                	<button onclick="refundTransaction({{$row->id}})" type="button" class="btn btn-info"  @if($userguideInit==1) data-step="7" data-intro="Payment could be refund using click on this button." @endif><i class="icon-moneybag"></i> Refund Amount</button>
 		                                	@else
-		                                		<button type="button" class="btn btn-green"><i class="icon-moneybag"></i> Refund Complete</button>
+		                                		<button type="button" class="btn btn-info"><i class="icon-moneybag"></i> Refund Complete</button>
 		                                	@endif
 	                                	@else
 		                                	@if($row->refund_status==1)
-		                                	<button onclick="VoidTransaction({{$row->id}})" type="button" class="btn btn-green"  @if($userguideInit==1) data-step="7" data-intro="Payment could be refund/void using click on this button." @endif><i class="icon-moneybag"></i> VOID Transaction</button>
+		                                	<button onclick="VoidTransaction({{$row->id}})" type="button" class="btn btn-info"  @if($userguideInit==1) data-step="7" data-intro="Payment could be refund/void using click on this button." @endif><i class="icon-moneybag"></i> VOID Transaction</button>
 		                                	@else
 		                                		<button type="button" class="btn btn-green" ><i class="icon-moneybag"></i> VOID Complete</button>
 		                                	@endif

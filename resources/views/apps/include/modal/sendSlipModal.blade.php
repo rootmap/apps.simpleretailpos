@@ -13,7 +13,7 @@
             <div class="form-group row">
                 <label class="col-md-4 label-control" for="projectinput1">Invoice ID</label>
                 <div class="col-md-8">
-                    <input type="text" readonly="readonly" class="form-control invoice_slip_id" placeholder="Invoice ID" name="invoice_id">
+                    <input type="text" readonly="readonly" class="form-control invoice_attachment_id" placeholder="Invoice ID" name="invoice_id">
                 </div>
             </div>
 

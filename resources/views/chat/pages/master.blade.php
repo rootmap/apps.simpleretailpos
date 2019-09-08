@@ -47,7 +47,7 @@ Website: http://emilcarlsson.se/
 		<div id="profile">
 			<div class="wrap">
 				<img id="profile-img" src="{{$proImage}}" class="online" alt="" />
-				<p>{{Auth::user()->name}}</p>
+				<p>Support Admin</p>
 			</div>
 		</div>
 		{{-- <div id="search">

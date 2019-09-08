@@ -1,0 +1,2035 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProcessMaker-Project version="3.0">
+  <metadata>
+    <meta key="vendor_version">3.1.3-community</meta>
+    <meta key="vendor_version_code">Michelangelo</meta>
+    <meta key="export_timestamp">1564654240</meta>
+    <meta key="export_datetime"><![CDATA[2019-08-01T16:10:40+06:00]]></meta>
+    <meta key="export_server_addr"><![CDATA[172.18.0.126:443]]></meta>
+    <meta key="export_server_os">Linux</meta>
+    <meta key="export_server_php_version">50636</meta>
+    <meta key="export_version">10</meta>
+    <meta key="workspace">robiworkflow</meta>
+    <meta key="name">Day Care Enrollment</meta>
+    <meta key="uid">6636409255d2b030f319111003840103</meta>
+  </metadata>
+  <definition class="BPMN">
+    <table name="ACTIVITY">
+      <record>
+        <act_uid>4369347305d2b0519519358051938763</act_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <pro_uid>4176904825d2b030f426167058601715</pro_uid>
+        <act_name>HR Dashboard</act_name>
+        <act_type>TASK</act_type>
+        <act_is_for_compensation>0</act_is_for_compensation>
+        <act_start_quantity>1</act_start_quantity>
+        <act_completion_quantity>0</act_completion_quantity>
+        <act_task_type>EMPTY</act_task_type>
+        <act_implementation></act_implementation>
+        <act_instantiate>0</act_instantiate>
+        <act_script_type></act_script_type>
+        <act_script></act_script>
+        <act_loop_type>EMPTY</act_loop_type>
+        <act_test_before>0</act_test_before>
+        <act_loop_maximum>0</act_loop_maximum>
+        <act_loop_condition>0</act_loop_condition>
+        <act_loop_cardinality>0</act_loop_cardinality>
+        <act_loop_behavior>0</act_loop_behavior>
+        <act_is_adhoc>0</act_is_adhoc>
+        <act_is_collapsed>0</act_is_collapsed>
+        <act_completion_condition>0</act_completion_condition>
+        <act_ordering>0</act_ordering>
+        <act_cancel_remaining_instances>0</act_cancel_remaining_instances>
+        <act_protocol>0</act_protocol>
+        <act_method>0</act_method>
+        <act_is_global>0</act_is_global>
+        <act_referer>0</act_referer>
+        <act_default_flow>0</act_default_flow>
+        <act_master_diagram>0</act_master_diagram>
+        <bou_uid>1885590405d2b051955cf59047487156</bou_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <element_uid>4369347305d2b0519519358051938763</element_uid>
+        <bou_element>9669413605d2b038937f414025055799</bou_element>
+        <bou_element_type>bpmnActivity</bou_element_type>
+        <bou_x>319</bou_x>
+        <bou_y>85</bou_y>
+        <bou_width>151</bou_width>
+        <bou_height>34</bou_height>
+        <bou_rel_position>0</bou_rel_position>
+        <bou_size_identical>0</bou_size_identical>
+        <bou_container>bpmnLane</bou_container>
+      </record>
+      <record>
+        <act_uid>5713646995d2b05414fd644036471299</act_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <pro_uid>4176904825d2b030f426167058601715</pro_uid>
+        <act_name>Requester Acceptance</act_name>
+        <act_type>TASK</act_type>
+        <act_is_for_compensation>0</act_is_for_compensation>
+        <act_start_quantity>1</act_start_quantity>
+        <act_completion_quantity>0</act_completion_quantity>
+        <act_task_type>EMPTY</act_task_type>
+        <act_implementation></act_implementation>
+        <act_instantiate>0</act_instantiate>
+        <act_script_type></act_script_type>
+        <act_script></act_script>
+        <act_loop_type>PARALLEL</act_loop_type>
+        <act_test_before>0</act_test_before>
+        <act_loop_maximum>0</act_loop_maximum>
+        <act_loop_condition>0</act_loop_condition>
+        <act_loop_cardinality>0</act_loop_cardinality>
+        <act_loop_behavior>0</act_loop_behavior>
+        <act_is_adhoc>0</act_is_adhoc>
+        <act_is_collapsed>0</act_is_collapsed>
+        <act_completion_condition>0</act_completion_condition>
+        <act_ordering>0</act_ordering>
+        <act_cancel_remaining_instances>0</act_cancel_remaining_instances>
+        <act_protocol>0</act_protocol>
+        <act_method>0</act_method>
+        <act_is_global>0</act_is_global>
+        <act_referer>0</act_referer>
+        <act_default_flow>0</act_default_flow>
+        <act_master_diagram>0</act_master_diagram>
+        <bou_uid>2555115985d2b0541527032037323174</bou_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <element_uid>5713646995d2b05414fd644036471299</element_uid>
+        <bou_element>6864767055d2b03614ccdf1057607269</bou_element>
+        <bou_element_type>bpmnActivity</bou_element_type>
+        <bou_x>471</bou_x>
+        <bou_y>33</bou_y>
+        <bou_width>151</bou_width>
+        <bou_height>44</bou_height>
+        <bou_rel_position>0</bou_rel_position>
+        <bou_size_identical>0</bou_size_identical>
+        <bou_container>bpmnLane</bou_container>
+      </record>
+      <record>
+        <act_uid>3319987695d2b038946e455062324287</act_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <pro_uid>4176904825d2b030f426167058601715</pro_uid>
+        <act_name>Request For Day Care</act_name>
+        <act_type>TASK</act_type>
+        <act_is_for_compensation>0</act_is_for_compensation>
+        <act_start_quantity>1</act_start_quantity>
+        <act_completion_quantity>0</act_completion_quantity>
+        <act_task_type>EMPTY</act_task_type>
+        <act_implementation></act_implementation>
+        <act_instantiate>0</act_instantiate>
+        <act_script_type></act_script_type>
+        <act_script></act_script>
+        <act_loop_type>EMPTY</act_loop_type>
+        <act_test_before>0</act_test_before>
+        <act_loop_maximum>0</act_loop_maximum>
+        <act_loop_condition>0</act_loop_condition>
+        <act_loop_cardinality>0</act_loop_cardinality>
+        <act_loop_behavior>0</act_loop_behavior>
+        <act_is_adhoc>0</act_is_adhoc>
+        <act_is_collapsed>0</act_is_collapsed>
+        <act_completion_condition>0</act_completion_condition>
+        <act_ordering>0</act_ordering>
+        <act_cancel_remaining_instances>0</act_cancel_remaining_instances>
+        <act_protocol>0</act_protocol>
+        <act_method>0</act_method>
+        <act_is_global>0</act_is_global>
+        <act_referer>0</act_referer>
+        <act_default_flow>0</act_default_flow>
+        <act_master_diagram>0</act_master_diagram>
+        <bou_uid>8606517175d2b03894afeb7085950882</bou_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <element_uid>3319987695d2b038946e455062324287</element_uid>
+        <bou_element>6864767055d2b03614ccdf1057607269</bou_element>
+        <bou_element_type>bpmnActivity</bou_element_type>
+        <bou_x>149</bou_x>
+        <bou_y>33</bou_y>
+        <bou_width>151</bou_width>
+        <bou_height>55</bou_height>
+        <bou_rel_position>0</bou_rel_position>
+        <bou_size_identical>0</bou_size_identical>
+        <bou_container>bpmnLane</bou_container>
+      </record>
+    </table>
+    <table name="ARTIFACT"/>
+    <table name="BOUND">
+      <record>
+        <bou_uid>1125758545d2b0389716619005867367</bou_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <element_uid>8956341755d2b03896eca72057069936</element_uid>
+        <bou_element>6864767055d2b03614ccdf1057607269</bou_element>
+        <bou_element_type>bpmnEvent</bou_element_type>
+        <bou_x>90</bou_x>
+        <bou_y>130</bou_y>
+        <bou_width>33</bou_width>
+        <bou_height>33</bou_height>
+        <bou_rel_position>0</bou_rel_position>
+        <bou_size_identical>0</bou_size_identical>
+        <bou_container>bpmnLane</bou_container>
+      </record>
+      <record>
+        <bou_uid>1735397715d2b03893a7869097572686</bou_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <element_uid>9669413605d2b038937f414025055799</element_uid>
+        <bou_element>3744499145d2b03390fef04039020796</bou_element>
+        <bou_element_type>bpmnLane</bou_element_type>
+        <bou_x>40</bou_x>
+        <bou_y>209</bou_y>
+        <bou_width>659</bou_width>
+        <bou_height>255</bou_height>
+        <bou_rel_position>2</bou_rel_position>
+        <bou_size_identical>0</bou_size_identical>
+        <bou_container>bpmnPool</bou_container>
+      </record>
+      <record>
+        <bou_uid>1885590405d2b051955cf59047487156</bou_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <element_uid>4369347305d2b0519519358051938763</element_uid>
+        <bou_element>9669413605d2b038937f414025055799</bou_element>
+        <bou_element_type>bpmnActivity</bou_element_type>
+        <bou_x>319</bou_x>
+        <bou_y>85</bou_y>
+        <bou_width>151</bou_width>
+        <bou_height>34</bou_height>
+        <bou_rel_position>0</bou_rel_position>
+        <bou_size_identical>0</bou_size_identical>
+        <bou_container>bpmnLane</bou_container>
+      </record>
+      <record>
+        <bou_uid>2368957055d2b0361500691010254215</bou_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <element_uid>6864767055d2b03614ccdf1057607269</element_uid>
+        <bou_element>3744499145d2b03390fef04039020796</bou_element>
+        <bou_element_type>bpmnLane</bou_element_type>
+        <bou_x>40</bou_x>
+        <bou_y>0</bou_y>
+        <bou_width>659</bou_width>
+        <bou_height>209</bou_height>
+        <bou_rel_position>1</bou_rel_position>
+        <bou_size_identical>0</bou_size_identical>
+        <bou_container>bpmnPool</bou_container>
+      </record>
+      <record>
+        <bou_uid>2555115985d2b0541527032037323174</bou_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <element_uid>5713646995d2b05414fd644036471299</element_uid>
+        <bou_element>6864767055d2b03614ccdf1057607269</bou_element>
+        <bou_element_type>bpmnActivity</bou_element_type>
+        <bou_x>471</bou_x>
+        <bou_y>33</bou_y>
+        <bou_width>151</bou_width>
+        <bou_height>44</bou_height>
+        <bou_rel_position>0</bou_rel_position>
+        <bou_size_identical>0</bou_size_identical>
+        <bou_container>bpmnLane</bou_container>
+      </record>
+      <record>
+        <bou_uid>2641853135d2d631a660639065009726</bou_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <element_uid>1394826905d2d631a627f06060982150</element_uid>
+        <bou_element>9669413605d2b038937f414025055799</bou_element>
+        <bou_element_type>bpmnEvent</bou_element_type>
+        <bou_x>242</bou_x>
+        <bou_y>129</bou_y>
+        <bou_width>33</bou_width>
+        <bou_height>33</bou_height>
+        <bou_rel_position>0</bou_rel_position>
+        <bou_size_identical>0</bou_size_identical>
+        <bou_container>bpmnLane</bou_container>
+      </record>
+      <record>
+        <bou_uid>7443980895d2b0339156304004625896</bou_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <element_uid>3744499145d2b03390fef04039020796</element_uid>
+        <bou_element>8105802575d2b030f3fc937027314929</bou_element>
+        <bou_element_type>bpmnLaneset</bou_element_type>
+        <bou_x>305</bou_x>
+        <bou_y>113</bou_y>
+        <bou_width>700</bou_width>
+        <bou_height>464</bou_height>
+        <bou_rel_position>0</bou_rel_position>
+        <bou_size_identical>0</bou_size_identical>
+        <bou_container>bpmnDiagram</bou_container>
+      </record>
+      <record>
+        <bou_uid>8606517175d2b03894afeb7085950882</bou_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <element_uid>3319987695d2b038946e455062324287</element_uid>
+        <bou_element>6864767055d2b03614ccdf1057607269</bou_element>
+        <bou_element_type>bpmnActivity</bou_element_type>
+        <bou_x>149</bou_x>
+        <bou_y>33</bou_y>
+        <bou_width>151</bou_width>
+        <bou_height>55</bou_height>
+        <bou_rel_position>0</bou_rel_position>
+        <bou_size_identical>0</bou_size_identical>
+        <bou_container>bpmnLane</bou_container>
+      </record>
+    </table>
+    <table name="DATA"/>
+    <table name="DIAGRAM">
+      <record>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <dia_name>Day Care Enrollment</dia_name>
+        <dia_is_closable>0</dia_is_closable>
+      </record>
+    </table>
+    <table name="DOCUMENTATION"/>
+    <table name="EVENT">
+      <record>
+        <evn_uid>8956341755d2b03896eca72057069936</evn_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <pro_uid>4176904825d2b030f426167058601715</pro_uid>
+        <evn_name></evn_name>
+        <evn_type>START</evn_type>
+        <evn_marker>EMPTY</evn_marker>
+        <evn_is_interrupting>1</evn_is_interrupting>
+        <evn_attached_to></evn_attached_to>
+        <evn_cancel_activity>0</evn_cancel_activity>
+        <evn_activity_ref></evn_activity_ref>
+        <evn_wait_for_completion>0</evn_wait_for_completion>
+        <evn_error_name></evn_error_name>
+        <evn_error_code></evn_error_code>
+        <evn_escalation_name></evn_escalation_name>
+        <evn_escalation_code></evn_escalation_code>
+        <evn_condition></evn_condition>
+        <evn_message>LEAD</evn_message>
+        <evn_operation_name></evn_operation_name>
+        <evn_operation_implementation_ref></evn_operation_implementation_ref>
+        <evn_time_date></evn_time_date>
+        <evn_time_cycle></evn_time_cycle>
+        <evn_time_duration></evn_time_duration>
+        <evn_behavior>CATCH</evn_behavior>
+        <bou_uid>1125758545d2b0389716619005867367</bou_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <element_uid>8956341755d2b03896eca72057069936</element_uid>
+        <bou_element>6864767055d2b03614ccdf1057607269</bou_element>
+        <bou_element_type>bpmnEvent</bou_element_type>
+        <bou_x>90</bou_x>
+        <bou_y>130</bou_y>
+        <bou_width>33</bou_width>
+        <bou_height>33</bou_height>
+        <bou_rel_position>0</bou_rel_position>
+        <bou_size_identical>0</bou_size_identical>
+        <bou_container>bpmnLane</bou_container>
+      </record>
+      <record>
+        <evn_uid>1394826905d2d631a627f06060982150</evn_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <pro_uid>4176904825d2b030f426167058601715</pro_uid>
+        <evn_name></evn_name>
+        <evn_type>START</evn_type>
+        <evn_marker>EMPTY</evn_marker>
+        <evn_is_interrupting>1</evn_is_interrupting>
+        <evn_attached_to></evn_attached_to>
+        <evn_cancel_activity>0</evn_cancel_activity>
+        <evn_activity_ref></evn_activity_ref>
+        <evn_wait_for_completion>0</evn_wait_for_completion>
+        <evn_error_name></evn_error_name>
+        <evn_error_code></evn_error_code>
+        <evn_escalation_name></evn_escalation_name>
+        <evn_escalation_code></evn_escalation_code>
+        <evn_condition></evn_condition>
+        <evn_message>LEAD</evn_message>
+        <evn_operation_name></evn_operation_name>
+        <evn_operation_implementation_ref></evn_operation_implementation_ref>
+        <evn_time_date></evn_time_date>
+        <evn_time_cycle></evn_time_cycle>
+        <evn_time_duration></evn_time_duration>
+        <evn_behavior>CATCH</evn_behavior>
+        <bou_uid>2641853135d2d631a660639065009726</bou_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <element_uid>1394826905d2d631a627f06060982150</element_uid>
+        <bou_element>9669413605d2b038937f414025055799</bou_element>
+        <bou_element_type>bpmnEvent</bou_element_type>
+        <bou_x>242</bou_x>
+        <bou_y>129</bou_y>
+        <bou_width>33</bou_width>
+        <bou_height>33</bou_height>
+        <bou_rel_position>0</bou_rel_position>
+        <bou_size_identical>0</bou_size_identical>
+        <bou_container>bpmnLane</bou_container>
+      </record>
+    </table>
+    <table name="EXTENSION"/>
+    <table name="FLOW">
+      <record>
+        <flo_uid>1767714215d2d631a800564072748974</flo_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <flo_type>SEQUENCE</flo_type>
+        <flo_name> </flo_name>
+        <flo_element_origin>1394826905d2d631a627f06060982150</flo_element_origin>
+        <flo_element_origin_type>bpmnEvent</flo_element_origin_type>
+        <flo_element_origin_port>0</flo_element_origin_port>
+        <flo_element_dest>4369347305d2b0519519358051938763</flo_element_dest>
+        <flo_element_dest_type>bpmnActivity</flo_element_dest_type>
+        <flo_element_dest_port>0</flo_element_dest_port>
+        <flo_is_inmediate>1</flo_is_inmediate>
+        <flo_condition></flo_condition>
+        <flo_x1>622</flo_x1>
+        <flo_y1>472</flo_y1>
+        <flo_x2>742</flo_x2>
+        <flo_y2>446</flo_y2>
+        <flo_state><![CDATA[[{"x":622,"y":472},{"x":742,"y":472},{"x":742,"y":446}]]]></flo_state>
+        <flo_position>1</flo_position>
+      </record>
+      <record>
+        <flo_uid>2045916515d2b03898067b3001922137</flo_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <flo_type>SEQUENCE</flo_type>
+        <flo_name> </flo_name>
+        <flo_element_origin>8956341755d2b03896eca72057069936</flo_element_origin>
+        <flo_element_origin_type>bpmnEvent</flo_element_origin_type>
+        <flo_element_origin_port>0</flo_element_origin_port>
+        <flo_element_dest>3319987695d2b038946e455062324287</flo_element_dest>
+        <flo_element_dest_type>bpmnActivity</flo_element_dest_type>
+        <flo_element_dest_port>0</flo_element_dest_port>
+        <flo_is_inmediate>1</flo_is_inmediate>
+        <flo_condition></flo_condition>
+        <flo_x1>470</flo_x1>
+        <flo_y1>262</flo_y1>
+        <flo_x2>496</flo_x2>
+        <flo_y2>176</flo_y2>
+        <flo_state><![CDATA[[{"x":470,"y":262},{"x":483,"y":262},{"x":483,"y":176},{"x":496,"y":176}]]]></flo_state>
+        <flo_position>1</flo_position>
+      </record>
+      <record>
+        <flo_uid>2138347795d302ea56df0a5081598500</flo_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <flo_type>SEQUENCE</flo_type>
+        <flo_name> </flo_name>
+        <flo_element_origin>5713646995d2b05414fd644036471299</flo_element_origin>
+        <flo_element_origin_type>bpmnActivity</flo_element_origin_type>
+        <flo_element_origin_port>0</flo_element_origin_port>
+        <flo_element_dest>4369347305d2b0519519358051938763</flo_element_dest>
+        <flo_element_dest_type>bpmnActivity</flo_element_dest_type>
+        <flo_element_dest_port>0</flo_element_dest_port>
+        <flo_is_inmediate>1</flo_is_inmediate>
+        <flo_condition></flo_condition>
+        <flo_x1>818</flo_x1>
+        <flo_y1>171</flo_y1>
+        <flo_x2>742</flo_x2>
+        <flo_y2>411</flo_y2>
+        <flo_state><![CDATA[[{"x":818,"y":171},{"x":742,"y":171},{"x":742,"y":411}]]]></flo_state>
+        <flo_position>1</flo_position>
+      </record>
+      <record>
+        <flo_uid>6350600435d302ea56d8cc1062056756</flo_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <flo_type>SEQUENCE</flo_type>
+        <flo_name> </flo_name>
+        <flo_element_origin>4369347305d2b0519519358051938763</flo_element_origin>
+        <flo_element_origin_type>bpmnActivity</flo_element_origin_type>
+        <flo_element_origin_port>0</flo_element_origin_port>
+        <flo_element_dest>5713646995d2b05414fd644036471299</flo_element_dest>
+        <flo_element_dest_type>bpmnActivity</flo_element_dest_type>
+        <flo_element_dest_port>0</flo_element_dest_port>
+        <flo_is_inmediate>1</flo_is_inmediate>
+        <flo_condition></flo_condition>
+        <flo_x1>817</flo_x1>
+        <flo_y1>429</flo_y1>
+        <flo_x2>894</flo_x2>
+        <flo_y2>193</flo_y2>
+        <flo_state><![CDATA[[{"x":817,"y":429},{"x":894,"y":429},{"x":894,"y":193}]]]></flo_state>
+        <flo_position>1</flo_position>
+      </record>
+      <record>
+        <flo_uid>9811118075d2ebec5563446041456711</flo_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <flo_type>SEQUENCE</flo_type>
+        <flo_name> </flo_name>
+        <flo_element_origin>3319987695d2b038946e455062324287</flo_element_origin>
+        <flo_element_origin_type>bpmnActivity</flo_element_origin_type>
+        <flo_element_origin_port>0</flo_element_origin_port>
+        <flo_element_dest>4369347305d2b0519519358051938763</flo_element_dest>
+        <flo_element_dest_type>bpmnActivity</flo_element_dest_type>
+        <flo_element_dest_port>0</flo_element_dest_port>
+        <flo_is_inmediate>1</flo_is_inmediate>
+        <flo_condition></flo_condition>
+        <flo_x1>572</flo_x1>
+        <flo_y1>203</flo_y1>
+        <flo_x2>666</flo_x2>
+        <flo_y2>429</flo_y2>
+        <flo_state><![CDATA[[{"x":572,"y":203},{"x":572,"y":429},{"x":666,"y":429}]]]></flo_state>
+        <flo_position>1</flo_position>
+      </record>
+    </table>
+    <table name="GATEWAY"/>
+    <table name="LANE">
+      <record>
+        <lan_uid>6864767055d2b03614ccdf1057607269</lan_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <lns_uid>3744499145d2b03390fef04039020796</lns_uid>
+        <lan_name>Requester</lan_name>
+        <lan_child_laneset></lan_child_laneset>
+        <lan_is_horizontal>1</lan_is_horizontal>
+        <bou_uid>2368957055d2b0361500691010254215</bou_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <element_uid>6864767055d2b03614ccdf1057607269</element_uid>
+        <bou_element>3744499145d2b03390fef04039020796</bou_element>
+        <bou_element_type>bpmnLane</bou_element_type>
+        <bou_x>40</bou_x>
+        <bou_y>0</bou_y>
+        <bou_width>659</bou_width>
+        <bou_height>209</bou_height>
+        <bou_rel_position>1</bou_rel_position>
+        <bou_size_identical>0</bou_size_identical>
+        <bou_container>bpmnPool</bou_container>
+      </record>
+      <record>
+        <lan_uid>9669413605d2b038937f414025055799</lan_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <lns_uid>3744499145d2b03390fef04039020796</lns_uid>
+        <lan_name>HR</lan_name>
+        <lan_child_laneset></lan_child_laneset>
+        <lan_is_horizontal>1</lan_is_horizontal>
+        <bou_uid>1735397715d2b03893a7869097572686</bou_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <element_uid>9669413605d2b038937f414025055799</element_uid>
+        <bou_element>3744499145d2b03390fef04039020796</bou_element>
+        <bou_element_type>bpmnLane</bou_element_type>
+        <bou_x>40</bou_x>
+        <bou_y>209</bou_y>
+        <bou_width>659</bou_width>
+        <bou_height>255</bou_height>
+        <bou_rel_position>2</bou_rel_position>
+        <bou_size_identical>0</bou_size_identical>
+        <bou_container>bpmnPool</bou_container>
+      </record>
+    </table>
+    <table name="LANESET">
+      <record>
+        <lns_uid>3744499145d2b03390fef04039020796</lns_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <pro_uid>4176904825d2b030f426167058601715</pro_uid>
+        <lns_name>Day Care Enrollment</lns_name>
+        <lns_parent_lane></lns_parent_lane>
+        <lns_is_horizontal>1</lns_is_horizontal>
+        <lns_state></lns_state>
+        <bou_uid>7443980895d2b0339156304004625896</bou_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <element_uid>3744499145d2b03390fef04039020796</element_uid>
+        <bou_element>8105802575d2b030f3fc937027314929</bou_element>
+        <bou_element_type>bpmnLaneset</bou_element_type>
+        <bou_x>305</bou_x>
+        <bou_y>113</bou_y>
+        <bou_width>700</bou_width>
+        <bou_height>464</bou_height>
+        <bou_rel_position>0</bou_rel_position>
+        <bou_size_identical>0</bou_size_identical>
+        <bou_container>bpmnDiagram</bou_container>
+      </record>
+    </table>
+    <table name="PARTICIPANT"/>
+    <table name="PROCESS">
+      <record>
+        <pro_uid>4176904825d2b030f426167058601715</pro_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <dia_uid>8105802575d2b030f3fc937027314929</dia_uid>
+        <pro_name>Day Care Enrollment</pro_name>
+        <pro_type>NONE</pro_type>
+        <pro_is_executable>0</pro_is_executable>
+        <pro_is_closed>0</pro_is_closed>
+        <pro_is_subprocess>0</pro_is_subprocess>
+      </record>
+    </table>
+    <table name="PROJECT">
+      <record>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <prj_name>Day Care Enrollment</prj_name>
+        <prj_description></prj_description>
+        <prj_target_namespace></prj_target_namespace>
+        <prj_expresion_language></prj_expresion_language>
+        <prj_type_language></prj_type_language>
+        <prj_exporter></prj_exporter>
+        <prj_exporter_version></prj_exporter_version>
+        <prj_create_date><![CDATA[2019-07-14 16:25:19]]></prj_create_date>
+        <prj_update_date><![CDATA[2019-07-25 11:34:23]]></prj_update_date>
+        <prj_author>8159829165b18cedc9853d4054281866</prj_author>
+        <prj_author_version></prj_author_version>
+        <prj_original_source></prj_original_source>
+      </record>
+    </table>
+  </definition>
+  <definition class="workflow">
+    <table name="process">
+      <record>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <pro_title>Day Care Enrollment</pro_title>
+        <pro_description></pro_description>
+        <pro_parent>6636409255d2b030f319111003840103</pro_parent>
+        <pro_time>1</pro_time>
+        <pro_timeunit>DAYS</pro_timeunit>
+        <pro_status>ACTIVE</pro_status>
+        <pro_type_day></pro_type_day>
+        <pro_type>NORMAL</pro_type>
+        <pro_assignment>FALSE</pro_assignment>
+        <pro_show_map>0</pro_show_map>
+        <pro_show_message>0</pro_show_message>
+        <pro_subprocess>0</pro_subprocess>
+        <pro_tri_open></pro_tri_open>
+        <pro_tri_deleted></pro_tri_deleted>
+        <pro_tri_canceled></pro_tri_canceled>
+        <pro_tri_paused></pro_tri_paused>
+        <pro_tri_reassigned></pro_tri_reassigned>
+        <pro_tri_unpaused></pro_tri_unpaused>
+        <pro_type_process>PUBLIC</pro_type_process>
+        <pro_show_delegate>0</pro_show_delegate>
+        <pro_show_dynaform>0</pro_show_dynaform>
+        <pro_category></pro_category>
+        <pro_sub_category></pro_sub_category>
+        <pro_industry>0</pro_industry>
+        <pro_update_date><![CDATA[2019-07-25 11:34:23]]></pro_update_date>
+        <pro_create_date><![CDATA[2019-07-14 16:25:19]]></pro_create_date>
+        <pro_create_user>8159829165b18cedc9853d4054281866</pro_create_user>
+        <pro_height>5000</pro_height>
+        <pro_width>10000</pro_width>
+        <pro_title_x>0</pro_title_x>
+        <pro_title_y>0</pro_title_y>
+        <pro_debug>0</pro_debug>
+        <pro_dynaforms></pro_dynaforms>
+        <pro_derivation_screen_tpl></pro_derivation_screen_tpl>
+        <pro_cost>0</pro_cost>
+        <pro_unit_cost></pro_unit_cost>
+        <pro_itee>1</pro_itee>
+        <pro_action_done><![CDATA[a:1:{i:0;s:41:"GATEWAYTOGATEWAY_DELETE_CORRUPTED_RECORDS";}]]></pro_action_done>
+        <pro_category_label>No Category</pro_category_label>
+        <pro_bpmn>1</pro_bpmn>
+      </record>
+    </table>
+    <table name="tasks">
+      <record>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <tas_uid>4369347305d2b0519519358051938763</tas_uid>
+        <tas_title>HR Dashboard</tas_title>
+        <tas_description></tas_description>
+        <tas_def_title></tas_def_title>
+        <tas_def_subject_message></tas_def_subject_message>
+        <tas_def_proc_code></tas_def_proc_code>
+        <tas_def_message></tas_def_message>
+        <tas_def_description></tas_def_description>
+        <tas_type>NORMAL</tas_type>
+        <tas_duration>1</tas_duration>
+        <tas_delay_type></tas_delay_type>
+        <tas_temporizer>0</tas_temporizer>
+        <tas_type_day></tas_type_day>
+        <tas_timeunit>DAYS</tas_timeunit>
+        <tas_alert>FALSE</tas_alert>
+        <tas_priority_variable></tas_priority_variable>
+        <tas_assign_type>BALANCED</tas_assign_type>
+        <tas_assign_variable><![CDATA[@@SYS_NEXT_USER_TO_BE_ASSIGNED]]></tas_assign_variable>
+        <tas_group_variable></tas_group_variable>
+        <tas_mi_instance_variable><![CDATA[@@SYS_VAR_TOTAL_INSTANCE]]></tas_mi_instance_variable>
+        <tas_mi_complete_variable><![CDATA[@@SYS_VAR_TOTAL_INSTANCES_COMPLETE]]></tas_mi_complete_variable>
+        <tas_assign_location>FALSE</tas_assign_location>
+        <tas_assign_location_adhoc>FALSE</tas_assign_location_adhoc>
+        <tas_transfer_fly>FALSE</tas_transfer_fly>
+        <tas_last_assigned>8159829165b18cedc9853d4054281866</tas_last_assigned>
+        <tas_user>0</tas_user>
+        <tas_can_upload>FALSE</tas_can_upload>
+        <tas_view_upload>FALSE</tas_view_upload>
+        <tas_view_additional_documentation>FALSE</tas_view_additional_documentation>
+        <tas_can_cancel>FALSE</tas_can_cancel>
+        <tas_owner_app>FALSE</tas_owner_app>
+        <stg_uid></stg_uid>
+        <tas_can_pause>FALSE</tas_can_pause>
+        <tas_can_send_message>TRUE</tas_can_send_message>
+        <tas_can_delete_docs>FALSE</tas_can_delete_docs>
+        <tas_self_service>FALSE</tas_self_service>
+        <tas_start>TRUE</tas_start>
+        <tas_to_last_user>FALSE</tas_to_last_user>
+        <tas_send_last_email>FALSE</tas_send_last_email>
+        <tas_derivation>NORMAL</tas_derivation>
+        <tas_posx>319</tas_posx>
+        <tas_posy>85</tas_posy>
+        <tas_width>110</tas_width>
+        <tas_height>60</tas_height>
+        <tas_color></tas_color>
+        <tas_evn_uid></tas_evn_uid>
+        <tas_boundary></tas_boundary>
+        <tas_derivation_screen_tpl></tas_derivation_screen_tpl>
+        <tas_selfservice_timeout>0</tas_selfservice_timeout>
+        <tas_selfservice_time>0</tas_selfservice_time>
+        <tas_selfservice_time_unit></tas_selfservice_time_unit>
+        <tas_selfservice_trigger_uid></tas_selfservice_trigger_uid>
+        <tas_selfservice_execution>EVERY_TIME</tas_selfservice_execution>
+        <tas_not_email_from_format>0</tas_not_email_from_format>
+      </record>
+      <record>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <tas_uid>3319987695d2b038946e455062324287</tas_uid>
+        <tas_title>Request For Day Care</tas_title>
+        <tas_description></tas_description>
+        <tas_def_title></tas_def_title>
+        <tas_def_subject_message></tas_def_subject_message>
+        <tas_def_proc_code></tas_def_proc_code>
+        <tas_def_message></tas_def_message>
+        <tas_def_description></tas_def_description>
+        <tas_type>NORMAL</tas_type>
+        <tas_duration>1</tas_duration>
+        <tas_delay_type></tas_delay_type>
+        <tas_temporizer>0</tas_temporizer>
+        <tas_type_day>1</tas_type_day>
+        <tas_timeunit>DAYS</tas_timeunit>
+        <tas_alert>FALSE</tas_alert>
+        <tas_priority_variable></tas_priority_variable>
+        <tas_assign_type>BALANCED</tas_assign_type>
+        <tas_assign_variable><![CDATA[@@SYS_NEXT_USER_TO_BE_ASSIGNED]]></tas_assign_variable>
+        <tas_group_variable></tas_group_variable>
+        <tas_mi_instance_variable><![CDATA[@@SYS_VAR_TOTAL_INSTANCE]]></tas_mi_instance_variable>
+        <tas_mi_complete_variable><![CDATA[@@SYS_VAR_TOTAL_INSTANCES_COMPLETE]]></tas_mi_complete_variable>
+        <tas_assign_location>FALSE</tas_assign_location>
+        <tas_assign_location_adhoc>FALSE</tas_assign_location_adhoc>
+        <tas_transfer_fly>FALSE</tas_transfer_fly>
+        <tas_last_assigned>8159829165b18cedc9853d4054281866</tas_last_assigned>
+        <tas_user>0</tas_user>
+        <tas_can_upload>FALSE</tas_can_upload>
+        <tas_view_upload>FALSE</tas_view_upload>
+        <tas_view_additional_documentation>FALSE</tas_view_additional_documentation>
+        <tas_can_cancel>FALSE</tas_can_cancel>
+        <tas_owner_app>FALSE</tas_owner_app>
+        <stg_uid></stg_uid>
+        <tas_can_pause>FALSE</tas_can_pause>
+        <tas_can_send_message>TRUE</tas_can_send_message>
+        <tas_can_delete_docs>FALSE</tas_can_delete_docs>
+        <tas_self_service>FALSE</tas_self_service>
+        <tas_start>TRUE</tas_start>
+        <tas_to_last_user>FALSE</tas_to_last_user>
+        <tas_send_last_email>FALSE</tas_send_last_email>
+        <tas_derivation>NORMAL</tas_derivation>
+        <tas_posx>149</tas_posx>
+        <tas_posy>33</tas_posy>
+        <tas_width>110</tas_width>
+        <tas_height>60</tas_height>
+        <tas_color></tas_color>
+        <tas_evn_uid></tas_evn_uid>
+        <tas_boundary></tas_boundary>
+        <tas_derivation_screen_tpl></tas_derivation_screen_tpl>
+        <tas_selfservice_timeout>0</tas_selfservice_timeout>
+        <tas_selfservice_time>0</tas_selfservice_time>
+        <tas_selfservice_time_unit></tas_selfservice_time_unit>
+        <tas_selfservice_trigger_uid></tas_selfservice_trigger_uid>
+        <tas_selfservice_execution>EVERY_TIME</tas_selfservice_execution>
+        <tas_not_email_from_format>0</tas_not_email_from_format>
+      </record>
+      <record>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <tas_uid>5713646995d2b05414fd644036471299</tas_uid>
+        <tas_title>Requester Acceptance</tas_title>
+        <tas_description></tas_description>
+        <tas_def_title></tas_def_title>
+        <tas_def_subject_message></tas_def_subject_message>
+        <tas_def_proc_code></tas_def_proc_code>
+        <tas_def_message></tas_def_message>
+        <tas_def_description></tas_def_description>
+        <tas_type>NORMAL</tas_type>
+        <tas_duration>1</tas_duration>
+        <tas_delay_type></tas_delay_type>
+        <tas_temporizer>0</tas_temporizer>
+        <tas_type_day></tas_type_day>
+        <tas_timeunit>DAYS</tas_timeunit>
+        <tas_alert>FALSE</tas_alert>
+        <tas_priority_variable></tas_priority_variable>
+        <tas_assign_type>MULTIPLE_INSTANCE_VALUE_BASED</tas_assign_type>
+        <tas_assign_variable><![CDATA[@@requester_Array_User]]></tas_assign_variable>
+        <tas_group_variable><![CDATA[@@SYS_GROUP_TO_BE_ASSIGNED]]></tas_group_variable>
+        <tas_mi_instance_variable><![CDATA[@@SYS_VAR_TOTAL_INSTANCE]]></tas_mi_instance_variable>
+        <tas_mi_complete_variable><![CDATA[@@SYS_VAR_TOTAL_INSTANCES_COMPLETE]]></tas_mi_complete_variable>
+        <tas_assign_location>FALSE</tas_assign_location>
+        <tas_assign_location_adhoc>FALSE</tas_assign_location_adhoc>
+        <tas_transfer_fly>FALSE</tas_transfer_fly>
+        <tas_last_assigned>0</tas_last_assigned>
+        <tas_user>0</tas_user>
+        <tas_can_upload>FALSE</tas_can_upload>
+        <tas_view_upload>FALSE</tas_view_upload>
+        <tas_view_additional_documentation>FALSE</tas_view_additional_documentation>
+        <tas_can_cancel>FALSE</tas_can_cancel>
+        <tas_owner_app>FALSE</tas_owner_app>
+        <stg_uid></stg_uid>
+        <tas_can_pause>FALSE</tas_can_pause>
+        <tas_can_send_message>TRUE</tas_can_send_message>
+        <tas_can_delete_docs>FALSE</tas_can_delete_docs>
+        <tas_self_service>FALSE</tas_self_service>
+        <tas_start>FALSE</tas_start>
+        <tas_to_last_user>FALSE</tas_to_last_user>
+        <tas_send_last_email>FALSE</tas_send_last_email>
+        <tas_derivation>NORMAL</tas_derivation>
+        <tas_posx>471</tas_posx>
+        <tas_posy>33</tas_posy>
+        <tas_width>110</tas_width>
+        <tas_height>60</tas_height>
+        <tas_color></tas_color>
+        <tas_evn_uid></tas_evn_uid>
+        <tas_boundary></tas_boundary>
+        <tas_derivation_screen_tpl></tas_derivation_screen_tpl>
+        <tas_selfservice_timeout>0</tas_selfservice_timeout>
+        <tas_selfservice_time>0</tas_selfservice_time>
+        <tas_selfservice_time_unit>HOURS</tas_selfservice_time_unit>
+        <tas_selfservice_trigger_uid></tas_selfservice_trigger_uid>
+        <tas_selfservice_execution>EVERY_TIME</tas_selfservice_execution>
+        <tas_not_email_from_format>0</tas_not_email_from_format>
+      </record>
+    </table>
+    <table name="routes">
+      <record>
+        <rou_uid>1346476615d393f610d25a7009575222</rou_uid>
+        <rou_parent>0</rou_parent>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <tas_uid>5713646995d2b05414fd644036471299</tas_uid>
+        <rou_next_task>4369347305d2b0519519358051938763</rou_next_task>
+        <rou_case>1</rou_case>
+        <rou_type>SEQUENTIAL</rou_type>
+        <rou_default>0</rou_default>
+        <rou_condition></rou_condition>
+        <rou_to_last_user>FALSE</rou_to_last_user>
+        <rou_optional>FALSE</rou_optional>
+        <rou_send_email>TRUE</rou_send_email>
+        <rou_sourceanchor>1</rou_sourceanchor>
+        <rou_targetanchor>0</rou_targetanchor>
+        <rou_to_port>1</rou_to_port>
+        <rou_from_port>2</rou_from_port>
+        <rou_evn_uid></rou_evn_uid>
+        <gat_uid></gat_uid>
+      </record>
+      <record>
+        <rou_uid>4180232975d393f6116cc24065040959</rou_uid>
+        <rou_parent>0</rou_parent>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <tas_uid>3319987695d2b038946e455062324287</tas_uid>
+        <rou_next_task>4369347305d2b0519519358051938763</rou_next_task>
+        <rou_case>1</rou_case>
+        <rou_type>SEQUENTIAL</rou_type>
+        <rou_default>0</rou_default>
+        <rou_condition></rou_condition>
+        <rou_to_last_user>FALSE</rou_to_last_user>
+        <rou_optional>FALSE</rou_optional>
+        <rou_send_email>TRUE</rou_send_email>
+        <rou_sourceanchor>1</rou_sourceanchor>
+        <rou_targetanchor>0</rou_targetanchor>
+        <rou_to_port>1</rou_to_port>
+        <rou_from_port>2</rou_from_port>
+        <rou_evn_uid></rou_evn_uid>
+        <gat_uid></gat_uid>
+      </record>
+      <record>
+        <rou_uid>6523095905d393f6101bab5049476272</rou_uid>
+        <rou_parent>0</rou_parent>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <tas_uid>4369347305d2b0519519358051938763</tas_uid>
+        <rou_next_task>5713646995d2b05414fd644036471299</rou_next_task>
+        <rou_case>1</rou_case>
+        <rou_type>SEQUENTIAL</rou_type>
+        <rou_default>0</rou_default>
+        <rou_condition></rou_condition>
+        <rou_to_last_user>FALSE</rou_to_last_user>
+        <rou_optional>FALSE</rou_optional>
+        <rou_send_email>TRUE</rou_send_email>
+        <rou_sourceanchor>1</rou_sourceanchor>
+        <rou_targetanchor>0</rou_targetanchor>
+        <rou_to_port>1</rou_to_port>
+        <rou_from_port>2</rou_from_port>
+        <rou_evn_uid></rou_evn_uid>
+        <gat_uid></gat_uid>
+      </record>
+    </table>
+    <table name="lanes"/>
+    <table name="gateways"/>
+    <table name="inputs"/>
+    <table name="outputs"/>
+    <table name="dynaforms">
+      <record>
+        <dyn_uid>1676627075d2b0631436b90012599887</dyn_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <dyn_type>xmlform</dyn_type>
+        <dyn_filename><![CDATA[6636409255d2b030f319111003840103/1676627075d2b0631436b90012599887]]></dyn_filename>
+        <dyn_content><![CDATA[{"name":"Employee_Info","description":"","items":[{"type":"form","variable":"","var_uid":"","dataType":"","id":"1676627075d2b0631436b90012599887","name":"Employee_Info","description":"","mode":"edit","script":"","language":"en","externalLibs":"","printable":false,"items":[[{"type":"text","variable":"Req_Name","var_uid":"2498248955d2b0646b87478009684288","dataType":"string","protectedValue":false,"id":"Req_Name","name":"Req_Name","label":"Employee Name","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"Req_Name","colSpan":4},{"type":"text","variable":"Req_ID","var_uid":"5797920895d2b066245beb0087458979","dataType":"string","protectedValue":false,"id":"Req_ID","name":"Req_ID","label":"Employee ID","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"Req_ID","colSpan":4},{"type":"datetime","variable":"Request_Date","var_uid":"8264320645d2b0705091160095925856","dataType":"datetime","protectedValue":false,"id":"Request_Date","name":"Request_Date","label":"Request Date","placeholder":"","hint":"","required":false,"mode":"view","format":"YYYY-MM-DD","dayViewHeaderFormat":"MMMM YYYY","extraFormats":false,"stepping":1,"minDate":"","maxDate":"","useCurrent":"true","collapse":true,"locale":"","defaultDate":"","disabledDates":false,"enabledDates":false,"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down","previous":"glyphicon glyphicon-chevron-left","next":"glyphicon glyphicon-chevron-right","today":"glyphicon glyphicon-screenshot","clear":"glyphicon glyphicon-trash"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":false,"calendarWeeks":false,"viewMode":"days","toolbarPlacement":"default","showTodayButton":false,"showClear":"false","widgetPositioning":{"horizontal":"auto","vertical":"auto"},"widgetParent":null,"keepOpen":false,"var_name":"Request_Date","colSpan":4}]],"variables":[{"var_uid":"2498248955d2b0646b87478009684288","prj_uid":"6636409255d2b030f319111003840103","var_name":"Req_Name","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"5797920895d2b066245beb0087458979","prj_uid":"6636409255d2b030f319111003840103","var_name":"Req_ID","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"8264320645d2b0705091160095925856","prj_uid":"6636409255d2b030f319111003840103","var_name":"Request_Date","var_field_type":"datetime","var_field_size":10,"var_label":"datetime","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""}]}]}]]></dyn_content>
+        <dyn_label></dyn_label>
+        <dyn_version>2</dyn_version>
+        <dyn_update_date><![CDATA[2019-07-16 14:56:29]]></dyn_update_date>
+        <dyn_title>Employee_Info</dyn_title>
+        <dyn_description></dyn_description>
+      </record>
+      <record>
+        <dyn_uid>1706997085d2b05f5b9b102043103834</dyn_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <dyn_type>xmlform</dyn_type>
+        <dyn_filename><![CDATA[6636409255d2b030f319111003840103/1706997085d2b05f5b9b102043103834]]></dyn_filename>
+        <dyn_content><![CDATA[{"name":"Requester_Request_View","description":"","items":[{"type":"form","variable":"","var_uid":"","dataType":"","id":"1706997085d2b05f5b9b102043103834","name":"Requester_Request_View","description":"","mode":"edit","script":{"type":"js","code":"$('.control-label').css('text-align','left');\n$(\"[id='form[children_Info][1][childEnrollmentDate_label]']\").attr(\"readonly\", false);\n\n$(\"#submit\").find(\"button\").css(\"backgroundColor\", \"#1fbc99\"); \n$(\"#submit\").find(\"button\").css(\"border\", \"1px solid #1ba385\");\n$(\"#submit, #Cancel\").find(\"button\").css(\"color\", \"#fff\");\n$(\"#Cancel\").find(\"button\").css(\"backgroundColor\", \"#e4655f\");\n$(\"#Cancel\").find(\"button\").css(\"border\", \"1px solid #e14333\");\n\n//$(\"[id='form[children_Info][1][TEST_label]']\").setValue('1234');\n\n//$(\"#children_Info\").setValue($(\"#Req_ID\").getValue(),1,1)\n\n$(\"#Req_Email,#Test_ChildName\").hide();\n\nfunction loadDefaultUserGridInfo(initialpaam)\n{\n    var drp='<option value=\"\">Please Wait ...</option>';\n   $(\"[id='form[children_Info][\"+initialpaam+\"][childName]']\").html(drp);\n   var Req_ID=$(\"#Req_ID\").getValue();\n   var sql=\"SELECT * FROM PMT_DV_DAY_CARE_EMPLOYEE_CHILD_INFO WHERE EMPLOYEEID='\"+Req_ID+\"'\";\n   $.ajax({\n      method: \"POST\",\n      dataType:'json',\n      url: \"https://workflow.robi.com.bd/divergent/IoT/getReport.php\",\n      data: {sql:sql}\n    }).done( function( obj ){\n       var drp='<option value=\"\">Please Select</option>';\n     \n       $(\"[id='form[children_Info][\"+initialpaam+\"][childName]']\").html(drp);\n\n       var drp='<option value=\"\">Please Select</option>';\n       $.each(obj,function(index,row){\n\t\t\tdrp+='<option value=\"'+row.ID+'\">'+row.CHILD_NAME+'</option>';\n       });\n     \n     \t$(\"[id='form[children_Info][\"+initialpaam+\"][childName]']\").html(drp);\n    });\n  \n  \n\n}\n\n\n  var curday = function(sp){\n  today = new Date();\n  var dd = today.getDate();\n  var mm = today.getMonth()+1; //As January is 0.\n  var yyyy = today.getFullYear();\n\n  if(dd<10) dd='0'+dd;\n  if(mm<10) mm='0'+mm;\n  return (dd+sp+mm+sp+yyyy);\n  };\n  \n  console.log(curday('/'));\n  console.log(curday('-'));\n\nfunction dateDiff(date) {\n    date = date.split('-');\n    var today = new Date();\n    var year = today.getFullYear();\n    var month = today.getMonth() + 1;\n    var day = today.getDate();\n    var yy = parseInt(date[0]);\n    var mm = parseInt(date[1]);\n    var dd = parseInt(date[2]);\n    var years, months, days;\n    // months\n    months = month - mm;\n    if (day < dd) {\n        months = months - 1;\n    }\n    // years\n    years = year - yy;\n    if (month * 100 + day < mm * 100 + dd) {\n        years = years - 1;\n        months = months + 12;\n    }\n    // days\n    days = Math.floor((today.getTime() - (new Date(yy + years, mm + months - 1, dd)).getTime()) / (24 * 60 * 60 * 1000));\n    //\n    return {years: years, months: months, days: days};\n}\n\n\nfunction loadGridChildrenInfo(children_id,grid_row)\n{\n   var sql=\"SELECT * FROM PMT_DV_DAY_CARE_EMPLOYEE_CHILD_INFO WHERE ID='\"+children_id+\"'\";\n   $.ajax({\n      method: \"POST\",\n      dataType:'json',\n      url: \"https://workflow.robi.com.bd/divergent/IoT/getReport.php\",\n      data: {sql:sql}\n    }).done( function( obj ){\n       console.log(obj[0]);\n        console.log(obj);\n     \t$(\"#children_Info\").setValue(obj[0].CHILD_GENDER,grid_row, 2);\n        $(\"#children_Info\").setValue(obj[0].CHILD_DOB,grid_row,3);\n     \n     \t\n     \n     \tvar ageParam=dateDiff(obj[0].CHILD_DOB);\n     \tconsole.log(ageParam);\n     \tvar age='';\n     \tif(ageParam.years>0)\n        {\n          age+=ageParam.years+' Year';\n        }\n     \n     \tif(ageParam.months>0)\n        {\n          if(age.length>0)\n          {\n            age+=', ';\n          }\n          age+=ageParam.months+' Month';\n        }\n     \t\n     \t$(\"#children_Info\").setValue(age,grid_row,4);\n     \n    });\n}\n\nloadDefaultUserGridInfo(1);\n\n\n$(\"form\").setOnchange(function(field, newVal, oldVal) {\n  var totalRows = $(\"#children_Info\").getNumberRows();\n  for (var i = 1; i <= totalRows; i++) {\n    var childName   = $(\"#children_Info\").getValue(i, 1);\n    console.log(childName);\n    \n    loadGridChildrenInfo(childName,i);\n    \n    \n  }\n});\n\n$(\"#children_Info\").onAddRow(function(newArrayRow, gridObject, indexAdd) {\n    loadDefaultUserGridInfo(indexAdd);\n})\n\n//url: \"https://workflow.robi.com.bd/divergent/dayCare_childInfo\";"},"language":"en","externalLibs":"","printable":false,"items":[[{"type":"title","id":"title0000000001","label":"Day Care Enrollment From","colSpan":6},{"type":"text","variable":"Req_Email","var_uid":"5824440185d303c977ab904000477595","dataType":"string","protectedValue":false,"id":"Req_Email","name":"Req_Email","label":"Email","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"edit","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"Req_Email","colSpan":6}],[{"type":"form","variable":"","var_uid":"","dataType":"","id":"1676627075d2b0631436b90012599887","name":"Employee_Info","description":"","mode":"edit","script":"","language":"en","externalLibs":"","printable":false,"items":[[{"type":"text","variable":"Req_Name","var_uid":"2498248955d2b0646b87478009684288","dataType":"string","protectedValue":false,"id":"Req_Name","name":"Req_Name","label":"Employee Name","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"Req_Name","colSpan":4},{"type":"text","variable":"Req_ID","var_uid":"5797920895d2b066245beb0087458979","dataType":"string","protectedValue":false,"id":"Req_ID","name":"Req_ID","label":"Employee ID","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"Req_ID","colSpan":4},{"type":"datetime","variable":"Request_Date","var_uid":"8264320645d2b0705091160095925856","dataType":"datetime","protectedValue":false,"id":"Request_Date","name":"Request_Date","label":"Request Date","placeholder":"","hint":"","required":false,"mode":"view","format":"YYYY-MM-DD","dayViewHeaderFormat":"MMMM YYYY","extraFormats":false,"stepping":1,"minDate":"","maxDate":"","useCurrent":"true","collapse":true,"locale":"","defaultDate":"","disabledDates":false,"enabledDates":false,"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down","previous":"glyphicon glyphicon-chevron-left","next":"glyphicon glyphicon-chevron-right","today":"glyphicon glyphicon-screenshot","clear":"glyphicon glyphicon-trash"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":false,"calendarWeeks":false,"viewMode":"days","toolbarPlacement":"default","showTodayButton":false,"showClear":"false","widgetPositioning":{"horizontal":"auto","vertical":"auto"},"widgetParent":null,"keepOpen":false,"var_name":"Request_Date","colSpan":4}]],"variables":[{"var_uid":"2498248955d2b0646b87478009684288","prj_uid":"6636409255d2b030f319111003840103","var_name":"Req_Name","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"5797920895d2b066245beb0087458979","prj_uid":"6636409255d2b030f319111003840103","var_name":"Req_ID","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"8264320645d2b0705091160095925856","prj_uid":"6636409255d2b030f319111003840103","var_name":"Request_Date","var_field_type":"datetime","var_field_size":10,"var_label":"datetime","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""}],"colSpan":12}],[{"type":"subtitle","id":"subtitle000002222","label":"","colSpan":6},{"type":"suggest","variable":"Test_ChildName","var_uid":"3443598605d305c4f68b122027787596","dataType":"string","protectedValue":false,"id":"Test_ChildName","name":"Test_ChildName","label":"Name of Child","defaultValue":"","placeholder":"","hint":"","required":false,"mode":"parent","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"SELECT ID, CHILD_NAME FROM PMT_DV_DAY_CARE_EMPLOYEE_CHILD_INFO WHERE EMPLOYEEID = @@Req_Email","dataVariable":"","options":[],"delay":0,"var_name":"Test_ChildName","colSpan":6}],[{"type":"grid","variable":"children_Info","var_uid":"3901943015d2b0c1240b694034811426","dataType":"grid","protectedValue":false,"id":"children_Info","name":"children_Info","label":"","hint":"","required":false,"columns":[{"type":"dropdown","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"childName","name":"childName","label":"Child Name","defaultValue":"","placeholder":"","hint":"","required":false,"mode":"parent","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","options":[],"columnWidth":"100%","width":100,"title":"Child Name"},{"type":"text","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"childGender","name":"childGender","label":"Gender","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","columnWidth":"100%","width":100,"title":"Gender"},{"type":"datetime","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"childBirthDay","name":"childBirthDay","label":"Date of Birth","placeholder":"","hint":"","required":false,"mode":"view","format":"YYYY-MM-DD","dayViewHeaderFormat":"MMMM YYYY","extraFormats":false,"stepping":1,"minDate":"","maxDate":"","useCurrent":"true","collapse":true,"locale":"","defaultDate":"","disabledDates":false,"enabledDates":false,"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down","previous":"glyphicon glyphicon-chevron-left","next":"glyphicon glyphicon-chevron-right","today":"glyphicon glyphicon-screenshot","clear":"glyphicon glyphicon-trash"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":false,"calendarWeeks":false,"viewMode":"days","toolbarPlacement":"default","showTodayButton":false,"showClear":"false","widgetPositioning":{"horizontal":"auto","vertical":"auto"},"widgetParent":null,"keepOpen":false,"columnWidth":"100%","width":100,"title":"Date of Birth"},{"type":"text","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"childAge","name":"childAge","label":"Age","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","columnWidth":"100%","width":100,"title":"Age"},{"type":"datetime","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"childEnrollmentDate","name":"childEnrollmentDate","label":"Date of Enrollment","placeholder":"","hint":"","required":true,"mode":"parent","format":"YYYY-MM-DD","dayViewHeaderFormat":"MMMM YYYY","extraFormats":false,"stepping":1,"minDate":"","maxDate":"","useCurrent":"true","collapse":true,"locale":"","defaultDate":"","disabledDates":false,"enabledDates":false,"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down","previous":"glyphicon glyphicon-chevron-left","next":"glyphicon glyphicon-chevron-right","today":"glyphicon glyphicon-screenshot","clear":"glyphicon glyphicon-trash"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":false,"calendarWeeks":false,"viewMode":"days","toolbarPlacement":"default","showTodayButton":false,"showClear":"false","widgetPositioning":{"horizontal":"auto","vertical":"auto"},"widgetParent":null,"keepOpen":false,"columnWidth":"100%","width":100,"title":"Date of Enrollment"},{"type":"multipleFile","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"childInfoAttachment","name":"childInfoAttachment","label":"Attachment","inputDocument":"","required":false,"dnd":false,"extensions":"*","size":1024,"sizeUnity":"MB","mode":"parent","multiple":false,"inp_doc_uid":"","columnWidth":"100%","width":100,"title":"Attachment"}],"data":[],"mode":"parent","layout":"static","pageSize":"0","addRow":true,"deleteRow":true,"title":"","colSpan":12}],[{"type":"subtitle","id":"subtitle0000000001","label":"","colSpan":4},{"colSpan":4},{"colSpan":4}],[{"colSpan":3},{"type":"submit","id":"submit","name":"submit","label":"Submit","colSpan":2},{"colSpan":1},{"type":"submit","id":"Cancel","name":"Cancel","label":"Cancel","colSpan":2},{"colSpan":4}]],"variables":[{"var_uid":"5824440185d303c977ab904000477595","prj_uid":"6636409255d2b030f319111003840103","var_name":"Req_Email","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"3443598605d305c4f68b122027787596","prj_uid":"6636409255d2b030f319111003840103","var_name":"Test_ChildName","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""}]}]}]]></dyn_content>
+        <dyn_label></dyn_label>
+        <dyn_version>2</dyn_version>
+        <dyn_update_date><![CDATA[2019-08-01 14:08:20]]></dyn_update_date>
+        <dyn_title>Requester_Request_View</dyn_title>
+        <dyn_description></dyn_description>
+      </record>
+      <record>
+        <dyn_uid>5072789265d2d65193e9524085327918</dyn_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <dyn_type>xmlform</dyn_type>
+        <dyn_filename><![CDATA[6636409255d2b030f319111003840103/5072789265d2d65193e9524085327918]]></dyn_filename>
+        <dyn_content><![CDATA[{"name":"HR_Dashboard","description":"","items":[{"type":"form","variable":"","var_uid":"","dataType":"","id":"5072789265d2d65193e9524085327918","name":"HR_Dashboard","description":"","mode":"edit","script":{"type":"js","code":"$(\"#enrolled_list,#5254083185d357af5576739091237006,#meetingSubmit,#meetingClose,#7095634655d3802fe7282f7013149809,#eventSubmit,#eventClose\").hide();\n\n$('.control-label').css('text-align','left');\n\n$(\"#submit, #MeetingSchedule\").find(\"button\").css(\"backgroundColor\", \"#1fbc99\"); \n$(\"#submit, #MeetingSchedule\").find(\"button\").css(\"border\", \"1px solid #1ba385\");\n$(\"#submit, #cancel, #MeetingSchedule\").find(\"button\").css(\"color\", \"#fff\");\n$(\"#cancel\").find(\"button\").css(\"backgroundColor\", \"#e4655f\");\n$(\"#cancel\").find(\"button\").css(\"border\", \"1px solid #e14333\");\n\n$('#total_Queue').setValue($(\"#queue_grid\").getNumberRows());\n\n$('#total_enrollment').setValue($(\"#enrolled_Grid\").getNumberRows());\n\nvar countenrolledGrid = (20-$(\"#enrolled_Grid\").getNumberRows());\n\nvar countqueue_grid = $(\"#queue_grid\").getNumberRows(); \n\nvar countGrid = (countqueue_grid-countenrolledGrid);\n  //alert(countGrid);\n\nvar showIncre=1;\nvar gridId = 'queue_grid';\n  /*if (countqueue_grid > 0) {\n     for (i=1; i <= countqueue_grid; i++) {\n      // alert('Running '+i+'sh'+countenrolledGrid);\n       if(i>countenrolledGrid)\n       {\n       \t\t//alert(i);\n           $(\"[id='form[queue_grid][\"+i+\"][mailCheck]']\").hide();\n       }\n      \n     }\n  }*/\n\n\n$(\"#MeetingSchedule\").find(\"button\").click(function(){\n  \n  /*for(var i = 1;  i <= $(\"#queue_grid\").getNumberRows(); i++){\n      \n    var checkMail = $(\"#queue_grid\").getValue(i,3);\n    \n      if(checkMail =='1'){\n        var mailTo = $(\"#queue_grid\").getValue(i,2);\n        //alert(mailTo);\n      }\n    }*/\n\t$(\"#5254083185d357af5576739091237006,#meetingSubmit,#meetingClose\").show();\n  $(\"#submit,#cancel,#eventClose,#eventSubmit,#7095634655d3802fe7282f7013149809,#event\").hide();\n});\n\t\n\n$(\"#meetingSubmit\").find(\"button\").click(function(){\n  \n  $(\"#hiddenAction\").setValue(\"mettingSubmit\");\n  $(\"form\").first().submitForm();\n});\n\n$(\"#meetingClose\").find(\"button\").click(function(){\n\t$(\"#hiddenAction\").setValue(\"mettingClose\");\n  \t$(\"form\").first().submitForm();\n});\n\n\n$(\"#submit\").find(\"button\").click(function(){\n  for(var i = 1;  i <= $(\"#enrolled_Grid\").getNumberRows(); i++){\n      \n    var gridStatus = $(\"#enrolled_Grid\").getValue(i,9);\n    var gridComment = $(\"#enrolled_Grid\").getValue(i,8);\n    //alert(gridStatus);\n    if(gridStatus == \"De-enrollment\"){\n        if(gridComment ==''){\n\n          alert(\"Enter your Comment\");\n          return false;\n        }\n    }\n    \n    }//enrolled_Grid  \n  \n  $(\"#hiddenAction\").setValue(\"submit\");\n  \n});\n$(\"#event\").find(\"button\").click(function(){\n\n\t$(\"#7095634655d3802fe7282f7013149809,#meetingSubmit,#eventClose,#eventSubmit\").show();\n  $(\"#submit,#cancel,#MeetingSchedule,#meetingSubmit,#meetingClose,#5254083185d357af5576739091237006\").hide();\n});\n$(\"#eventSubmit\").find(\"button\").click(function(){\n  \n  $(\"#hiddenAction\").setValue(\"eventSubmit\");\n  $(\"form\").first().submitForm();\n});\n$(\"#eventClose\").find(\"button\").click(function(){\n\t$(\"#hiddenAction\").setValue(\"eventClose\");\n  \t$(\"form\").first().submitForm();\n});\n\n\n//queue_grid\n/*for(var i = 1;  i <= $(\"#queue_grid\").getNumberRows(); i++){\n      \n    var checkMail = $(\"#queue_grid\").getValue(i,3);\n    \n      if(checkMail =='1'){\n        var mailTo = $(\"#queue_grid\").getValue(i,2);\n        //alert(mailTo);\n      }\n    }*/\n\nvar totalGrid=$(\"#queue_grid\").getNumberRows();\nif(totalGrid>0)\n{\n  for(var i = 1;  i <= totalGrid; i++){\n    $(\"[id='form[queue_grid][\"+i+\"][ECDFeedback]']\").hide();\n    $(\"[id='form[queue_grid][\"+i+\"][FinalApproval]']\").hide();\n    $(\"[id='form[queue_grid][\"+i+\"][mailCheck]']\").hide();\n    var exixts_column_value=$(\"#queue_grid\").getValue(i, 14);\n    if(exixts_column_value==2)\n    {\n     \t//[queue_grid][1][ECDFeedback] \n      $(\"[id='form[queue_grid][\"+i+\"][ECDFeedback]']\").show();//FinalApproval\n      $(\"[id='form[queue_grid][\"+i+\"][FinalApproval]']\").show();//FinalApproval\n      $(\"[id='form[queue_grid][\"+i+\"][mailCheck]']\").show();\n    }\n    \n    ///alert(exixts_column_value);\n    \n  }\n}\n\n\n\n"},"language":"en","externalLibs":"","printable":false,"items":[[{"type":"title","id":"title0000000001","label":"Day Care Enrollment Detail","colSpan":12}],[{"type":"text","variable":"total_enrollment","var_uid":"8776350985d2d66a3d87006082384949","dataType":"string","protectedValue":false,"id":"total_enrollment","name":"total_enrollment","label":"Current Enrolled","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"total_enrollment","colSpan":6},{"type":"text","variable":"total_Queue","var_uid":"5491050905d2d6710a22715072837094","dataType":"string","protectedValue":false,"id":"total_Queue","name":"total_Queue","label":"Queue","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"total_Queue","colSpan":6}],[{"type":"grid","variable":"enrolled_Grid","var_uid":"2706858875d2d68835c3323074799770","dataType":"grid","protectedValue":false,"id":"enrolled_Grid","name":"enrolled_Grid","label":"Enrolled List","hint":"","required":false,"columns":[{"type":"hidden","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"ID","name":"ID","defaultValue":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","width":100},{"type":"hidden","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"REQ_EMAIL","name":"REQ_EMAIL","defaultValue":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","width":100},{"type":"text","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"REQ_NAME","name":"REQ_NAME","label":"Name of Employee","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","columnWidth":"100%","width":100,"title":"Name of Employee"},{"type":"text","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"CHILD_NAME","name":"CHILD_NAME","label":"Name of Child","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","columnWidth":"100%","width":100,"title":"Name of Child"},{"type":"text","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"DATE_OF_BIRTH","name":"DATE_OF_BIRTH","label":"Date of Birth","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","columnWidth":"100%","width":100,"title":"Date of Birth"},{"type":"text","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"AGE","name":"AGE","label":"Age","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","columnWidth":"100%","width":100,"title":"Age"},{"type":"text","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"DATE_OF_ENROLLMENT","name":"DATE_OF_ENROLLMENT","label":"Date of Enrollment","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","columnWidth":"100%","width":100,"title":"Date of Enrollment"},{"type":"link","id":"reqAttach","name":"reqAttach","label":"Attachment","value":"Download","href":"","hint":"","columnWidth":"100%","width":100,"title":"Attachment"},{"type":"textarea","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"DeEnrollmentReason","name":"DeEnrollmentReason","label":"De-enrollment Reason","defaultValue":"","placeholder":"","hint":"","required":false,"validate":"","validateMessage":"","mode":"parent","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","rows":"1","columnWidth":"100%","width":100,"title":"De-enrollment Reason"},{"type":"dropdown","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"EnrollmentStatus","name":"EnrollmentStatus","label":"Enrollment Status","defaultValue":"","placeholder":"","hint":"","required":false,"mode":"parent","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","options":[{"value":"","label":"Select option"},{"value":"Enrollment","label":"Enrollment"},{"value":"De-enrollment","label":"De-enrollment"}],"columnWidth":"100%","width":100,"title":"Enrollment Status"}],"data":[],"mode":"parent","layout":"static","pageSize":"0","addRow":false,"deleteRow":false,"title":"Enrolled List","colSpan":12}],[{"type":"panel","id":"enrolled_list","content":"<h3>Enrolled List</h3>\n<style type=\"text/css\">\n  #th th{padding: 0px 16px;    color: #428bca;\n    border: none;\n    border-bottom: 1px solid #ddd;\n    border-top: 1px solid #ddd;\n    font-size: 12px;\n    background: #f1f1f1;\n    vertical-align: middle;}\n  #rData tr td{font-size: .85em; text-align: center; padding: 2px 2px;border: none;vertical-align: middle;color: rgba(51,51,51,.9);    font-family: \"Open Sans\", sans-serif; font-weight: 600;}\n  #tr:hover{background: #8BC34A;}\n  #rData tr {border:#E0E0E0 1px solid;}\n  #rData tr:nth-child(even){background-color: #eeeeee}\n  #border tr td{padding: 8px; border:solid 1px black;}\n</style>\n\n<table class=\"table\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"99%\" id=\"r\">\n    <thead id=\"th\" class=\"bg-black\">\n      <tr>\n        <th>Name of Employee</th>\n        <th>Name of Child</th>\n        <th>Date of Birth</th>        \n        <th>Age</th>\n        <th>Date of Enrollment</th>\n        <th>Attachment</th>\n        <th>De-enrollment Reason</th>\n        <th>Enrollment Status</th>\n        <!--<th>ACTION</th>-->\n      </tr>\n    </thead>\n    <tbody id=\"rData\">\n    </tbody>\n  </table>","border":"1px","colSpan":12}],[{"type":"subtitle","id":"subtitle0000000001","label":"","colSpan":12}],[{"type":"grid","variable":"queue_grid","var_uid":"5136357435d2d6db986cab6078435408","dataType":"grid","protectedValue":false,"id":"queue_grid","name":"queue_grid","label":"Queue List","hint":"","required":false,"columns":[{"type":"hidden","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"QUID","name":"QUID","defaultValue":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","width":100},{"type":"hidden","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"hiddenEmail","name":"hiddenEmail","defaultValue":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","width":100},{"type":"checkbox","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"mailCheck","name":"mailCheck","label":"","defaultValue":false,"hint":"","required":false,"mode":"parent","options":[],"columnWidth":"40","width":100,"title":""},{"type":"text","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"QNameOfEmployee","name":"QNameOfEmployee","label":"Name of Employee","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","columnWidth":"100%","width":100,"title":"Name of Employee"},{"type":"text","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"QNameOfChild","name":"QNameOfChild","label":"Name of Child","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","columnWidth":"100%","width":100,"title":"Name of Child"},{"type":"text","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"QDateOfBirth","name":"QDateOfBirth","label":"Date of Birth","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","columnWidth":"100%","width":100,"title":"Date of Birth"},{"type":"text","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"QAge","name":"QAge","label":"Age","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","columnWidth":"100%","width":100,"title":"Age"},{"type":"text","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"QDateOfEnrollment","name":"QDateOfEnrollment","label":"Date of Enrollment","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","columnWidth":"100%","width":100,"title":"Date of Enrollment"},{"type":"link","id":"QReqAttach","name":"QReqAttach","label":"Attachment","value":"Download","href":"","hint":"","columnWidth":"100%","width":100,"title":"Attachment"},{"type":"text","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"EmployeeFeedback","name":"EmployeeFeedback","label":"Employee Feedback","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","columnWidth":"100%","width":100,"title":"Employee Feedback"},{"type":"text","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"meeting_schedule_status","name":"meeting_schedule_status","label":"Meeting Schedule Status","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","columnWidth":"100%","width":100,"title":"Meeting Schedule Status"},{"type":"dropdown","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"ECDFeedback","name":"ECDFeedback","label":"ECD Feedback","defaultValue":"","placeholder":"","hint":"","required":false,"mode":"parent","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","options":[{"value":"","label":"Please Select"},{"value":"Ok","label":"Ok"},{"value":"Not Ok","label":"Not Ok"}],"columnWidth":"100%","width":100,"title":"ECD Feedback"},{"type":"dropdown","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"FinalApproval","name":"FinalApproval","label":"Final Approval","defaultValue":"","placeholder":"","hint":"","required":false,"mode":"parent","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","options":[{"value":"","label":"Please select"},{"value":"Approve","label":"Approve"},{"value":"Not Approve","label":"Not Approve"}],"columnWidth":"100%","width":100,"title":"Final Approval"},{"type":"hidden","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"QUEUE_EXISTS_STATUS","name":"QUEUE_EXISTS_STATUS","defaultValue":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","width":100}],"data":[],"mode":"parent","layout":"static","pageSize":"0","addRow":false,"deleteRow":false,"title":"Queue List","colSpan":12}],[{"colSpan":2},{"type":"submit","id":"submit","name":"submit","label":"Submit","colSpan":2},{"type":"submit","id":"cancel","name":"cancel","label":"Exit","colSpan":2},{"type":"button","id":"MeetingSchedule","name":"MeetingSchedule ","label":"Meeting Schedule ","colSpan":2},{"type":"button","id":"event","name":"event","label":"Event & Communications","colSpan":2},{"colSpan":2}],[{"type":"form","variable":"","var_uid":"","dataType":"","id":"5254083185d357af5576739091237006","name":"meeting schedule","description":"","mode":"edit","script":"","language":"en","externalLibs":"","printable":false,"items":[[{"type":"title","id":"titleMettingSchedule","label":"Meeting schedule","colSpan":12}],[{"type":"datetime","variable":"meeting_date","var_uid":"4561773925d357b45af21d8040055663","dataType":"datetime","protectedValue":false,"id":"meeting_date","name":"meeting_date","label":"Meeting date","placeholder":"Meeting date","hint":"","required":false,"mode":"parent","format":"YYYY-MM-DD","dayViewHeaderFormat":"MMMM YYYY","extraFormats":false,"stepping":1,"minDate":"","maxDate":"","useCurrent":"true","collapse":true,"locale":"","defaultDate":"","disabledDates":false,"enabledDates":false,"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down","previous":"glyphicon glyphicon-chevron-left","next":"glyphicon glyphicon-chevron-right","today":"glyphicon glyphicon-screenshot","clear":"glyphicon glyphicon-trash"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":false,"calendarWeeks":false,"viewMode":"days","toolbarPlacement":"default","showTodayButton":false,"showClear":"false","widgetPositioning":{"horizontal":"auto","vertical":"auto"},"widgetParent":null,"keepOpen":false,"var_name":"meeting_date","colSpan":3},{"type":"datetime","variable":"meeting_time","var_uid":"4939356555d357b512c75d1065405519","dataType":"datetime","protectedValue":false,"id":"meeting_time","name":"meeting_time","label":"Meeting Time","placeholder":"Meeting Time","hint":"","required":false,"mode":"parent","format":"hh:mm:ss a","dayViewHeaderFormat":"MMMM YYYY","extraFormats":false,"stepping":1,"minDate":"","maxDate":"","useCurrent":"true","collapse":true,"locale":"","defaultDate":"","disabledDates":false,"enabledDates":false,"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down","previous":"glyphicon glyphicon-chevron-left","next":"glyphicon glyphicon-chevron-right","today":"glyphicon glyphicon-screenshot","clear":"glyphicon glyphicon-trash"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":false,"calendarWeeks":false,"viewMode":"days","toolbarPlacement":"default","showTodayButton":false,"showClear":"false","widgetPositioning":{"horizontal":"auto","vertical":"auto"},"widgetParent":null,"keepOpen":false,"var_name":"meeting_time","colSpan":3},{"type":"text","variable":"meeting_venue","var_uid":"4509787615d357b826a2719035127056","dataType":"string","protectedValue":false,"id":"meeting_venue","name":"meeting_venue","label":"Venue","defaultValue":"","placeholder":"Venue","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"parent","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"meeting_venue","colSpan":3},{"type":"suggest","variable":"metting_name_ecd","var_uid":"1396469845d357ba406d568093653113","dataType":"string","protectedValue":false,"id":"metting_name_ecd","name":"metting_name_ecd","label":"Name of ECD specialist ","defaultValue":"","placeholder":"Name of ECD specialist ","hint":"","required":false,"mode":"parent","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"SELECT CONCAT(EmployeeName,'/',IFNULL(Email,'NULL')) as NAME FROM RobiHRSupervisor","dataVariable":"","options":[],"delay":0,"var_name":"metting_name_ecd","colSpan":3}]],"variables":[{"var_uid":"4561773925d357b45af21d8040055663","prj_uid":"6636409255d2b030f319111003840103","var_name":"meeting_date","var_field_type":"datetime","var_field_size":10,"var_label":"datetime","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"4939356555d357b512c75d1065405519","prj_uid":"6636409255d2b030f319111003840103","var_name":"meeting_time","var_field_type":"datetime","var_field_size":10,"var_label":"datetime","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"4509787615d357b826a2719035127056","prj_uid":"6636409255d2b030f319111003840103","var_name":"meeting_venue","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"1396469845d357ba406d568093653113","prj_uid":"6636409255d2b030f319111003840103","var_name":"metting_name_ecd","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""}],"colSpan":12}],[{"type":"hidden","variable":"hiddenAction","var_uid":"7421860525d358a771f7531075071473","dataType":"string","protectedValue":false,"id":"hiddenAction","name":"hiddenAction","defaultValue":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"hiddenAction","colSpan":4},{"type":"button","id":"meetingSubmit","name":"meetingSubmit","label":"Submit","colSpan":2},{"type":"button","id":"meetingClose","name":"meetingClose","label":"Close","colSpan":2},{"colSpan":4}],[{"type":"form","variable":"","var_uid":"","dataType":"","id":"7095634655d3802fe7282f7013149809","name":"event","description":"","mode":"edit","script":"","language":"en","externalLibs":"","printable":false,"items":[[{"type":"title","id":"titleEvent","label":"Day care Event & Communications","colSpan":12}],[{"type":"text","variable":"event_name","var_uid":"3989594465d3803fe94eff3072912110","dataType":"string","protectedValue":false,"id":"event_name","name":"event_name","label":"Name of event","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"parent","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"event_name","colSpan":4},{"type":"datetime","variable":"event_date","var_uid":"6086119545d380416c760e9010340163","dataType":"datetime","protectedValue":false,"id":"event_date","name":"event_date","label":"Date of event","placeholder":"","hint":"","required":false,"mode":"parent","format":"YYYY-MM-DD","dayViewHeaderFormat":"MMMM YYYY","extraFormats":false,"stepping":1,"minDate":"","maxDate":"","useCurrent":"true","collapse":true,"locale":"","defaultDate":"","disabledDates":false,"enabledDates":false,"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down","previous":"glyphicon glyphicon-chevron-left","next":"glyphicon glyphicon-chevron-right","today":"glyphicon glyphicon-screenshot","clear":"glyphicon glyphicon-trash"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":false,"calendarWeeks":false,"viewMode":"days","toolbarPlacement":"default","showTodayButton":false,"showClear":"false","widgetPositioning":{"horizontal":"auto","vertical":"auto"},"widgetParent":null,"keepOpen":false,"var_name":"event_date","colSpan":4},{"type":"datetime","variable":"event_time","var_uid":"3133361755d38042a026aa4015864728","dataType":"datetime","protectedValue":false,"id":"event_time","name":"event_time","label":"Time","placeholder":"","hint":"","required":false,"mode":"parent","format":"h:mm:s a","dayViewHeaderFormat":"MMMM YYYY","extraFormats":false,"stepping":1,"minDate":"","maxDate":"","useCurrent":"true","collapse":true,"locale":"","defaultDate":"","disabledDates":false,"enabledDates":false,"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down","previous":"glyphicon glyphicon-chevron-left","next":"glyphicon glyphicon-chevron-right","today":"glyphicon glyphicon-screenshot","clear":"glyphicon glyphicon-trash"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":false,"calendarWeeks":false,"viewMode":"days","toolbarPlacement":"default","showTodayButton":false,"showClear":"false","widgetPositioning":{"horizontal":"auto","vertical":"auto"},"widgetParent":null,"keepOpen":false,"var_name":"event_time","colSpan":4}],[{"type":"text","variable":"event_venue","var_uid":"6172826005d38044e69c400067010346","dataType":"string","protectedValue":false,"id":"event_venue","name":"event_venue","label":"Venue","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"parent","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"event_venue","colSpan":4},{"type":"text","variable":"event_attraction","var_uid":"7911683975d380469eff4e6003208142","dataType":"string","protectedValue":false,"id":"event_attraction","name":"event_attraction","label":"Attraction","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"parent","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"event_attraction","colSpan":4},{"type":"text","variable":"event_recommendation","var_uid":"8775448195d38047ce3d084092477081","dataType":"string","protectedValue":false,"id":"event_recommendation","name":"event_recommendation","label":"Recommendation","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"parent","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"event_recommendation","colSpan":4}],[{"type":"multipleFile","variable":"event_attachment","var_uid":"7579278555d3804a762a3a4032811718","dataType":"multiplefile","protectedValue":false,"id":"event_attachment","name":"event_attachment","label":"Attachment ","inputDocument":"","required":false,"dnd":false,"extensions":"*","size":1024,"sizeUnity":"KB","mode":"parent","multiple":false,"inp_doc_uid":"","var_name":"event_attachment","colSpan":4},{"colSpan":4},{"colSpan":4}],[{"type":"grid","variable":"event_additional_email","var_uid":"7462633165d3804f5023205037492987","dataType":"grid","protectedValue":false,"id":"event_additional_email","name":"event_additional_email","label":"Add additional email ID","hint":"","required":false,"columns":[{"type":"suggest","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"event_add_email_id","name":"event_add_email_id","label":"Email","defaultValue":"","placeholder":"","hint":"","required":false,"mode":"parent","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","options":[],"delay":0,"columnWidth":"30%","width":100,"title":"Email"}],"data":[],"mode":"parent","layout":"responsive","pageSize":"0","addRow":true,"deleteRow":true,"title":"Add additional email ID","colSpan":12}]],"variables":[{"var_uid":"3989594465d3803fe94eff3072912110","prj_uid":"6636409255d2b030f319111003840103","var_name":"event_name","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"6086119545d380416c760e9010340163","prj_uid":"6636409255d2b030f319111003840103","var_name":"event_date","var_field_type":"datetime","var_field_size":10,"var_label":"datetime","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"3133361755d38042a026aa4015864728","prj_uid":"6636409255d2b030f319111003840103","var_name":"event_time","var_field_type":"datetime","var_field_size":10,"var_label":"datetime","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"6172826005d38044e69c400067010346","prj_uid":"6636409255d2b030f319111003840103","var_name":"event_venue","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"7911683975d380469eff4e6003208142","prj_uid":"6636409255d2b030f319111003840103","var_name":"event_attraction","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"8775448195d38047ce3d084092477081","prj_uid":"6636409255d2b030f319111003840103","var_name":"event_recommendation","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"7579278555d3804a762a3a4032811718","prj_uid":"6636409255d2b030f319111003840103","var_name":"event_attachment","var_field_type":"multiplefile","var_field_size":10,"var_label":"multiplefile","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""}],"colSpan":12}],[{"colSpan":4},{"type":"button","id":"eventSubmit","name":"eventSubmit","label":"Submit","colSpan":2},{"type":"button","id":"eventClose","name":"eventClose","label":"Close","colSpan":2},{"colSpan":4}]],"variables":[{"var_uid":"8776350985d2d66a3d87006082384949","prj_uid":"6636409255d2b030f319111003840103","var_name":"total_enrollment","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"5491050905d2d6710a22715072837094","prj_uid":"6636409255d2b030f319111003840103","var_name":"total_Queue","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"7421860525d358a771f7531075071473","prj_uid":"6636409255d2b030f319111003840103","var_name":"hiddenAction","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""}]}]}]]></dyn_content>
+        <dyn_label></dyn_label>
+        <dyn_version>2</dyn_version>
+        <dyn_update_date><![CDATA[2019-08-01 14:38:05]]></dyn_update_date>
+        <dyn_title>HR_Dashboard</dyn_title>
+        <dyn_description></dyn_description>
+      </record>
+      <record>
+        <dyn_uid>5254083185d357af5576739091237006</dyn_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <dyn_type>xmlform</dyn_type>
+        <dyn_filename><![CDATA[6636409255d2b030f319111003840103/5254083185d357af5576739091237006]]></dyn_filename>
+        <dyn_content><![CDATA[{"name":"meeting schedule","description":"","items":[{"type":"form","variable":"","var_uid":"","dataType":"","id":"5254083185d357af5576739091237006","name":"meeting schedule","description":"","mode":"edit","script":"","language":"en","externalLibs":"","printable":false,"items":[[{"type":"title","id":"titleMettingSchedule","label":"Meeting schedule","colSpan":12}],[{"type":"datetime","variable":"meeting_date","var_uid":"4561773925d357b45af21d8040055663","dataType":"datetime","protectedValue":false,"id":"meeting_date","name":"meeting_date","label":"Meeting date","placeholder":"Meeting date","hint":"","required":false,"mode":"parent","format":"YYYY-MM-DD","dayViewHeaderFormat":"MMMM YYYY","extraFormats":false,"stepping":1,"minDate":"","maxDate":"","useCurrent":"true","collapse":true,"locale":"","defaultDate":"","disabledDates":false,"enabledDates":false,"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down","previous":"glyphicon glyphicon-chevron-left","next":"glyphicon glyphicon-chevron-right","today":"glyphicon glyphicon-screenshot","clear":"glyphicon glyphicon-trash"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":false,"calendarWeeks":false,"viewMode":"days","toolbarPlacement":"default","showTodayButton":false,"showClear":"false","widgetPositioning":{"horizontal":"auto","vertical":"auto"},"widgetParent":null,"keepOpen":false,"var_name":"meeting_date","colSpan":3},{"type":"datetime","variable":"meeting_time","var_uid":"4939356555d357b512c75d1065405519","dataType":"datetime","protectedValue":false,"id":"meeting_time","name":"meeting_time","label":"Meeting Time","placeholder":"Meeting Time","hint":"","required":false,"mode":"parent","format":"hh:mm:ss a","dayViewHeaderFormat":"MMMM YYYY","extraFormats":false,"stepping":1,"minDate":"","maxDate":"","useCurrent":"true","collapse":true,"locale":"","defaultDate":"","disabledDates":false,"enabledDates":false,"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down","previous":"glyphicon glyphicon-chevron-left","next":"glyphicon glyphicon-chevron-right","today":"glyphicon glyphicon-screenshot","clear":"glyphicon glyphicon-trash"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":false,"calendarWeeks":false,"viewMode":"days","toolbarPlacement":"default","showTodayButton":false,"showClear":"false","widgetPositioning":{"horizontal":"auto","vertical":"auto"},"widgetParent":null,"keepOpen":false,"var_name":"meeting_time","colSpan":3},{"type":"text","variable":"meeting_venue","var_uid":"4509787615d357b826a2719035127056","dataType":"string","protectedValue":false,"id":"meeting_venue","name":"meeting_venue","label":"Venue","defaultValue":"","placeholder":"Venue","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"parent","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"meeting_venue","colSpan":3},{"type":"suggest","variable":"metting_name_ecd","var_uid":"1396469845d357ba406d568093653113","dataType":"string","protectedValue":false,"id":"metting_name_ecd","name":"metting_name_ecd","label":"Name of ECD specialist ","defaultValue":"","placeholder":"Name of ECD specialist ","hint":"","required":false,"mode":"parent","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"SELECT CONCAT(EmployeeName,'/',IFNULL(Email,'NULL')) as NAME FROM RobiHRSupervisor","dataVariable":"","options":[],"delay":0,"var_name":"metting_name_ecd","colSpan":3}]],"variables":[{"var_uid":"4561773925d357b45af21d8040055663","prj_uid":"6636409255d2b030f319111003840103","var_name":"meeting_date","var_field_type":"datetime","var_field_size":10,"var_label":"datetime","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"4939356555d357b512c75d1065405519","prj_uid":"6636409255d2b030f319111003840103","var_name":"meeting_time","var_field_type":"datetime","var_field_size":10,"var_label":"datetime","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"4509787615d357b826a2719035127056","prj_uid":"6636409255d2b030f319111003840103","var_name":"meeting_venue","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"1396469845d357ba406d568093653113","prj_uid":"6636409255d2b030f319111003840103","var_name":"metting_name_ecd","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""}]}]}]]></dyn_content>
+        <dyn_label></dyn_label>
+        <dyn_version>2</dyn_version>
+        <dyn_update_date><![CDATA[2019-07-22 16:48:32]]></dyn_update_date>
+        <dyn_title>meeting schedule</dyn_title>
+        <dyn_description></dyn_description>
+      </record>
+      <record>
+        <dyn_uid>7095634655d3802fe7282f7013149809</dyn_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <dyn_type>xmlform</dyn_type>
+        <dyn_filename><![CDATA[6636409255d2b030f319111003840103/7095634655d3802fe7282f7013149809]]></dyn_filename>
+        <dyn_content><![CDATA[{"name":"event","description":"","items":[{"type":"form","variable":"","var_uid":"","dataType":"","id":"7095634655d3802fe7282f7013149809","name":"event","description":"","mode":"edit","script":"","language":"en","externalLibs":"","printable":false,"items":[[{"type":"title","id":"titleEvent","label":"Day care Event & Communications","colSpan":12}],[{"type":"text","variable":"event_name","var_uid":"3989594465d3803fe94eff3072912110","dataType":"string","protectedValue":false,"id":"event_name","name":"event_name","label":"Name of event","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"parent","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"event_name","colSpan":4},{"type":"datetime","variable":"event_date","var_uid":"6086119545d380416c760e9010340163","dataType":"datetime","protectedValue":false,"id":"event_date","name":"event_date","label":"Date of event","placeholder":"","hint":"","required":false,"mode":"parent","format":"YYYY-MM-DD","dayViewHeaderFormat":"MMMM YYYY","extraFormats":false,"stepping":1,"minDate":"","maxDate":"","useCurrent":"true","collapse":true,"locale":"","defaultDate":"","disabledDates":false,"enabledDates":false,"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down","previous":"glyphicon glyphicon-chevron-left","next":"glyphicon glyphicon-chevron-right","today":"glyphicon glyphicon-screenshot","clear":"glyphicon glyphicon-trash"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":false,"calendarWeeks":false,"viewMode":"days","toolbarPlacement":"default","showTodayButton":false,"showClear":"false","widgetPositioning":{"horizontal":"auto","vertical":"auto"},"widgetParent":null,"keepOpen":false,"var_name":"event_date","colSpan":4},{"type":"datetime","variable":"event_time","var_uid":"3133361755d38042a026aa4015864728","dataType":"datetime","protectedValue":false,"id":"event_time","name":"event_time","label":"Time","placeholder":"","hint":"","required":false,"mode":"parent","format":"h:mm:s a","dayViewHeaderFormat":"MMMM YYYY","extraFormats":false,"stepping":1,"minDate":"","maxDate":"","useCurrent":"true","collapse":true,"locale":"","defaultDate":"","disabledDates":false,"enabledDates":false,"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down","previous":"glyphicon glyphicon-chevron-left","next":"glyphicon glyphicon-chevron-right","today":"glyphicon glyphicon-screenshot","clear":"glyphicon glyphicon-trash"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":false,"calendarWeeks":false,"viewMode":"days","toolbarPlacement":"default","showTodayButton":false,"showClear":"false","widgetPositioning":{"horizontal":"auto","vertical":"auto"},"widgetParent":null,"keepOpen":false,"var_name":"event_time","colSpan":4}],[{"type":"text","variable":"event_venue","var_uid":"6172826005d38044e69c400067010346","dataType":"string","protectedValue":false,"id":"event_venue","name":"event_venue","label":"Venue","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"parent","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"event_venue","colSpan":4},{"type":"text","variable":"event_attraction","var_uid":"7911683975d380469eff4e6003208142","dataType":"string","protectedValue":false,"id":"event_attraction","name":"event_attraction","label":"Attraction","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"parent","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"event_attraction","colSpan":4},{"type":"text","variable":"event_recommendation","var_uid":"8775448195d38047ce3d084092477081","dataType":"string","protectedValue":false,"id":"event_recommendation","name":"event_recommendation","label":"Recommendation","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"parent","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"event_recommendation","colSpan":4}],[{"type":"multipleFile","variable":"event_attachment","var_uid":"7579278555d3804a762a3a4032811718","dataType":"multiplefile","protectedValue":false,"id":"event_attachment","name":"event_attachment","label":"Attachment ","inputDocument":"","required":false,"dnd":false,"extensions":"*","size":1024,"sizeUnity":"KB","mode":"parent","multiple":false,"inp_doc_uid":"","var_name":"event_attachment","colSpan":4},{"colSpan":4},{"colSpan":4}],[{"type":"grid","variable":"event_additional_email","var_uid":"7462633165d3804f5023205037492987","dataType":"grid","protectedValue":false,"id":"event_additional_email","name":"event_additional_email","label":"Add additional email ID","hint":"","required":false,"columns":[{"type":"suggest","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"event_add_email_id","name":"event_add_email_id","label":"Email","defaultValue":"","placeholder":"","hint":"","required":false,"mode":"parent","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","options":[],"delay":0,"columnWidth":"30%","width":100,"title":"Email"}],"data":[],"mode":"parent","layout":"responsive","pageSize":"0","addRow":true,"deleteRow":true,"title":"Add additional email ID","colSpan":12}]],"variables":[{"var_uid":"3989594465d3803fe94eff3072912110","prj_uid":"6636409255d2b030f319111003840103","var_name":"event_name","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"6086119545d380416c760e9010340163","prj_uid":"6636409255d2b030f319111003840103","var_name":"event_date","var_field_type":"datetime","var_field_size":10,"var_label":"datetime","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"3133361755d38042a026aa4015864728","prj_uid":"6636409255d2b030f319111003840103","var_name":"event_time","var_field_type":"datetime","var_field_size":10,"var_label":"datetime","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"6172826005d38044e69c400067010346","prj_uid":"6636409255d2b030f319111003840103","var_name":"event_venue","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"7911683975d380469eff4e6003208142","prj_uid":"6636409255d2b030f319111003840103","var_name":"event_attraction","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"8775448195d38047ce3d084092477081","prj_uid":"6636409255d2b030f319111003840103","var_name":"event_recommendation","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"7579278555d3804a762a3a4032811718","prj_uid":"6636409255d2b030f319111003840103","var_name":"event_attachment","var_field_type":"multiplefile","var_field_size":10,"var_label":"multiplefile","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""}]}]}]]></dyn_content>
+        <dyn_label></dyn_label>
+        <dyn_version>2</dyn_version>
+        <dyn_update_date><![CDATA[2019-07-24 13:21:04]]></dyn_update_date>
+        <dyn_title>event</dyn_title>
+        <dyn_description></dyn_description>
+      </record>
+      <record>
+        <dyn_uid>9307037665d3030fe8d2084017953609</dyn_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <dyn_type>xmlform</dyn_type>
+        <dyn_filename><![CDATA[6636409255d2b030f319111003840103/9307037665d3030fe8d2084017953609]]></dyn_filename>
+        <dyn_content><![CDATA[{"name":"Requester_Acceptance","description":"","items":[{"type":"form","variable":"","var_uid":"","dataType":"","id":"9307037665d3030fe8d2084017953609","name":"Requester_Acceptance","description":"","mode":"edit","script":{"type":"js","code":"$('.control-label').css('text-align','left');\n$(\"[id='form[children_Info][1][childEnrollmentDate_label]']\").attr(\"readonly\", false);\n\n$(\"#children_Info\").hide();\n\n$(\"#submit\").find(\"button\").css(\"backgroundColor\", \"#1fbc99\"); \n$(\"#submit\").find(\"button\").css(\"border\", \"1px solid #1ba385\");\n$(\"#submit, #Cancel\").find(\"button\").css(\"color\", \"#fff\");\n$(\"#Cancel\").find(\"button\").css(\"backgroundColor\", \"#e4655f\");\n$(\"#Cancel\").find(\"button\").css(\"border\", \"1px solid #e14333\");\n\n\n\n$(\"#submit\").click(function(){\n  \t$(\"#hiddenUserAccept\").setValue(\"submit\");\n});\n$(\"#Cancel\").click(function(){\n  \t$(\"#hiddenUserAccept\").setValue(\"cancel\");\n});"},"language":"en","externalLibs":"","printable":false,"items":[[{"type":"title","id":"title0000000001","label":"Day Care Enrollment From","colSpan":12}],[{"type":"form","variable":"","var_uid":"","dataType":"","id":"1676627075d2b0631436b90012599887","name":"Employee_Info","description":"","mode":"edit","script":"","language":"en","externalLibs":"","printable":false,"items":[[{"type":"text","variable":"Req_Name","var_uid":"2498248955d2b0646b87478009684288","dataType":"string","protectedValue":false,"id":"Req_Name","name":"Req_Name","label":"Employee Name","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"Req_Name","colSpan":4},{"type":"text","variable":"Req_ID","var_uid":"5797920895d2b066245beb0087458979","dataType":"string","protectedValue":false,"id":"Req_ID","name":"Req_ID","label":"Employee ID","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"Req_ID","colSpan":4},{"type":"datetime","variable":"Request_Date","var_uid":"8264320645d2b0705091160095925856","dataType":"datetime","protectedValue":false,"id":"Request_Date","name":"Request_Date","label":"Request Date","placeholder":"","hint":"","required":false,"mode":"view","format":"YYYY-MM-DD","dayViewHeaderFormat":"MMMM YYYY","extraFormats":false,"stepping":1,"minDate":"","maxDate":"","useCurrent":"true","collapse":true,"locale":"","defaultDate":"","disabledDates":false,"enabledDates":false,"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down","previous":"glyphicon glyphicon-chevron-left","next":"glyphicon glyphicon-chevron-right","today":"glyphicon glyphicon-screenshot","clear":"glyphicon glyphicon-trash"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":false,"calendarWeeks":false,"viewMode":"days","toolbarPlacement":"default","showTodayButton":false,"showClear":"false","widgetPositioning":{"horizontal":"auto","vertical":"auto"},"widgetParent":null,"keepOpen":false,"var_name":"Request_Date","colSpan":4}]],"variables":[{"var_uid":"2498248955d2b0646b87478009684288","prj_uid":"6636409255d2b030f319111003840103","var_name":"Req_Name","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"5797920895d2b066245beb0087458979","prj_uid":"6636409255d2b030f319111003840103","var_name":"Req_ID","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"8264320645d2b0705091160095925856","prj_uid":"6636409255d2b030f319111003840103","var_name":"Request_Date","var_field_type":"datetime","var_field_size":10,"var_label":"datetime","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""}],"colSpan":12}],[{"type":"subtitle","id":"subtitle000002222","label":"","colSpan":12}],[{"type":"text","variable":"Grid_ChildName","var_uid":"6866423265d3031c7d5f8f9072643381","dataType":"string","protectedValue":false,"id":"Grid_ChildName","name":"Grid_ChildName","label":"Name of Child","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"Grid_ChildName","colSpan":4},{"type":"text","variable":"Grid_ChildGender","var_uid":"5688377495d3031e4962644046360373","dataType":"string","protectedValue":false,"id":"Grid_ChildGender","name":"Grid_ChildGender","label":"Gender","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"Grid_ChildGender","colSpan":4},{"type":"text","variable":"Grid_ChildBirthDay","var_uid":"1661299865d3032155cfe18082557969","dataType":"string","protectedValue":false,"id":"Grid_ChildBirthDay","name":"Grid_ChildBirthDay","label":"Date of Birth","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"Grid_ChildBirthDay","colSpan":4}],[{"type":"text","variable":"Grid_ChildAge","var_uid":"1734708995d30323cb588c9049463844","dataType":"string","protectedValue":false,"id":"Grid_ChildAge","name":"Grid_ChildAge","label":"Age","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"Grid_ChildAge","colSpan":4},{"type":"datetime","variable":"Grid_ChildEnrollmentDate","var_uid":"6319060405d3032bf8d93e8000606137","dataType":"datetime","protectedValue":false,"id":"Grid_ChildEnrollmentDate","name":"Grid_ChildEnrollmentDate","label":"Date of Enrollment","placeholder":"","hint":"","required":false,"mode":"parent","format":"YYYY-MM-DD","dayViewHeaderFormat":"MMMM YYYY","extraFormats":false,"stepping":1,"minDate":"","maxDate":"","useCurrent":"true","collapse":true,"locale":"","defaultDate":"","disabledDates":false,"enabledDates":false,"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down","previous":"glyphicon glyphicon-chevron-left","next":"glyphicon glyphicon-chevron-right","today":"glyphicon glyphicon-screenshot","clear":"glyphicon glyphicon-trash"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":false,"calendarWeeks":false,"viewMode":"days","toolbarPlacement":"default","showTodayButton":false,"showClear":"false","widgetPositioning":{"horizontal":"auto","vertical":"auto"},"widgetParent":null,"keepOpen":false,"var_name":"Grid_ChildEnrollmentDate","colSpan":4},{"type":"link","id":"Grid_ChildInfoAttachment","name":"Grid_ChildInfoAttachment","label":"Attachment","value":"Download","href":"","hint":"","colSpan":4}],[{"type":"grid","variable":"children_Info","var_uid":"3901943015d2b0c1240b694034811426","dataType":"grid","protectedValue":false,"id":"children_Info","name":"children_Info","label":"","hint":"","required":false,"columns":[{"type":"suggest","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"childName","name":"childName","label":"Name of Child","defaultValue":"","placeholder":"","hint":"","required":false,"mode":"parent","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","options":[],"delay":0,"columnWidth":"100%","width":100,"title":"Name of Child"},{"type":"text","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"childGender","name":"childGender","label":"Gender","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","columnWidth":"100%","width":100,"title":"Gender"},{"type":"datetime","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"childBirthDay","name":"childBirthDay","label":"Date of Birth","placeholder":"","hint":"","required":false,"mode":"view","format":"YYYY-MM-DD","dayViewHeaderFormat":"MMMM YYYY","extraFormats":false,"stepping":1,"minDate":"","maxDate":"","useCurrent":"true","collapse":true,"locale":"","defaultDate":"","disabledDates":false,"enabledDates":false,"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down","previous":"glyphicon glyphicon-chevron-left","next":"glyphicon glyphicon-chevron-right","today":"glyphicon glyphicon-screenshot","clear":"glyphicon glyphicon-trash"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":false,"calendarWeeks":false,"viewMode":"days","toolbarPlacement":"default","showTodayButton":false,"showClear":"false","widgetPositioning":{"horizontal":"auto","vertical":"auto"},"widgetParent":null,"keepOpen":false,"columnWidth":"100%","width":100,"title":"Date of Birth"},{"type":"text","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"childAge","name":"childAge","label":"Age","defaultValue":"","placeholder":"","hint":"","required":false,"textTransform":"none","validate":"","validateMessage":"","maxLength":1000,"formula":"","mode":"view","operation":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","columnWidth":"100%","width":100,"title":"Age"},{"type":"datetime","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"childEnrollmentDate","name":"childEnrollmentDate","label":"Date of Enrollment","placeholder":"","hint":"","required":false,"mode":"parent","format":"YYYY-MM-DD","dayViewHeaderFormat":"MMMM YYYY","extraFormats":false,"stepping":1,"minDate":"","maxDate":"","useCurrent":"true","collapse":true,"locale":"","defaultDate":"","disabledDates":false,"enabledDates":false,"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down","previous":"glyphicon glyphicon-chevron-left","next":"glyphicon glyphicon-chevron-right","today":"glyphicon glyphicon-screenshot","clear":"glyphicon glyphicon-trash"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":false,"calendarWeeks":false,"viewMode":"days","toolbarPlacement":"default","showTodayButton":false,"showClear":"false","widgetPositioning":{"horizontal":"auto","vertical":"auto"},"widgetParent":null,"keepOpen":false,"columnWidth":"100%","width":100,"title":"Date of Enrollment"},{"type":"multipleFile","variable":"","var_uid":"","dataType":"","protectedValue":false,"id":"childInfoAttachment","name":"childInfoAttachment","label":"Attachment","inputDocument":"","required":false,"dnd":false,"extensions":"*","size":1024,"sizeUnity":"MB","mode":"parent","multiple":false,"inp_doc_uid":"","columnWidth":"100%","width":100,"title":"Attachment"}],"data":[],"mode":"parent","layout":"static","pageSize":"0","addRow":true,"deleteRow":true,"title":"","colSpan":12}],[{"type":"subtitle","id":"subtitle0000000001","label":"","colSpan":4},{"colSpan":4},{"colSpan":4}],[{"colSpan":3},{"colSpan":1},{"type":"submit","id":"submit","name":"submit","label":"Accept","colSpan":2},{"type":"submit","id":"Cancel","name":"Cancel","label":"Reject","colSpan":2},{"colSpan":4}],[{"type":"hidden","variable":"hiddenUserAccept","var_uid":"7546828715d4157b21fe978004654030","dataType":"string","protectedValue":false,"id":"hiddenUserAccept","name":"hiddenUserAccept","defaultValue":"","datasource":"database","dbConnection":"workflow","dbConnectionLabel":"PM Database","sql":"","dataVariable":"","var_name":"hiddenUserAccept","colSpan":2},{"colSpan":2},{"colSpan":2},{"colSpan":6}]],"variables":[{"var_uid":"6866423265d3031c7d5f8f9072643381","prj_uid":"6636409255d2b030f319111003840103","var_name":"Grid_ChildName","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"5688377495d3031e4962644046360373","prj_uid":"6636409255d2b030f319111003840103","var_name":"Grid_ChildGender","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"1661299865d3032155cfe18082557969","prj_uid":"6636409255d2b030f319111003840103","var_name":"Grid_ChildBirthDay","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"1734708995d30323cb588c9049463844","prj_uid":"6636409255d2b030f319111003840103","var_name":"Grid_ChildAge","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"6319060405d3032bf8d93e8000606137","prj_uid":"6636409255d2b030f319111003840103","var_name":"Grid_ChildEnrollmentDate","var_field_type":"datetime","var_field_size":10,"var_label":"datetime","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""},{"var_uid":"7546828715d4157b21fe978004654030","prj_uid":"6636409255d2b030f319111003840103","var_name":"hiddenUserAccept","var_field_type":"string","var_field_size":10,"var_label":"string","var_dbconnection":"workflow","var_dbconnection_label":"PM Database","var_sql":"","var_null":0,"var_default":"","var_accepted_values":"[]","inp_doc_uid":""}]}]}]]></dyn_content>
+        <dyn_label></dyn_label>
+        <dyn_version>2</dyn_version>
+        <dyn_update_date><![CDATA[2019-07-31 15:48:42]]></dyn_update_date>
+        <dyn_title>Requester_Acceptance</dyn_title>
+        <dyn_description></dyn_description>
+      </record>
+    </table>
+    <table name="steps">
+      <record>
+        <step_uid>3155796495d2b072386e795066317918</step_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <tas_uid>3319987695d2b038946e455062324287</tas_uid>
+        <step_type_obj>DYNAFORM</step_type_obj>
+        <step_uid_obj>1706997085d2b05f5b9b102043103834</step_uid_obj>
+        <step_condition></step_condition>
+        <step_position>1</step_position>
+        <step_mode>EDIT</step_mode>
+      </record>
+      <record>
+        <step_uid>5363687825d2d76505a63a7006183248</step_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <tas_uid>4369347305d2b0519519358051938763</tas_uid>
+        <step_type_obj>DYNAFORM</step_type_obj>
+        <step_uid_obj>5072789265d2d65193e9524085327918</step_uid_obj>
+        <step_condition></step_condition>
+        <step_position>1</step_position>
+        <step_mode>EDIT</step_mode>
+      </record>
+      <record>
+        <step_uid>7245072755d3032b38e1d41080483470</step_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <tas_uid>5713646995d2b05414fd644036471299</tas_uid>
+        <step_type_obj>DYNAFORM</step_type_obj>
+        <step_uid_obj>9307037665d3030fe8d2084017953609</step_uid_obj>
+        <step_condition></step_condition>
+        <step_position>1</step_position>
+        <step_mode>EDIT</step_mode>
+      </record>
+    </table>
+    <table name="triggers">
+      <record>
+        <tri_uid>2687508555d2d9709e59a85004008272</tri_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <tri_type>SCRIPT</tri_type>
+        <tri_webbot><![CDATA[$APPUID		= @@APPLICATION;
+$EMP_NAME	= @@Req_Name;
+$EMP_ID		= @@Req_ID;
+$EMP_EMAIL	= @@Req_Email;
+$EMP_GENDER	= 'Male';
+$REQ_DATE	= @@Request_Date;
+$INFO_GRID	= @@children_Info;
+
+foreach($INFO_GRID as $ROW){
+	$CHILD_ID			= $ROW['childName'];
+	$CN					= executeQuery("SELECT CHILD_NAME FROM PMT_DV_DAY_CARE_EMPLOYEE_CHILD_INFO WHERE ID = '$CHILD_ID'");
+	$CHILD_NAME			= $CN[1]['CHILD_NAME'];
+	//echo $CHILD_NAME; die();	
+	$CHILD_GENDER		= $ROW['childGender'];
+	$DATE_OF_BIRTH		= $ROW['childBirthDay'];
+	$AGE				= $ROW['childAge'];
+	//echo $AGE; die();
+	$DATE_OF_ENROLLMENT	= $ROW['childEnrollmentDate'];
+	
+	$REQ_ATTACHMENT		= '';
+	$bserver 			= (G::is_https() ? 'https://':'http://').$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'];
+$burls = $bserver . PATH_SEP . 'sys' . @@SYS_SYS . PATH_SEP . @@SYS_LANG . PATH_SEP . @@SYS_SKIN . PATH_SEP . 'cases' . PATH_SEP. 'cases_ShowDocument?a=';
+	
+	$attachment	= $ROW['childInfoAttachment'];
+	if(count($attachment)>0){  foreach($attachment as $row ){ $bfilName .= $burls.$row['appDocUid']."||"; } }
+	$REQ_ATTACHMENT		= $bfilName;
+	
+	$saveData	= "INSERT INTO PMT_DV_DAY_CARE_DATA	(APPUID,REQ_NAME,REQ_ID,REQ_EMAIL,REQ_GENDER,CHILD_NAME,CHILD_GENDER,DATE_OF_BIRTH,AGE,DATE_OF_ENROLLMENT,ATTACHMENT,REQUEST_DATE) VALUES('$APPUID','$EMP_NAME','$EMP_ID','$EMP_EMAIL','$EMP_GENDER','$CHILD_NAME','$CHILD_GENDER','$DATE_OF_BIRTH','$AGE','$DATE_OF_ENROLLMENT','$REQ_ATTACHMENT','$REQ_DATE')";
+	
+	executeQuery($saveData);
+	
+	$saveQueue	= "INSERT INTO PMT_DV_DAY_CARE_QUEUE (APPUID,REQ_NAME,REQ_ID,REQ_EMAIL,REQ_GENDER,CHILD_NAME,CHILD_GENDER,DATE_OF_BIRTH,AGE,DATE_OF_ENROLLMENT,ATTACHMENT,REQUEST_DATE,STATUS) VALUES ('$APPUID','$EMP_NAME','$EMP_ID','$EMP_EMAIL','$EMP_GENDER','$CHILD_NAME','$CHILD_GENDER','$DATE_OF_BIRTH','$AGE','$DATE_OF_ENROLLMENT','$REQ_ATTACHMENT','$REQ_DATE',1)";
+	executeQuery($saveQueue);	
+}]]></tri_webbot>
+        <tri_param></tri_param>
+        <tri_title>saveDayCareData</tri_title>
+        <tri_description></tri_description>
+      </record>
+      <record>
+        <tri_uid>3591486685d303409313049008424901</tri_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <tri_type>SCRIPT</tri_type>
+        <tri_webbot><![CDATA[$aUser = userInfo(@@USER_LOGGED);
+$requester_email = $aUser['mail'];
+
+$action = @@hiddenUserAccept;
+//print_r($action); die();
+if($action=="submit")
+{
+	$sqlQuery = ("UPDATE PMT_DV_DAY_CARE_QUEUE SET QUEUE_EXISTS_STATUS='2' WHERE REQ_EMAIL='".$requester_email."'");
+	
+	//echo '<pre>';
+	//print_r($sqlQuery); die();
+}
+else
+{
+	$sqlQuerys = executeQuery("UPDATE PMT_DV_DAY_CARE_QUEUE SET QUEUE_EXISTS_STATUS='3' WHERE REQ_EMAIL='".$requester_email."'");
+	//echo '<pre>';
+	//print_r($sqlQuerys); die();
+}]]></tri_webbot>
+        <tri_param></tri_param>
+        <tri_title>Request_Acceptance_After_Trigger</tri_title>
+        <tri_description></tri_description>
+      </record>
+      <record>
+        <tri_uid>3674576495d3033d028f0d3039325902</tri_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <tri_type>SCRIPT</tri_type>
+        <tri_webbot><![CDATA[$aUser = userInfo(@@USER_LOGGED);
+//$user_name = $aUser['firstname'] .' '. $aUser['lastname'];
+$requester_email = $aUser['mail'];
+//print_r($requester_email); die();
+$sqlQueryUser = executeQuery("SELECT * FROM PMT_DV_DAY_CARE_QUEUE WHERE REQ_EMAIL = '$requester_email'");
+//echo'<pre>';
+//print_r($sqlQueryUser); die();
+if (is_array($sqlQueryUser) and count($sqlQueryUser) > 0) {
+	@@Grid_ChildName		= $sqlQueryUser[1]['CHILD_NAME'];
+	@@Grid_ChildGender   	= $sqlQueryUser[1]['CHILD_GENDER'];
+	@@Grid_ChildBirthDay   	= $sqlQueryUser[1]['DATE_OF_BIRTH'];
+	@@Grid_ChildAge   		= $sqlQueryUser[1]['AGE'];
+}]]></tri_webbot>
+        <tri_param></tri_param>
+        <tri_title>Request_Acceptance_Before_Trigger</tri_title>
+        <tri_description></tri_description>
+      </record>
+      <record>
+        <tri_uid>4684994175d302f9ae5cf75025665032</tri_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <tri_type>SCRIPT</tri_type>
+        <tri_webbot><![CDATA[@@hiddenAction ='';
+
+
+$Enrolled	= executeQuery("SELECT * FROM PMT_DV_DAY_CARE_ENROLLED WHERE STATUS = 1 limit 20");
+$e=1;
+if($Enrolled){
+	foreach($Enrolled as $row){
+		$enrolled_Grid[$e]	= array(
+			'ID'				=> $row['ID'],
+			'REQ_EMAIL'			=> $row['REQ_EMAIL'],
+			'REQ_NAME'			=> $row['REQ_NAME'],
+			'CHILD_NAME'		=> $row['CHILD_NAME'],
+			'DATE_OF_BIRTH'		=> $row['DATE_OF_BIRTH'],
+			'AGE'				=> $row['AGE'],
+			'DATE_OF_ENROLLMENT'=> $row['DATE_OF_ENROLLMENT']
+		);
+		$e++;
+	}
+}
+
+@=enrolled_Grid = $enrolled_Grid;
+
+
+$Queue		= executeQuery("SELECT * FROM PMT_DV_DAY_CARE_QUEUE WHERE STATUS = 1 ORDER BY ID ASC ");
+$Q=1;
+if($Queue){
+	foreach($Queue as $row1){
+		
+		$feedback="";
+		if(!empty($row1['QUEUE_EXISTS_STATUS']))
+		{
+			if($row1['QUEUE_EXISTS_STATUS']==1)
+			{
+				$feedback="Request Send for Approval";
+			}
+			elseif($row1['QUEUE_EXISTS_STATUS']==2)
+			{
+				$feedback="Approved";
+			}
+			elseif($row1['QUEUE_EXISTS_STATUS']==3)
+			{
+				$feedback="Reject";
+			}
+		}
+		
+		$meeting_sch_status="Not Eligible";
+		
+		if(!empty($feedback))
+		{
+			$meeting_sch_status="Not set yet";
+			if(!empty($row1['MEETING_SCHEDULE_STATUS']))
+			{
+				$meeting_sch_status="Meeting scheduled";
+			}
+		}
+		
+		$queue_grid[$Q]	= array(
+			'hiddenEmail'		=>$row1['REQ_EMAIL'],
+			'QUID'				=>$row1['ID'],
+			'QNameOfEmployee'	=>$row1['REQ_NAME'],
+			'QNameOfChild'		=>$row1['CHILD_NAME'],
+			'QDateOfBirth'		=>$row1['DATE_OF_BIRTH'],
+			'QAge'				=>$row1['AGE'],
+			'QDateOfEnrollment'	=>$row1['DATE_OF_ENROLLMENT'],
+			'QUEUE_EXISTS_STATUS'	=>$row1['QUEUE_EXISTS_STATUS'], 
+			'meeting_schedule_status'	=>$meeting_sch_status,
+			'EmployeeFeedback'=>$feedback
+		);
+		$Q++;
+	}
+}
+
+@=queue_grid	= $queue_grid;
+
+
+//echo '<pre>';
+//print_r($Queue); die();
+//print_r($enrolled_Grid); die();
+
+
+]]></tri_webbot>
+        <tri_param></tri_param>
+        <tri_title>HR_Dashboard_Before_Trigger</tri_title>
+        <tri_description></tri_description>
+      </record>
+      <record>
+        <tri_uid>7061894175d358ace67eb68060418504</tri_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <tri_type>SCRIPT</tri_type>
+        <tri_webbot><![CDATA[if(@@hiddenAction=="submit"){
+	$grid=@=enrolled_Grid;
+	//echo '<pre>';
+	//print_r($grid); die();
+	
+	$contGrid = count(@=enrolled_Grid);
+	
+	@=requester_Array_User=array();
+	
+	//echo "<pre>";
+	
+	//print_r(@=enrolled_Grid); die();
+	
+	if(count($contGrid)>0)
+	{
+		foreach($grid as $row){
+			if($row['EnrollmentStatus']=="De-enrollment")
+			{
+				$enerolid = $row['ID'];
+				$st = "UPDATE PMT_DV_DAY_CARE_ENROLLED SET STATUS='2' WHERE ID='".$enerolid."'";
+				//executeQuery($st);
+			}
+		}
+	}
+	
+	$sqlTotalEnrolled=executeQuery("SELECT * FROM PMT_DV_DAY_CARE_ENROLLED WHERE STATUS='1'");
+	$totalEnrolled=count($sqlTotalEnrolled); 
+	$totalLeftQuta=20-$totalEnrolled;
+	
+	$CheckReqEmail = executeQuery("SELECT * FROM PMT_DV_DAY_CARE_QUEUE WHERE QUEUE_EXISTS_STATUS IS NULL ORDER BY REQ_GENDER ASC LIMIT $totalLeftQuta");
+	
+	if(count($CheckReqEmail)>0)
+	{
+		$email_array=array();
+		foreach($CheckReqEmail as $row){
+			$sqlUserUID=executeQuery("SELECT USR_UID FROM USERS WHERE USR_EMAIL='".$row['REQ_EMAIL']."'");
+			
+			if(!in_array($sqlUserUID[1]['USR_UID'],$email_array))
+			{
+				array_push($email_array,$sqlUserUID[1]['USR_UID']);
+			}
+			
+			executeQuery("UPDATE PMT_DV_DAY_CARE_QUEUE SET QUEUE_EXISTS_STATUS='1' WHERE ID='".$row['ID']."'");
+			
+		}
+		
+		//print_r($email_array); die();
+		
+		@=requester_Array_User=$email_array;
+	}
+	
+	//echo "<pre>";
+	//print_r($CheckReqEmail);
+	
+	//echo $totalLeftQuta; 
+	
+	//die();
+				//executeQuery($st);
+	
+}
+
+else if(@@hiddenAction=="mettingSubmit"){
+	//echo 'kk'; die();
+	
+	$Metting_date = @@meeting_date;
+	@@meeting_date = date("Y-m-d", strtotime($Metting_date));
+	
+	$meeting_time = @@meeting_time;
+	@@meeting_time = date("h:i:s a", strtotime($meeting_time));
+	
+	$lenGrid = count(@=queue_grid);
+		//@=queue_grid = 0; 
+	for ($x = 1; $x <= $lenGrid; $x++){
+			$checkMail = @=queue_grid[$x]['mailCheck'];
+		
+		if($checkMail != '0'){
+			$mailTo = @=queue_grid[$x]['hiddenEmail'];
+			$email= $mailTo;
+			$ccEmail= 'fakhrul@divergenttechbd.com';
+			$subject = "Day Care Enrollment Status ";
+			$dd = PMFSendMessage(@@APPLICATION, 'Day Care Enrollment',$email,$ccEmail,'',$subject, 'HR_Meeting_Mail.html');
+			
+			//print_r($dd); die();
+			$GRID_id = @=queue_grid[$x]['QUID'];
+			executeQuery("UPDATE PMT_DV_DAY_CARE_QUEUE SET MEETING_SCHEDULE_STATUS='1' WHERE ID='".$GRID_id."'");
+			
+			
+		}
+	}
+	
+PMFRedirectToStep(@@APPLICATION, @%INDEX, 'DYNAFORM', '5072789265d2d65193e9524085327918');
+	
+}else if(@@hiddenAction=="mettingClose"){
+	PMFRedirectToStep(@@APPLICATION, @%INDEX, 'DYNAFORM', '5072789265d2d65193e9524085327918');
+}
+else if(@@hiddenAction=="eventSubmit"){
+	//echo 'kk'; die();
+	
+	$event_date = @@event_date;
+	@@event_date = date("Y-m-d", strtotime($event_date));
+	
+	$event_time = @@event_time;
+	@@event_time = date("h:i:s a", strtotime($event_time));
+	
+	$lenGrid = count(@=enrolled_Grid);
+		//@=queue_grid = 0; 
+	for ($x = 1; $x <= $lenGrid; $x++){
+			$checkMail = @=enrolled_Grid[$x]['REQ_EMAIL'];
+		
+		if($checkMail != ''){
+			$mailTo = @=enrolled_Grid[$x]['REQ_EMAIL'];
+			$email= $mailTo;
+			$ccEmail= 'fakhrul@divergenttechbd.com';
+			$subject = "Day Care Enrollment Status ";
+			$dd = PMFSendMessage(@@APPLICATION, 'Day Care Enrollment',$email,$ccEmail,'',$subject, 'HR_Meeting_Mail.html');
+			
+			//print_r($dd); die();
+			
+			
+		}
+	}
+	$addGrid = count(@=event_additional_email);
+		//@=queue_grid = 0; 
+
+	for ($y = 1; $y <= $addGrid; $y++){
+			$checkMail = @=event_additional_email[$y]['event_add_email_id'];
+		
+		if($checkMail != ''){
+			$mailTo = @=event_additional_email[$y]['event_add_email_id'];
+			$email= $mailTo;
+			$ccEmail= 'fakhrul@divergenttechbd.com';
+			$subject = "Day Care Enrollment Status ";
+			$dd = PMFSendMessage(@@APPLICATION, 'Day Care Enrollment',$email,$ccEmail,'',$subject, 'HR_Meeting_Mail.html');
+			
+			//print_r($dd); die();
+			
+			
+		}
+	}
+	
+PMFRedirectToStep(@@APPLICATION, @%INDEX, 'DYNAFORM', '5072789265d2d65193e9524085327918');
+	
+}else if(@@hiddenAction=="eventClose"){
+	PMFRedirectToStep(@@APPLICATION, @%INDEX, 'DYNAFORM', '5072789265d2d65193e9524085327918');
+}
+//echo 'k'; die();]]></tri_webbot>
+        <tri_param></tri_param>
+        <tri_title>HR_Action</tri_title>
+        <tri_description></tri_description>
+      </record>
+      <record>
+        <tri_uid>9022283915d30303f113485077536980</tri_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <tri_type>SCRIPT</tri_type>
+        <tri_webbot></tri_webbot>
+        <tri_param></tri_param>
+        <tri_title>HR_Dashboard_After_Trigger</tri_title>
+        <tri_description></tri_description>
+      </record>
+      <record>
+        <tri_uid>9174521795d3034378fd862082893277</tri_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <tri_type>SCRIPT</tri_type>
+        <tri_webbot><![CDATA[$UID			= @@USER_LOGGED;
+@@Request_Date	= date('Y-m-d');
+$emailQuery = executeQuery("SELECT * FROM USERS WHERE USR_UID = '$UID'");
+if (is_array($emailQuery) and count($emailQuery) > 0) {
+	$email   = $emailQuery[1]['USR_EMAIL'];
+}
+
+if($email == 'fahad@divergenttechbd.com'){
+	$email	= 'md.rana@robi.com.bd';
+}
+
+//@@Req_Email	= $email;
+
+
+/*$RESULT = executeQuery("select u.`USR_UID`, u.`USR_EMAIL`, hr.`EmployeeName`, hr.`EmployeeID`, hr.`Mobile`, hr.`Department`, hr.`Division`, hr.`Unit`, hr.`Designation`, hr.`HierarchyManagerName`, hr.`HierarchyManagerEmail` FROM wf_robiworkflow.`USERS` u INNER JOIN wf_robiworkflow.`RobiHRSupervisor` hr ON UPPER(u.`USR_EMAIL`) = UPPER(hr.`Email`) WHERE UPPER(hr.Email) = UPPER('$email')");*/
+
+$RESULT	= executeQuery("SELECT * FROM PMT_DV_DAY_CARE_EMPLOYEE_CHILD_INFO WHERE EMAIL = '$email'");
+
+if (is_array($RESULT) and count($RESULT) > 0) {
+	@@Req_Name		= $RESULT[1]['EMPLOYEENAME'];
+	@@Req_ID   		= $RESULT[1]['EMPLOYEEID'];
+	@@Req_Email   	= $RESULT[1]['EMAIL'];
+}
+//@@Req_Email	= @@Req_ID;]]></tri_webbot>
+        <tri_param></tri_param>
+        <tri_title>Employee_Info_View_Trigger</tri_title>
+        <tri_description></tri_description>
+      </record>
+    </table>
+    <table name="taskusers"/>
+    <table name="groupwfs"/>
+    <table name="steptriggers">
+      <record>
+        <step_uid>-2</step_uid>
+        <tas_uid>3319987695d2b038946e455062324287</tas_uid>
+        <tri_uid>2687508555d2d9709e59a85004008272</tri_uid>
+        <st_type>AFTER</st_type>
+        <st_condition></st_condition>
+        <st_position>1</st_position>
+      </record>
+      <record>
+        <step_uid>-2</step_uid>
+        <tas_uid>4369347305d2b0519519358051938763</tas_uid>
+        <tri_uid>9022283915d30303f113485077536980</tri_uid>
+        <st_type>AFTER</st_type>
+        <st_condition></st_condition>
+        <st_position>1</st_position>
+      </record>
+      <record>
+        <step_uid>3155796495d2b072386e795066317918</step_uid>
+        <tas_uid>3319987695d2b038946e455062324287</tas_uid>
+        <tri_uid>9174521795d3034378fd862082893277</tri_uid>
+        <st_type>BEFORE</st_type>
+        <st_condition></st_condition>
+        <st_position>1</st_position>
+      </record>
+      <record>
+        <step_uid>5363687825d2d76505a63a7006183248</step_uid>
+        <tas_uid>4369347305d2b0519519358051938763</tas_uid>
+        <tri_uid>4684994175d302f9ae5cf75025665032</tri_uid>
+        <st_type>BEFORE</st_type>
+        <st_condition></st_condition>
+        <st_position>1</st_position>
+      </record>
+      <record>
+        <step_uid>5363687825d2d76505a63a7006183248</step_uid>
+        <tas_uid>4369347305d2b0519519358051938763</tas_uid>
+        <tri_uid>7061894175d358ace67eb68060418504</tri_uid>
+        <st_type>AFTER</st_type>
+        <st_condition></st_condition>
+        <st_position>1</st_position>
+      </record>
+      <record>
+        <step_uid>7245072755d3032b38e1d41080483470</step_uid>
+        <tas_uid>5713646995d2b05414fd644036471299</tas_uid>
+        <tri_uid>3591486685d303409313049008424901</tri_uid>
+        <st_type>AFTER</st_type>
+        <st_condition></st_condition>
+        <st_position>1</st_position>
+      </record>
+      <record>
+        <step_uid>7245072755d3032b38e1d41080483470</step_uid>
+        <tas_uid>5713646995d2b05414fd644036471299</tas_uid>
+        <tri_uid>3674576495d3033d028f0d3039325902</tri_uid>
+        <st_type>BEFORE</st_type>
+        <st_condition></st_condition>
+        <st_position>1</st_position>
+      </record>
+    </table>
+    <table name="dbconnections"/>
+    <table name="reportTables"/>
+    <table name="reportTablesVars"/>
+    <table name="stepSupervisor"/>
+    <table name="objectPermissions"/>
+    <table name="subProcess"/>
+    <table name="caseTracker"/>
+    <table name="caseTrackerObject"/>
+    <table name="stage"/>
+    <table name="fieldCondition"/>
+    <table name="event"/>
+    <table name="caseScheduler"/>
+    <table name="processCategory"/>
+    <table name="taskExtraProperties"/>
+    <table name="processUser"/>
+    <table name="processVariables">
+      <record>
+        <var_uid>1272874265d357a98641c76015981320</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>meeting_schedule_grid</var_name>
+        <var_field_type>grid</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>grid</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>1396469845d357ba406d568093653113</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>metting_name_ecd</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>1661299865d3032155cfe18082557969</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>Grid_ChildBirthDay</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>1734708995d30323cb588c9049463844</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>Grid_ChildAge</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>2498248955d2b0646b87478009684288</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>Req_Name</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>2706858875d2d68835c3323074799770</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>enrolled_Grid</var_name>
+        <var_field_type>grid</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>grid</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>3133361755d38042a026aa4015864728</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>event_time</var_name>
+        <var_field_type>datetime</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>datetime</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>3327871075d2d7e5fbff267024872207</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>MeetingTime</var_name>
+        <var_field_type>datetime</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>datetime</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>3443598605d305c4f68b122027787596</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>Test_ChildName</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>3545629035d2d7e840c7016020896530</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>MeetingVenue</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>3901943015d2b0c1240b694034811426</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>children_Info</var_name>
+        <var_field_type>grid</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>grid</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>3989594465d3803fe94eff3072912110</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>event_name</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>4416127675d2d7e02b64d40081921495</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>Metting_date</var_name>
+        <var_field_type>datetime</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>datetime</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>4509787615d357b826a2719035127056</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>meeting_venue</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>4561773925d357b45af21d8040055663</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>meeting_date</var_name>
+        <var_field_type>datetime</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>datetime</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>4939356555d357b512c75d1065405519</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>meeting_time</var_name>
+        <var_field_type>datetime</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>datetime</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>5136357435d2d6db986cab6078435408</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>queue_grid</var_name>
+        <var_field_type>grid</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>grid</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>5491050905d2d6710a22715072837094</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>total_Queue</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>5688377495d3031e4962644046360373</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>Grid_ChildGender</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>5797920895d2b066245beb0087458979</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>Req_ID</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>5824440185d303c977ab904000477595</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>Req_Email</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>5909749175d2d7ed7aaa8d2052561286</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>NameOfSpecialist</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>6086119545d380416c760e9010340163</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>event_date</var_name>
+        <var_field_type>datetime</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>datetime</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>6172826005d38044e69c400067010346</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>event_venue</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>6319060405d3032bf8d93e8000606137</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>Grid_ChildEnrollmentDate</var_name>
+        <var_field_type>datetime</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>datetime</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>6866423265d3031c7d5f8f9072643381</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>Grid_ChildName</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>7421860525d358a771f7531075071473</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>hiddenAction</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>7462633165d3804f5023205037492987</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>event_additional_email</var_name>
+        <var_field_type>grid</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>grid</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>7546828715d4157b21fe978004654030</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>hiddenUserAccept</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>7579278555d3804a762a3a4032811718</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>event_attachment</var_name>
+        <var_field_type>multiplefile</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>multiplefile</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>7911683975d380469eff4e6003208142</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>event_attraction</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>8015267295d2b06e70cbce8061548954</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>Req_Department_Division</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>8055467705d2b06a4a072e7064939177</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>Req_Designation</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>8264320645d2b0705091160095925856</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>Request_Date</var_name>
+        <var_field_type>datetime</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>datetime</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>8304085555d382519d2dc81076586182</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>parallelUser</var_name>
+        <var_field_type>array</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>array</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>8775448195d38047ce3d084092477081</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>event_recommendation</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>8776350985d2d66a3d87006082384949</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>total_enrollment</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>9129582265d2d7e229749b3069733113</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>MeetingDate</var_name>
+        <var_field_type>datetime</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>datetime</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>9268194785d3d32706a1ec8034643349</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>radioVar001</var_name>
+        <var_field_type>string</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>string</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+      <record>
+        <var_uid>9964661505d4151d437dea1090901214</var_uid>
+        <prj_uid>6636409255d2b030f319111003840103</prj_uid>
+        <var_name>requester_Array_User</var_name>
+        <var_field_type>array</var_field_type>
+        <var_field_size>10</var_field_size>
+        <var_label>array</var_label>
+        <var_dbconnection>workflow</var_dbconnection>
+        <var_sql></var_sql>
+        <var_null>0</var_null>
+        <var_default></var_default>
+        <var_accepted_values><![CDATA[[]]]></var_accepted_values>
+        <inp_doc_uid></inp_doc_uid>
+      </record>
+    </table>
+    <table name="webEntry"/>
+    <table name="webEntryEvent"/>
+    <table name="messageType"/>
+    <table name="messageTypeVariable"/>
+    <table name="messageEventDefinition"/>
+    <table name="scriptTask"/>
+    <table name="timerEvent"/>
+    <table name="emailEvent"/>
+    <table name="filesManager">
+      <record>
+        <prf_uid>5190306435d3ead46856388070507082</prf_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <usr_uid>8159829165b18cedc9853d4054281866</usr_uid>
+        <prf_update_usr_uid></prf_update_usr_uid>
+        <prf_path><![CDATA[/app/processmaker/shared/sites/robiworkflow/mailTemplates/6636409255d2b030f319111003840103/HR_Event.html]]></prf_path>
+        <prf_type>file</prf_type>
+        <prf_editable>1</prf_editable>
+        <prf_create_date><![CDATA[2019-07-29 14:24:38]]></prf_create_date>
+        <prf_update_date></prf_update_date>
+      </record>
+      <record>
+        <prf_uid>9542096855d3592255f7be9047134431</prf_uid>
+        <pro_uid>6636409255d2b030f319111003840103</pro_uid>
+        <usr_uid>8159829165b18cedc9853d4054281866</usr_uid>
+        <prf_update_usr_uid>8159829165b18cedc9853d4054281866</prf_update_usr_uid>
+        <prf_path><![CDATA[/app/processmaker/shared/sites/robiworkflow/mailTemplates/6636409255d2b030f319111003840103/HR_Meeting_Mail.html]]></prf_path>
+        <prf_type>file</prf_type>
+        <prf_editable>1</prf_editable>
+        <prf_create_date><![CDATA[2019-07-22 16:38:29]]></prf_create_date>
+        <prf_update_date><![CDATA[2019-07-22 17:09:03]]></prf_update_date>
+      </record>
+    </table>
+    <table name="abeConfiguration"/>
+    <table name="elementTask"/>
+  </definition>
+  <workflow-files>
+    <file target="dynaforms">
+      <file_name>Employee_Info</file_name>
+      <file_path><![CDATA[6636409255d2b030f319111003840103/1676627075d2b0631436b90012599887.xml]]></file_path>
+      <file_content><![CDATA[PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPGR5bmFGb3JtIHR5cGU9InhtbGZvcm0iIG5hbWU9IjY2MzY0MDkyNTVkMmIwMzBmMzE5MTExMDAzODQwMTAzLzE2NzY2MjcwNzVkMmIwNjMxNDM2YjkwMDEyNTk5ODg3IiB3aWR0aD0iNTAwIiBlbmFibGV0ZW1wbGF0ZT0iMCIgbW9kZT0iIiBuZXh0c3RlcHNhdmU9InByb21wdCI+CjwvZHluYUZvcm0+]]></file_content>
+    </file>
+    <file target="dynaforms">
+      <file_name>Requester_Request_View</file_name>
+      <file_path><![CDATA[6636409255d2b030f319111003840103/1706997085d2b05f5b9b102043103834.xml]]></file_path>
+      <file_content><![CDATA[PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPGR5bmFGb3JtIHR5cGU9InhtbGZvcm0iIG5hbWU9IjY2MzY0MDkyNTVkMmIwMzBmMzE5MTExMDAzODQwMTAzLzE3MDY5OTcwODVkMmIwNWY1YjliMTAyMDQzMTAzODM0IiB3aWR0aD0iNTAwIiBlbmFibGV0ZW1wbGF0ZT0iMCIgbW9kZT0iIiBuZXh0c3RlcHNhdmU9InByb21wdCI+CjwvZHluYUZvcm0+]]></file_content>
+    </file>
+    <file target="dynaforms">
+      <file_name>HR_Dashboard</file_name>
+      <file_path><![CDATA[6636409255d2b030f319111003840103/5072789265d2d65193e9524085327918.xml]]></file_path>
+      <file_content><![CDATA[PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPGR5bmFGb3JtIHR5cGU9InhtbGZvcm0iIG5hbWU9IjY2MzY0MDkyNTVkMmIwMzBmMzE5MTExMDAzODQwMTAzLzUwNzI3ODkyNjVkMmQ2NTE5M2U5NTI0MDg1MzI3OTE4IiB3aWR0aD0iNTAwIiBlbmFibGV0ZW1wbGF0ZT0iMCIgbW9kZT0iIiBuZXh0c3RlcHNhdmU9InByb21wdCI+CjwvZHluYUZvcm0+]]></file_content>
+    </file>
+    <file target="dynaforms">
+      <file_name>meeting schedule</file_name>
+      <file_path><![CDATA[6636409255d2b030f319111003840103/5254083185d357af5576739091237006.xml]]></file_path>
+      <file_content><![CDATA[PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPGR5bmFGb3JtIHR5cGU9InhtbGZvcm0iIG5hbWU9IjY2MzY0MDkyNTVkMmIwMzBmMzE5MTExMDAzODQwMTAzLzUyNTQwODMxODVkMzU3YWY1NTc2NzM5MDkxMjM3MDA2IiB3aWR0aD0iNTAwIiBlbmFibGV0ZW1wbGF0ZT0iMCIgbW9kZT0iIiBuZXh0c3RlcHNhdmU9InByb21wdCI+CjwvZHluYUZvcm0+]]></file_content>
+    </file>
+    <file target="dynaforms">
+      <file_name>event</file_name>
+      <file_path><![CDATA[6636409255d2b030f319111003840103/7095634655d3802fe7282f7013149809.xml]]></file_path>
+      <file_content><![CDATA[PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPGR5bmFGb3JtIHR5cGU9InhtbGZvcm0iIG5hbWU9IjY2MzY0MDkyNTVkMmIwMzBmMzE5MTExMDAzODQwMTAzLzcwOTU2MzQ2NTVkMzgwMmZlNzI4MmY3MDEzMTQ5ODA5IiB3aWR0aD0iNTAwIiBlbmFibGV0ZW1wbGF0ZT0iMCIgbW9kZT0iIiBuZXh0c3RlcHNhdmU9InByb21wdCI+CjwvZHluYUZvcm0+]]></file_content>
+    </file>
+    <file target="dynaforms">
+      <file_name>Requester_Acceptance</file_name>
+      <file_path><![CDATA[6636409255d2b030f319111003840103/9307037665d3030fe8d2084017953609.xml]]></file_path>
+      <file_content><![CDATA[PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPGR5bmFGb3JtIHR5cGU9InhtbGZvcm0iIG5hbWU9IjY2MzY0MDkyNTVkMmIwMzBmMzE5MTExMDAzODQwMTAzLzkzMDcwMzc2NjVkMzAzMGZlOGQyMDg0MDE3OTUzNjA5IiB3aWR0aD0iNTAwIiBlbmFibGV0ZW1wbGF0ZT0iMCIgbW9kZT0iIiBuZXh0c3RlcHNhdmU9InByb21wdCI+CjwvZHluYUZvcm0+]]></file_content>
+    </file>
+  </workflow-files>
+</ProcessMaker-Project>

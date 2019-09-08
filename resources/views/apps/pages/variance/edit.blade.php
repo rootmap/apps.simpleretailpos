@@ -37,10 +37,10 @@
 		                        @endif
 		                        
 	                        <div class="form-actions right">
-								<button type="button" class="btn btn-info btn-darken-2 mr-1" @if($userguideInit==1) data-step="3" data-intro="if you want clear all information then click the cancel button." @endif>
+								<button type="button" class="btn btn-info btn-darken-2 mr-1">
 									<i class="icon-cross2"></i> Cancel
 								</button>
-								<button type="submit" class="btn btn-info btn-accent-2" @if($userguideInit==1) data-step="2" data-intro="When you modify your information then click this button." @endif>
+								<button type="submit" class="btn btn-info btn-accent-2">
 									<i class="icon-check2"></i> Update
 								</button>
 							</div>

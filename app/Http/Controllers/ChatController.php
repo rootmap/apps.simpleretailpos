@@ -31,7 +31,7 @@ class ChatController extends Controller
         $chat =\DB::select("SELECT id,to_user_id,from_user_id,message_type,status,created_at,updated_at,deleted_at,DATE_FORMAT(created_at,'%H:%i %p') as sent_time, 
                          CASE 
                         WHEN message_type=0 THEN chat_message
-                        ELSE CONCAT('<a target=_blank href=".url('chat_photo')."/',chat_message,'>','<img width=193 src=".url('chat_photo')."/',chat_message,' /></a>') END 
+                        ELSE CONCAT('<a target=_blank href=http://localhost/laravel/simpleretailpos/public/chat_photo/',chat_message,'>','<img width=193 src=http://localhost/laravel/simpleretailpos/public/chat_photo','/',chat_message,' /></a>') END 
                         AS chat_message
                          FROM lsp_chats 
                          WHERE 
@@ -83,7 +83,7 @@ class ChatController extends Controller
                             AS user_name,
                             CASE 
                             WHEN message_type=0 THEN chat_message
-                            ELSE CONCAT('<a target=_blank href=".url('chat_photo')."/',chat_message,'>','<img width=193 src=".url('chat_photo')."/',chat_message,' /></a>') END 
+                            ELSE CONCAT('<a target=_blank href=http://localhost/laravel/simpleretailpos/public/chat_photo/',chat_message,'>','<img width=193 src=http://localhost/laravel/simpleretailpos/public/chat_photo','/',chat_message,' /></a>') END 
                             AS chat_message
                             FROM lsp_chats a
                             WHERE 

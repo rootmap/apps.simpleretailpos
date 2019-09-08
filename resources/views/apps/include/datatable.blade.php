@@ -52,6 +52,46 @@
 			$(".invoice_slip_id").val(invNo);
 			$("#slip").modal('show');
 		}
+
+		function attachmentAddView(attachmentAddView){
+			console.log('attachmentAddView',attachmentAddView);
+			$(".invoice_attachment_id").val(attachmentAddView);
+			$("#attachmentAddInvoice").modal('show');
+
+
+			//------------------------Ajax Customer Start-------------------------//
+            var getInvoiceAttachment="{{url('sales/attachment')}}/"+attachmentAddView;
+            var getAttachmentFIleDownload="{{url('sales/attachment/download')}}";
+            var getAttachmentFIleDelete="{{url('sales/attachment/delete')}}";
+            htrHtml='<tr><td colspan="3" align="center"> Loading please wait... </td></tr>';
+            $("#loadAttachmentinSalesReport").html(htrHtml);
+            $.ajax({
+                'async': false,
+                'type': "GET",
+                'global': false,
+                'dataType': 'json',
+                'url': getInvoiceAttachment,
+                'success': function (masterData) {
+                    console.log("gET attachment to SALES : "+masterData);
+                    //loadAttachmentinSalesReport
+                    var htrHtml="";
+                    	if(masterData.total==0){
+                    		htrHtml='<tr><td colspan="3" align="center"> No Record Found </td></tr>';
+                    	}else{
+                    		var i=1;
+                    		$.each(masterData.data,function(key,row){
+                    			htrHtml+='<tr><td>'+i+'</td><td>'+row.orginal_file_name+'</td><td><a target="_blank" href="'+getAttachmentFIleDownload+'/'+row.id+'" class="btn btn-success"><i class="icon-download"></i></a> <a href="'+getAttachmentFIleDelete+'/'+row.id+'" class="btn btn-danger"><i class="icon-cross2"></i></a></td></tr>';
+                    			i++;
+                    		});
+                    	}
+
+                    	$("#loadAttachmentinSalesReport").html(htrHtml);
+
+                }
+            });
+            //------------------------Ajax Customer End---------------------------//
+
+		}
 	</script>
 	@endif
 	

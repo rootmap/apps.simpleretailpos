@@ -3,9 +3,9 @@
 @section('content')
 <section id="form-action-layouts">
 	<?php 
-	    $userguideInit=StaticDataController::userguideInit();
-	    //dd($dataMenuAssigned);
-	?>
+    $userguideInit=StaticDataController::userguideInit();
+    //dd($dataMenuAssigned);
+?>
 	<div class="row">
 		<div class="col-md-8 offset-md-2" @if($userguideInit==1) data-step="1" data-intro="You can change POS setting like (POS display item, sale tax rate, discount, discount type and select invoice email layout)." @endif>
 	        <div class="card">

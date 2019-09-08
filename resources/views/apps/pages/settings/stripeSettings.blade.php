@@ -34,7 +34,7 @@
 	                        		<label class="col-md-4 label-control">API Public ID</label>
 	                        		<div class="col-md-7">
 										<div class="form-group">
-											<input type="text" id="eventRegInput1" class="form-control border-green" placeholder="API Public ID" 
+											<input type="text" id="eventRegInput1" class="form-control border-info" placeholder="API Public ID" 
 											@if(isset($edit))
 												value="{{$edit->publishable_key}}"  
 											@endif 
@@ -48,7 +48,7 @@
 	                        		<label class="col-md-4 label-control">Secret Key</label>
 	                        		<div class="col-md-7">
 										<div class="form-group">
-											<input type="text" id="eventRegInput1" class="form-control border-green" placeholder="Secret Key" 
+											<input type="text" id="eventRegInput1" class="form-control border-info" placeholder="Secret Key" 
 											@if(isset($edit))
 												value="{{$edit->secret_key}}"  
 											@endif 
@@ -63,7 +63,7 @@
 	                        		<label class="col-md-4 label-control">Active module</label>
 	                        		<div class="col-md-7">
 										<div class="form-group">
-											<input type="checkbox" id="eventRegInput1" class="border-green" placeholder="Transaction Key" 
+											<input type="checkbox" id="eventRegInput1" class="border-info" placeholder="Transaction Key" 
 											@if(isset($edit))
 												@if($edit->module_status==1)
 													checked="checked"  
@@ -79,10 +79,10 @@
 
 
 							<div class="form-actions center">
-	                            <button type="button" class="btn btn-green btn-lighten-2 mr-1" @if($userguideInit==1) data-step="3" data-intro="if you want clear all information then click the Cancel button." @endif>
+	                            <button type="button" class="btn btn-info btn-lighten-2 mr-1" @if($userguideInit==1) data-step="3" data-intro="if you want clear all information then click the Cancel button." @endif>
 	                            	<i class="icon-cross2"></i> Cancel
 	                            </button>
-	                            <button type="submit" class="btn btn-green btn-darken-2" @if($userguideInit==1) data-step="2" data-intro="When you fill up all information then click save button." @endif>
+	                            <button type="submit" class="btn btn-info btn-darken-2" @if($userguideInit==1) data-step="2" data-intro="When you fill up all information then click save button." @endif>
 	                                <i class="icon-check2"></i> Save
 	                            </button>
 	                        </div>
