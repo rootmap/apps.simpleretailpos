@@ -85,7 +85,7 @@ class StaticDataController extends Facade {
 
     public static function urlForChangeData()
     {
-        return "http://app.simpleretailpos.com/";
+        return "http://localhost/laravel/simpleretailpos/public/";
     }
 
     public static function userguideInit() 
@@ -435,14 +435,42 @@ class StaticDataController extends Facade {
           try {
               $mail->SMTPDebug = $debug;
               $mail->isSMTP(); 
-              $mail->Host = 'mail.simpleretailpos.com';
-              $mail->SMTPAuth = true;
-              $mail->Username = 'automail@simpleretailpos.com';
-              $mail->Password = 'automail';
-              $mail->SMTPSecure = 'tls';
-              $mail->Port = 587;
+              $dataSlpit=explode("@",$to);
+              if(count($dataSlpit)>1)
+              {
+                  $senderFrom="no-reply@neutrix.systems";
+                  if($dataSlpit[1]=="neutrix.systems"){
+                      $mail->Host = 'mail.neutrix.systems';
+                      $mail->SMTPAuth = true;
+                      $mail->Username = 'noreply@neutrix.systems';
+                      $mail->Password = '@sdQwe123';
+                      $mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+                      $mail->Port       = 587;    
+                      $mail->setFrom('noreply@neutrix.systems', 'Simple Retail POS');
+                  }
+                  else
+                  {
+                      $mail->Host = 'mail.simpleretailpos.com';
+                      $mail->SMTPAuth = true;
+                      $mail->Username = 'automail@simpleretailpos.com';
+                      $mail->Password = 'automail';
+                      $mail->SMTPSecure = 'tls';            // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+                      $mail->Port       = 587;    
 
-              $mail->setFrom('automail@simpleretailpos.com', 'Simple Retail POS');
+                      $mail->setFrom('automail@simpleretailpos.com', 'Simple Retail POS');
+                  }
+              }  
+              else
+              {
+                  $mail->Host = 'mail.simpleretailpos.com';
+                  $mail->SMTPAuth = true;
+                  $mail->Username = 'automail@simpleretailpos.com';
+                  $mail->Password = 'automail';
+                  $mail->SMTPSecure = 'tls';            // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+                  $mail->Port       = 587;    
+
+                  $mail->setFrom('automail@simpleretailpos.com', 'Simple Retail POS');
+              }
 
               //$mail->addAddress($to, 'Fahad Bhuyian');
               $mail->addAddress($to);               // Name is optional

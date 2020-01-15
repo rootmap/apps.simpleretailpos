@@ -44,40 +44,73 @@
                                                   margin: -0.2em 0 0 0;
                                               }
                                           </style>
-                                          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 button button1 authorizenet btn-group">
-                                              @if(isset($authorizeNettender))
-                                                <a id="btn-payment-modal_modal_button" data-id="{{$authorizeNettender[0]->id}}" type="button" class="btn btn-info btn-lighten-1 btn-responsive margin-all-bottom-button {{$authorizeNettender[0]->tender_class}}" >
-                                                    {{$authorizeNettender[0]->name}}
-                                                </a> 
+
+                                          <h4 align="center">PAY WITH <i class="fa fa-arrow-down"></i></h4>
+
+                                          <hr />
+
+                                          @if(isset($authorizeNettender))
+                                              @if(!empty($authorizeNettender))
+                                              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
+                                                  
+                                                    <a id="btn-payment-modal_modal_button" data-id="{{$authorizeNettender[0]->id}}" type="button" class="btn btn-info btn-lighten-1 btn-block btn-responsive margin-all-bottom-button {{$authorizeNettender[0]->tender_class}}" >
+                                                        Authorizenet
+                                                    </a> 
+                                                  
+                                              </div>
                                               @endif
-                                          </div>
+                                            @endif
 
                                           @if(!empty($stripe))
-                                          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 button button1 authorizenet btn-group">
-                                                <a id="btn-payment-modal_modal_button" data-id="26" type="button" class="btn btn-info btn-lighten-1 btn-responsive margin-all-bottom-button stripe_card_payment" >
-                                                    Card Payment With Stripe
+                                          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
+                                                <a id="btn-payment-modal_modal_button" data-id="26" type="button" class="btn btn-info btn-block btn-lighten-1 btn-responsive margin-all-bottom-button stripe_card_payment" >
+                                                    Stripe
                                                 </a> 
                                           </div>
                                           @endif
 
-                                          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 button button1 authorizenet btn-group">
-                                              @if(isset($payPaltender))
-                                                <a id="btn-payment-modal_modal_button" data-id="{{$payPaltender[0]->id}}" type="button" class="btn btn-info btn-lighten-2 btn-responsive margin-all-bottom-button {{$payPaltender[0]->tender_class}}" >
-                                                    {{$payPaltender[0]->name}}
-                                                </a> 
-                                              @endif
-                                          </div>
+                                          @if(!empty($cardpointe))
+                                            @if($cardpointe->module_status==1)
+                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
+                                                  <a id="btn-payment-modal_modal_button" data-id="26" type="button" class="btn btn-info btn-block btn-lighten-1 btn-responsive margin-all-bottom-button cardpointe_card_payment" >
+                                                      CardPointe
+                                                  </a> 
+                                            </div>
+                                            @endif
+
+                                            @if($cardpointe->bolt_status==1)
+                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
+                                                  <a id="btn-payment-modal_modal_button" data-id="26" type="button" class="btn btn-info btn-block btn-lighten-1 btn-responsive margin-all-bottom-button cardpointe_bolt_payment" >
+                                                      Bolt
+                                                  </a> 
+                                            </div>
+                                            @endif
+                                          @endif
+                                          
+                                          @if(isset($payPaltender))
+                                            @if(!empty($payPaltender))
+                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
+                                                
+                                                  <a id="btn-payment-modal_modal_button" data-id="{{$payPaltender[0]->id}}" type="button" class="btn btn-info btn-block btn-lighten-2 btn-responsive margin-all-bottom-button {{$payPaltender[0]->tender_class}}" >
+                                                      Paypal
+                                                  </a> 
+                                                
+                                            </div>
+                                            @endif
+                                          @endif
 
 
-                                          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 button button1">
-                                            @if(isset($tender))
-                                              @foreach($tender as $ten)
-                                              <button id="btn-payment-modal_modal_button" data-id="{{$ten->id}}" type="button" class="btn btn-info btn-responsive margin-all-bottom-button make-payment" >
-                                                  {{$ten->name}}
-                                              </button>  
-                                              @endforeach
-                                            @endif      
-                                          </div>
+                                          @if(isset($tender))
+                                            @foreach($tender as $ten)
+                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1  btn-group">
+                                              
+                                                <button id="btn-payment-modal_modal_button" data-id="{{$ten->id}}" type="button" class="btn btn-block btn-info btn-responsive margin-all-bottom-button make-payment pull-right mr-1" >
+                                                    {{$ten->name}}
+                                                </button>  
+                                                     
+                                            </div>
+                                            @endforeach
+                                          @endif 
 
                                             
 

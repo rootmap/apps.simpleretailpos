@@ -45,6 +45,43 @@
 @endsection
 
 @section('js')
+
+	@if(isset($cardpointe))
+
+    <script type="text/javascript">
+		function refundTransaction(id)
+		{
+			var c=confirm('Are you sure to refund this transaction ?');
+			if(c)
+			{
+				//------------------------Ajax Customer Start-------------------------//
+		         var AddHowMowKhaoUrl="{{url('cardpointe/payment/refund')}}";
+		         $.ajax({
+		            'async': true,
+		            'type': "POST",
+		            'global': false,
+		            'dataType': 'json',
+		            'url': AddHowMowKhaoUrl,
+		            'data': {'rid':id,'_token':"{{csrf_token()}}"},
+		            'success': function (data) {
+		            	console.log(data);
+		                if(data.status==1)
+		                {
+		                	window.location.reload();
+		                }
+		                else
+		                {
+		                	alert('Something went wrong, Please try again.');
+		                }
+		            }
+		        });
+		        //------------------------Ajax Customer End---------------------------//
+			}
+		}
+
+	</script>
+	@endif
+
 	@if(isset($invoiceSlip))
 	<script type="text/javascript">
 		function putInvoiceModal(invNo)

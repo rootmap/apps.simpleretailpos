@@ -75,6 +75,7 @@
                                 if(row.invoice_status!="Paid")
                                 {
                                     @if(!empty($partial_invoice)) 
+
                                         if(row.invoice_id=="{{$partial_invoice}}")
                                         {
                                             ff+="<option selected='selected' data-customer='"+row.customer_name+"' data-paid='"+row.absPaid+"' data-total='"+row.total_amount+"' value='"+row.invoice_id+"'>"+row.invoice_id+" - "+row.customer_name+" - "+row.created_at+"</option>";
@@ -88,6 +89,8 @@
                                     @endif
                                     
                                 }
+
+                                
                                 
                             });
 
@@ -122,10 +125,12 @@
                             var ff="<option value=''>Select A Invoice</option>";
                             $.each(data,function(index,row){
                                 //console.log(row);
-                                if(row.total_amount>row.paid_amount)
+                                if(row.invoice_status!='Paid')
                                 {
                                     ff+="<option data-customer='"+row.customer_name+"' data-paid='"+row.paid_amount+"' data-total='"+row.total_amount+"' value='"+row.invoice_id+"'>"+row.invoice_id+" - "+row.customer_name+" - "+row.created_at+"</option>";
                                 }
+
+                                console.log('log',row.invoice_status);
                                 
                             });
 
@@ -160,6 +165,429 @@
                 $("input[name=partialpay_amount]").val(balanceDue);
 
             });
+
+            //staripe partial payment start 
+            $(".manualstripe_card_payment").click(function(){
+                    
+                    var invoice_id=$("select[name=partialpay_invoice_id]").val();
+                    var total_due=$("input[name=partialpay_hidden_due_amount]").val();
+                    var today_paid=$("input[name=partialpay_today_paid]").val();
+                    var today_payment_method=$(this).html();
+                    var today_payment_method_id=$(this).attr('data-id');
+
+                    if(invoice_id.length==0)
+                    {
+                        $("#partialpayMSG").html(warningMessage("Please Select a Invoice."));
+                        $("#addPartialPayment").animate({ scrollTop: 0 }, "slow");
+                        return false;
+                    }
+
+                    if(today_paid.length==0)
+                    {
+                        $("#partialpayMSG").html(warningMessage("Please type a partial paid amount."));
+                        $("#addPartialPayment").animate({ scrollTop: 0 }, "slow");
+                        return false;
+                    }
+
+                    if(today_payment_method.length==0)
+                    {
+                        $("#partialpayMSG").html(warningMessage("Invalid Payment Method, Please Select Again."));
+                        $("#addPartialPayment").animate({ scrollTop: 0 }, "slow");
+                        return false;
+                    }
+
+                    if(today_payment_method_id.length==0)
+                    {
+                        $("#partialpayMSG").html(warningMessage("Invalid Payment Method, Please Select Again."));
+                        $("#addPartialPayment").animate({ scrollTop: 0 }, "slow");
+                        return false;
+                    }
+
+                    $("#partialpayMSG").html(loadingOrProcessing("Saving Your Partial Payment Info, Please wait..."));
+
+                    $("#addPartialPayment").animate({ scrollTop: 0 }, "slow");
+
+                    
+                    if($.trim(today_paid)>0)
+                    {
+                        $("#addPartialPayment").modal('hide');
+                        $(".defualtCapture").hide();
+                       //$(".ManualAutorizeCapture").show();
+                        console.log('Partial Stripe');
+                        $("#stripeCustomerCard").modal('show');
+
+                        var stripepartialURL="{{url('stripepartial')}}";
+
+                        alert(stripepartialURL);
+
+                        $("#payment-form-stripe").attr("action",stripepartialURL);
+                        $("#partial_invoice_id").val(invoice_id);
+                        $("#partial_today_paid").val(today_paid);
+
+                        $(".card-pay-due-amount").html(today_paid);
+
+
+                    }
+                    else
+                    {
+                        $(".payModal-message-area").html(warningMessage("Please Type a Today Paid Amount."));
+                    }
+            });
+            //staripe partial payment End
+
+            //cardpointee and bolt start 
+            //cardPointe start
+                $(".cardpointe_card_payment_manual").click(function(){
+
+                   
+
+                    $(".cardPointe-cardnumber").val("");
+                    $(".cardPointe-cardholder").val("");
+                    $(".cardPointe-month option[value='']").prop("selected",true);
+                    $(".cardPointe-year option[value='']").prop("selected",true);
+                    $(".cardPointe-cvc").val("");
+
+                    $(".cardPointe-cardholder").focus();
+
+                    var invoice_id=$("select[name=partialpay_invoice_id]").val();
+                    var total_due=$("input[name=partialpay_hidden_due_amount]").val();
+                    var today_paid=$("input[name=partialpay_today_paid]").val();
+                    var today_payment_method=$(this).html();
+                    var today_payment_method_id=$(this).attr('data-id');
+
+                    if(invoice_id.length==0)
+                    {
+                        $("#partialpayMSG").html(warningMessage("Please Select a Invoice."));
+                        $("#addPartialPayment").animate({ scrollTop: 0 }, "slow");
+                        return false;
+                    }
+
+                    if(today_paid.length==0)
+                    {
+                        $("#partialpayMSG").html(warningMessage("Please type a partial paid amount."));
+                        $("#addPartialPayment").animate({ scrollTop: 0 }, "slow");
+                        return false;
+                    }
+
+                    if(today_payment_method.length==0)
+                    {
+                        $("#partialpayMSG").html(warningMessage("Invalid Payment Method, Please Select Again."));
+                        $("#addPartialPayment").animate({ scrollTop: 0 }, "slow");
+                        return false;
+                    }
+
+                    if(today_payment_method_id.length==0)
+                    {
+                        $("#partialpayMSG").html(warningMessage("Invalid Payment Method, Please Select Again."));
+                        $("#addPartialPayment").animate({ scrollTop: 0 }, "slow");
+                        return false;
+                    }
+
+                    $("#partialpayMSG").html(loadingOrProcessing("Saving Your Partial Payment Info, Please wait..."));
+
+                    $("#addPartialPayment").animate({ scrollTop: 0 }, "slow");
+
+                    
+                    if($.trim(today_paid)>0)
+                    {
+                        $("#addPartialPayment").modal('hide');
+                        $(".defualtCapture").hide();
+                       //$(".ManualAutorizeCapture").show();
+
+                        $("#cardPointePartialCustomerCard").modal('show');
+
+
+                    }
+                    else
+                    {
+                        $(".payModal-message-area").html(warningMessage("Please Type a Today Paid Amount."));
+                    }
+                });
+
+                $("button.payPartialCardPointe").click(function(){
+
+            //console.log("WOrking");
+                    $(".cardpointeButtonPartial").hide();
+
+                    var invoice_id=$("select[name=partialpay_invoice_id]").val();
+                    var total_due=$("input[name=partialpay_hidden_due_amount]").val();
+                    var today_paid=$("input[name=partialpay_today_paid]").val();
+                    var today_payment_method=$(this).html();
+                    var today_payment_method_id=$(this).attr('data-id');
+                    
+                    var parseNewPayment=today_paid;
+
+                    var cardNumber=$.trim($(".cardPointepartial-cardnumber").val());
+                    if(cardNumber.length==0)
+                    {
+                        $(".cardpointeButtonPartial").show();
+                        $(".hidestripemsg").show();
+                        $(".hidestripemsg").html(warningMessage("Please type card number."));
+                        return false;
+                    }
+
+                    var cardHName=$.trim($(".cardPointepartial-cardholder").val());
+                    if(cardHName.length==0)
+                    {
+                        $(".cardpointeButtonPartial").show();
+                        $(".hidestripemsg").show();
+                        $(".hidestripemsg").html(warningMessage("Please type card holder name."));
+                        return false;
+                    }
+
+                    var cardMonth=$.trim($(".cardPointepartial-month").val());
+                    if(cardMonth.length==0)
+                    {
+                        $(".cardpointeButtonPartial").show();
+                        $(".hidestripemsg").show();
+                        $(".hidestripemsg").html(warningMessage("Please type card expire month."));
+                        return false;
+                    }
+
+
+                    var cardYear=$.trim($(".cardPointepartial-year").val());
+                    if(cardYear.length==0)
+                    {
+                        $(".cardpointeButtonPartial").show();
+                        $(".hidestripemsg").show();
+                        $(".hidestripemsg").html(warningMessage("Please type card expire Year."));
+                        return false;
+                    }
+
+
+                    var cardcvc=$.trim($(".cardPointepartial-cvc").val());
+                    if(cardcvc.length==0)
+                    {
+                        $(".cardpointeButtonPartial").show();
+                        $(".hidestripemsg").show();
+                        $(".hidestripemsg").html(warningMessage("Please type card cvc/cvc2 pin."));
+                        return false;
+                    }
+
+                    $(".hidestripemsg").show();
+                    $(".hidestripemsg").html(loadingOrProcessing("CardPointe payment please wait...."));
+
+
+
+                    var addCardPointePaymentURL="{{url('cardpointe/partial/payment')}}";
+                     $.ajax({
+                        'async': true,
+                        'type': "POST",
+                        'global': false,
+                        'dataType': 'json',
+                        'url': addCardPointePaymentURL,
+                        'data': {
+                            'cardNumber':cardNumber,
+                            'cardHName':cardHName,
+                            'cardMonth':cardMonth,
+                            'cardYear':cardYear,
+                            'cardcvc':cardcvc,
+                            'amountToPay':parseNewPayment,
+                            'invoice_id':invoice_id,
+                            '_token':"{{csrf_token()}}"},
+                        'success': function (data) {
+                            console.log("cardPointe Print Sales ID : "+data);
+                            if(data==null)
+                            {
+                                $(".cardpointeButtonPartial").show();
+                                $(".hidestripemsg").show();
+                                $(".hidestripemsg").html(warningMessage("Failed to authorize payment. Please try again."));
+                            }
+                            else
+                            {
+                                console.log(data.status);
+                                if(data.status==1)
+                                {
+                                    //------------------------Ajax POS End---------------------------//
+                                    $(".hidestripemsg").show();
+                                    $(".hidestripemsg").html(successMessage(data.message));
+                                    
+                                    setTimeout(function(){
+                                            $("#cardPointePartialCustomerCard").modal('hide');
+                                    }, 2000);
+
+                                    $("#cartMessageProShow").show();
+                                    $("#cartMessageProShow").html(successMessage("Thank You, Partial Payment completed & Received."));
+
+                                }
+                                else
+                                {
+                                    $(".hidestripemsg").show();
+                                    $(".cardpointeButtonPartial").show();
+                                    $(".hidestripemsg").html(warningMessage(data.message));
+                                }
+                            }
+                            //$(".message-place-authorizenet").html("dddd");
+                        }
+                    });
+                    //------------------------Ajax Customer End---------------------------//
+                });
+        //cardPointe end
+
+        //bolt start partal
+
+                $(".cardpointe_bolt_payment_manual").click(function(){
+
+           
+
+                    var invoice_id=$("select[name=partialpay_invoice_id]").val();
+                    var total_due=$("input[name=partialpay_hidden_due_amount]").val();
+                    var today_paid=$("input[name=partialpay_today_paid]").val();
+                    var today_payment_method=$(this).html();
+                    var today_payment_method_id=$(this).attr('data-id');
+
+                    if(invoice_id.length==0)
+                    {
+                        $("#partialpayMSG").html(warningMessage("Please Select a Invoice."));
+                        $("#addPartialPayment").animate({ scrollTop: 0 }, "slow");
+                        return false;
+                    }
+
+                    if(today_paid.length==0)
+                    {
+                        $("#partialpayMSG").html(warningMessage("Please type a partial paid amount."));
+                        $("#addPartialPayment").animate({ scrollTop: 0 }, "slow");
+                        return false;
+                    }
+
+                    if(today_payment_method.length==0)
+                    {
+                        $("#partialpayMSG").html(warningMessage("Invalid Payment Method, Please Select Again."));
+                        $("#addPartialPayment").animate({ scrollTop: 0 }, "slow");
+                        return false;
+                    }
+
+                    if(today_payment_method_id.length==0)
+                    {
+                        $("#partialpayMSG").html(warningMessage("Invalid Payment Method, Please Select Again."));
+                        $("#addPartialPayment").animate({ scrollTop: 0 }, "slow");
+                        return false;
+                    }
+
+                    $("#partialpayMSG").html(loadingOrProcessing("Saving Your Partial Payment Info, Please wait..."));
+
+                    $("#addPartialPayment").animate({ scrollTop: 0 }, "slow");
+
+
+                    if($.trim(today_paid)>0)
+                    {
+
+                    //$(".payModal-message-area").html("<div class='col-md-12'>"+loadingOrProcessing("Please wait, checking bolt device.")+"<div>");
+
+                
+                        var parseNewPayment=today_paid;                       
+                        var pingDevice="{{url('bolt/ping')}}";
+                        $.ajax({
+                            'async': true,
+                            'type': "GET",
+                            'global': false,
+                            'dataType': 'json',
+                            'url': pingDevice,
+                            'success': function (data) {
+
+                                console.log(data);
+                                //return false;
+                                if(data.connected==false){
+                                    $("#partialpayMSG").html("<div class='col-md-12'>"+warningMessage("Please connect your Bolt device with internet.")+"<div>");
+                                }
+                                else
+                                {
+                                    ///Token Start
+                                    $("#partialpayMSG").html("<div class='col-md-12'>"+loadingOrProcessing("Generating new session-id for transaction.")+"<div>");
+
+                                    var boltTokenCaptureURL="{{url('bolt/token')}}";
+                                    $.ajax({
+                                        'async': true,
+                                        'type': "POST",
+                                        'global': false,
+                                        'dataType': 'json',
+                                        'url': boltTokenCaptureURL,
+                                        'data': {
+                                            'amountToPay':parseNewPayment,
+                                            '_token':"{{csrf_token()}}"},
+                                        'success': function (data) {
+                                            console.log(data);
+
+                                            if(data.connected==false){
+                                                $("#partialpayMSG").html("<div class='col-md-12'>"+warningMessage("Please connect your Bolt device with internet.")+"<div>");
+                                            }
+                                            else
+                                            {
+                                                var tokenSession=data.token;
+                                                ///Capture Card Start
+                                                $("#partialpayMSG").html("<div class='col-md-12'>"+loadingOrProcessing("Please Swipe/Insert your card to device & wait for PIN.")+"<div>");
+                                                var boltCaptureURL="{{url('bolt/partial/capture')}}";
+                                                $.ajax({
+                                                    'async': true,
+                                                    'type': "POST",
+                                                    'global': false,
+                                                    'dataType': 'json',
+                                                    'url': boltCaptureURL,
+                                                    'data': {
+                                                        'amountToPay':parseNewPayment,
+                                                        'cardsession':tokenSession,
+                                                        'invoice_id':invoice_id,
+                                                        '_token':"{{csrf_token()}}"},
+                                                    'success': function (data) {
+
+
+                                                        console.log("cardPointe Partial Bolt Print Sales ID : "+data);
+                                                        if(data==null)
+                                                        {
+                                                            $("#partialpayMSG").html(warningMessage("Failed to authorize payment. Please try again."));
+                                                        }
+                                                        else
+                                                        {
+                                                            console.log(data.status);
+                                                            if(data.status==1)
+                                                            {
+                                                                
+                                                                
+                                                                $("#partialpayMSG").html(successMessage(data.message));
+                                                                
+                                                                setTimeout(function(){
+                                                                        $("#addPartialPayment").modal('hide');
+                                                                }, 3000);
+
+                                                                $("#cartMessageProShow").show();
+                                                                $("#cartMessageProShow").html(successMessage("Payment completed, Please click on print/complete sale."));
+
+                                                            }
+                                                            else
+                                                            {
+                                                                $("#partialpayMSG").html(warningMessage(data.message));
+                                                            }
+                                                        }
+                                                       
+                                                    }
+                                                });
+
+                                                ///Capture Card End
+
+                                            }
+
+                                        }
+
+                                    });
+
+                                    // Token End
+                                    
+                                    
+                                }
+
+                                //console.log("cardPointe Bolt Print Sales ID : "+data);
+                            }
+                        });
+
+                    }
+                    else
+                    {
+                        $("#partialpayMSG").html(warningMessage("Please Type a today paid amount."));
+                    }
+
+                    
+                });
+            //cardpointee and bolt end 
 
             $(".manualMakePayment").click(function(){
                 //alert("success Working");

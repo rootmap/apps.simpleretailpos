@@ -65,9 +65,11 @@ class AuthorizeNetPaymentController extends Controller
     {
         $tab=AuthorizeNetPayment::where('store_id',$this->sdc->storeID())->first();
         $active_module_for_email_invoice=$request->active_module_for_email_invoice?1:0;
+        $active_module=$request->active_module?1:0;
         $tab->api_login_id=$request->api_login_id;
         $tab->transaction_key=$request->transaction_key;
         $tab->active_module_for_email_invoice=$active_module_for_email_invoice;
+        $tab->active_module=$active_module;
         $tab->store_id=$this->sdc->storeID();
         $tab->updated_by=$this->sdc->UserID();
         $tab->save();

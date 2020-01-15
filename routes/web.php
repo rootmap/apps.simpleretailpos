@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('backup', 'ActivityController@dbbackup');
 Route::get('/', function () {
     return redirect('login');
 });
@@ -27,6 +27,18 @@ Route::get('/capture/invoice/print/pdf/{invoice_id}', 'InvoiceController@capture
 //customer pay url
 
 
+//-----------------------bolt Start ----------------||
+
+Route::get('bolt/ping', 'CardPointeeController@boltPing');
+Route::post('bolt/capture', 'CardPointeeController@boltCaptureCard');
+Route::post('bolt/partial/capture', 'CardPointeeController@boltCaptureCardPartialPayment');
+Route::post('bolt/token', 'CardPointeeController@boltGenarateNewToken');
+
+//-----------------------bolt End ------------------||
+
+//-----------------Cardpointe Start-----------------||
+Route::get('/cardpointe/test', 'CardPointeeController@testM');
+//-----------------Cardpointe End-------------------||
 
 // Route::get('/form', 'HomeController@form')->name('form');
 Route::get('/form', 'HomeController@form')->name('form');
@@ -545,7 +557,27 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 	Route::post('stripe', 'InvoiceController@stripeCardPayment')->name('stripe.post');
+	Route::post('stripepartial', 'InvoiceController@stripeMnaulPartialCardPayment')->name('stripe.partial');
 	//----------------Authorize.net Payment Route End-----------------------------//
+
+	Route::get('/cardpointe/account/setting', 'CardPointeeController@cardPointeSettings');
+	Route::post('/cardpointe/account/setting', 'CardPointeeController@cardPointeSettingsSave');
+	Route::post('/cardpointe/account/update/setting', 'CardPointeeController@cardPointeSettingsUpdate');
+
+	Route::post('/cardpointe/pos/payment','CardPointeeController@cardpointePayment');
+
+	Route::post('/cardpointe/partial/payment','CardPointeeController@cardpointePartialPayment');
+
+	
+
+	Route::get('/cardpointe/payment/history','CardPointeeController@index');
+	Route::post('/cardpointe/payment/data/json','CardPointeeController@datajson');
+	Route::post('/cardpointe/payment/history/report','CardPointeeController@show');
+	Route::post('/cardpointe/payment/history/excel/report', 'CardPointeeController@ExcelReport');
+	Route::post('/cardpointe/payment/history/pdf/report', 'CardPointeeController@PdfReport');
+	Route::post('/cardpointe/payment/refund','CardPointeeController@refund');
+	//----------------Authorize.net Payment Route End-----------------------------//
+
 
 });
 
