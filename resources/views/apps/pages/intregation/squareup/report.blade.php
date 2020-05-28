@@ -155,7 +155,7 @@
 	                                	@if($row->hour_gone > 168 && $row->refund_status==0)
 		                                	<button type="button" class="btn btn-default danger"><i class="icon-expeditedssl"></i> Refund Disable</button>
 	                                	@else
-		                                	@if($row->refund_status==1)
+		                                	@if($row->refund_status==0)
 		                                	<button onclick="refundTransaction({{$row->id}})" type="button" class="btn btn-info"  @if($userguideInit==1) data-step="7" data-intro="Payment could be refund using click on this button." @endif><i class="icon-minus-circle"></i> Refund Amount</button>
 		                                	@else
 		                                		<button type="button" class="btn btn-default"><i class="icon-check"></i> Refund Complete</button>
@@ -186,30 +186,6 @@
 @include('apps.include.datatable',['JDataTable'=>1,'selectTwo'=>1,'dateDrop'=>1])
 @section('counter-display-js')
    <script>
-
-   	function actionTemplate(id,hour_gone,refund_status){
-   		var strHTML='';
- 
-           if(hour_gone > 168 && refund_status==0){
-                strHTML+='	<button type="button" class="btn btn-default"><i class="icon-expeditedssl"></i> Refund Disable</button>';
-           }
-           else{
-                if(refund_status==0){
-                    strHTML+='<button onclick="refundTransaction('+id+')" type="button" class="btn btn-green"  ';
-                        @if($userguideInit==1) 
-                            strHTML+='data-step="7" data-intro="Payment could be refund using click on this button." ';
-                        @endif
-                    strHTML+='><i class="icon-minus-circle"></i> Refund Amount</button>';
-                }else{
-                    strHTML+='	<button type="button" class="btn btn-default"><i class="icon-check"></i> Refund Complete</button>';
-                }
-           }
-	    	
-		
-
-		return strHTML;
-   	}
-	
 	$(document).ready(function(e){
 
         $.getScript("https://cdn.jsdelivr.net/npm/sweetalert2@9");
@@ -224,11 +200,7 @@
 
 			return returnHt;
 		}
-
-        $('#report_table').DataTable({"aLengthMenu": [[25, 50, 100, 500,999999999999999999], [25, 50, 100, 500, "All"]]});
- 
-
-
+	});
     </script>
 
     <script type="text/javascript">
