@@ -1,0 +1,19 @@
+[21-May-2018 20:28:58 UTC] PHP Fatal error:  Class 'App\Vendor' not found in /home/spxce/public_html/simplepos/app/Http/Controllers/VendorController.php on line 57
+[25-May-2018 22:00:59 UTC] PHP Fatal error:  Class 'PHPMailer\PHPMailer\PHPMailer' not found in /home/spxce/public_html/simplepos/app/Http/Controllers/MailController.php on line 13
+[23-Jul-2018 21:17:25 UTC] PHP Fatal error:  Call to a member function delete() on null in /home/spxce/public_html/simplepos/app/Http/Controllers/CounterDisplayAuthorizedPCController.php on line 118
+[23-Jul-2018 21:17:26 UTC] PHP Fatal error:  Call to a member function delete() on null in /home/spxce/public_html/simplepos/app/Http/Controllers/CounterDisplayAuthorizedPCController.php on line 118
+[17-Aug-2018 11:18:59 UTC] PHP Fatal error:  Class 'App\Payout' not found in /home/spxce/public_html/simplepos/app/Http/Controllers/InvoiceController.php on line 903
+[17-Aug-2018 11:19:10 UTC] PHP Fatal error:  Class 'App\Payout' not found in /home/spxce/public_html/simplepos/app/Http/Controllers/InvoiceController.php on line 254
+[17-Aug-2018 11:19:23 UTC] PHP Fatal error:  Class 'App\Payout' not found in /home/spxce/public_html/simplepos/app/Http/Controllers/InvoiceController.php on line 254
+[31-Aug-2018 17:56:20 UTC] PHP Fatal error:  Call to undefined method stdClass::delete() in /home/spxce/public_html/simplepos/app/Http/Controllers/RoleController.php on line 112
+[31-Aug-2018 17:56:24 UTC] PHP Fatal error:  Call to undefined method stdClass::delete() in /home/spxce/public_html/simplepos/app/Http/Controllers/RoleController.php on line 112
+[31-Aug-2018 18:01:18 UTC] PHP Fatal error:  Call to undefined method stdClass::delete() in /home/spxce/public_html/simplepos/app/Http/Controllers/RoleController.php on line 112
+[03-Oct-2018 00:00:16 UTC] PHP Fatal error:  Call to a member function delete() on null in /home/simpleretailpos/app/Http/Controllers/CategoryController.php on line 121
+[17-Apr-2019 19:43:22 UTC] PHP Fatal error:  Class 'App\Http\Controllers\URL' not found in /home/simpleretailpos/app.simpleretailpos.com/app/Http/Controllers/StaticDataController.php on line 93
+[04-Jul-2019 19:13:12 UTC] PHP Fatal error:  Call to undefined function formatDate() in /home/simpleretailpos/app.simpleretailpos.com/storage/framework/views/f4c2918dd9b5ef25b8356d7b4e6a17808775b08d.php on line 134
+[21-Oct-2019 16:30:57 UTC] PHP Fatal error:  Class 'App\Http\Controllers\DB' not found in /home/simpleretailpos/app.simpleretailpos.com/app/Http/Controllers/CashierPunchController.php on line 117
+[07-Jan-2020 19:19:08 UTC] PHP Fatal error:  Class 'App\CardPointee' not found in /home/simpleretailpos/app.simpleretailpos.com/app/Http/Controllers/CardPointeeController.php on line 662
+[07-Jan-2020 19:19:09 UTC] PHP Fatal error:  Class 'App\CardPointee' not found in /home/simpleretailpos/app.simpleretailpos.com/app/Http/Controllers/CardPointeeController.php on line 662
+[07-Jan-2020 19:19:58 UTC] PHP Fatal error:  Call to undefined function formatDate() in /home/simpleretailpos/app.simpleretailpos.com/storage/framework/views/3673a178c1d8e9b08b3102ef9c5ea9fcc3a4bc65.php on line 133
+[07-Jan-2020 19:19:59 UTC] PHP Fatal error:  Call to undefined function formatDate() in /home/simpleretailpos/app.simpleretailpos.com/storage/framework/views/3673a178c1d8e9b08b3102ef9c5ea9fcc3a4bc65.php on line 133
+[07-Jan-2020 19:31:28 UTC] PHP Fatal error:  Class 'App\Http\Controllers\CardPointe' not found in /home/simpleretailpos/app.simpleretailpos.com/app/Http/Controllers/CardPointeeController.php on line 406
