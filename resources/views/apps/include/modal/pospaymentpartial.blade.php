@@ -124,6 +124,16 @@
               @endif
             @endif
 
+            @if(isset($square))
+              @if(!empty($square))
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
+                    <a id="btn-payment-modal_modal_button" data-id="SquareupPayment" type="button" class="btn btn-info btn-block btn-lighten-2 btn-responsive margin-all-bottom-button SquareupPartalPayment" >
+                        Square
+                    </a> 
+              </div>
+              @endif
+            @endif
+
             @if(isset($tender))
               @foreach($tender as $ten)
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1">
@@ -134,15 +144,7 @@
               @endforeach
             @endif           
 
-            @if(isset($square))
-              @if(!empty($square))
-              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
-                    <a id="btn-payment-modal_modal_button" data-id="SquareupPayment" type="button" class="btn btn-green btn-block btn-lighten-2 btn-responsive margin-all-bottom-button SquareupPartalPayment" >
-                        Square
-                    </a> 
-              </div>
-              @endif
-            @endif
+            
             
           </div>
         </form>
