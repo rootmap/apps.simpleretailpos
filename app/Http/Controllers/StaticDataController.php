@@ -467,8 +467,8 @@ class StaticDataController extends Facade {
                 //$mpdf->SetDisplayMode('fullpage');
                 //$mpdf->list_indent_first_level=0; // 1 or 0 - whether to indent the first level of a list
                 // LOAD a stylesheet
-                $stylesheet=file_get_contents(url('assets/css/bootstrap.min.css'));
-                $stylesheet2=file_get_contents(url('assets/css/style.css'));
+                $stylesheet=file_get_contents(public_path('assets/css/bootstrap.min.css'));
+                $stylesheet2=file_get_contents(public_path('assets/css/style.css'));
                 $html= '<table  class="col-md-12" cellpadding="10" style="width:100%;" width="100%;">
                         <tr>
                         

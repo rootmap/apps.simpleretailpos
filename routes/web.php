@@ -568,6 +568,7 @@ Route::group(['middleware' => ['auth', 'ssl']], function () {
 
 	Route::get('/intregation/squareup/form', 'SquareConnectController@init');
 	Route::post('/square/connect/capture/payment/nonce', 'SquareConnectController@capturePayment');
+	Route::post('/square/connect/capture/parrtial/nonce', 'SquareConnectController@squareMnaulPartialCardPayment');
 	Route::post('/square/connect/payment/refund', 'SquareConnectController@refund');
 
 

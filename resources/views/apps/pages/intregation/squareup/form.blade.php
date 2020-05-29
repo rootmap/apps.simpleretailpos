@@ -3,6 +3,7 @@
   <title>Square Payment Form</title>
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="squareconnectpayment" content="{{ url('square/connect/capture/payment/nonce') }}">
+  <meta name="squarepartialpayment" content="{{ url('/square/connect/capture/parrtial/nonce') }}">
   <!-- link to the SqPaymentForm library -->
   <script type="text/javascript" src=<?php
                                       echo "\"";
@@ -58,6 +59,7 @@
         <div id="error"></div>
         <input type="hidden" id="card-nonce" name="nonce">
         <input type="hidden" id="card-amount" name="card-amount" value="0">
+        <input type="hidden" id="card-invoice" name="card-invoice" value="0">
       </form>
     </div>
   </div>

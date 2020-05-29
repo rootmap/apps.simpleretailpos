@@ -4,6 +4,7 @@
  */
 var csrftLarVe = $('meta[name="csrf-token"]').attr("content");
 var squareCapturePayment = $('meta[name="squareconnectpayment"]').attr("content");
+var squarepartialpayment = $('meta[name="squarepartialpayment"]').attr("content");
 
 function loadingOrProcessing(sms) {
     var strHtml = '';
@@ -52,12 +53,15 @@ function onGetCardNonce(event) {
 function processCardPayment() {
     var nonce = $("#card-nonce").val();
     var card_amount = $("#card-amount").val();
-    //url = parent.document.URL;
-    //alert(csrftLarVe);
-    //return false;
-
+    var paymentType = 1;
+    var card_invoice = $("#card-invoice").val();
+    if (card_invoice.length > 0) {
+        paymentType = 2;
+    }
     var topFrame = window.parent;
 
+    if (paymentType == 1) {
+        /* Payment Start */
     $.ajax({
         'async': true,
         'type': "POST",
@@ -72,19 +76,15 @@ function processCardPayment() {
         'success': function(data) {
             console.log("Square Connect Print Sales ID : " + data);
             if (data == null) {
-                //$(".message-place-authorizenet").html(warningMessage("Failed to authorize payment. Please try again."));
+                    topFrame.$("#squareupMsg").html(warningMessage(data.msg));
+                    topFrame.$("#squareupMsg").show();
             } else {
                 console.log(data);
                 if (data.status == 0) {
                     console.log(0);
-                    //warningMessage
                     console.log(topFrame.$("#squareupMsg").html());
                     topFrame.$("#squareupMsg").html(warningMessage(data.msg));
                     topFrame.$("#squareupMsg").show();
-                    //$("#squareupMsg").show();
-
-
-
                 } else if (data.status == 1) {
                     console.log(1);
                     topFrame.$("#squareupMsg").html(successMessage(data.msg));
@@ -111,32 +111,58 @@ function processCardPayment() {
                 } else {
                     console.log('else');
                 }
-                // if (data.status == 1) {
-                //     var amount_to_pay = $("input[name=amount_to_pay]").val();
-
-                //     var expaid = $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html();
-                //     if ($.trim(expaid) == 0) {
-                //         var parseNewPayment = parseFloat(amount_to_pay).toFixed(2);
-                //         $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html(parseNewPayment);
-                //     } else {
-                //         var newpayment = (expaid - 0) + (amount_to_pay - 0);
-                //         var parseNewPayment = parseFloat(newpayment).toFixed(2);
-                //         $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html(parseNewPayment);
-                //     }
-                //     genarateSalesTotalCart();
-                //     var AddPOSUrl = makePaymentInitialDefaultAddPOSUrl;
-                //     $.post(AddPOSUrl, { 'paymentID': 8, 'paidAmount': parseNewPayment, '_token': csrftLarVe }, function(response) {
-
-                //     });
-                //     $(".message-place-authorizenet").html(successMessage(data.message));
-
-                // } else {
-                //     $(".message-place-authorizenet").html(warningMessage(data.message));
-                // }
-            }
-            //$(".message-place-authorizenet").html("dddd");
+                }
         }
     });
+        /* Payment End */
+    } else {
+        /* Partial Payment Start */
+        $.ajax({
+            'async': true,
+            'type': "POST",
+            'global': false,
+            'dataType': 'json',
+            'url': squarepartialpayment,
+            'data': {
+                'card_amount': card_amount,
+                'card_invoice': card_invoice,
+                'nonce': nonce,
+                '_token': csrftLarVe
+            },
+            'success': function(data) {
+                console.log("Square Connect Print Sales ID : " + data);
+                if (data == null) {
+                    topFrame.$("#squareupPartialMsg").html(warningMessage(data.msg));
+                    topFrame.$("#squareupPartialMsg").show();
+                } else {
+                    console.log(data);
+                    if (data.status == 0) {
+                        console.log(0);
+                        console.log(topFrame.$("#squareupPartialMsg").html());
+                        topFrame.$("#squareupPartialMsg").html(warningMessage(data.msg));
+                        topFrame.$("#squareupPartialMsg").show();
+                    } else if (data.status == 1) {
+                        console.log(1);
+                        topFrame.$("#squareupPartialMsg").html(successMessage(data.msg));
+                        topFrame.$("#squareupPartialMsg").show();
+
+                        topFrame.$("#squareupPartialmodal").modal('hide');
+
+                        topFrame.$("#cartMessageProShow").html(successMessage(data.msg));
+                        topFrame.$("#cartMessageProShow").show();
+                        //cartMessageProShow
+
+                    } else {
+                        console.log('else');
+                    }
+                }
+            }
+        });
+        /* Partial Payment End */
+    }
+
+
+
     //------------------------Ajax Customer End---------------------------//
 
     return false;
