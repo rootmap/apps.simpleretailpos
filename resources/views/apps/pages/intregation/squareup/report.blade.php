@@ -151,14 +151,14 @@
 	                                <td>{{$row->CardType}}</td>
 	                                <td>{{$row->transactionID}}</td>
 	                                <td>{{$row->paid_amount}}</td>
-	                                <td>
+	                                <td id="row_place_{{$row->id}}">
 	                                	@if($row->hour_gone > 168 && $row->refund_status==0)
 		                                	<button type="button" class="btn btn-default danger"><i class="icon-expeditedssl"></i> Refund Disable</button>
 	                                	@else
 		                                	@if($row->refund_status==0)
 		                                	<button onclick="refundTransaction({{$row->id}})" type="button" class="btn btn-info"  @if($userguideInit==1) data-step="7" data-intro="Payment could be refund using click on this button." @endif><i class="icon-minus-circle"></i> Refund Amount</button>
 		                                	@else
-		                                		<button type="button" class="btn btn-default"><i class="icon-check"></i> Refund Complete</button>
+		                                		<button type="button" class="btn btn-default success"><i class="icon-check"></i> Refund Complete</button>
 		                                	@endif
 	                                	@endif
 	                                </td>
@@ -241,15 +241,18 @@
                         Swal.hideLoading();
 		                if(data.status==1)
 		                {
+
                             swalSuccessMsg(data.msg); 
-                            setTimeout(() => {
-                                window.location.reload();
-                            }, 1560);
+                            $("#row_place_"+id).html('<button type="button" class="btn btn-default success"><i class="icon-check"></i> Refund Complete</button>');
 		                	
 		                }
 		                else
 		                {
-                            swalErrorMsg('Something went wrong, Please try again.'); return false;
+                            swalErrorMsg('Something went wrong, Please try again.'); 
+							setTimeout(() => {
+                                window.location.reload();
+                            }, 1560);
+							return false;
 		                }
 		            }
 		        });
@@ -257,35 +260,7 @@
 			}
 		}
 
-		function VoidTransaction(id)
-		{
-			var c=confirm('Are you sure to void/cancel this transaction ?');
-			if(c)
-			{
-				//------------------------Ajax Customer Start-------------------------//
-		         var AddHowMowKhaoUrl="{{url('authorize/net/payment/void')}}";
-		         $.ajax({
-		            'async': true,
-		            'type': "POST",
-		            'global': false,
-		            'dataType': 'json',
-		            'url': AddHowMowKhaoUrl,
-		            'data': {'rid':id,'_token':"{{csrf_token()}}"},
-		            'success': function (data) {
-		            	console.log(data);
-		                if(data==1)
-		                {
-		                	window.location.reload();
-		                }
-		                else
-		                {
-		                	alert('Something went wrong, Please try again.');
-		                }
-		            }
-		        });
-		        //------------------------Ajax Customer End---------------------------//
-			}
-		}
+		
 	</script>
 
 @endsection
