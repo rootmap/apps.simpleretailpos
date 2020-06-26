@@ -79,14 +79,20 @@ class ProductStockinController extends Controller
     {
         //echo "string"; die();
         //excel 
+        $total_invoice_amount=0;
         $data=array();
         $array_column=array('ID','Order ID','Order Date','Invoice Total Quantity','Created At','Created By');
         array_push($data, $array_column);
         $inv=$this->profitQuery($request);
         foreach($inv as $voi):
             $inv_arry=array($voi->id,$voi->order_no,$voi->order_date,$voi->total_quantity,$voi->created_at,$voi->created_by);
+
+            $total_invoice_amount+=$voi->total_quantity;
             array_push($data, $inv_arry);
         endforeach;
+
+        $array_column=array('','','Total =',$total_invoice_amount,'','');
+        array_push($data, $array_column);
 
         $reportName="Stock In Order Eport Report";
         $report_title="Stock In Order Eport Report";
@@ -104,7 +110,7 @@ class ProductStockinController extends Controller
 
     public function invoicePDF(Request $request)
     {
-
+        $total_invoice_amount=0;
         $data=array();      
         $reportName="Stock In Order Eport Report";
         $report_title="Stock In Order Eport Report";
@@ -123,6 +129,7 @@ class ProductStockinController extends Controller
                 </thead>
                 <tbody>';
 
+                $total_invoice_amount=0;
                     $inv=$this->profitQuery($request);
                     foreach($inv as $voi):
                         $html .='<tr>
@@ -133,7 +140,7 @@ class ProductStockinController extends Controller
                         <td style="font-size:12px;" class="text-right">'.$voi->created_at.'</td>
                         <td style="font-size:12px;" class="text-right">'.$voi->created_by.'</td>
                         </tr>';
-
+                        $total_invoice_amount+=$voi->total_quantity;
                     endforeach;
 
 
@@ -148,12 +155,18 @@ class ProductStockinController extends Controller
                 <td style="font-size:12px;" class="text-right">00</td>
                 </tr>';*/
 
-                $html .='</tbody>
-                
-                </table>
-
-
-                ';
+                $html .='</tbody>';
+                $html .='<tfoot>';
+                $html .='<tfoot>';
+                $html .='<tr>
+                <td></td>
+                <td></td>
+                <td>Total</td>
+                <td align="center">'.$total_invoice_amount.'</td>
+                <td></td>
+                <td></td>
+                </tr>';
+                $html .='</table>';
 
 
 
@@ -416,14 +429,19 @@ class ProductStockinController extends Controller
     {
 
         //excel 
+        $total_invoice_quantity=0;
         $data=array();
         $array_column=array('Order ID','Vendor Name','Invoice Total Quantity','Order Date');
         array_push($data, $array_column);
         $inv=$this->StockInReport($request);
         foreach($inv as $voi):
             $inv_arry=array($voi->order_no,$voi->vendor_name,$voi->total_quantity,$voi->created_at);
+            $total_invoice_quantity+=$voi->total_quantity;
             array_push($data, $inv_arry);
         endforeach;
+
+        $array_column=array('','Total =',$total_invoice_quantity,'');
+        array_push($data, $array_column);
 
         $reportName="Stock In Order Report";
         $report_title="Stock In Order Report";
@@ -470,7 +488,7 @@ class ProductStockinController extends Controller
                 <tbody>';
 
 
-
+                    $total_invoice_quantity=0;
                     $inv=$this->StockInReport($request);
                     foreach($inv as $index=>$voi):
     
@@ -480,7 +498,7 @@ class ProductStockinController extends Controller
                         <td>'.$voi->total_quantity.'</td>
                         <td>'.date('Y-m-d',strtotime($voi->created_at)).'</td>
                         </tr>';
-
+                        $total_invoice_quantity+=$voi->total_quantity;
                     endforeach;
 
 
@@ -496,7 +514,18 @@ class ProductStockinController extends Controller
                 <td style="font-size:12px;" class="text-right">00</td>
                 </tr>';*/
 
-                $html .='</tbody></table>';
+                $html .='</tbody>';
+                $html .='<tfoot>';
+                $html .='<tfoot>';
+                $html .='<tr>
+                
+                <td></td>
+                <td>Total =</td>
+                <td>'.$total_invoice_quantity.'</td>
+                <td></td>
+                
+                </tr>';
+                $html .='</table>';
 
                 //echo $html; die();
 

@@ -714,6 +714,7 @@ class SquareConnectController extends Controller
     public function ExcelReport(Request $request){
       // dd($request);
       //excel 
+      $total_paid_amount=0;
       $data = array();
       $array_column = array('Invoice ID', 'Card Number', 'Card Type', 'Transaction ID', 'Paid Amount', 'Date', 'Status');
       array_push($data, $array_column);
@@ -729,6 +730,7 @@ class SquareConnectController extends Controller
           formatDateTime($voi->created_at),
           $voi->refund_status==0 ? 'Payment Captured' : 'Refunded'
         );
+        
         array_push($data, $inv_arry);
         $total_amount += $voi->amount;
       endforeach;

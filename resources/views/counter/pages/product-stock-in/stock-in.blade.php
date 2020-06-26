@@ -41,7 +41,7 @@
 									<div class="form-group">
 										
 										<button type="button" id="addCart" class="btn btn-primary">
-											<i class="icon-plus"></i> Add to cart
+											<i class="icon-plus"></i> Add to cart 
 										</button>
 									</div>
 								

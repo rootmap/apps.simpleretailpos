@@ -222,7 +222,8 @@ class AuthorizeNetPaymentHistoryController extends Controller
 	    public function ExcelReport(Request $request) 
 	    {
 	        // dd($request);
-	        //excel 
+            //excel 
+            $total_paid_amount=0;
 	        $data=array();
 	        $array_column=array('Invoice ID','Card Number','Card Type','Transaction ID','Paid Amount','Date');
 	        array_push($data, $array_column);
@@ -235,9 +236,13 @@ class AuthorizeNetPaymentHistoryController extends Controller
 	            	$voi->transactionID,
 	            	$voi->paid_amount,
 	            	$voi->created_at
-	            );
+                );
+                $total_paid_amount+=$voi->paid_amount;
 	            array_push($data, $inv_arry);
-	        endforeach;
+            endforeach;
+            
+            $array_column=array('','','','Total =',$total_paid_amount,'');
+	        array_push($data, $array_column);
 
 	        $reportName="Card Payment History Report";
 	        $report_title="Card Payment History Report";
@@ -287,7 +292,7 @@ class AuthorizeNetPaymentHistoryController extends Controller
 	                <tbody>';
 
 
-
+                        $total_apid_amount=0;
 	                    $inv=$this->AuthReport($request);
 	                    foreach($inv as $index=>$voi):
 	    
@@ -299,7 +304,7 @@ class AuthorizeNetPaymentHistoryController extends Controller
 	                        <td align="center">'.$voi->paid_amount.'</td>
 	                        <td>'.date('Y-m-d',strtotime($voi->created_at)).'</td>
 	                        </tr>';
-
+                            $total_apid_amount+=$voi->paid_amount;
 	                    endforeach;
 
 
@@ -315,7 +320,19 @@ class AuthorizeNetPaymentHistoryController extends Controller
 	                <td style="font-size:12px;" class="text-right">00</td>
 	                </tr>';*/
 
-	                $html .='</tbody></table>';
+                    $html .='</tbody>';
+                    $html .='<tfoot>';
+                    $html .='<tfoot>';
+                    $html .='<tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Total =</td>
+                    <td align="center">'.$total_apid_amount.'</td>
+                    <td></td>
+                    
+                    </tr>';
+                    $html .='</table>';
 
 	                //echo $html; die();
 

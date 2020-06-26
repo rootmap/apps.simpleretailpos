@@ -56,14 +56,28 @@ class ProductController extends Controller
     {
         //echo "string"; die();
         //excel 
+        $total_stock_amount=0;
+        $total_price_amount=0;
+        $total_cost_amount=0;
+        $total_price=0;
+        $total_cost=0;
         $data=array();
         $array_column=array('Product ID','Product Name','Quantity IN Stock','Price','Cost','Total Price','Total Cost','Product Date');
         array_push($data, $array_column);
         $inv=$this->profitQuery($request);
         foreach($inv as $voi):
             $inv_arry=array($voi->id,$voi->name,$voi->quantity,$voi->price,$voi->cost,$voi->price*$voi->quantity,$voi->cost*$voi->quantity,$voi->created_at);
+
+            $total_stock_amount+=$voi->quantity;
+            $total_price_amount+=$voi->price;
+            $total_cost_amount+=$voi->cost;
+            $total_price+=$voi->price*$voi->quantity;
+            $total_cost+=$voi->cost*$voi->quantity;
             array_push($data, $inv_arry);
         endforeach;
+
+        $array_column=array('','Total =',$total_stock_amount,$total_price_amount,$total_cost_amount,$total_price,$total_cost,'');
+        array_push($data, $array_column);
 
         $reportName="Product Report";
         $report_title="Product Report";
@@ -113,6 +127,11 @@ class ProductController extends Controller
                 </thead>
                 <tbody>';
 
+                    $total_stock_amount=0;
+                    $total_price_amount=0;
+                    $total_cost_amount=0;
+                    $total_price=0;
+                    $total_cost=0;
                     $inv=$this->profitQuery($request);
                     foreach($inv as $voi):
                         $html .='<tr>
@@ -126,6 +145,11 @@ class ProductController extends Controller
                         <td style="font-size:12px;" class="text-right">'.$voi->created_at.'</td>
                         </tr>';
 
+                        $total_stock_amount+=$voi->quantity;
+                        $total_price_amount+=$voi->price;
+                        $total_cost_amount+=$voi->cost;
+                        $total_price+=$voi->price*$voi->quantity;
+                        $total_cost+=$voi->cost*$voi->quantity;
                     endforeach;
 
 
@@ -139,13 +163,23 @@ class ProductController extends Controller
                 <td></td>
                 <td style="font-size:12px;" class="text-right">00</td>
                 </tr>';*/
+                $html .='</tbody>';
+                $html .='<tfoot>';
+                $html .='<tfoot>';
+                $html .='<tr>
+                <td></td>
+                <td>Total =</td>
+                <td>'.$total_stock_amount.'</td>
+                <td>'.$total_price_amount.'</td>
+                <td>'.$total_cost_amount.'</td>
+                <td>'.$total_price.'</td>
+                <td>'.$total_cost.'</td>
+                <td></td>
+                </tr>';
+                $html .='</table>';
 
-                $html .='</tbody>
+
                 
-                </table>
-
-
-                ';
 
 
 
@@ -461,14 +495,30 @@ class ProductController extends Controller
     {
         // dd($request);
         //excel 
+        $total_stock_amount=0;
+        $total_price_amount=0;
+        $total_cost_amount=0;
+        $total_price=0;
+        $total_cost=0;
         $data=array();
         $array_column=array('Product ID','Product Name','Quantity IN Stock','Price','Cost','Total Price','Total Cost','Product Date');
         array_push($data, $array_column);
         $inv=$this->ExportReport($request);
         foreach($inv as $voi):
             $inv_arry=array($voi->id,$voi->name,$voi->quantity,$voi->price,$voi->cost,$voi->price*$voi->quantity,$voi->cost*$voi->quantity,$voi->created_at);
+
+            
+            $total_stock_amount+=$voi->quantity;
+            $total_price_amount+=$voi->price;
+            $total_cost_amount+=$voi->cost;
+            $total_price+=$voi->price*$voi->quantity;
+            $total_cost+=$voi->cost*$voi->quantity;
             array_push($data, $inv_arry);
         endforeach;
+
+        
+        $array_column=array('','Total =',$total_stock_amount,$total_price_amount,$total_cost_amount,$total_price,$total_cost,'');
+        array_push($data, $array_column);
 
         $reportName="Product Report";
         $report_title="Product Report";
@@ -519,6 +569,12 @@ class ProductController extends Controller
                 </thead>
                 <tbody>';
 
+                    $total_stock_amount=0;
+                    $total_price_amount=0;
+                    $total_cost_amount=0;
+                    $total_price=0;
+                    $total_cost=0;
+
                     $inv=$this->ExportReport($request);
                     foreach($inv as $voi):
                         $html .='<tr>
@@ -531,6 +587,12 @@ class ProductController extends Controller
                         <td style="font-size:12px;" class="text-right">'.$voi->cost*$voi->quantity.'</td>
                         <td style="font-size:12px;" class="text-right">'.$voi->created_at.'</td>
                         </tr>';
+
+                        $total_stock_amount+=$voi->quantity;
+                        $total_price_amount+=$voi->price;
+                        $total_cost_amount+=$voi->cost;
+                        $total_price+=$voi->price*$voi->quantity;
+                        $total_cost+=$voi->cost*$voi->quantity;
 
                     endforeach;
 
@@ -547,7 +609,20 @@ class ProductController extends Controller
                 <td style="font-size:12px;" class="text-right">00</td>
                 </tr>';*/
 
-                $html .='</tbody></table>';
+                $html .='</tbody>';
+                $html .='<tfoot>';
+                $html .='<tfoot>';
+                $html .='<tr>
+                <td></td>
+                <td>Total =</td>
+                <td>'.$total_stock_amount.'</td>
+                <td>'.$total_price_amount.'</td>
+                <td>'.$total_cost_amount.'</td>
+                <td>'.$total_price.'</td>
+                <td>'.$total_cost.'</td>
+                <td></td>
+                </tr>';
+                $html .='</table>';
 
                 //echo $html; die();
 
@@ -907,14 +982,25 @@ class ProductController extends Controller
     {
 
         //excel 
+        $total_sold_quantity_amount=0;
+        $total_cost_amount=0;
+        $total_seles_amount=0;
+        $total_profit_amount=0;
         $data=array();
         $array_column=array('Product ID','Name','Sold Quantity','Total Cost','Total Sales Amount','Total Profit','Created Date');
         array_push($data, $array_column);
         $inv=$this->productProfitSQL($request);
         foreach($inv as $voi):
             $inv_arry=array($voi->id,$voi->name,$voi->sold_times,($voi->sold_times*$voi->cost),($voi->sold_times*$voi->price),(($voi->sold_times*$voi->price)-($voi->sold_times*$voi->cost)),$voi->created_at);
+            $total_sold_quantity_amount+=$voi->sold_times;
+            $total_cost_amount+=$voi->sold_times*$voi->cost;
+            $total_seles_amount+=$voi->sold_times*$voi->price;
+            $total_profit_amount+=(($voi->sold_times*$voi->price)-($voi->sold_times*$voi->cost));
             array_push($data, $inv_arry);
         endforeach;
+
+        $array_column=array('','Total =',$total_sold_quantity_amount,$total_cost_amount,$total_seles_amount,$total_profit_amount,'');
+        array_push($data, $array_column);
 
         $reportName="Product Profit Report";
         $report_title="Product Profit Report";
@@ -965,7 +1051,10 @@ class ProductController extends Controller
                 <tbody>';
 
 
-
+                    $total_sold_quantity_amount=0;
+                    $total_cost_amount=0;
+                    $total_seles_amount=0;
+                    $total_profit_amount=0;
                     $inv=$this->productProfitSQL($request);
                     foreach($inv as $index=>$voi):
     
@@ -978,7 +1067,10 @@ class ProductController extends Controller
                         <td>'.(($voi->sold_times*$voi->price)-($voi->sold_times*$voi->cost)).'</td>
                         <td>'.$voi->created_at.'</td>
                         </tr>';
-
+                        $total_sold_quantity_amount+=$voi->sold_times;
+                        $total_cost_amount+=$voi->sold_times*$voi->cost;
+                        $total_seles_amount+=$voi->sold_times*$voi->price;
+                        $total_profit_amount+=(($voi->sold_times*$voi->price)-($voi->sold_times*$voi->cost));
                     endforeach;
 
 
@@ -994,7 +1086,20 @@ class ProductController extends Controller
                 <td style="font-size:12px;" class="text-right">00</td>
                 </tr>';*/
 
-                $html .='</tbody></table>';
+               
+                $html .='</tbody>';
+                $html .='<tfoot>';
+                $html .='<tfoot>';
+                $html .='<tr>
+                <td></td>
+                <td>Total =</td>
+                <td>'.$total_sold_quantity_amount.'</td>
+                <td>'.$total_cost_amount.'</td>
+                <td>'.$total_seles_amount.'</td>
+                <td>'.$total_profit_amount.'</td>
+                <td></td>
+                </tr>';
+                $html .='</table>';
 
                 //echo $html; die();
 

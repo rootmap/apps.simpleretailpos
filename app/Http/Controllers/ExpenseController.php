@@ -200,14 +200,19 @@ class ExpenseController extends Controller
     {
 
         //excel 
+        $total_paid_amount=0;
         $data=array();
         $array_column=array('Voucher ID','Expense Head','Expense DATE','Description','Expense AMOUNT','Created at');
         array_push($data, $array_column);
         $inv=$this->filterDataExpense($request);
         foreach($inv as $voi):
             $inv_arry=array($voi->id,$voi->expense_name,date('Y-m-d',strtotime($voi->expense_date)),$voi->expense_description,$voi->expense_amount,date('Y-m-d',strtotime($voi->created_at)));
+            $total_paid_amount+=$voi->expense_amount;
             array_push($data, $inv_arry);
         endforeach;
+
+        $array_column=array('','','','Total =',$total_paid_amount,'');
+        array_push($data, $array_column);
 
         $reportName="Expense Voucher Report";
         $report_title="Expense Voucher Report";
@@ -256,7 +261,7 @@ class ExpenseController extends Controller
                 <tbody>';
 
 
-
+                     $total_paid_amount=0;
                     $inv=$this->filterDataExpense($request);
                     foreach($inv as $index=>$voi):
     
@@ -268,7 +273,7 @@ class ExpenseController extends Controller
                         <td>'.$voi->expense_amount.'</td>
                         <td>'.date('Y-m-d',strtotime($voi->created_at)).'</td>
                         </tr>';
-
+                        $total_paid_amount+=$voi->expense_amount;
                     endforeach;
 
 
@@ -284,7 +289,18 @@ class ExpenseController extends Controller
                 <td style="font-size:12px;" class="text-right">00</td>
                 </tr>';*/
 
-                $html .='</tbody></table>';
+                $html .='</tbody>';
+                $html .='<tfoot>';
+                $html .='<tfoot>';
+                $html .='<tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Total =</td>
+                <td>'.$total_paid_amount.'</td>
+                <td></td>
+                </tr>';
+                $html .='</table>';
 
                 //echo $html; die();
 

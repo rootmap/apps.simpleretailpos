@@ -327,6 +327,7 @@ ELSE IFNULL(TIME_FORMAT(TIMEDIFF(CONCAT(out_date, ' ', IF(LOCATE('PM',out_time) 
     {
         // dd($request);
         //excel 
+        
         $data=array();
         $array_column=array('ID','Name','In Date','In Time','Out Date','Out Time','Elapsed Time');
         array_push($data, $array_column);

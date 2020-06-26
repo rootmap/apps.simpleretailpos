@@ -193,15 +193,23 @@ class InvoiceProfitController extends Controller
     {
 
         //excel 
+        $total_invoice_amount=0;
+        $total_cost_amount=0;
+        $total_profit_amount=0;
         $data=array();
         $array_column=array('Invoice ID','Customer Name','Total Amount','Total Cost','Total Profit','Invoice Date');
         array_push($data, $array_column);
         $inv=$this->profitQuery($request);
         foreach($inv as $voi):
             $inv_arry=array($voi->invoice_id,$voi->customer_name,$voi->total_amount,$voi->total_cost,$voi->total_profit,$voi->created_at);
+            $total_invoice_amount+=$voi->total_amount;
+            $total_cost_amount+=$voi->total_cost;
+            $total_profit_amount+=$voi->total_profit;
             array_push($data, $inv_arry);
         endforeach;
 
+        $array_column=array('','Total =',$total_invoice_amount,$total_cost_amount,$total_profit_amount,'');
+        array_push($data, $array_column);
         $reportName="Profit Report";
         $report_title="Profit Report";
         $report_description="Report Genarated : ".date('d-M-Y H:i:s a');
@@ -249,7 +257,9 @@ class InvoiceProfitController extends Controller
                 <tbody>';
 
 
-
+                    $total_invoice_amount=0;
+                    $total_cost_amount=0;
+                    $total_profit_amount=0;
                     $inv=$this->profitQuery($request);
                     foreach($inv as $index=>$voi):
     
@@ -261,7 +271,9 @@ class InvoiceProfitController extends Controller
                         <td>'.$voi->total_cost.'</td>
                         <td>'.$voi->total_profit.'</td>
                         </tr>';
-
+                        $total_invoice_amount+=$voi->total_amount;
+                        $total_cost_amount+=$voi->total_cost;
+                        $total_profit_amount+=$voi->total_profit;
                     endforeach;
 
 
@@ -277,7 +289,18 @@ class InvoiceProfitController extends Controller
                 <td style="font-size:12px;" class="text-right">00</td>
                 </tr>';*/
 
-                $html .='</tbody></table>';
+                $html .='</tbody>';
+                $html .='<tfoot>';
+                $html .='<tfoot>';
+                $html .='<tr>
+                <td></td>
+                <td></td>
+                <td>Total =</td>
+                <td>'.$total_invoice_amount.'</td>
+                <td>'.$total_cost_amount.'</td>
+                <td>'.$total_profit_amount.'</td>
+                </tr>';
+                $html .='</table>';
 
                 //echo $html; die();
 
