@@ -207,4 +207,11 @@ class StoreController extends Controller
 
         return redirect('store-shop/list')->with('status', $this->moduleName.' Deleted Successfully !');
     }
+
+    public function storeInfo(Request $request)
+    {
+        $id=$this->sdc->storeID();
+        $tab=Store::where('store_id',$id)->first();
+        return view('apps.pages.user_info.index',['edit'=>$tab,'store_id'=>$id]);
+    }
 }

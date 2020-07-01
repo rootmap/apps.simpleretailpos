@@ -6,21 +6,12 @@
           <span aria-hidden="true">&times;</span>
       </button>
       <h3 class="modal-title" id="myModalLabel35"> Pay With CardPointe Payment 
-        <img class="img-responsive pull-left" src="http://i76.imgup.net/accepted_c22e0.png">
+        <img class="img-responsive pull-left" src="{{url('intregation/accepted_c22e0.png')}}">
       </h3>
   </div>
       <div class="card-body collapse in">
                     <div class="card-block">
 
-
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" /> --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <style type="text/css">
-       .hidestripemsg
-       {
-            display: none;
-       }
-    </style>
 
 
   

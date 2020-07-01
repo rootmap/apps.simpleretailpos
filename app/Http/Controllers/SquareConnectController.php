@@ -9,6 +9,7 @@ use App\Invoice;
 use App\Customer;
 use App\Tender;
 use App\InvoicePayment;
+use App\PartialPayment;
 use Illuminate\Http\Request;
 use DB;
 
@@ -441,6 +442,18 @@ class SquareConnectController extends Controller
             $invoicePay->store_id = $this->sdc->storeID();
             $invoicePay->created_by = $this->sdc->UserID();
             $invoicePay->save();
+
+            $partialPay=new PartialPayment;
+            $partialPay->invoice_id=$invoice_id;
+            $partialPay->customer_id=$invoice->customer_id;
+            $partialPay->customer_name=$cusInfo->name;
+            $partialPay->tender_id=$tenderData->id;
+            $partialPay->tender_name=$tenderData->name;
+            $partialPay->total_amount=$invoice->total_amount;
+            $partialPay->paid_amount=$amountPaid;
+            $partialPay->store_id=$this->sdc->storeID();
+            $partialPay->created_by=$this->sdc->UserID();
+            $partialPay->save();
 
             $invoice->invoice_status = $load_invoice_status;
             $invoice->save();

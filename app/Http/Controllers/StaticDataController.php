@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Facade;
 use Session;
 use App\Cart;
 use Auth;
-use Illuminate\Http\Request;
+use Request;
 use App\PosSetting;
 use App\InvoiceLayoutOne;
 use App\InvoiceLayoutTwo;
@@ -112,6 +112,29 @@ class StaticDataController extends Facade {
         return self::urlOwnDomain();
     }
 
+    private static function checkMatchEscape(){
+        $escapeParam=[];
+        $escapeParam[]="sales/invoice/";
+        $escapeParam[]="sales/edit/";
+        $escapeParam[]="product/edit/";
+        $escapeParam[]="product/stock/in/receipt/";
+        $escapeParam[]="product/stock/in/edit/";
+        $escapeParam[]="customer/report/";
+        $escapeParam[]="warranty/invoice/";
+        $escapeParam[]="store-shop/edit/";
+        $escapeParam[]="user/edit/";
+        $escapeParam[]="change-password";
+        $escapeParam[]="user-info";
+        $escapeParam[]="store-info";
+        $found=0;
+        $reqPath=Request::path();
+        if (preg_match('('.implode('|',$escapeParam).')', $reqPath)){
+            $found=1;
+        }
+
+        return $found;
+    }
+
     public static function userguideInit() 
     {
         $currentFullURLReplacer=self::urlForChangeData();
@@ -124,8 +147,13 @@ class StaticDataController extends Facade {
                         ->where('page_name',$fullURL)
                         ->where('user_tour_status',2)
                         ->count();
+        
         $stReturn=0; 
         if($sttopTour==1)
+        {
+            $stReturn=0;
+        }
+        elseif(self::checkMatchEscape()>0)
         {
             $stReturn=0;
         }
@@ -150,6 +178,7 @@ class StaticDataController extends Facade {
             }
         }
 
+        //$stReturn=0;
 
         return $stReturn;
         

@@ -345,7 +345,8 @@ function loadCatProduct(cid) {
                     proHtml += '<div class="p-1 card-header" style="padding: 0.7rem !important;">';
                     proHtml += '      <p style="margin-bottom: 0px !important; min-height: 40px; color: #fff;" class="text-xs-left info" style="color: #fff;">' + row.name + '</p>';
                     proHtml += '</div>';
-                    proHtml += '<div class="text-xs-right info" style="line-height: 30px; padding-right: 10px; font-weight: bolder; height: 30px; color: #3BAFDA;">$' + row.price + '</div>';
+                    proHtml += '<style type="text/css">#cb' + row.id + '::before { content: "Stock: ' + row.quantity + '"; left:3px; position:absolute; font-size: 9px; }</style>';
+                    proHtml += '<div id="cb' + row.id + '" class="text-xs-right info" style="line-height: 30px; padding-right: 10px; font-weight: bolder; height: 30px; color: #545a63;">$' + row.price + '</div>';
                     proHtml += '</div>';
                     proHtml += '</a>';
                     proHtml += '</div>';
@@ -359,7 +360,8 @@ function loadCatProduct(cid) {
                     proHtml += '<div class="p-1 card-header  bg-info" style="padding: 0.7rem !important;">';
                     proHtml += '      <p style="margin-bottom: 0px !important; min-height: 40px; color: #fff;" class="text-xs-left">' + row.name + '</p>';
                     proHtml += '</div>';
-                    proHtml += '<div class="text-xs-right info" style="line-height: 30px; padding-right: 10px; font-weight: bolder; height: 30px;">$' + row.price + '</div>';
+                    proHtml += '<style type="text/css">#cb' + row.id + '::before { content: "Stock: ' + row.quantity + '"; left:3px; position:absolute; font-size: 9px; }</style>';
+                    proHtml += '<div id="cb' + row.id + '"  class="text-xs-right info" style="line-height: 30px; padding-right: 10px; font-weight: bolder; height: 30px;">$' + row.price + '</div>';
                     proHtml += '</div>';
                     proHtml += '</a>';
                     proHtml += '</div>';
@@ -904,7 +906,7 @@ $(document).ready(function() {
         document.getElementById('card-number').dispatchEvent(changeEvent);
     });
 
-
+    loadCustomerList();
     $("body").addClass("page-sidebar-minimize menu-collapsed");
     alignProductLine();
     genarateSalesTotalCart();
@@ -3463,4 +3465,47 @@ function genarateSalesTotalCart() {
     }
 
 
+}
+
+function loadCustomerList() {
+    var ff = "<option ";
+    var fff = "<option ";
+    ff += selectedDefCusPOSSCRvFour;
+    fff += selectedDefCusPOSSCRvFour;
+
+    ff += " value=''>SELECT CUSTOMER</option>";
+    fff += " value=''>SELECT CUSTOMER</option>";
+    ff += '<option value="0">CREATE NEW CUSTOMER</option>';
+    var defCusID = defCusIDCusPOSSCRvFour;
+
+    $.each(cusObjData, function(index, row) {
+        //console.log(row);  
+
+        if (defCusID == row.id) {
+            ff += "<option selected='selected' value='" + row.id + "'>" + row.name + "</option>";
+            fff += "<option selected='selected' value='" + row.id + "'>" + row.name + "</option>";
+        } else {
+            ff += "<option value='" + row.id + "'>" + row.name + "</option>";
+            fff += "<option value='" + row.id + "'>" + row.name + "</option>";
+        }
+
+
+    });
+
+    $("select[name=customer_id]").html(ff);
+   // $("select[name=sales_return_customer_id]").html(fff);
+    //$("select[name=buyback_customer_id]").html(fff);
+    //$("select[name=partialpay_customer_id]").html(fff);
+
+    // $("select[name=sales_return_customer_id]").select2({
+    //     dropdownParent: $("#salesReturn")
+    // });
+
+    // $("select[name=sales_return_sales_invoice_id]").select2({
+    //     dropdownParent: $("#salesReturn")
+    // });
+
+
+    ff = "";
+    fff = "";
 }

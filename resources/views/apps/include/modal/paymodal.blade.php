@@ -53,7 +53,7 @@
                                               @if(!empty($authorizeNettender))
                                               <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
                                                   
-                                                    <a id="btn-payment-modal_modal_button" data-id="{{$authorizeNettender[0]->id}}" type="button" class="btn btn-info btn-lighten-1 btn-block btn-responsive margin-all-bottom-button {{$authorizeNettender[0]->tender_class}}" >
+                                                    <a  data-id="{{$authorizeNettender[0]->id}}" type="button" class="btn btn-info btn-lighten-1 btn-block btn-responsive margin-all-bottom-button {{$authorizeNettender[0]->tender_class}}" >
                                                         Authorizenet
                                                     </a> 
                                                   
@@ -63,7 +63,7 @@
 
                                           @if(!empty($stripe))
                                           <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
-                                                <a id="btn-payment-modal_modal_button" data-id="26" type="button" class="btn btn-info btn-block btn-lighten-1 btn-responsive margin-all-bottom-button stripe_card_payment" >
+                                                <a  data-id="26" type="button" class="btn btn-info btn-block btn-lighten-1 btn-responsive margin-all-bottom-button stripe_card_payment" >
                                                     Stripe
                                                 </a> 
                                           </div>
@@ -72,7 +72,7 @@
                                           @if(!empty($cardpointe))
                                             @if($cardpointe->module_status==1)
                                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
-                                                  <a id="btn-payment-modal_modal_button" data-id="26" type="button" class="btn btn-info btn-block btn-lighten-1 btn-responsive margin-all-bottom-button cardpointe_card_payment" >
+                                                  <a  data-id="26" type="button" class="btn btn-info btn-block btn-lighten-1 btn-responsive margin-all-bottom-button cardpointe_card_payment" >
                                                       CardPointe
                                                   </a> 
                                             </div>
@@ -80,7 +80,7 @@
 
                                             @if($cardpointe->bolt_status==1)
                                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
-                                                  <a id="btn-payment-modal_modal_button" data-id="26" type="button" class="btn btn-info btn-block btn-lighten-1 btn-responsive margin-all-bottom-button cardpointe_bolt_payment" >
+                                                  <a  data-id="26" type="button" class="btn btn-info btn-block btn-lighten-1 btn-responsive margin-all-bottom-button cardpointe_bolt_payment" >
                                                       Bolt
                                                   </a> 
                                             </div>
@@ -91,7 +91,7 @@
                                             @if(!empty($payPaltender))
                                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
                                                 
-                                                  <a id="btn-payment-modal_modal_button" data-id="{{$payPaltender[0]->id}}" type="button" class="btn btn-info btn-block btn-lighten-2 btn-responsive margin-all-bottom-button {{$payPaltender[0]->tender_class}}" >
+                                                  <a  data-id="{{$payPaltender[0]->id}}" type="button" class="btn btn-info btn-block btn-lighten-2 btn-responsive margin-all-bottom-button {{$payPaltender[0]->tender_class}}" >
                                                       Paypal
                                                   </a> 
                                                 
@@ -102,7 +102,7 @@
                                           @if(isset($square))
                                             @if(!empty($square))
                                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
-                                                  <a id="btn-payment-modal_modal_button" data-id="SquareupPayment" type="button" class="btn btn-info btn-block btn-lighten-2 btn-responsive margin-all-bottom-button SquareupPayment" >
+                                                  <a  data-id="SquareupPayment" type="button" class="btn btn-info btn-block btn-lighten-2 btn-responsive margin-all-bottom-button SquareupPayment" >
                                                       Square
                                                   </a> 
                                             </div>
@@ -115,7 +115,7 @@
                                             @foreach($tender as $ten)
                                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1  btn-group">
                                               
-                                                <button id="btn-payment-modal_modal_button" data-id="{{$ten->id}}" type="button" class="btn btn-block btn-info btn-responsive margin-all-bottom-button make-payment pull-right mr-1" >
+                                                <button  data-id="{{$ten->id}}" type="button" class="btn btn-block btn-info btn-responsive margin-all-bottom-button make-payment pull-right mr-1" >
                                                     {{$ten->name}}
                                                 </button>  
                                                      

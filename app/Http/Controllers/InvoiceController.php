@@ -48,6 +48,7 @@ use App\StripeTransactionHistory;
 
 use App\ProductSettings;
 use App\SquareAccount;
+use App\PartialPayment;
 
 class InvoiceController extends Controller
 {
@@ -1858,6 +1859,18 @@ class InvoiceController extends Controller
                 $invoicePay->store_id=$this->sdc->storeID();
                 $invoicePay->created_by=$this->sdc->UserID();
                 $invoicePay->save();
+
+                $partialPay=new PartialPayment;
+                $partialPay->invoice_id=$invoice_id;
+                $partialPay->customer_id=$invoice->customer_id;
+                $partialPay->customer_name=$cusInfo->name;
+                $partialPay->tender_id=$tenderData->id;
+                $partialPay->tender_name=$tenderData->name;
+                $partialPay->total_amount=$invoice->total_amount;
+                $partialPay->paid_amount=$amountPaid;
+                $partialPay->store_id=$this->sdc->storeID();
+                $partialPay->created_by=$this->sdc->UserID();
+                $partialPay->save();
                 
                 $invoice->invoice_status=$load_invoice_status;
                 $invoice->save();
@@ -2052,7 +2065,7 @@ class InvoiceController extends Controller
         $defualtCustomer=$this->genarateDefaultCustomer();
         $this->getSalesCartTokenID();
         $filter=$this->GenaratePageDataFilter();
-        $tab_customer=Customer::where('store_id',$this->sdc->storeID())->get();
+        //$tab_customer=Customer::where('store_id',$this->sdc->storeID())->get();
         $Cart = $request->session()->has('Pos') ? $request->session()->get('Pos') : null;
         if(isset($Cart))
         {
@@ -2098,7 +2111,7 @@ class InvoiceController extends Controller
         }
 
         $ps=PosSetting::find(1);
-        $pro=Product::where('store_id',$this->sdc->storeID())->where('general_sale',0)->get();
+        //$pro=Product::where('store_id',$this->sdc->storeID())->where('general_sale',0)->get();
         //dd($pro);
         /*->when($filter, function($query) use ($filter){
             if($filter=='id-desc'){ return $query->orderby('id','desc'); }
@@ -2152,14 +2165,15 @@ class InvoiceController extends Controller
         }
 
         $systemArray=[
-                'product'=>$pro,
+                //'product'=>$pro,
                 'tender'=>$tender,
                 'catInfo'=>$catInfo,
                 'addPartialPayment'=>0,
                 'payPaltender'=>$payPaltender,
                 'drawerStatus'=>$drawerStatus,
                 'authorizeNettender'=>$authorizeNettender,
-                'ps'=>$ps,'cart'=>$Cart,'customerData'=>$tab_customer,
+                'ps'=>$ps,'cart'=>$Cart,
+                //'customerData'=>$tab_customer,
                 "last_invoice_id"=>$last_invoice_id,
                 'CounterDisplay'=>$CounterDisplay,
                 'cardpointe'=>$cardPointe,
@@ -2250,8 +2264,7 @@ class InvoiceController extends Controller
                 $load_invoice_status="Partial";
             }
 
-            if(empty($invoice->tender_id))
-            {
+
                 $tender=Tender::find($request->payment_method_id);
                 $tender_name=$tender->name;
                 $tender_id=$tender->id;
@@ -2259,14 +2272,6 @@ class InvoiceController extends Controller
                 $invoice->tender_id=$tender_id;
                 $invoice->tender_name=$tender_name;
                 $invoice->save();
-            }
-            else
-            {
-                $tender_id=$invoice->tender_id;
-                $tender=Tender::find($tender_id);
-                $tender_name=$tender->name;
-                $invoice->save();
-            }
 
             $total_amount_invoice=$invoice->total_amount;
 
@@ -2282,6 +2287,18 @@ class InvoiceController extends Controller
             $tabInPay->store_id=$this->sdc->storeID();
             $tabInPay->created_by=$this->sdc->UserID();
             $tabInPay->save();
+
+            $partialPay=new PartialPayment;
+            $partialPay->invoice_id=$invoice_id;
+            $partialPay->customer_id=$customer_id;
+            $partialPay->customer_name=$customer_name;
+            $partialPay->tender_id=$tender_id;
+            $partialPay->tender_name=$tender_name;
+            $partialPay->total_amount=$total_amount_invoice;
+            $partialPay->paid_amount=$paid_amount;
+            $partialPay->store_id=$this->sdc->storeID();
+            $partialPay->created_by=$this->sdc->UserID();
+            $partialPay->save();
 
             
             $invoice->invoice_status=$load_invoice_status;
@@ -2429,6 +2446,18 @@ class InvoiceController extends Controller
             $invoicePay->store_id=$this->sdc->storeID();
             $invoicePay->created_by=$this->sdc->UserID();
             $invoicePay->save();
+
+            $partialPay=new PartialPayment;
+            $partialPay->invoice_id=$invoice_id;
+            $partialPay->customer_id=$invoice->customer_id;
+            $partialPay->customer_name=$cusInfo->name;
+            $partialPay->tender_id=$tenderData->id;
+            $partialPay->tender_name=$tenderData->name;
+            $partialPay->total_amount=$invoice->total_amount;
+            $partialPay->paid_amount=$amountPaid;
+            $partialPay->store_id=$this->sdc->storeID();
+            $partialPay->created_by=$this->sdc->UserID();
+            $partialPay->save();
 
             
             $invoice->invoice_status=$load_invoice_status;
@@ -2625,6 +2654,18 @@ class InvoiceController extends Controller
             $invoicePay->store_id=$this->sdc->storeID();
             $invoicePay->created_by=$this->sdc->UserID();
             $invoicePay->save();
+
+            $partialPay=new PartialPayment;
+            $partialPay->invoice_id=$invoice_id;
+            $partialPay->customer_id=$invoice->customer_id;
+            $partialPay->customer_name=$cusInfo->name;
+            $partialPay->tender_id=$tenderData->id;
+            $partialPay->tender_name=$tenderData->name;
+            $partialPay->total_amount=$invoice->total_amount;
+            $partialPay->paid_amount=$amountPaid;
+            $partialPay->store_id=$this->sdc->storeID();
+            $partialPay->created_by=$this->sdc->UserID();
+            $partialPay->save();
             
             $invoice->invoice_status=$load_invoice_status;
             $invoice->save();
@@ -5500,5 +5541,146 @@ class InvoiceController extends Controller
                                    ->delete();
         $tab->delete();
         return redirect('sales/report')->with('status', $this->moduleName.' Invoices Deleted Successfully !');
+    }
+
+    public function productConfigjson(Request $request){
+        $tab_customer=Customer::select('id','name')->where('store_id',$this->sdc->storeID())->get();
+        $pro=Product::where('store_id',$this->sdc->storeID())->where('general_sale',0)->get();
+        
+        return response()->json([
+            'product'=>$pro,
+            'customer'=>$tab_customer
+            ]);
+    }
+
+    public function loadCustomerInvoice(Request $request)
+    {
+        
+        $customer_id=$request->customer_id;
+        $invoice_id=$request->invoice_id;
+        $invoice_date=$request->invoice_date;
+        $barcode=$request->barcode;
+
+        if(!empty($request->barcode))
+        {
+            $loadInvoices=Invoice::join('customers','invoices.customer_id','=','customers.id')
+                             ->join("invoice_products","invoices.invoice_id","=","invoice_products.invoice_id")
+                             ->join("products","invoice_products.product_id","=","products.id")
+                             ->where('invoices.store_id',$this->sdc->storeID())
+                             ->when($invoice_id, function ($query) use ($invoice_id) {
+                                       return $query->where('invoices.invoice_id','=', $invoice_id);
+                             })
+                             ->when($barcode, function ($query) use ($barcode) {
+                                       return $query->where('products.barcode','=', $barcode);
+                             })
+                             ->when($customer_id, function ($query) use ($customer_id) {
+                                       return $query->where('invoices.customer_id','=', $customer_id);
+                             })
+                             ->when($invoice_date, function ($query) use ($invoice_date) {
+                                       return $query->whereDate('invoices.created_at','=', $invoice_date);
+                             })
+                             ->select("invoices.*",'customers.name as customer_name')
+                             ->groupBy('invoices.id')
+                             ->get();
+        }
+        else
+        {
+            $loadInvoices=Invoice::join('customers','invoices.customer_id','=','customers.id')
+                             ->where('invoices.store_id',$this->sdc->storeID())
+                             ->when($invoice_id, function ($query) use ($invoice_id) {
+                                       return $query->where('invoices.invoice_id','=', $invoice_id);
+                             })
+                             ->when($customer_id, function ($query) use ($customer_id) {
+                                       return $query->where('invoices.customer_id','=', $customer_id);
+                             })
+                             ->when($invoice_date, function ($query) use ($invoice_date) {
+                                       return $query->whereDate('invoices.created_at','=', $invoice_date);
+                             })
+                             ->select("invoices.*",'customers.name as customer_name')
+                             ->get();
+        }
+
+        
+
+        return response()->json($loadInvoices);
+    }
+
+    public function loadCustomerReturnInvoice(Request $request){
+        //dd($request->invoice_id);
+        $sql_invoice = InvoiceProduct::where('invoice_id',$request->invoice_id)
+                                     ->leftJoin('products','invoice_products.product_id','=','products.id')
+                                     ->select('invoice_products.*','products.name as product_name','products.barcode as product_barcode')
+                                     ->get();
+
+        $table_data = [];
+        if(count($sql_invoice)>0){
+            foreach ($sql_invoice as $key => $row) {
+                 //-$row->return_item
+                 $tdrows=json_decode(json_encode($row)); 
+                 //dd(json_decode(json_encode($row)));
+                 for($i=1; $i<=$row->quantity; $i++) {
+                    $tdrow=[]; 
+
+                    foreach($tdrows as $index=>$td){
+                        $tdrow[$index]=$td;
+                     }
+
+                     if($i<=$row->return_item)
+                     {
+                        $tdrow['item_return_status']="1";
+                     }
+                     else
+                     {
+                        $tdrow['item_return_status']="0";
+                     }
+
+                     $table_data[]=$tdrow; 
+                 }
+                //$table_data[]=$row;
+            }
+        }                             
+        return response()->json($table_data);
+    }
+
+    public function saveCustomerReturnItem(Request $request){
+        //dd($request);
+        $product = InvoiceProduct::where('invoice_products.id',$request->item_id)
+                                     ->leftJoin('products','invoice_products.product_id','=','products.id')
+                                     ->leftJoin('invoices','invoice_products.invoice_id','=','invoices.invoice_id')
+                                     ->select('invoice_products.*','invoices.customer_id','products.name as product_name','products.barcode as product_barcode')
+                                     ->first();
+
+        $product_quantity = $product->quantity;
+        $product_return_item = $product->return_item;
+
+        if($product_quantity == $product_return_item){
+            return response()->json(array('status'=>1,'data'=>[]));
+        }
+        else
+        {
+            $product->return_item=$product->return_item + 1;
+            $product->save();
+
+            Product::find($product->product_id)->increment('quantity',1);
+        }
+
+        //dd($product);
+
+        $invoice=Invoice::where('invoice_id',$product->invoice_id)->first();
+        $customer=Customer::find($product->customer_id);
+        $sr=new SalesReturn;
+        $sr->invoice_id=$product->invoice_id;
+        $sr->customer_id=$product->customer_id;
+        $sr->customer_name=$customer->name;
+        $sr->product_id=$product->product_id;
+        $sr->product_name=$product->product_name;
+        $sr->invoice_total=$invoice->total_amount;
+        $sr->sales_return_amount=$request->return_amount;
+        $sr->sales_return_note=$request->return_reason;
+        $sr->store_id=$this->sdc->storeID();
+        $sr->created_by=$this->sdc->UserID();
+        $sr->save();
+
+        return response()->json(array('status'=>1,'data'=>$sr));
     }
 }

@@ -16,31 +16,6 @@
 	<div class="row">
 		<div class="col-lg-7 col-md-12 pos-product-display" style="min-height: 700px;">
             <div id="cartMessageProShow" style="display: block;"></div>
-        <style type="text/css">
-            .border-radius-button
-            {
-                -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
-                -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
-                box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
-                -webkit-border-radius: 4px;
-                -moz-border-radius: 4px;
-                border-radius: 4px;
-                font-weight: 600;
-            }
-
-            .add-pos-cart {
-              min-height: 50px !important;
-              line-height: 50px !important;
-              text-align: center;
-              border: 1px solid #123456;
-              margin-bottom:5px;
-            }
-            .add-pos-cart > span {
-              display: inline-block;
-              vertical-align: middle;
-              line-height: normal;
-            }
-        </style>
         <div class="row">
             <div class="col-md-12" @if($userguideInit==1) data-step="6" data-intro="Here you will have categories which you have created. Also after you click on category it will show all the product on top & after you click on product it will add on POS Cart." @endif>
                 
@@ -145,12 +120,6 @@
         </div>
         <div class="row" id="defaultProductView">
 
-        <style type="text/css">
-            .height-30
-            {
-                height:30px !important;
-            }
-        </style>
         <span id="product_place"></span>
 
         </div>
@@ -158,27 +127,6 @@
     <hr>
             
         </div>
-        <style type="text/css">
-        .height-10{ height: 10px !important; }
-        .table td, .table th
-        {
-            padding: 0.1rem .75rem;
-        }
-        .paper-cut:after {
-          content: " ";
-          display: block;
-          position: relative;
-          top: 0px;
-          left: 0px;
-          width: 100%;
-          height: 36px;
-          background: -webkit-linear-gradient(#FFFFFF 0%, transparent 0%), -webkit-linear-gradient(135deg, #e9ebee 33.33%, transparent 33.33%) 0 0%, #e9ebee -webkit-linear-gradient(45deg, #e9ebee 33.33%, #FFFFFF 33.33%) 0 0%;
-          background: -o-linear-gradient(#FFFFFF 0%, transparent 0%), -o-linear-gradient(135deg, #e9ebee 33.33%, transparent 33.33%) 0 0%, #e9ebee -o-linear-gradient(45deg, #e9ebee 33.33%, #FFFFFF 33.33%) 0 0%;
-          background: -moz-linear-gradient(#FFFFFF 0%, transparent 0%), -moz-linear-gradient(135deg, #e9ebee 33.33%, transparent 33.33%) 0 0%, #e9ebee -moz-linear-gradient(45deg, #e9ebee 33.33%, #FFFFFF 33.33%) 0 0%;
-          background-repeat: repeat-x;
-          background-size: 0px 100%, 14px 27px, 14px 27px;
-        }
-    </style>
 
     <div class="col-lg-5 col-md-12 mr-0 pr-0 dropableCartZone">
         <!-- CSS Classes -->
@@ -224,6 +172,9 @@
                                     <button class="dropdown-item" type="button" data-toggle="modal" data-target="#payoutModal"><i class="icon-share-square info"></i> Payout </button>
                                     <button class="dropdown-item" type="button"  data-toggle="modal" data-target="#TimeClockModal">
                                         <i class="icon-clock-o info"></i> Time Clock 
+                                    </button>
+                                    <button class="dropdown-item" type="button" data-toggle="modal" data-target="#salesReturn">
+                                        <i class="icon-repeat2 info"></i> Sales Return
                                     </button>
                                     <button class="dropdown-item addPartialPayment" type="button"><i class="icon-money info"></i> 
                                     Add Partial Payment
@@ -394,12 +345,7 @@
                         <div class="clearfix"></div>
 
                         <style type="text/css">
-                            .select2-container--default .select2-selection--single .select2-selection__rendered
-                            {
-                                font-weight: bolder !important;
-                                text-align: center !important;
-                                font-size: 22px !important;
-                            }
+                            
                         </style>
                         </div>
                         <div class="clearfix"></div>
@@ -410,10 +356,7 @@
 
 
                 <style type="text/css">
-                    .hellvetia{
-                        font-family: 'Helvetica Neue', 'Nunito', sans-serif;
-                        font-weight: 600;
-                    }
+                    
                 </style>
                 <div class="card-header" style="padding: 0.50rem 1.5rem !important;">
 
@@ -451,26 +394,13 @@
 
                     <div class="row">
                         <style type="text/css">
-                                .select2-container--default .select2-selection--single .select2-selection__rendered
-                                {
-                                    font-weight: bolder !important;
-                                    text-align: center !important;
-                                    font-size: 16px !important;
-                                }
+                                
                             </style>
                             <div class="col-xs-12 button-group">
                                 <!-- Quick Links -->
 
                                 <style type="text/css">
-                                    .dropdown-toggle::after
-                                    {
-                                        top: -7px !important;
-                                    }
-
-                                    .spfontcartfotter
-                                    {
-                                        font-size: 28px !important; font-weight: 700;
-                                    }
+                                    
 
                                 </style>
 
@@ -542,6 +472,7 @@
 <!-- Modal for Cash Out-->
 
            @include('apps.include.modal.new-customer')
+           @include('apps.include.modal.salesReturn')
            @include('apps.include.modal.generalsaleModal')
            @include('apps.include.modal.payout')
            @include('apps.include.modal.cash-out')
@@ -558,6 +489,7 @@
            @include('apps.include.modal.close-drawer')
            @include('apps.include.modal.time_clock')
            @include('apps.include.modal.pospaymentpartial')
+           
 
 
 
@@ -601,17 +533,97 @@
 {
     line-height:1.3rem !important;
 }
+
+.border-radius-button
+{
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.add-pos-cart {
+    min-height: 50px !important;
+    line-height: 50px !important;
+    text-align: center;
+    border: 1px solid #123456;
+    margin-bottom:5px;
+}
+.add-pos-cart > span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.height-10{ height: 10px !important; }
+.table td, .table th
+{
+    padding: 0.1rem .75rem;
+}
+.paper-cut:after {
+content: " ";
+display: block;
+position: relative;
+top: 0px;
+left: 0px;
+width: 100%;
+height: 36px;
+background: -webkit-linear-gradient(#FFFFFF 0%, transparent 0%), -webkit-linear-gradient(135deg, #e9ebee 33.33%, transparent 33.33%) 0 0%, #e9ebee -webkit-linear-gradient(45deg, #e9ebee 33.33%, #FFFFFF 33.33%) 0 0%;
+background: -o-linear-gradient(#FFFFFF 0%, transparent 0%), -o-linear-gradient(135deg, #e9ebee 33.33%, transparent 33.33%) 0 0%, #e9ebee -o-linear-gradient(45deg, #e9ebee 33.33%, #FFFFFF 33.33%) 0 0%;
+background: -moz-linear-gradient(#FFFFFF 0%, transparent 0%), -moz-linear-gradient(135deg, #e9ebee 33.33%, transparent 33.33%) 0 0%, #e9ebee -moz-linear-gradient(45deg, #e9ebee 33.33%, #FFFFFF 33.33%) 0 0%;
+background-repeat: repeat-x;
+background-size: 0px 100%, 14px 27px, 14px 27px;
+}
+
+.height-30
+{
+    height:30px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered
+{
+    font-weight: bolder !important;
+    text-align: center !important;
+    font-size: 22px !important;
+}
+
+.hellvetia{
+    font-family: 'Helvetica Neue', 'Nunito', sans-serif;
+    font-weight: 600;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered
+{
+    font-weight: bolder !important;
+    text-align: center !important;
+    font-size: 16px !important;
+}
+.dropdown-toggle::after
+{
+    top: -7px !important;
+}
+
+.spfontcartfotter
+{
+    font-size: 28px !important; font-weight: 700;
+}
+
+.hidestripemsg
+{
+    display: none;
+}
 </style>
 <link rel="stylesheet" type="text/css" href="{{url('theme/app-assets/vendors/css/forms/selects/select2.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{url('theme/app-assets/css/pages/invoice.min.css')}}">
 @endsection
 
 @section('js')
+
 <script src="{{url('theme/app-assets/vendors/js/forms/extended/card/jquery.card.js')}}" type="text/javascript"></script>
 <script src="{{url('theme/app-assets/js/scripts/forms/extended/form-typeahead.min.js')}}" type="text/javascript"></script>
-<script src="{{url('theme/app-assets/js/scripts/forms/extended/form-inputmask.min.js')}}" type="text/javascript"></script>
-<script src="{{url('theme/app-assets/js/scripts/forms/extended/form-formatter.min.js')}}" type="text/javascript"></script>
-<script src="{{url('theme/app-assets/js/scripts/forms/extended/form-maxlength.min.js')}}" type="text/javascript"></script>
 <script src="{{url('theme/app-assets/js/scripts/forms/extended/form-card.min.js')}}" type="text/javascript"></script>
 
 
@@ -623,11 +635,33 @@
 
 <script src="{{url('theme/app-assets/vendors/js/extensions/dragula.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/jquery-ui.js')}}" ></script>
-
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script src="{{asset('js/stripe.js')}}" ></script>
+<script src="{{asset('js/sales-return.js')}}" ></script>
 <script>
 //editRowLive
     //
-var productJson=<?php echo json_encode($product); ?>; 
+var sales_return_invoice_detail = "{{secure_url('sales/return/invoice/detail')}}";
+var sales_return_item = "{{secure_url('sales/return/item')}}";
+var sales_return_invoice_ajax="{{secure_url('sales/return/invoice/ajax')}}";
+var sales_return_save_ajax="{{secure_url('sales/return/save/ajax')}}";
+
+var product_pos_settings_product_url = "{{secure_url('product-config/json')}}";
+var productJson=null; 
+
+var selectedDefCusPOSSCRvFour="";
+var defCusIDCusPOSSCRvFour=0;
+    @if(!isset($cart->customerID))
+        @if(empty($cart->customerID))
+    selectedDefCusPOSSCRvFour=" selected='selected'  ";
+        @endif
+    @endif
+
+    @if(isset($cart->customerID))
+    defCusIDCusPOSSCRvFour="<?php echo $cart->customerID; ?>";
+    @endif
+
+
 @if(isset($ps))
 var taxRate="{{$ps->sales_tax}}";
 @else
@@ -707,12 +741,8 @@ var product_image_status=0;
 @endif
 var squareupPaymentFormload="{{url('intregation/squareup/form')}}";
 </script>
+<script src="{{url('js/product-config.js')}}" type="text/javascript"></script>
 <script src="{{url('js/pos.js')}}" type="text/javascript"></script>
 <script src="{{url('js/intregation.js')}}" type="text/javascript"></script>
-<script>
-$(document).ready(function() {
-    $.getScript("https://cdn.jsdelivr.net/npm/sweetalert2@9");
-});
-</script>
 @endsection
 

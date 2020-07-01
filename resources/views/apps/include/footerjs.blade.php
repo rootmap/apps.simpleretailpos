@@ -72,58 +72,14 @@ if($userguideInit==1)
         var chatMessPhotoUrl="{{url('chat/conv/usr/image')}}";
         var chatInterfaceUserID="{{Auth::user()->id}}";
         var chatInterfaceUserName="{{Auth::user()->name}}";
-
-        function logoutFRM()
-        {
-                $("#logoutME").submit();
-        }
-
-        function copyToClipboard(element) {
-          var $temp = $("<input>");
-          $("body").append($temp);
-          $temp.val($(element).text()).select();
-          document.execCommand("copy");
-          $temp.remove();
-          alert("Counter display link copied successfully.");
-        }
-
-        console.log("menu status","<?php echo $dataslideCheck; ?>");
-
-        @if($dataslideCheck==2)
-            $("body").removeClass("page-sidebar-minimize menu-collapsed");
-        @else
-            $("body").addClass("page-sidebar-minimize menu-collapsed");
-        @endif
-
-        
-
-        $(document).ready(function(){
-            $("#fullscreen").click(function(){
-                $(document).toggleFullScreen()
-                $(this).children("i").toggleClass("danger");
-            });
-
-            $(".copyButton").click(function(){
-                copyToClipboard('#cdlDt');
-            });
-            
-            $(".cash_register_collapse").click(function(){
-                //---------------------Ajax New Product Start---------------------//
-                var AddProductUrl="{{url('slide-menu/slide/status')}}";
-                $.ajax({
-                    'async': false,
-                    'type': "POST",
-                    'global': false,
-                    'dataType': 'json',
-                    'url': AddProductUrl,
-                    'data': {'slide':1,'_token':"{{csrf_token()}}"},
-                    'success': function (data) { 
-                        console.log(data);
-                    }
-                });
-                //-----------------Ajax New Product End------------------//
-            });
-        });
+        var searchnucleus = "{{secure_url('search-nucleus')}}";
+        var siteConfig_dataslideCheck="{{$dataslideCheck}}";
+        var siteConfig_slidemenu_slide_status="{{url('slide-menu/slide/status')}}";
+        var siteConfig_userguideInit="{{$userguideInit}}";
+        var siteConfig_introjs_intro_js="{{url('introjs/intro.js')}}";
+        var siteConfig_systemtour_ajax_status="{{url('systemtour/ajax/status')}}";
+        var siteConfig_request_path="{{Request::path()}}";
+        var siteConfig_fullscreenSearch="{{url('theme/app-assets/js/scripts/ui/fullscreenSearch.js')}}";  
     </script>
 
     <!-- BEGIN Custom CSS-->
@@ -147,60 +103,5 @@ if($userguideInit==1)
     <!-- END ROBUST JS-->
     <!-- BEGIN PAGE LEVEL JS-->
     <!-- END PAGE LEVEL JS-->
-    <?php
-    if($userguideInit==1)
-    {
-    ?>
-    
-    <script type="text/javascript" src="{{url('introjs/intro.js')}}"></script>
-    <script>
-        $(document).ready(function(){
-            var systemTourURL="{{url('systemtour/ajax/status')}}";
-            $("#initiateUserGuideTour").modal('show');
-
-            $("#strSystemTour").click(function(){
-                $("#initiateUserGuideTour").modal('hide');
-                introJs().start();
-                //---------------------Ajax New Product Start---------------------//
-                $.ajax({
-                    'async': true,
-                    'type': "POST",
-                    'global': true,
-                    'dataType': 'json',
-                    'url': systemTourURL,
-                    'data': {'systour':1,'page_name':"{{Request::path()}}",'_token':"{{csrf_token()}}"},
-                    'success': function (data) 
-                    { 
-                        console.log(data);
-                    }
-                });
-                //-----------------Ajax New Product End------------------//
-            });
-
-            $("#skpSystemTour").click(function(){
-                $("#initiateUserGuideTour").modal('hide');
-            });
-
-            $("#stpSystemTour").click(function(){
-                $("#initiateUserGuideTour").modal('hide');
-                //---------------------Ajax New Product Start---------------------//
-                $.ajax({
-                    'async': true,
-                    'type': "POST",
-                    'global': true,
-                    'dataType': 'json',
-                    'url': systemTourURL,
-                    'data': {'systour':2,'page_name':"{{Request::path()}}",'_token':"{{csrf_token()}}"},
-                    'success': function (data) 
-                    { 
-                        console.log(data);
-                    }
-                });
-                //-----------------Ajax New Product End------------------//
-            });
-        });
-    </script>
-    <?php
-    }
-    ?>
+    <script src="{{url('js/site.js')}}"></script>
     <script src="{{url('chat/sc.js')}}"></script>

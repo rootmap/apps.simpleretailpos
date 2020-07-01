@@ -75,6 +75,59 @@ Route::get('pdf', 'InvoiceController@GenaratePDF');
 
 Route::group(['middleware' => ['auth', 'ssl']], function () {
 
+	Route::get('/partial/payment/report', 'PartialPaymentController@index');
+	Route::post('/partial/payment/report/json', 'PartialPaymentController@datajson');
+	Route::post('/partial/payment/report', 'PartialPaymentController@index');
+	Route::post('/partial/payment/report/excel/report', 'PartialPaymentController@exportExcel');
+	Route::post('/partial/payment/report/pdf/report', 'PartialPaymentController@invoicePDF');
+
+
+	//Purchase
+	Route::get('/purchase', 'PurchaseController@index');
+	Route::get('/purchase/item', 'PurchaseController@indexItem');
+	Route::post('/purchase/item', 'PurchaseController@indexItem');
+	Route::post('/purchase', 'PurchaseController@index');
+	Route::get('/purchase/create', 'PurchaseController@create');
+	Route::post('/purchase/save', 'PurchaseController@store');
+	Route::get('/purchase/receipt/{id}', 'PurchaseController@edit');
+	Route::get('/purchase/delete/{id}', 'PurchaseController@destroy');
+	Route::post('/purchase/modify/{id}', 'PurchaseController@update');
+	Route::post('/product/purchase/confirm', 'PurchaseController@confirm');
+	Route::post('/product/purchase/save', 'PurchaseController@purchaseSave');
+
+	Route::get('/purchase/excel/report', 'PurchaseController@ExcelReport');
+	Route::post('/purchase/excel/report', 'PurchaseController@ExcelReport');
+	Route::get('/purchase/pdf/report', 'PurchaseController@PdfReport');
+	Route::post('/purchase/pdf/report', 'PurchaseController@PdfReport');
+
+	Route::get('/purchase/item/excel/report', 'PurchaseController@ExcelItemReport');
+	Route::post('/purchase/item/excel/report', 'PurchaseController@ExcelItemReport');
+	Route::get('/purchase/item/pdf/report', 'PurchaseController@PdfItemReport');
+	Route::post('/purchase/item/pdf/report', 'PurchaseController@PdfItemReport');
+
+	//====================== Json Record Parse =======================//
+	Route::get('/product-config/json', 'InvoiceController@productConfigjson');
+	Route::get('/analytical/profitvsexpense/json', 'RetailPosSummaryController@analyticsRepairInventory');
+	Route::get('/analytical/salesvsreturn/json', 'RetailPosSummaryController@analyticsSalesNBuyback');
+	Route::get('/analytical/salesvsprofit/json', 'RetailPosSummaryController@analyticsSalesvsProfit');
+	Route::get('/analytical/top/cashier/products/json', 'RetailPosSummaryController@analyticsTopCashierProducts');
+	Route::get('/analytical/topproducts/json', 'RetailPosSummaryController@analyticsTopProducts');
+	Route::get('/analytical/salesninventory/json', 'RetailPosSummaryController@analyticsTodaySalesnTotalInventory');
+
+	//======================== Search In Nucleus Start =================//
+	Route::get('/search-nucleus', 'SearchSiteController@search');
+	Route::post('/search-nucleus', 'SearchSiteController@search');
+	Route::post('/search-nuc/inventory/repair', 'SearchSiteController@SearchinventoryRepair');
+	Route::post('/search-nuc/non-inventory/repair', 'SearchSiteController@SearchNoninventoryRepair');
+	Route::post('/search-nuc/customer', 'SearchSiteController@SearchCustomer');
+	Route::post('/search-nuc/product', 'SearchSiteController@SearchProduct');
+	//======================== Search In Nucleus End =================//
+
+	Route::post('/sales/return/invoice/ajax', 'InvoiceController@loadCustomerInvoice');
+	Route::post('/sales/return/invoice/detail', 'InvoiceController@loadCustomerReturnInvoice');
+	Route::post('/sales/return/item', 'InvoiceController@saveCustomerReturnItem');
+	Route::post('/sales/return/save/ajax', 'InvoiceController@SaveSalesReturnInvoice');
+
 	Route::post('/product/settings', 'ProductSettingsController@store');
 	Route::post('/ma/verify', 'InvoiceController@verifyMALogin');
 
@@ -91,7 +144,8 @@ Route::group(['middleware' => ['auth', 'ssl']], function () {
 
 	Route::get('/login-activity', 'LoginActivityController@index');
 	Route::get('/dashboard', 'RetailPosSummaryController@index');
-    Route::get('/home', 'RetailPosSummaryController@index');
+	Route::get('/home', 'RetailPosSummaryController@index');
+	Route::get('/analytical/dashboard', 'RetailPosSummaryController@analytical_dashboard');
 	Route::get('/dashboard_demo', 'HomeController@dashboard_demo')->name('dashboard_demo');
 	//------------------customer route start--------------------//
 	Route::get('/customer', 'CustomerController@index')->name('customer');
@@ -132,8 +186,12 @@ Route::group(['middleware' => ['auth', 'ssl']], function () {
 	Route::get('user/edit/{id}', 'CustomerController@UserShow');
 	Route::post('/user/modify/{id}', 'CustomerController@userUpdate');
 	Route::get('/user/delete/{id}', 'CustomerController@Userdestroy');
+	Route::get('user-info', 'CustomerController@UserInfoShow');
+	Route::get('change-password', 'CustomerController@change_password');
+	Route::post('change-password', 'CustomerController@do_change_password');
 
 	//store controller
+	Route::get('store-info', 'StoreController@storeInfo');
 	Route::get('store-shop', 'StoreController@create');
 	Route::get('store-shop/list', 'StoreController@index');
 	Route::post('store-shop/save', 'StoreController@store');

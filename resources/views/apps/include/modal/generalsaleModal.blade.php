@@ -14,7 +14,7 @@
                 Product Name
             </label>
             <div class="col-md-8">
-                <input type="text" id="projectinput1" class="form-control" placeholder="Product Name" name="gName">
+                <input type="text"  class="form-control" placeholder="Product Name" name="gName">
             </div>
         </div>
         <div class="form-group row">
@@ -22,7 +22,7 @@
                Sold Price
             </label>
             <div class="col-md-8">
-                <input type="number" id="projectinput1" class="form-control" placeholder="Price" name="gPrice">
+                <input type="number"  class="form-control" placeholder="Price" name="gPrice">
             </div>
         </div>
 
@@ -31,7 +31,7 @@
                Cost Price
             </label>
             <div class="col-md-8">
-                <input type="number" id="projectinput1" class="form-control" placeholder="Cost Price" name="CPrice">
+                <input type="number"  class="form-control" placeholder="Cost Price" name="CPrice">
             </div>
         </div>
 

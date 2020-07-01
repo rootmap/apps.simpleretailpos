@@ -1,18 +1,14 @@
 @extends('apps.layout.master')
-@section('title','Confirm Product New Stock')
+@section('title','Purchase Report')
 @section('content')
 <section>
-<?php 
-    $userguideInit=StaticDataController::userguideInit();
-    //dd($dataMenuAssigned);
-?>
-	<form class="form" id="createInvoice" action="{{url('product/stock/in/save')}}" method="post">
+	
 	<div class="row">
-		<div class="col-md-10 offset-md-1" @if($userguideInit==1) data-step="1" data-intro="In this section, you can see New stock order no, new stock order date and select vendor name." @endif>
+		<div class="col-md-10 offset-md-1">
 			<div class="card">
 				<div class="card-header">
 					<h4 align="center" class="card-title" id="from-actions-bottom-right">
-						<i class="icon-cloud-upload"></i> Confirm New Stock Details</h4>
+						<i class="icon-cloud-upload"></i> Purchase Invoice Details</h4>
 					<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
 					<div class="heading-elements">
 						<ul class="list-inline mb-0">
@@ -25,31 +21,22 @@
                             <div class="row">
                                 {{ csrf_field() }}
                                 <div class="col-md-4">
-                                    <h4 align="center">New Stock Order No.</h4>
+                                    <h4 align="center">New Purchase Order No.</h4>
                                     <div class="input-group">
-									<input class="form-control" 
-									@if(isset($autoOrderID))
-										value="{{$autoOrderID}}" 
-									@endif
-									 type="text" name="order_no" placeholder="Order No.">
+									<input style="text-align:center;" class="form-control" value="{{$pro->order_no}}" type="text" readonly name="order_no" placeholder="Order No.">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <h4 align="center">New Stock Order Date. </h4>
+                                    <h4 align="center">Purchase Order Date. </h4>
                                     <div class="input-group">
-                                    	<input class="form-control DropDateWithformat" type="text" name="order_date" placeholder="YYYY-mm-dd">
+									<input style="text-align:center;"  class="form-control" readonly type="text" value="{{$pro->order_date}}" name="order_date" placeholder="YYYY-mm-dd">
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <h4 align="center">Vendor name </h4>
                                     <div class="input-group">
-                                    <select name="vendor_id" class="form-control">
-                                    	<option value="">Select Vendor / Supplier</option>
-                                    	@foreach($vendorData as $row)
-                                    	<option value="{{$row->id}}">{{$row->name}}</option>
-                                    	@endforeach
-                                    </select>
+									<input style="text-align:center;"  readonly type="text" value="{{$pro->vendor_name}}" name="new_vendor_name" autocomplete="off" class="form-control" placeholder="Enter new vendor name">
                                     </div>
                                 </div>
                                 
@@ -63,10 +50,10 @@
 	
 		
 		<div class="row">
-			<div class="col-xs-12" @if($userguideInit==1) data-step="2" data-intro="In this section, you can see your shopping cart and you can update the quantity for stock." @endif>
+			<div class="col-xs-12">
 				<div class="card">
 					<div class="card-header">
-						<h4 class="card-title"><i class="icon-cloud-check"></i> Confirm Stock Inventory in Cart</h4>
+						<h4 class="card-title"><i class="icon-cloud-check"></i> Purchase Item List</h4>
 						<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
 						<div class="heading-elements">
 							<ul class="list-inline mb-0">
@@ -89,7 +76,7 @@
 										<th width="150">Quantity For Stock</th>
 										<th>Purchase Cost</th>
 										<th>Sell Price</th>
-										<th width="50">Action</th>
+										<th>Purchase Total</th>
 									</tr>
 								</thead>
 								<tbody id="ShoppingCartList">
@@ -99,41 +86,37 @@
 									<?php 
 										$dataLoop=1; 
 										$dataQuantity=0; 
+										$datacost=0; 
+										$datasell=0; 
 									?>
-									@if(isset($req_pid))
+									@if(isset($proItem))
 										
-										@foreach($req_pid as $index=>$pid)
+										@foreach($proItem as $index=>$pid)
 											<tr id="row_{{$dataLoop}}">
 												<td width="100" class="sl">{{$dataLoop}}</td>
-												<td>{{$barcode[$index]}}</td>
-												<td>{{$req_name[$index]}}</td>
-												
-												<td width="150">
-													<input type="hidden" name="pid[]" class="form-control" value="{{$pid}}">
-													<input type="number" name="quantity[]" class="form-control typed_quantity" id="number" value="{{$req_quantity[$index]}}">
-													
-													
-													<input type="hidden" name="barcode[]" class="form-control typed_quantity" id="number" value="{{$barcode[$index]}}">
-												</td>
-												<td width="150"><input type="text" name="purchase_price[]" class="form-control typed_quantity" id="number" value="{{$purchase_price[$index]}}"></td>
-												<td width="150"><input type="text" name="sell_price[]" class="form-control typed_quantity" id="number" value="{{$sell_price[$index]}}"></td>
-												<td width="50">
-													<button type="button" data-id="1" class="btn btn-sm btn-danger close-row" onclick="removeRowCart(<?=$dataLoop?>)">
-														<i class="icon-cross"></i>
-													</button>
-												</td>
+												<td>{{$pid->product_barcode}}</td>
+												<td>{{$pid->product_name}}</td>
+												<td width="150">{{$pid->quantity}}</td>
+												<td width="150">{{$pid->cost}}</td>
+												<td width="150">{{$pid->price}}</td>
+												<td width="50">{{$pid->cost*$pid->quantity}}</td>
 											</tr>
 											<?php 
 											$dataLoop++; 
-											$dataQuantity+=$req_quantity[$index];
+											$dataQuantity+=$pid->quantity;
+											$datacost+=($pid->quantity*$pid->cost);
+											$datasell+=($pid->quantity*$pid->price);
 											?>
 										@endforeach
 									@endif
 								</tbody>
 								<tfoot>
 									<tr>
-										<th style="font-weight: bolder; text-align: right;" colspan="2" align="right">Total Quantity =</th>
+										<th colspan="2"></th>
+										<th  style="font-weight: bolder; text-align: right;" align="right">Total =</th>
 										<th style="font-weight: bolder;" id="shoppingCartQuantityTotal">{{$dataQuantity}}</th>
+										<th>{{$datacost}}</th>
+										<th>{{$datasell}}</th>
 										<th></th>
 									</tr>
 								</tfoot>
@@ -150,15 +133,14 @@
 		<!-- Invoice Footer -->
 		<div id="invoice-footer">
 			<div class="row">
-				<div class="col-md-12 col-sm-12 text-xs-center" @if($userguideInit==1) data-step="3" data-intro="when you click this button then your stock will be saved and generate the invoice." @endif>
-					<button type="button" id="invoiceSubmit" class="btn btn-primary">
-						<i class="icon-download"></i>  Add Stock &amp; Generate Invoice
-					</button>
+				<div class="col-md-12 col-sm-12 text-xs-center">
+				<a type="button" href="{{url('purchase')}}" id="invoiceSubmit" class="btn btn-info">
+						<i class="icon-shopping-cart"></i> Back To Purchase Invoice List
+					</a>
 				</div>
 			</div>
 		</div>
 		<!--/ Invoice Footer -->
-	</form>
 
 </div>
 </div>
@@ -172,6 +154,9 @@
 
 
 </section>
+<script>
+	
+</script>
 @endsection
 
 @include('apps.include.datatable',['confirmStockIN'=>1,'dateDrop'=>1])

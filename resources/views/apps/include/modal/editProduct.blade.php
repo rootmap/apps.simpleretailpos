@@ -19,7 +19,7 @@
                         <div class="form-group row">
                             <label class="col-md-4 label-control" for="projectinput1">Quantity</label>
                             <div class="col-md-8">
-                                <input type="number" onkeyup="editRowLive(0);" onchange="editRowLive(0);" id="edit_quantity" class="form-control" value="0"  name="edit_quantity">
+                                <input type="number" onkeyup="editRowLive(0);" onchange="editRowLive(0);" class="form-control" value="0"  name="edit_quantity">
                             </div>
                         </div>                                                
                     </div>

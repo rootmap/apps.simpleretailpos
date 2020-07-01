@@ -68,8 +68,12 @@
 								<thead>
 									<tr>
 										<th width="100">SL</th>
+										<th>Barcode</th>
 										<th>Product Name</th>
 										<th width="150">Quantity in Stock</th>
+										<th width="150">Purchase Cost</th>
+										<th width="150">Sell Price</th>
+										
 									</tr>
 								</thead>
 								<tbody id="ShoppingCartList">
@@ -80,26 +84,35 @@
 									$dataLoop=1; 
 									$dataQuantity=0; 
 									$dataTotalPrice=0; 
+									$dataItemCost=0; 
+									$dataItemprice=0; 
 									?>
 									@if(isset($order_product))
 										@foreach($order_product as $index=>$row)
 											<tr id="row_{{$dataLoop}}">
 												<td width="100" class="sl">{{$dataLoop}}</td>
+												<td>{{$row->product_barcode}}</td>
 												<td>{{$row->product_name}}</td>
 												<td width="150">{{$row->quantity}}</td>
+												<td width="150">{{$row->cost}} Tk</td>
+												<td width="150">{{$row->price}} Tk</td>
 											</tr>
 											<?php 
 											$dataLoop++; 
 											$dataQuantity+=$row->quantity;
 											$dataTotalPrice+=($row->quantity*$row->price);
+											$dataItemCost+=($row->quantity*$row->cost);
+											$dataItemprice+=($row->quantity*$row->price);
 											?>
 										@endforeach
 									@endif
 								</tbody>
 								<tfoot>
 									<tr>
-										<th style="font-weight: bolder; text-align: right;" colspan="2" align="right">Total Quantity =</th>
+										<th style="font-weight: bolder; text-align: right;" colspan="3" align="right">Total Quantity =</th>
 										<th style="font-weight: bolder;" id="shoppingCartQuantityTotal"><?=$dataQuantity?></th>
+										<th style="font-weight: bolder;"><?=$dataItemCost?> Tk (Purchase X Quantity)</th>
+										<th style="font-weight: bolder;"><?=$dataItemprice?> Tk (Sell X Quantity)</th>
 									</tr>
 								</tfoot>
 							</table>

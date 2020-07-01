@@ -28,7 +28,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="projectinput1">Total Invoice Amount</label>
-                            <input type="text" readonly="readonly" id="projectinput1" class="form-control" placeholder="Total Invoice Amount" name="partialpay_total_bill">
+                            <input type="text" readonly="readonly"  class="form-control" placeholder="Total Invoice Amount" name="partialpay_total_bill">
                         </div>
                     </div>
                   
@@ -38,14 +38,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="projectinput2">Customer Name </label>
-                            <input type="text" readonly="readonly" id="projectinput1" class="form-control" placeholder="Customer Name " name="partialpay_customer_name">
+                            <input type="text" readonly="readonly"  class="form-control" placeholder="Customer Name " name="partialpay_customer_name">
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="projectinput1">Previously Paid Amount </label>
-                            <input type="text"  readonly="readonly" id="projectinput1" class="form-control" placeholder="Previously Paid Amount " name="partialpay_pre_paid">
+                            <input type="text"  readonly="readonly"  class="form-control" placeholder="Previously Paid Amount " name="partialpay_pre_paid">
                         </div>
                     </div>
                   
@@ -55,14 +55,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="projectinput2">Today Paid Amount </label>
-                            <input type="text" id="projectinput1" class="form-control" placeholder="Previously Paid Amount " name="partialpay_today_paid">
+                            <input type="text"  class="form-control" placeholder="Previously Paid Amount " name="partialpay_today_paid">
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="projectinput1">Current Due Amount</label>
-                            <input type="text" readonly="readonly" id="projectinput1" class="form-control" placeholder="Today Paid Amount" name="partialpay_amount">
+                            <input type="text" readonly="readonly"  class="form-control" placeholder="Today Paid Amount" name="partialpay_amount">
                             <input type="hidden" name="partialpay_hidden_due_amount" value="0">
                         </div>
                     </div>
@@ -81,7 +81,7 @@
             @if(isset($authorizeNettender))
               @if(!empty($authorizeNettender))
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
-                  <a id="btn-payment-modal_modal_button" data-id="{{$authorizeNettender[0]->id}}" type="button" class="btn btn-info btn-lighten-1 btn-responsive  btn-block  margin-all-bottom-button manualcardPayment" >
+                  <a  data-id="{{$authorizeNettender[0]->id}}" type="button" class="btn btn-info btn-lighten-1 btn-responsive  btn-block  margin-all-bottom-button manualcardPayment" >
                     {{$authorizeNettender[0]->name}}
                   </a>
                 </div>
@@ -90,7 +90,7 @@
 
             @if(!empty($stripe))
               <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
-                    <a id="btn-payment-modal_modal_button" data-id="26" type="button" class="btn btn-info btn-block btn-lighten-1 btn-responsive  btn-block  margin-all-bottom-button manualstripe_card_payment" >
+                    <a  data-id="26" type="button" class="btn btn-info btn-block btn-lighten-1 btn-responsive  btn-block  margin-all-bottom-button manualstripe_card_payment" >
                         Stripe
                     </a> 
               </div>
@@ -99,7 +99,7 @@
             @if(!empty($cardpointe))
               @if($cardpointe->module_status==1)
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
-                      <a id="btn-payment-modal_modal_button" data-id="26" type="button" class="btn btn-info btn-block btn-lighten-1 btn-responsive  btn-block  margin-all-bottom-button cardpointe_card_payment_manual" >
+                      <a  data-id="26" type="button" class="btn btn-info btn-block btn-lighten-1 btn-responsive  btn-block  margin-all-bottom-button cardpointe_card_payment_manual" >
                           CardPointe
                       </a> 
                 </div>
@@ -107,7 +107,7 @@
 
               @if($cardpointe->bolt_status==1)
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
-                      <a id="btn-payment-modal_modal_button" data-id="26" type="button" class="btn btn-info btn-block btn-lighten-1 btn-responsive  btn-block  margin-all-bottom-button cardpointe_bolt_payment_manual" >
+                      <a  data-id="26" type="button" class="btn btn-info btn-block btn-lighten-1 btn-responsive  btn-block  margin-all-bottom-button cardpointe_bolt_payment_manual" >
                           Bolt
                       </a> 
                 </div>
@@ -117,7 +117,7 @@
             @if(isset($payPaltender))
               @if(!empty($payPaltender))
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
-                  <a id="btn-payment-modal_modal_button" data-id="{{$payPaltender[0]->id}}" type="button" class="btn btn-info btn-lighten-2 btn-responsive margin-all-bottom-button  btn-block  manualPaypalPayment" >
+                  <a  data-id="{{$payPaltender[0]->id}}" type="button" class="btn btn-info btn-lighten-2 btn-responsive margin-all-bottom-button  btn-block  manualPaypalPayment" >
                     {{$payPaltender[0]->name}}
                   </a>
                 </div>
@@ -127,7 +127,7 @@
             @if(isset($square))
               @if(!empty($square))
               <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1 authorizenet btn-group">
-                    <a id="btn-payment-modal_modal_button" data-id="SquareupPayment" type="button" class="btn btn-info btn-block btn-lighten-2 btn-responsive margin-all-bottom-button SquareupPartalPayment" >
+                    <a  data-id="SquareupPayment" type="button" class="btn btn-info btn-block btn-lighten-2 btn-responsive margin-all-bottom-button SquareupPartalPayment" >
                         Square
                     </a> 
               </div>
@@ -137,7 +137,7 @@
             @if(isset($tender))
               @foreach($tender as $ten)
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1">
-                  <button id="btn-payment-modal_modal_button" data-id="{{$ten->id}}" type="button" class="btn btn-info btn-responsive margin-all-bottom-button  btn-block  manualMakePayment" >
+                  <button  data-id="{{$ten->id}}" type="button" class="btn btn-info btn-responsive margin-all-bottom-button  btn-block  manualMakePayment" >
                   {{$ten->name}}
                   </button>
                 </div>

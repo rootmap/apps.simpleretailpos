@@ -2,12 +2,8 @@
 @section('title','POS Setting')
 @section('content')
 <section id="form-action-layouts">
-	<?php 
-    $userguideInit=StaticDataController::userguideInit();
-    //dd($dataMenuAssigned);
-?>
 	<div class="row">
-		<div class="col-md-8 offset-md-2" @if($userguideInit==1) data-step="1" data-intro="In this section, you can create a sales return." @endif>
+		<div class="col-md-8 offset-md-2">
 	        <div class="card">
 	            <div class="card-header">
 	                <h4 class="card-title" id="striped-label-layout-card-center">
@@ -86,10 +82,10 @@
 							</div>
 
 							<div class="form-actions center">
-	                            <button type="button" class="btn btn-info btn-darken-2 mr-1" @if($userguideInit==1) data-step="3" data-intro="if you want clear all information then click the clear button." @endif>
+	                            <button type="button" class="btn btn-info btn-accent-2 mr-1">
 	                            	<i class="icon-cross2"></i> Cancel
 	                            </button>
-	                            <button type="submit" class="btn btn-info btn-accent-2" @if($userguideInit==1) data-step="2" data-intro="When you fill up all information then click save button." @endif>
+	                            <button type="submit" class="btn btn-info btn-darken-2">
 	                                <i class="icon-check2"></i> Save
 	                            </button>
 	                        </div>
