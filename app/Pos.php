@@ -108,7 +108,7 @@ class Pos {
 
     public function calculateTax()
     {
-        $count=count($this->items);
+        $count=$this->items?count($this->items):0;
         if($count>0)
         {
             $this->totalTax = 0;

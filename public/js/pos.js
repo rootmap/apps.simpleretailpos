@@ -343,7 +343,7 @@ function loadCatProduct(cid) {
                     proHtml += '<div class="card-body collapse in">';
 
                     proHtml += '<div class="p-1 card-header" style="padding: 0.7rem !important;">';
-                    proHtml += '      <p style="margin-bottom: 0px !important; min-height: 40px; color: #fff;" class="text-xs-left info" style="color: #fff;">' + row.name + '</p>';
+                    proHtml += '      <p style="margin-bottom: 0px !important; min-height: 70px; color: #fff;" class="text-xs-left info" style="color: #fff;">' + row.name + '</p>';
                     proHtml += '</div>';
                     proHtml += '<style type="text/css">#cb' + row.id + '::before { content: "Stock: ' + row.quantity + '"; left:3px; position:absolute; font-size: 9px; }</style>';
                     proHtml += '<div id="cb' + row.id + '" class="text-xs-right info" style="line-height: 30px; padding-right: 10px; font-weight: bolder; height: 30px; color: #545a63;">$' + row.price + '</div>';
@@ -358,7 +358,7 @@ function loadCatProduct(cid) {
                     proHtml += '<a id="' + moveableID + '" data-pro-id="' + row.id + '" data-pro-price="' + row.price + '"  data-pro-name="' + productName + '" href="javascript:add_pos_cart(' + row.id + ',' + row.price + ',' + productName + ');" class="card mb-1" style="border-bottom-right-radius:3px; border-bottom-left-radius: 3px;">';
                     proHtml += '<div class="card-body collapse in">';
                     proHtml += '<div class="p-1 card-header  bg-info" style="padding: 0.7rem !important;">';
-                    proHtml += '      <p style="margin-bottom: 0px !important; min-height: 40px; color: #fff;" class="text-xs-left">' + row.name + '</p>';
+                    proHtml += '      <p style="margin-bottom: 0px !important; min-height: 70px; color: #fff;" class="text-xs-left">' + row.name + '</p>';
                     proHtml += '</div>';
                     proHtml += '<style type="text/css">#cb' + row.id + '::before { content: "Stock: ' + row.quantity + '"; left:3px; position:absolute; font-size: 9px; }</style>';
                     proHtml += '<div id="cb' + row.id + '"  class="text-xs-right info" style="line-height: 30px; padding-right: 10px; font-weight: bolder; height: 30px;">$' + row.price + '</div>';
@@ -3379,10 +3379,15 @@ function genarateSalesTotalCart() {
         }
 
         $.each($("#dataCart").find("tr"), function(index, row) {
-            var rowPrice = $(row).find("td:eq(3)").children("span").html();
-            var rowTax = $(row).find("td:eq(2)").attr("data-tax");
-            subTotalPrice += (rowPrice - 0);
-            TotalTax += (rowTax - 0);
+            if($(row).find("td:eq(3)").length)
+            {
+                var rowPrice = $(row).find("td:eq(3)").children("span").html();
+                console.log('rowPrice = ',rowPrice);
+                var rowTax = $(row).find("td:eq(2)").attr("data-tax");
+                subTotalPrice += (rowPrice - 0);
+                TotalTax += (rowTax - 0);
+            }
+            
         });
 
         var calcDisc = 0;
@@ -3408,6 +3413,13 @@ function genarateSalesTotalCart() {
         var newDiscount = parseFloat(calcDisc).toFixed(2);
         var newsubTotalPrice = parseFloat(subTotalPrice).toFixed(2);
         var newTotalTax = parseFloat(TotalTax).toFixed(2);
+
+        console.log('sumdues = ',sumdues);
+        console.log('newdues = ',newdues);
+        console.log('newPriceTotal = ',newPriceTotal);
+        console.log('newDiscount = ',newDiscount);
+        console.log('newsubTotalPrice = ',newsubTotalPrice);
+        console.log('newTotalTax = ',newTotalTax);
 
         if (newdues < 0) { newdues = "0.00"; } else if (newdues == "-0.00") { newdues = "0.00"; }
 
