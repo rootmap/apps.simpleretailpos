@@ -1,0 +1,216 @@
+var simplePOS = function () {
+
+    // =========================================================================
+    // SETTINGS APP
+    // =========================================================================minimize
+    return {
+
+        // =========================================================================
+        // CONSTRUCTOR APP
+        // =========================================================================
+        init: function () {
+            simplePOS.handleLayoutSetting();
+        },
+        
+        // =========================================================================
+        // LAYOUT SETTING
+        // =========================================================================
+        handleLayoutSetting: function () {
+            // Check cookie for layout setting
+            if ($.cookie('layout_setting')) {
+                $('body').addClass($.cookie('layout_setting'));
+            }
+
+            // Check cookie for header layout setting
+            if ($.cookie('header_layout_setting')) {
+                $('body').addClass($.cookie('header_layout_setting'));
+            }
+
+            // Check cookie for sidebar layout setting
+            if ($.cookie('sidebar_layout_setting')) {
+                $('#sidebar-left').addClass($.cookie('sidebar_layout_setting'));
+            }
+
+            // Check cookie for sidebar type layout setting
+            if ($.cookie('sidebar_type_setting')) {
+                $('#sidebar-left').addClass($.cookie('sidebar_type_setting'));
+            }
+
+            // Check cookie for footer layout setting
+            if ($.cookie('footer_layout_setting')) {
+                $('body').addClass($.cookie('footer_layout_setting'));
+            }
+
+            // Check checked status input on layout setting
+            if($('body').not('.page-boxed')){
+                $('.layout-setting li:eq(0) input').attr('checked','checked');
+            }
+            if($('body').hasClass('page-boxed')){
+                $('.layout-setting li:eq(1) input').attr('checked','checked');
+                $('body').removeClass('page-header-fixed');
+                $('body').removeClass('page-sidebar-fixed');
+                $('body').removeClass('page-footer-fixed');
+                $('.header-layout-setting li:eq(1) input').attr('disabled','disabled').next().css('text-decoration','line-through').parent('.rdio').attr({'data-toggle':'tooltip','data-container':'body','data-placement':'left','data-title':'Not working on page boxed'}).tooltip();
+                $('.sidebar-layout-setting li:eq(1) input').attr('disabled','disabled').next().css('text-decoration','line-through').parent('.rdio').attr({'data-toggle':'tooltip','data-container':'body','data-placement':'left','data-title':'Not working on page boxed'}).tooltip();
+                $('.footer-layout-setting li:eq(1) input').attr('disabled','disabled').next().css('text-decoration','line-through').parent('.rdio').attr({'data-toggle':'tooltip','data-container':'body','data-placement':'left','data-title':'Not working on page boxed'}).tooltip();
+            }
+
+            // Check checked status input on header layout setting
+            if($('body').not('.page-header-fixed')){
+                $('.header-layout-setting li:eq(0) input').attr('checked','checked');
+            }
+            if($('body').hasClass('page-header-fixed')){
+                $('.header-layout-setting li:eq(1) input').attr('checked','checked');
+            }
+
+            // Check checked status input on sidebar layout setting
+            if($('body').not('.page-sidebar-fixed')){
+                $('.sidebar-layout-setting li:eq(0) input').attr('checked','checked');
+            }
+            if($('body').hasClass('page-sidebar-fixed')){
+                $('.sidebar-layout-setting li:eq(1) input').attr('checked','checked');
+            }
+
+            // Check checked status input on sidebar type layout setting
+            if($('#sidebar-left').not('.sidebar-box, .sidebar-rounded, .sidebar-circle')){
+                $('.sidebar-type-setting li:eq(0) input').attr('checked','checked');
+            }
+            if($('#sidebar-left').hasClass('sidebar-box')){
+                $('.sidebar-type-setting li:eq(1) input').attr('checked','checked');
+            }
+            if($('#sidebar-left').hasClass('sidebar-rounded')){
+                $('.sidebar-type-setting li:eq(2) input').attr('checked','checked');
+            }
+            if($('#sidebar-left').hasClass('sidebar-circle')){
+                $('.sidebar-type-setting li:eq(3) input').attr('checked','checked');
+            }
+
+            // Check checked status input on footer layout setting
+            if($('body').not('.page-footer-fixed')){
+                $('.footer-layout-setting li:eq(0) input').attr('checked','checked');
+            }
+            if($('body').hasClass('page-footer-fixed')){
+                $('.footer-layout-setting li:eq(1) input').attr('checked','checked');
+            }
+
+
+            $('.layout-setting input').change(function(){
+
+                // Create variable class name for layout setting
+                var classname = $(this).val();
+
+                // Add trigger change class on body HTML
+                if($('body').hasClass('page-boxed')){
+                    $('body').removeClass('page-boxed');
+                    $('body').removeClass('page-header-fixed');
+                    $('body').removeClass('page-sidebar-fixed');
+                    $('body').removeClass('page-footer-fixed');
+                    $('.header-layout-setting li:eq(1) input').removeAttr('disabled').next().css('text-decoration','inherit').parent('.rdio').tooltip('destroy');
+                    $('.sidebar-layout-setting li:eq(1) input').removeAttr('disabled').next().css('text-decoration','inherit').parent('.rdio').tooltip('destroy');
+                    $('.footer-layout-setting li:eq(1) input').removeAttr('disabled').next().css('text-decoration','inherit').parent('.rdio').tooltip('destroy');
+                }else{
+                    $('body').addClass($(this).val());
+                    $('body').removeClass('page-header-fixed');
+                    $('body').removeClass('page-sidebar-fixed');
+                    $('body').removeClass('page-footer-fixed');
+                    $('.header-layout-setting li:eq(1) input').attr('disabled','disabled').next().css('text-decoration','line-through').parent('.rdio').attr({'data-toggle':'tooltip','data-container':'body','data-placement':'left','data-title':'Not working on page boxed'}).tooltip();
+                    $('.sidebar-layout-setting li:eq(1) input').attr('disabled','disabled').next().css('text-decoration','line-through').parent('.rdio').attr({'data-toggle':'tooltip','data-container':'body','data-placement':'left','data-title':'Not working on page boxed'}).tooltip();
+                    $('.footer-layout-setting li:eq(1) input').attr('disabled','disabled').next().css('text-decoration','line-through').parent('.rdio').attr({'data-toggle':'tooltip','data-container':'body','data-placement':'left','data-title':'Not working on page boxed'}).tooltip();
+                }
+
+                // Set cookie theme name value to variable classname
+                $.cookie('layout_setting',classname, {expires: 1});
+
+            });
+
+            $('.header-layout-setting input').change(function(){
+
+                // Create variable class name for layout setting
+                var classname = $(this).val();
+
+                // Add trigger change class on body HTML
+                if($('body').hasClass('page-header-fixed')){
+                    $('body').removeClass('page-header-fixed');
+                    $('body').addClass($(this).val());
+                }
+
+                $('body').addClass($(this).val());
+
+                // Set cookie theme name value to variable classname
+                $.cookie('header_setting',classname, {expires: 1});
+
+            });
+
+            $('.sidebar-layout-setting input').change(function(){
+
+                // Create variable class name for layout setting
+                var classname = $(this).val();
+
+                // Add trigger change class on body HTML
+                if($('body').hasClass('page-sidebar-fixed')){
+                    $('body').removeClass('page-sidebar-fixed');
+                    $('.header-layout-setting li:eq(0) input').removeAttr('disabled').next().css('text-decoration','inherit').parent('.rdio').tooltip('destroy');
+                }else{
+                    $('body').addClass($(this).val());
+                    $('body').addClass('page-header-fixed');
+                    $('.header-layout-setting li:eq(0) input').attr('disabled','disabled').next().css('text-decoration','line-through').parent('.rdio').attr({'data-toggle':'tooltip','data-container':'body','data-placement':'left','data-title':'Not working on sidebar fixed'}).tooltip();
+                    $('.header-layout-setting li:eq(1) input').attr('checked','checked');
+                }
+
+                // Set cookie theme name value to variable classname
+                $.cookie('sidebar_layout_setting',classname, {expires: 1});
+
+            });
+
+            $('.sidebar-type-setting input').change(function(){
+
+                // Create variable class name for layout setting
+                var classname = $(this).val();
+
+                // Add trigger change class on sidebar left element
+                if($('#sidebar-left').hasClass('sidebar-circle')){
+                    $('#sidebar-left').removeClass('sidebar-circle');
+                    $('#sidebar-left').addClass($(this).val());
+                }
+
+                if($('#sidebar-left').hasClass('sidebar-box')){
+                    $('#sidebar-left').removeClass('sidebar-box');
+                    $('#sidebar-left').addClass($(this).val());
+                }
+
+                if($('#sidebar-left').hasClass('sidebar-rounded')){
+                    $('#sidebar-left').removeClass('sidebar-rounded');
+                    $('#sidebar-left').addClass($(this).val());
+                }
+
+                $('#sidebar-left').addClass($(this).val());
+
+                // Set cookie theme name value to variable classname
+                $.cookie('sidebar_type_setting',classname, {expires: 1});
+
+            });
+
+            $('.footer-layout-setting input').change(function(){
+
+                // Create variable class name for layout setting
+                var classname = $(this).val();
+
+                // Add trigger change class on body HTML
+                if($('body').hasClass('page-footer-fixed')){
+                    $('body').removeClass('page-footer-fixed')
+                }else{
+                    $('body').addClass($(this).val());
+                }
+
+                // Set cookie theme name value to variable classname
+                $.cookie('footer_layout_setting',classname, {expires: 1});
+
+            });
+        }
+        
+    };
+
+}();
+
+// Call main app init
+simplePOS.init();
