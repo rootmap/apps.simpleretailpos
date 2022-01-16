@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Session;
 class InvoiceProductController extends Controller
 {
     
+    private $sdc;
+    public function __construct(){ 
+        $this->sdc = new StaticDataController(); 
+    }
+
     public function getDBCart(Request $request)
     {
         $datas=\DB::table('sessions')->where('user_id',\Auth::user()->id)->first();
@@ -23,8 +28,28 @@ class InvoiceProductController extends Controller
         dd(unserialize(base64_decode($datas->payload)));
     }
 
+    private function genarateDefaultCustomer()
+    {
+        $chkCus=Customer::where('store_id',$this->sdc->storeID())->where('name','No Customer')->count();
+        if($chkCus==0)
+        {
+            $tab_customer=new Customer;
+            $tab_customer->name="No Customer";
+            $tab_customer->store_id=$this->sdc->storeID();
+            $tab_customer->phone="00000000000";
+            $tab_customer->email="nocustomer".$this->sdc->storeID()."@simpleretailpos.com";
+            $tab_customer->created_by=\Auth::user()->id;
+            $tab_customer->save();
+        }
+
+        $cus=Customer::where('store_id',$this->sdc->storeID())->where('name','No Customer')->first();
+
+        return $cus->id;
+    }
 
     public function getAddToCart(Request $request, $pid) {
+
+        $defualtCustomer=$this->genarateDefaultCustomer();
 
         if(isset($request->price))
         {
@@ -39,6 +64,12 @@ class InvoiceProductController extends Controller
             $oldCart = $request->session()->has('Pos') ?  $request->session()->get('Pos') : null;
             $cart = new Pos($oldCart);
             $cart->add($product, $product->id);
+        }
+
+        if(empty($cart->customerID))
+        {
+            $cart = new Pos($cart);
+            $cart->addCustomerID($defualtCustomer);
         }
 
         

@@ -480,6 +480,7 @@
            @include('apps.include.modal.discountModal')
            @include('apps.include.modal.CustomerCardModal')
            @include('apps.include.modal.stripeCardModal',compact('stripe'))
+           @include('apps.include.modal.complete-sales')
            @include('apps.include.modal.squareup')
            @include('apps.include.modal.cardPointeCardModal')
            @include('apps.include.modal.cardPointepartialCardModal')
@@ -641,6 +642,7 @@ background-size: 0px 100%, 14px 27px, 14px 27px;
 <script>
 //editRowLive
     //
+var AddHowMowKhaoUrlCartPOSvfour="{{secure_url('sales/cart/complete-sales')}}";    
 var sales_return_invoice_detail = "{{secure_url('sales/return/invoice/detail')}}";
 var sales_return_item = "{{secure_url('sales/return/item')}}";
 var sales_return_invoice_ajax="{{secure_url('sales/return/invoice/ajax')}}";
@@ -684,7 +686,9 @@ var CardPointePOSPaymentURL="{{url('cardpointe/pos/payment')}}";
 var invoicePosPayPaypal="{{url('invoice/pos/pay/paypal')}}";
 
 var salesCartCompleteSales="{{url('sales/cart/complete-sales')}}";
-var salesInvoicePrintMediaPDF="{{url('sales/invoice/print/media/pdf')}}";
+// var salesInvoicePrintMediaPDF="{{url('sales/invoice/print/media/pdf')}}";
+//var AddHowMowKhaoUrlCartPOSvfourPrintPDFSalesRec="url('sales/invoice/print/media/pdf')";
+var AddHowMowKhaoUrlCartPOSvfourPrintPDFSalesRec="{{url('sales/invoice/print/media/last-invoice')}}";
 var clposLink="{{url('pos/clear')}}";
 var salesCartCustomer="{{url('sales/cart/customer')}}";
 var customerPosAjaxAdd="{{url('customer/pos/ajax/add')}}";

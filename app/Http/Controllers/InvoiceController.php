@@ -4274,6 +4274,825 @@ class InvoiceController extends Controller
 
     }
 
+    public function lastInvoicePDFByMedia(Invoice $invoice,$ptype='pos')
+    {
+
+
+            $tab_invoice=$invoice::join('tenders','invoices.tender_id','=','tenders.id')
+                                 ->select('invoices.id',
+                                          'invoices.tax_rate',
+                                          'invoices.total_tax',
+                                          'invoices.discount_type',
+                                          'invoices.sales_discount',
+                                          'invoices.discount_total',
+                                          'invoices.total_amount',
+                                          'invoices.invoice_id',
+                                          'invoices.created_by',
+                                          'tenders.name as tender',
+                                          'invoices.created_at',
+                                          'invoices.customer_id')
+                                 //->where('invoices.id',$invoice_id)
+                                 ->where('invoices.store_id',$this->sdc->storeID())
+                                 ->orderBy('invoices.id','DESC')
+                                 ->first();
+                                 
+            $invoice_payment=InvoicePayment::where('invoice_id',$tab_invoice->invoice_id)
+                                 ->where('store_id',$this->sdc->storeID())
+                                 //->groupBy("invoice_id")
+                                 ->sum('paid_amount');                     
+
+            $customer=Customer::find($tab_invoice->customer_id);
+
+
+            $tab_invoice_product=InvoiceProduct::join('products','invoice_products.product_id','=','products.id')
+                                               ->where('invoice_products.invoice_id',$tab_invoice->invoice_id)
+                                               ->where('invoice_products.store_id',$this->sdc->storeID())
+                                               ->select('invoice_products.*','products.name as product_name')
+                                               ->get();
+
+                $invInfo=$this->sdc->Invlayout();
+                if(!file_exists('company/'.$invInfo->logo))
+                {
+                    return redirect()->back()->with('error', ' Invoice failed to load, Please Set Invoice/Report Logo. !');
+                }
+                //dd($invInfo);
+
+                $dataPageLayout=$this->sdc->DefaultPrinterPrintSize();
+
+                if($ptype=='thermal')
+                {
+                    $thermalPageWidth=$dataPageLayout->thermal_width;
+                    $thermalPageHeight=$dataPageLayout->thermal_height;
+                    $address='';
+                    if(isset($invInfo->address))
+                    {
+                        $address=$invInfo->address;
+                    }
+
+                    if(isset($invInfo->mm_four))
+                    {
+                        $address=$invInfo->mm_four;
+                    }
+
+                    $userInfo=User::find($tab_invoice->created_by);
+                    $userNameLength=strlen($userInfo->name);
+                    $userName=$userInfo->name;
+                    if($userNameLength>20)
+                    {
+                        $userName=substr($userInfo->name,0,20)."...";
+                    }
+
+                    $thermalHtml='<table align="center" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td align="center">
+                                                <img class="logo" height="45" src="'.public_path($this->companyphoto($invInfo->logo)).'" alt="brand logo"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center">'.$invInfo->company_name.'</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center">'.$invInfo->c_one.'</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center">'.$address.'</td>
+                                        </tr>
+                                    </tbody>
+                                </table>';
+
+                    $thermalHtml.='<table align="center" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="4"><hr></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Invoice No</b></td>
+                                            <td colspan="3"><b>: '.$tab_invoice->invoice_id.'</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cashier</td>
+                                            <td colspan="3">: '.$userName.'</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date Time</td>
+                                            <td colspan="3">: '.formatDateTime($tab_invoice->created_at).'</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"><hr></td>
+                                        </tr>
+                                    </tbody>
+                                </table>';
+
+                    $thermalHtml.='<table align="center" class="mt-10" width="100%">
+                                    <thead class="bt-1 bb-1">
+                                        <tr>
+                                            <td><b>SL</b></td>
+                                            <td align="center"><b>Product</b></td>
+                                            <td align="right"><b>Total (TK)</b></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3"><hr></td>
+                                        </tr>';
+                    $subTotal=0;
+                    $total=0;
+                    $tender='';
+                    $ai=0;
+                    $ai_quantity=0;
+                    if(isset($tab_invoice_product)){
+                        foreach($tab_invoice_product as $inv){
+
+                                $thermalHtml.='     <tr>
+                                                        <td>'.($ai+1).'</td>
+                                                        <td colspan="2">'.$inv->product_name.'</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td align="right">'.$inv->price.' X '.$inv->quantity.'</td>
+                                                        <td align="right">'.$inv->total_price.'</td>
+                                                    </tr>';
+                            $ai_quantity+=$inv->quantity;
+                            $subTotal+=$inv->total_price;
+                            $ai+=1;
+                            $thermalPageHeight+=8;
+                        }
+                    }
+
+                    
+
+
+                    $thermalHtml.=' </tbody>
+                                </table>
+
+                                <table align="center" class="mt-15" width="100%">
+                                    <thead class="bt-1 bb-1">
+                                        <tr>
+                                            <th colspan="4" align="left" style="text-align:center;">
+                                             <hr>
+                                             Bill Summary
+                                             <hr>  
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td width="33%" colspan="2" align="right"><b>Gross Amount</b></td>
+                                            <td width="10%" align="center"><b>:</b></td>
+                                            <td align="right"><b>$'.number_format($subTotal, 2).'</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" width="33%" align="right"><b>VAT Amount</b></td>
+                                            <td width="10%" align="center"><b>:</b></td>
+                                            <td align="right"><b>$'.number_format($tab_invoice->total_tax, 2).'</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" width="33%" align="right"><b>Net Amount</b></td>
+                                            <td width="10%" align="center"><b>:</b></td>
+                                            <td align="right"><b>$'.number_format(($subTotal+$tab_invoice->total_tax), 2).'</b></td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody class="bt-1 bb-1">
+                                        <tr>
+                                            <td colspan="4" align="right"><hr></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" width="33%" align="right"><b>*Discount Amount</b></td>
+                                            <td width="10%" align="center"><b>:</b></td>
+                                            <td align="right"><b>$'.number_format($tab_invoice->discount_total, 2).'</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" width="33%" align="right"><b>Net Payable</b></td>
+                                            <td width="10%" align="center"><b>:</b></td>
+                                            <td align="right"><b>$'.number_format((($subTotal+$tab_invoice->total_tax)-$tab_invoice->discount_total), 2).'</b></td>
+                                        </tr>
+                                    </tbody>
+                                    <thead class="bt-1 pt-15">
+                                        <tr>
+                                            <th colspan="4" align="left" style="text-align:center;">
+                                             <hr>
+                                             Payment Details  
+                                             <hr>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bb-1">';
+                $dataInvPa=$this->InvoicePaymentByInvoice($tab_invoice->invoice_id);
+                if(isset($dataInvPa))
+                {
+                    foreach($dataInvPa as $vpa):
+                        $thermalHtml.='     <tr>
+                                                <td colspan="2" width="33%" align="right"><b>'.$vpa->tender_name.'</b></td>
+                                                <td width="10%" align="center"><b>:</b></td>
+                                                <td align="right"><b>$'.number_format($vpa->paid_amount,2).'</b></td>
+                                            </tr>';
+                    endforeach;
+                }
+                
+
+                $thermalHtml.='         <tr>
+                                            <td colspan="4" align="right"><hr></td>
+                                        </tr>';
+
+                if(!empty($invInfo->terms))
+                {
+
+                    $termsLength=intval((strlen($invInfo->terms))/40);
+
+                    $thermalPageHeight+=($termsLength*3);
+
+                    $thermalHtml.='         <tr>
+                                                <td colspan="4" align="center"><u><b>Terms &amp; Condition</b></u>
+                                                <br>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" align="center">
+                                                '.$invInfo->terms.'
+                                                </td>
+                                            </tr>';
+                }
+
+
+                $thankYouMessage='';
+                if(isset($invInfo->company_thank_you_message))
+                {
+                    $thankYouMessage=$invInfo->company_thank_you_message;
+                }
+
+                $thermalHtml.='         <tr>
+                                            <td colspan="4" align="center"><b>'.$thankYouMessage.'</b></td>
+                                        </tr>
+                                    </tbody>
+                                </table>';
+
+
+                                
+
+                    
+                    $mpdf = new Mpdf([
+                                        'mode' => '', 
+                                        'format'               =>[$thermalPageWidth,$thermalPageHeight],
+                                        'default_font_size'    => '8',
+                                        'default_font'         => 'serif',
+                                        'margin_left'          => 3,
+                                        'margin_right'         => 3,
+                                        'margin_top'           => 5,
+                                        'margin_bottom'        => 0,
+                                        'margin_header'        => 0,
+                                        'margin_footer'        => 0,
+                                        'orientation'          => 'P',
+                                        'title'                => 'Thermal Invoice Printer',
+                                        'author'               => '',
+                                        'watermark'            => 'SimpleRetailPos',
+                                        'show_watermark'       => true,
+                                        'watermark_font'       => 'sans-serif',
+                                        'display_mode'         => 'fullpage',
+                                        'watermark_text_alpha' => 0.1
+                                    ]);
+                    $mpdf->SetDisplayMode('fullpage');
+                    $mpdf->SetTitle('INV-'.$tab_invoice->id);
+                    $stylesheet=file_get_contents(public_path('pdf/thermal.css'));
+                    $stylesheet2=file_get_contents(public_path('assets/css/style.css'));
+
+                    $mpdf->WriteHTML($stylesheet, 1);
+                    $mpdf->WriteHTML($stylesheet2, 1); // The parameter 1 tells that this is css/style only and no body/html/text
+                    $mpdf->WriteHTML($thermalHtml, 2);
+                    $mpdf->Output('invoice_' . time() . '.pdf', 'I');
+                    exit();
+                  
+                }
+                elseif($ptype=='barcode')
+                {
+
+                    $thermalPageWidth=$dataPageLayout->barcode_width;
+                    $thermalPageHeight=$dataPageLayout->barcode_height;
+                    $address='';
+                    if(isset($invInfo->address))
+                    {
+                        $address=$invInfo->address;
+                    }
+
+                    if(isset($invInfo->mm_four))
+                    {
+                        $address=$invInfo->mm_four;
+                    }
+
+                    $userInfo=User::find($tab_invoice->created_by);
+                    $userNameLength=strlen($userInfo->name);
+                    $userName=$userInfo->name;
+                    if($userNameLength>20)
+                    {
+                        $userName=substr($userInfo->name,0,20)."...";
+                    }
+
+                    $barcode = $this->sdc->GenarateBarcode($tab_invoice->invoice_id);
+
+                    $barcodeImage='<img src="data:image/png;base64,'.$barcode.'" />';
+
+                    $thermalHtml='<table align="center" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td align="center">
+                                                <img class="logo" height="45" src="'.public_path($this->companyphoto($invInfo->logo)).'" alt="brand logo"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center">'.$invInfo->company_name.'</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center">'.$invInfo->c_one.'</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center">'.$address.'</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center">'.$barcodeImage.'</td>
+                                        </tr>
+                                    </tbody>
+                                </table>';
+
+                    $thermalHtml.='<table align="center" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td><hr></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Invoice No : '.$tab_invoice->invoice_id.'</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cashier : '.$userName.'</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date Time : '.formatDateTime($tab_invoice->created_at).'</td>
+                                        </tr>
+                                        <tr>
+                                            <td><hr></td>
+                                        </tr>
+                                    </tbody>
+                                </table>';
+
+                    $thermalHtml.='<table align="center" class="mt-10" width="100%">
+                                    <thead class="bt-1 bb-1">
+                                        <tr>
+                                            <td><b>SL</b></td>
+                                            <td align="center"><b>Product</b></td>
+                                            <td align="right"><b>Total (TK)</b></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3"><hr></td>
+                                        </tr>';
+                    $subTotal=0;
+                    $total=0;
+                    $tender='';
+                    $ai=0;
+                    $ai_quantity=0;
+                    if(isset($tab_invoice_product)){
+                        foreach($tab_invoice_product as $inv){
+
+                                $thermalHtml.='     <tr>
+                                                        <td>'.($ai+1).'</td>
+                                                        <td colspan="2">'.$inv->product_name.'</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td align="right">'.$inv->price.' X '.$inv->quantity.'</td>
+                                                        <td align="right">'.$inv->total_price.'</td>
+                                                    </tr>';
+                            $ai_quantity+=$inv->quantity;
+                            $subTotal+=$inv->total_price;
+                            $ai+=1;
+                            $thermalPageHeight+=12;
+                        }
+                    }
+
+                    
+
+
+                    $thermalHtml.=' </tbody>
+                                </table>
+
+                                <table align="center" class="mt-15" width="100%">
+                                    <thead class="bt-1 bb-1">
+                                        <tr>
+                                            <th colspan="4" align="left" style="text-align:center;">
+                                             <hr>
+                                             Bill Summary
+                                             <hr>  
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td width="33%" colspan="2" align="right"><b>Gross Amount</b></td>
+                                            <td width="10%" align="center"><b>:</b></td>
+                                            <td align="right"><b>$'.number_format($subTotal, 2).'</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" width="33%" align="right"><b>VAT Amount</b></td>
+                                            <td width="10%" align="center"><b>:</b></td>
+                                            <td align="right"><b>$'.number_format($tab_invoice->total_tax, 2).'</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" width="33%" align="right"><b>Net Amount</b></td>
+                                            <td width="10%" align="center"><b>:</b></td>
+                                            <td align="right"><b>$'.number_format(($subTotal+$tab_invoice->total_tax), 2).'</b></td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody class="bt-1 bb-1">
+                                        <tr>
+                                            <td colspan="4" align="right"><hr></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" width="33%" align="right"><b>*Discount Amount</b></td>
+                                            <td width="10%" align="center"><b>:</b></td>
+                                            <td align="right"><b>$'.number_format($tab_invoice->discount_total, 2).'</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" width="33%" align="right"><b>Net Payable</b></td>
+                                            <td width="10%" align="center"><b>:</b></td>
+                                            <td align="right"><b>$'.number_format((($subTotal+$tab_invoice->total_tax)-$tab_invoice->discount_total), 2).'</b></td>
+                                        </tr>
+                                    </tbody>
+                                    <thead class="bt-1 pt-15">
+                                        <tr>
+                                            <th colspan="4" align="left" style="text-align:center;">
+                                             <hr>
+                                             Payment Details  
+                                             <hr>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bb-1">';
+                $dataInvPa=$this->InvoicePaymentByInvoice($tab_invoice->invoice_id);
+                if(isset($dataInvPa))
+                {
+                    foreach($dataInvPa as $vpa):
+                        $thermalHtml.='     <tr>
+                                                <td colspan="2" width="33%" align="right"><b>'.$vpa->tender_name.'</b></td>
+                                                <td width="10%" align="center"><b>:</b></td>
+                                                <td align="right"><b>$'.number_format($vpa->paid_amount,2).'</b></td>
+                                            </tr>';
+                    endforeach;
+                }
+                
+
+                $thermalHtml.='         <tr>
+                                            <td colspan="4" align="right"><hr></td>
+                                        </tr>';
+
+                if(!empty($invInfo->terms))
+                {
+
+                    $termsLength=intval((strlen($invInfo->terms))/40);
+
+                    $thermalPageHeight+=($termsLength*3);
+
+                    $thermalHtml.='         <tr>
+                                                <td colspan="4" align="center"><u><b>Terms &amp; Condition</b></u>
+                                                <br>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" align="center">
+                                                '.$invInfo->terms.'
+                                                </td>
+                                            </tr>';
+                }
+
+
+                $thankYouMessage='';
+                if(isset($invInfo->company_thank_you_message))
+                {
+                    $thankYouMessage=$invInfo->company_thank_you_message;
+                }
+
+                $thermalHtml.='         <tr>
+                                            <td colspan="4" align="center"><b>'.$thankYouMessage.'</b></td>
+                                        </tr>
+                                    </tbody>
+                                </table>';
+
+
+                                
+
+                    
+                    $mpdf = new Mpdf([
+                                        'mode' => '', 
+                                        'format'               =>[$thermalPageWidth,$thermalPageHeight],
+                                        'default_font_size'    => '8',
+                                        'default_font'         => 'serif',
+                                        'margin_left'          => 3,
+                                        'margin_right'         => 3,
+                                        'margin_top'           => 5,
+                                        'margin_bottom'        => 0,
+                                        'margin_header'        => 0,
+                                        'margin_footer'        => 0,
+                                        'orientation'          => 'P',
+                                        'title'                => 'Thermal Invoice Printer',
+                                        'author'               => '',
+                                        'watermark'            => 'SimpleRetailPos',
+                                        'show_watermark'       => true,
+                                        'watermark_font'       => 'sans-serif',
+                                        'display_mode'         => 'fullpage',
+                                        'watermark_text_alpha' => 0.1
+                                    ]);
+                    $mpdf->SetDisplayMode('fullpage');
+                    $mpdf->SetTitle('INV-'.$tab_invoice->id);
+                    $stylesheet=file_get_contents(public_path('pdf/thermal.css'));
+                    $stylesheet2=file_get_contents(public_path('assets/css/style.css'));
+
+                    $mpdf->WriteHTML($stylesheet, 1);
+                    $mpdf->WriteHTML($stylesheet2, 1); // The parameter 1 tells that this is css/style only and no body/html/text
+                    $mpdf->WriteHTML($thermalHtml, 2);
+                    $mpdf->Output('invoice_' . time() . '.pdf', 'I');
+                    exit();
+                  
+                }
+                else
+                {
+
+                    $mpdf = new Mpdf([
+                                        'mode' => '', 
+                                        'orientation'          => 'P',
+                                        'title'                => 'POS Invoice Printer',
+                                        'author'               => '',
+                                        'watermark'            => 'SimpleRetailPos',
+                                        'show_watermark'       => true,
+                                        'watermark_font'       => 'sans-serif',
+                                        'display_mode'         => 'fullpage',
+                                        'watermark_text_alpha' => 0.1
+                                    ]);
+                    $mpdf->SetDisplayMode('fullpage');
+                    
+                    $mpdf->SetTitle('INV-'.$tab_invoice->id);
+                    $stylesheet=file_get_contents(public_path('assets/css/bootstrap.min.css'));
+                    $stylesheet2=file_get_contents(public_path('assets/css/style.css'));
+                    $html='<div class="container" id="report_container" style="border: 1px #ccc solid;">
+                        <table  class="col-md-12" cellpadding="10" style="width:100%;" width="100%;">
+                            <tr>
+                            <td valign="top" width="200">
+                        <div class="col-lg-3">
+                            <div class="col-md-12" style="border-bottom: 5px #000 solid; font-size: 20px; font-weight: bold; padding-left: 0px;">
+                                ' . formatDateTime($tab_invoice->created_at) . '<hr style="height:5px;">
+                            </div>
+                            <div class="col-md-12" style="padding-top: 20px; padding-bottom: 4px; color: #000; padding-left: 0px;">
+                                <b><br />Customer Info</b>
+                            </div>
+                            <div class="col-md-12" style="padding-top: 4px; font-size:12px; padding-bottom: 4px; color: #008000; padding-left: 0px;">
+                                ' . $customer->name . '
+                            </div>
+                            <div class="col-md-12" style="padding-top: 4px;  font-size:12px; padding-bottom: 4px;  color: #008000; padding-left: 0px;">
+                                ' . $customer->address . '
+                            </div>
+                            <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px;  color: #008000; padding-left: 0px;">
+                                ' . $customer->email . '
+                            </div>
+                            <div class="col-md-12" style="padding-top: 4px;  font-size:12px; padding-bottom: 4px;  color: #008000; padding-left: 0px;">
+                                ' . $customer->phone . '
+                            </div>
+
+                            <div class="col-md-12" style="padding-top: 21px; padding-bottom: 5px; padding-left: 0px; font-size: 15px;">
+                                <b><br />Ship To :</b>
+                            </div>
+                            <div class="col-md-12" style="padding-top: 4px;  font-size:12px; padding-bottom: 4px; color: #008000; padding-left: 0px;">
+                                ' . $customer->name . '
+                            </div>
+                            <div class="col-md-12" style="padding-top: 4px;  font-size:12px; padding-bottom: 4px;  color: #008000; padding-left: 0px;">
+                                ' . $customer->address . '
+                            </div>
+                            <div class="col-md-12" style="padding-top: 4px;  font-size:12px; padding-bottom: 4px;  color: #008000; padding-left: 0px;">
+                                ' . $customer->email . '
+                            </div>
+                            <div class="col-md-12" style="padding-top: 4px;  font-size:12px; padding-bottom: 4px;  color: #008000; padding-left: 0px;">
+                                ' . $customer->phone . '
+                            </div>
+
+
+                            <div class="col-md-12" style="padding-top: 35px; padding-bottom: 5px; padding-left: 0px; font-size: 15px;">
+                                <b><br />Payment Method :</b>
+                            </div>
+                            <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px; color: #008000; padding-left: 0px;">
+                                ' . $tab_invoice->tender . '
+                    </div>
+
+                    <div class="col-md-12" style="padding-top: 30px; padding-bottom: 4px; padding-left: 0px;">
+                    <img src="'.public_path($this->companyphoto($invInfo->logo)).'" style="width:100px; margin-top:10px;">
+                    </div>
+
+                    </div>
+                    </td>
+                    <td valign="top">
+                    <div class="col-lg-9" style="float:left; margin-top:-50px;">
+                    <div class="col-md-12" style="border-bottom: 5px #000 solid; color: #008000; font-size: 20px; font-weight: bold; padding-left: 0px;">
+                    '.$invInfo->company_name.'<hr style="height:5px;">
+                    </div>
+                    <div class="col-md-12" style="padding-top: 10px; padding-bottom: 5px; padding-left: 0px; font-size: 13px;">
+                    <b>'.$invInfo->company_thank_you_message.'<br /></b>
+                    </div>
+                    <div class="col-md-12" style="padding-top: 4px; padding-bottom: 4px; color: #008000; font-size: 10px; padding-left: 0px;">'.$invInfo->company_services.'
+                    <br /><br />
+                    </div>
+                    <div class="col-md-12" style="padding-top: 4px;  padding-bottom: 4px; padding-left: 0px;">
+                    <table class="table table-bordered" style="width:100%;">
+                    <thead>
+                    <tr>
+                    <th class="text-center" style="font-size:12px;" >Item Number</th>
+                    <th class="text-center" style="font-size:12px;" >Description</th>
+                    <th class="text-center" style="font-size:12px;" >Price</th>
+                    <th class="text-center" style="font-size:12px;" >Quantity</th>
+                    <th class="text-center" style="font-size:12px;" >Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>';
+
+                    $subTotal=0;
+                    $total=0;
+                    $tender='';
+                    $ai=0;
+                    $ai_quantity=0;
+                    if(isset($tab_invoice_product)){
+                        foreach($tab_invoice_product as $inv){
+                            $html .='<tr>
+                        <td style="font-size:12px;" class="text-center">' . $inv->product_id . '</td>
+                        <td style="font-size:12px; width:200px;">' . $inv->product_name . '</td>
+                        <td style="font-size:12px;" class="text-center">' . $inv->price . '</td>
+                        <td style="font-size:12px;" class="text-center">' . $inv->quantity . '</td>
+                        <td style="font-size:12px;" class="text-right">' . number_format($inv->total_price, 2) . '</td>
+                        </tr>';
+
+                            $ai_quantity+=$inv->quantity;
+                            $ai+=1;
+                        }
+                    }
+
+                    for ($i=1; $i <= 16 - $ai; $i++):
+                        $html .='<tr>
+                    <td>&nbsp;
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>';
+                    endfor;
+                    $html .='<tr style="border-bottom: 5px #000 solid;">
+                    <td style="font-size:12px;">Subtotal </td>
+                    <td style="font-size:12px;">Total Item : ' . $ai_quantity . '</td>
+                    <td></td>
+                    <td></td>
+                    <td style="font-size:12px;" class="text-right">' . number_format((($tab_invoice->total_amount+$tab_invoice->sales_discount)-$tab_invoice->total_tax), 2) . '</td>
+                    </tr>
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                    <td colspan="2" rowspan="5" style="font-size:10px;"> Sales Tax Rate: ' . number_format($tab_invoice->tax_rate, 2) . '% <br><br>';
+
+                    if($tab_invoice->discount_type==1)
+                    {
+                        $html .='Discount Amount is '.number_format($tab_invoice->discount_total, 2);
+                    }
+                    elseif($tab_invoice->discount_type==2)
+                    {
+                        $html .='Discount Rate : '.number_format($tab_invoice->sales_discount, 2).'%';
+                    }
+
+                    $html .='</td>
+                    <td colspan="2" style="font-size:10px;" class="text-right">Sales Tax (+)</td>
+                    <td style="font-size:12px;" class="text-right">' . number_format($tab_invoice->total_tax, 2) . '</td>
+                    </tr>
+                    <tr>
+                    <td style="font-size:10px;" colspan="2" class="text-right">Discount (-)</td>
+                    <td style="font-size:12px;" class="text-right">' . number_format($tab_invoice->discount_total, 2) . '</td>
+                    </tr>
+                    <tr>
+                    <td style="font-size:10px;" colspan="2" class="text-right">Invoice Total</td>
+                    <td style="font-size:12px;" class="text-right" style="border-bottom: 5px #000 solid;">' . number_format($tab_invoice->total_amount, 2) . '</td>
+                    </tr>
+                    <tr>
+                    <td style="font-size:10px;" colspan="2" class="text-right">Paid Amount</td>
+                    <td style="font-size:12px;" class="text-right" style="border-bottom: 5px #000 solid;">' . number_format($invoice_payment, 2) . '</td>
+                    </tr>
+                    <tr>
+                    <td style="font-size:10px;" colspan="2" class="text-right">Invoice Due</td>
+                    <td style="font-size:12px;" class="text-right" style="border-bottom: 5px #000 solid;"><b>'; 
+
+                    if(($tab_invoice->total_amount-$invoice_payment)>0)
+                    {
+                        $html .=number_format(($tab_invoice->total_amount-$invoice_payment), 2);
+                    }
+                    else
+                    {
+                        $html .="0.00";
+                    }
+               
+                    $html .='</b></td>
+                    </tr>
+                    </tfoot>
+
+
+                    </table>
+                    </div>
+                    </div>
+                    </td>
+                    <tr>
+                    </table>
+                    <div class="row">
+                    <div class="col-lg-12" style="padding-left: 5px; padding-top: 1px; margin-top:-20px;">
+                    <div class="col-md-12 text-center">
+                    <b>'.$invInfo->mm_one.'</b>
+                    </div>
+                    <div class="col-md-12 text-center">
+                    <b>'.$invInfo->mm_two.'</b>
+                    </div>
+                    <div class="col-md-12 text-center">
+                    <b>'.$invInfo->mm_three.'</b>
+                    </div>
+                    <div class="col-md-12 text-center">
+                    <b>'.$invInfo->mm_four.'</b>
+                    </div>
+                    <br />
+                    <table width="100%" style="margin-left:25px;" class="col-md-12">
+                    <tr>
+                    <td>
+                    <div class="col-md-11 text-left" style="padding-left: 0px; border-bottom: 3px #000 solid; font-size: 28px; color: #008000;">
+                    <b>
+                    '.$invInfo->fotter_company_name.'</b><hr style="height:5px; margin-top:0px;">
+                    </div>
+                    </td>
+                    <td width="50">
+                    <img width="50" src="'.public_path($this->companyphoto($invInfo->logo_fotter)).'">
+                    </td>
+                    </tr>
+                    </table>
+
+
+                    <div class="col-md-12" style="clear: both;">
+                    <br />
+                    <table width="100%" class="col-md-12">
+                    <tr>
+                    <td style="text-align:center; font-size:10px;">
+                    '.$invInfo->c_one.'
+                    </td>
+                    <td style="text-align:center; font-size:10px;">
+                    <div class="col-md-5 text-center">
+                    '.$invInfo->c_two.'
+                    </div>
+                    </td>
+                    <td style="text-align:center; font-size:10px;">
+                    <div class="col-md-4 text-center">
+                    '.$invInfo->c_three.'
+                    </div>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="text-align:center; font-size:10px;">
+                    <div class="col-md-3 text-center">
+                    '.$invInfo->c_four.'
+                    </div>
+                    </td>
+                    <td style="text-align:center; font-size:10px;">
+                    <div class="col-md-5 text-center">
+                    '.$invInfo->c_five.'
+                    </div>
+                    </td>
+                    <td style="text-align:center; font-size:10px;">
+                    <div class="col-md-4 text-center">
+                    '.$invInfo->c_six.'
+                    </div>
+                    </td>
+                    </tr>
+                    </tr>
+                    </table>
+                    </div>
+                    <div class="col-md-12" style="border-bottom: 5px #000 solid; margin-left:15px; clear: both;">
+                    <hr style="height:5px; margin-top:5px;">
+                    </div>
+                    </div>
+                    </div>
+                    </div>';
+
+                    //echo $html; die();
+
+                    $mpdf->WriteHTML($stylesheet, 1);
+                    $mpdf->WriteHTML($stylesheet2, 1); // The parameter 1 tells that this is css/style only and no body/html/text
+                    $mpdf->WriteHTML($html, 2);
+                    $mpdf->Output('invoice_' . time() . '.pdf', 'I');
+                    exit();
+
+
+                }
+
+
+
+    }
+
     public function showCustomerInvoice(Invoice $invoice,$invoice_id=0)
     {
         if(!empty($invoice_id))

@@ -27,10 +27,80 @@ function alignProductLine() {
     });
 }
 
+function clearPosScreenCart(){
+    console.log('Initiate clering log');
+    $("#posCartSummary tr:eq(1)").hide();
+    $("#posCartSummary tr:eq(2)").hide();
+    $("#posCartSummary tr:eq(4)").hide();
+
+    $("#posCartSummary tr:eq(0)").find("td:eq(2)").children("span").html("0.00");
+    $("#posCartSummary tr:eq(1)").find("td:eq(2)").children("span").html("0.00");
+    $("#posCartSummary tr:eq(2)").find("td:eq(2)").children("span").html("0.00");
+    $("#posCartSummary tr:eq(2)").find("th").children("span").html("0%");
+    $("#posCartSummary tr:eq(3)").find("td:eq(2)").children("span").html("0.00");
+    $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html("0.00");
+    $("#posCartSummary tr:eq(5)").find("td:eq(2)").children("span").html("0.00");
+
+    $("#cartTotalAmount").html("0.00");
+    $("input[name=amount_to_pay]").val("0.00");
+    $("#prmDue").html("0.00");
+    $("#totalCartDueToPay").html("0.00");
+
+    $(".posQL").hide();
+
+
+    $("#dataCart").html('<tr class="emptCRTMSG"><td colspan="5"><h3 style="height: 50px; text-align: center; line-height: 50px;">No Item on Cart</h3></td></tr>');
+    $(".emptCRTMSG").show();
+}
+
 function storecloseLTTheme(name, price) {
     var conPrice = parseFloat(price).toFixed(2);
     var data = '<tr><td align="left">' + name + ' Collected (+) :  </td><td align="left">$' + conPrice + '</td></tr>';
     return data;
+}
+
+function completeSaleAutomatically() {
+
+    Swal.showLoading();
+    //------------------------Ajax Customer Start-------------------------//
+    var AddHowMowKhaoUrl = AddHowMowKhaoUrlCartPOSvfour;
+    $.ajax({
+        'async': false,
+        'type': "POST",
+        'global': false,
+        'dataType': 'json',
+        'url': AddHowMowKhaoUrl,
+        'data': { '_token': csrftLarVe },
+        'success': function(data) {
+            Swal.close();
+            //console.log("Completing Sales : " + data);
+
+            if (data!= 1) {
+                swalErrorMsg("Something went wrong, Please try again.");
+            }
+            else
+            {
+                Swal.close();
+                clearPosScreenCart();
+            }
+        }
+    });
+    //------------------------Ajax Customer End---------------------------//
+}
+
+$('body').on('click','.paybuttontrigger',function(){
+    Swal.showLoading();
+    //$("#cartMessageProShow").html(loadingOrProcessing("Processing, Please Wait....!!!!"));
+});
+
+
+function showCompleteSaleModal()
+{
+    console.log("Initiated opoup");
+    $("#completeSalesModal").modal({backdrop: 'static', keyboard: false, show: true});
+    $(".comprint > .dropdown-menu").css("left","unset");
+    $(".comprint > .dropdown-menu").css("right","0");
+    completeSaleAutomatically();
 }
 
 function loadCloseDrawer() {
@@ -1568,7 +1638,7 @@ $(document).ready(function() {
                         genarateSalesTotalCart();
                         //------------------------Ajax POS Start-------------------------//
                         $.post(salesCartPayment, { 'paymentID': 1, 'paidAmount': parseNewPayment, '_token': csrftLarVe }, function(response) {
-                            // setTimeout(function(){ $("#CustomerCard").modal('show'); }, 3000);
+                            showCompleteSaleModal();
                         });
                         //------------------------Ajax POS End---------------------------//
                         $(".hidestripemsg").show();
@@ -1736,7 +1806,7 @@ $(document).ready(function() {
                         genarateSalesTotalCart();
                         //------------------------Ajax POS Start-------------------------//
                         $.post(salesCartPayment, { 'paymentID': 8, 'paidAmount': parseNewPayment, '_token': csrftLarVe }, function(response) {
-                            // setTimeout(function(){ $("#CustomerCard").modal('show'); }, 3000);
+                            showCompleteSaleModal();
                         });
                         //------------------------Ajax POS End---------------------------//
                         $(".message-place-authorizenet").html(successMessage(data.message));
@@ -1784,27 +1854,42 @@ $(document).ready(function() {
 
 
     $(".printncompleteSale").click(function() {
+        $("#completeSalesModal").modal({backdrop: 'static', keyboard: true, show: false});
+        $("#completeSalesModal").modal('hide');
         var printDataType = $.trim($(this).attr("data-id"));
-        var customerID = $.trim($("select[name=customer_id]").val());
-        if (customerID.length == 0) {
-            alert("Please select a customer.");
-            return false;
-        }
-
-        var expaid;
-        expaid = $.trim($("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html());
-        if (expaid == "0") {
-            var paid = 0;
+        //var PrintLocation = AddHowMowKhaoUrlCartPOSvfourPrintPDFSalesRec + "/" + printDataType + "/" + data;
+        var PrintLocation = AddHowMowKhaoUrlCartPOSvfourPrintPDFSalesRec + "/" + printDataType;
+                    //window.location.href=PrintLocation;
+        var win = window.open(PrintLocation);
+        if (win) {
+            //Browser has allowed it to be opened
+            win.focus();
+            //window.location.href = window.location.href;
         } else {
-            var paid = expaid;
+            alert('Please allow popups for this website');
         }
+        return false;
+        // var printDataType = $.trim($(this).attr("data-id"));
+        // var customerID = $.trim($("select[name=customer_id]").val());
+        // if (customerID.length == 0) {
+        //     alert("Please select a customer.");
+        //     return false;
+        // }
 
-        if (paid < 1) {
-            alert("Please add payment.");
-            return false;
-        }
+        // var expaid;
+        // expaid = $.trim($("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html());
+        // if (expaid == "0") {
+        //     var paid = 0;
+        // } else {
+        //     var paid = expaid;
+        // }
 
-        console.log("Printing Type - ", printDataType);
+        // if (paid < 1) {
+        //     alert("Please add payment.");
+        //     return false;
+        // }
+
+        // console.log("Printing Type - ", printDataType);
 
         //return false;
 
@@ -2022,7 +2107,7 @@ $(document).ready(function() {
             $("#payModal").modal("hide");
             //------------------------Ajax POS Start-------------------------//
             $.post(salesCartPayment, { 'paymentID': payment_id, 'paidAmount': parseNewPayment, '_token': csrftLarVe }, function(response) {
-                console.log(response);
+                showCompleteSaleModal();
             });
             //------------------------Ajax POS End---------------------------//
         }
@@ -2911,6 +2996,8 @@ $(document).ready(function() {
 
                                                     $("#cartMessageProShow").show();
                                                     $("#cartMessageProShow").html(successMessage("Payment completed, Please click on print/complete sale."));
+
+                                                    showCompleteSaleModal();
 
                                                 } else {
                                                     $("#partialpayMSG").html(warningMessage(data.message));

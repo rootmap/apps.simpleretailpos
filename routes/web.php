@@ -383,6 +383,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/sales/invoice/{invoice_id}', 'InvoiceController@invoiceShow');
 	Route::get('/sales/invoice/print/pdf/{invoice_id}', 'InvoiceController@invoicePDF');
 	Route::get('/sales/invoice/print/media/pdf/{ptype}/{invoice_id}', 'InvoiceController@invoicePDFByMedia');
+	Route::get('/sales/invoice/print/media/last-invoice/{ptype}', 'InvoiceController@lastInvoicePDFByMedia');
 	Route::post('/sales/confirm', 'InvoiceController@create');
 	Route::post('/sales/save', 'InvoiceController@store');
 	Route::get('/sales/edit/{id}', 'InvoiceController@edit');
