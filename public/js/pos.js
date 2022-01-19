@@ -467,8 +467,19 @@ function add_pos_cart(ProductID, ProductPrice, ProductName) {
     }
 
     var rowTypeforMin = $("#dataCart tr[id=" + ProductID + "]").children('td:eq(1)').children('div').children('span:eq(0)').children('i').attr('class');
+    console.log('Total Row Length first = ',$("#dataCart tr").length);
+
+
 
     if ($("#dataCart tr").length > 0) {
+
+        if($("#dataCart tr").length==1)
+        {
+            if($("#dataCart > tr:first-child").children('td:eq(0)').children('h3').length==1)
+            {
+                $("#dataCart > tr:first-child").remove();
+            }
+        }
 
         if ($("#dataCart tr[id=" + ProductID + "]").length) {
 
@@ -522,6 +533,9 @@ function add_pos_cart(ProductID, ProductPrice, ProductName) {
             $("#dataCart").append(strHTML);
         }
     } else {
+
+        console.log('Total Row Length = ',$("#dataCart tr").length);
+
         var quantityPlaceFUnc = "javascript:add_pos_cart(" + ProductID + "," + ProductPrice + ",'" + ProductName + "');";
         var quantityPlace = '';
         quantityPlace += '<div class="input-group" style="border-spacing: 0px !important;">';
@@ -3526,22 +3540,15 @@ function genarateSalesTotalCart() {
         $("#posCartSummary tr:eq(3)").find("td:eq(2)").children("span").html(newPriceTotal);
         $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html(paid);
         $("#posCartSummary tr:eq(5)").find("td:eq(2)").children("span").html(newdues);
-
         if (parseFloat(paid) > 0) { $("#posCartSummary tr:eq(4)").show(); } else { $("#posCartSummary tr:eq(4)").hide(); }
-
         if (parseFloat(newTotalTax) > 0) { $("#posCartSummary tr:eq(1)").show(); } else { $("#posCartSummary tr:eq(1)").hide(); }
-
         if (parseFloat(newDiscount) > 0) { $("#posCartSummary tr:eq(2)").show(); } else { $("#posCartSummary tr:eq(2)").hide(); }
-
         $("#cartTotalAmount").html(newPriceTotal);
-
         $("input[name=amount_to_pay]").val(newdues);
         console.log($("input[name=amount_to_pay]").val());
         $("#prmDue").html(newdues);
         $("#totalCartDueToPay").html(newdues);
-
         $(".posQL").show();
-
         $(".emptCRTMSG").show();
     } else {
         $("#posCartSummary tr:eq(1)").hide();

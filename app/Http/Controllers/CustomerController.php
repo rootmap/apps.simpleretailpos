@@ -394,18 +394,19 @@ class CustomerController extends Controller
         $tab->created_by=$this->sdc->UserID();
         $tab->save();
 
-        RetailPosSummary::where('id',1)->update(['customer_quantity' => \DB::raw('customer_quantity + 1')]);
+        RetailPosSummary::where('store_id',$this->sdc->storeID())->update(['customer_quantity' => \DB::raw('customer_quantity + 1')]);
         $Todaydate=date('Y-m-d');
-        if(RetailPosSummaryDateWise::where('report_date',$Todaydate)->count()==0)
+        if(RetailPosSummaryDateWise::where('report_date',$Todaydate)->where('store_id',$this->sdc->storeID())->count()==0)
         {
             RetailPosSummaryDateWise::insert([
                'report_date'=>$Todaydate,
+               'store_id'=>$this->sdc->storeID(),
                'customer_quantity' => \DB::raw('1')
             ]);
         }
         else
         {
-            RetailPosSummaryDateWise::where('report_date',$Todaydate)
+            RetailPosSummaryDateWise::where('report_date',$Todaydate)->where('store_id',$this->sdc->storeID())
             ->update([
                'customer_quantity' => \DB::raw('customer_quantity + 1')
             ]);
@@ -499,14 +500,14 @@ class CustomerController extends Controller
         $tab=$customer::find($id);
         $invoice_date=date('Y-m-d',strtotime($tab->created_at));
         $Todaydate=date('Y-m-d');
-        if((RetailPosSummaryDateWise::where('report_date',$Todaydate)->count()==1) && ($invoice_date==$Todaydate))
+        if((RetailPosSummaryDateWise::where('report_date',$Todaydate)->where('store_id',$this->sdc->storeID())->count()==1) && ($invoice_date==$Todaydate))
         {
-            RetailPosSummaryDateWise::where('report_date',$Todaydate)
+            RetailPosSummaryDateWise::where('report_date',$Todaydate)->where('store_id',$this->sdc->storeID())
             ->update([
                'customer_quantity' => \DB::raw('customer_quantity - 1')
             ]);
         }
-        RetailPosSummary::where('id',1)->update(['customer_quantity' => \DB::raw('customer_quantity - 1')]);
+        RetailPosSummary::where('store_id',$this->sdc->storeID())->update(['customer_quantity' => \DB::raw('customer_quantity - 1')]);
         $tab->delete();
         
 

@@ -181,7 +181,7 @@ class ProductVarianceController extends Controller
             $tab->created_by=$this->sdc->UserID();
             $tab->save();
 
-            RetailPosSummary::where('id',1)->update(['variance_quantity' => \DB::raw('variance_quantity + '.$total_amount_invoice)]);
+            RetailPosSummary::where('store_id',$this->sdc->storeID())->update(['variance_quantity' => \DB::raw('variance_quantity + '.$total_amount_invoice)]);
 
             return redirect('variance/report')->with('status', $this->moduleName.' Genarated Successfully !'); 
         }
@@ -259,7 +259,7 @@ class ProductVarianceController extends Controller
             endforeach;
             
             $this->sdc->log("variance","Product variance updated");
-            RetailPosSummary::where('id',1)->update(['variance_quantity' => \DB::raw('variance_quantity - '.$total_amount_invoice)]);
+            RetailPosSummary::where('store_id',$this->sdc->storeID())->update(['variance_quantity' => \DB::raw('variance_quantity - '.$total_amount_invoice)]);
 
             //RetailPosSummary::where('id',1)->update(['variance_quantity' => \DB::raw('variance_quantity + '.$total_amount_invoice)]);
 
@@ -292,7 +292,7 @@ class ProductVarianceController extends Controller
             $tab->updated_by=$this->sdc->UserID();
             $tab->save();
 
-            RetailPosSummary::where('id',1)->update(['variance_quantity' => \DB::raw('variance_quantity + '.$total_amount_invoice)]);
+            RetailPosSummary::where('store_id',$this->sdc->storeID())->update(['variance_quantity' => \DB::raw('variance_quantity + '.$total_amount_invoice)]);
 
             return redirect('variance/report')->with('status', $this->moduleName.' Updated Successfully !'); 
         }
@@ -323,7 +323,7 @@ class ProductVarianceController extends Controller
             
             $this->sdc->log("variance","Product variance deleted");
 
-            RetailPosSummary::where('id',1)->update(['variance_quantity' => \DB::raw('variance_quantity - '.$total_amount_invoice)]);
+            RetailPosSummary::where('store_id',$this->sdc->storeID())->update(['variance_quantity' => \DB::raw('variance_quantity - '.$total_amount_invoice)]);
 
         
         $invoice_tab=ProductVarianceData::where('store_id',$this->sdc->storeID())

@@ -105,7 +105,7 @@
             <div class="card-body">
                 <div class="card-block text-xs-center" @if($userguideInit==1) data-step="5" data-intro="You can see total Invoice / Sales Amount and total cost, profit." @endif>
                     <div class="card-header mb-2">
-                        <span class="info lighten-2">Total Invoice / Sales Amount</span>
+                        <span class="info lighten-2">Total Sales Invoice Amount</span>
                         <h3 class="font-large-2 grey darken-1 text-bold-400" style="font-size: 30px !important;">${{$dash->sales_amount}}</h3>
                     </div>
                     <div class="card-body">

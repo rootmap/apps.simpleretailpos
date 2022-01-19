@@ -304,7 +304,7 @@ class WarrantyController extends Controller
 
             $this->sdc->log("warranty","Product Warranty created");
 
-            RetailPosSummary::where('id',1)
+            RetailPosSummary::where('store_id',$this->sdc->storeID())
             ->update([
                'warranty_invoice_quantity' => \DB::raw('warranty_invoice_quantity + 1'),
                'warranty_product_quantity' => \DB::raw('warranty_product_quantity + '.$countOLDPid),
@@ -312,10 +312,11 @@ class WarrantyController extends Controller
             ]);
 
             $Todaydate=date('Y-m-d');
-            if(RetailPosSummaryDateWise::where('report_date',$Todaydate)->count()==0)
+            if(RetailPosSummaryDateWise::where('report_date',$Todaydate)->where('store_id',$this->sdc->storeID())->count()==0)
             {
                 RetailPosSummaryDateWise::insert([
                    'report_date'=>$Todaydate,
+                   'store_id'=>$this->sdc->storeID(),
                    'warranty_invoice_quantity' => \DB::raw('1'),
                    'warranty_product_quantity' => \DB::raw($countOLDPid)
                 ]);
@@ -323,6 +324,7 @@ class WarrantyController extends Controller
             else
             {
                 RetailPosSummaryDateWise::where('report_date',$Todaydate)
+                ->where('store_id',$this->sdc->storeID())
                 ->update([
                    'warranty_invoice_quantity' => \DB::raw('warranty_invoice_quantity + 1'),
                    'warranty_product_quantity' => \DB::raw('warranty_product_quantity + '.$countOLDPid)
@@ -469,7 +471,7 @@ class WarrantyController extends Controller
         
         $countOLDPid=count($allpidSQL);
 
-        RetailPosSummary::where('id',1)
+        RetailPosSummary::where('store_id',$this->sdc->storeID())
         ->update([
            'warranty_invoice_quantity' => \DB::raw('warranty_invoice_quantity - 1'),
            'warranty_product_quantity' => \DB::raw('warranty_product_quantity - '.$countOLDPid),
@@ -478,9 +480,10 @@ class WarrantyController extends Controller
 
         $invoice_date=date('Y-m-d',strtotime($tab->created_at));
         $Todaydate=date('Y-m-d');
-        if((RetailPosSummaryDateWise::where('report_date',$Todaydate)->count()==1) && ($invoice_date==$Todaydate))
+        if((RetailPosSummaryDateWise::where('report_date',$Todaydate)->where('store_id',$this->sdc->storeID())->count()==1) && ($invoice_date==$Todaydate))
         {
             RetailPosSummaryDateWise::where('report_date',$Todaydate)
+            ->where('store_id',$this->sdc->storeID())
             ->update([
                'warranty_invoice_quantity' => \DB::raw('warranty_invoice_quantity - 1'),
                'warranty_product_quantity' => \DB::raw('warranty_product_quantity - '.$pro->quantity)

@@ -35,47 +35,62 @@ class RetailPosSummaryController extends Controller
                 return redirect('login')->with(Auth::logout());
             }
 
-        $dash=$dashboard::find(1);
-        //print_r($dash); die();
-        $Todaydate=date('Y-m-d');
-        if(RetailPosSummaryDateWise::where('report_date',$Todaydate)->count()==0)
-        {
-            RetailPosSummaryDateWise::insert([
-               'report_date'=>$Todaydate
+            //$dash=$dashboard::find(1);
+
+            if(RetailPosSummary::where('store_id',$this->sdc->storeID())->count()==1)
+            {
+                $dash=RetailPosSummary::where('store_id',$this->sdc->storeID())->first();
+            }
+            else
+            {
+                RetailPosSummary::insert([
+                    'store_id'=>$this->sdc->storeID()
+                ]);
+                $dash=RetailPosSummary::where('store_id',$this->sdc->storeID())->first();
+            }
+
+            //print_r($dash); die();
+            $Todaydate=date('Y-m-d');
+            //$Todaydate="2022-01-20";
+            if(RetailPosSummaryDateWise::where('report_date',$Todaydate)->where('store_id',$this->sdc->storeID())->count()==0)
+            {
+                RetailPosSummaryDateWise::insert([
+                'report_date'=>$Todaydate,
+                'store_id'=>$this->sdc->storeID()
+                ]);
+                $tabToday=RetailPosSummaryDateWise::where('report_date',$Todaydate)->where('store_id',$this->sdc->storeID())->first();
+            }
+            else
+            {
+                $tabToday=RetailPosSummaryDateWise::where('report_date',$Todaydate)->where('store_id',$this->sdc->storeID())->first();
+            }
+
+            $CashierPunch=CashierPunch::select('id',
+                                                'name',
+                                                'in_date',
+                                                'in_time',
+                                                'out_date',
+                                                'out_time',\DB::raw('TIMEDIFF(updated_at,created_at) as elsp'))
+                                        ->where('store_id',$this->sdc->storeID())
+                                        ->orderBy('id','DESC')
+                                        ->limit(10)
+                                        ->get();
+
+            $LoginActivity=LoginActivity::select('name','activity','created_at')->where('store_id',$this->sdc->storeID())
+                                        ->orderBy('id','DESC')
+                                        ->limit(10)
+                                        ->get();
+
+            //dd($CashierPunch);
+
+            $product=Product::where('store_id',$this->sdc->storeID())->orderBy('sold_times','DESC')->limit(8)->get();
+            return view('apps.pages.dashboard.index',[
+                'dash'=>$dash,
+                'product'=>$product,
+                'tod'=>$tabToday,
+                'cashier_punch'=>$CashierPunch,
+                'loginactivity'=>$LoginActivity,
             ]);
-            $tabToday=RetailPosSummaryDateWise::where('report_date',$Todaydate)->first();
-        }
-        else
-        {
-            $tabToday=RetailPosSummaryDateWise::where('report_date',$Todaydate)->first();
-        }
-
-        $CashierPunch=CashierPunch::select('id',
-                                            'name',
-                                            'in_date',
-                                            'in_time',
-                                            'out_date',
-                                            'out_time',\DB::raw('TIMEDIFF(updated_at,created_at) as elsp'))
-                                    ->where('store_id',$this->sdc->storeID())
-                                    ->orderBy('id','DESC')
-                                    ->limit(24)
-                                    ->get();
-
-        $LoginActivity=LoginActivity::select('name','activity','created_at')->where('store_id',$this->sdc->storeID())
-                                    ->orderBy('id','DESC')
-                                    ->limit(24)
-                                    ->get();
-
-        //dd($CashierPunch);
-
-        $product=Product::orderBy('sold_times','DESC')->limit(8)->get();
-        return view('apps.pages.dashboard.index',[
-            'dash'=>$dash,
-            'product'=>$product,
-            'tod'=>$tabToday,
-            'cashier_punch'=>$CashierPunch,
-            'loginactivity'=>$LoginActivity,
-        ]);
 
         }
         else

@@ -227,7 +227,7 @@ class ProductStockinController extends Controller
 
         $this->sdc->log("product","Product stockin created");
 
-        RetailPosSummary::where('id',1)
+        RetailPosSummary::where('store_id',$this->sdc->storeID())
         ->update([
            'stockin_invoice_quantity' => \DB::raw('stockin_invoice_quantity + 1'),
            'stockin_product_quantity' => \DB::raw('stockin_product_quantity + '.$total_quantity_invoice),
@@ -237,10 +237,11 @@ class ProductStockinController extends Controller
 
 
         $Todaydate=date('Y-m-d');
-        if(RetailPosSummaryDateWise::where('report_date',$Todaydate)->count()==0)
+        if(RetailPosSummaryDateWise::where('report_date',$Todaydate)->where('store_id',$this->sdc->storeID())->count()==0)
         {
             RetailPosSummaryDateWise::insert([
                'report_date'=>$Todaydate,
+               'store_id'=>$this->sdc->storeID(),
                'stockin_invoice_quantity' => \DB::raw('1'),
                'stockin_product_quantity' => \DB::raw($total_quantity_invoice),
                'product_quantity' => \DB::raw($total_quantity_invoice)
@@ -249,6 +250,7 @@ class ProductStockinController extends Controller
         else
         {
             RetailPosSummaryDateWise::where('report_date',$Todaydate)
+            ->where('store_id',$this->sdc->storeID())
             ->update([
                'stockin_invoice_quantity' => \DB::raw('stockin_invoice_quantity + 1'),
                'stockin_product_quantity' => \DB::raw('stockin_product_quantity + '.$total_quantity_invoice),
@@ -619,7 +621,7 @@ class ProductStockinController extends Controller
 
         $this->sdc->log("product","Product stockin updated");
 
-        RetailPosSummary::where('id',1)
+        RetailPosSummary::where('store_id',$this->sdc->storeID())
         ->update([
            'stockin_invoice_quantity' => \DB::raw('stockin_invoice_quantity - 1'),
            'stockin_product_quantity' => \DB::raw('stockin_product_quantity - '.$total_quantity_invoice),
@@ -629,9 +631,10 @@ class ProductStockinController extends Controller
 
         $invoice_date=date('Y-m-d',strtotime($inv->created_at));
         $Todaydate=date('Y-m-d');
-        if((RetailPosSummaryDateWise::where('report_date',$Todaydate)->count()==1) && ($invoice_date==$Todaydate))
+        if((RetailPosSummaryDateWise::where('report_date',$Todaydate)->where('store_id',$this->sdc->storeID())->count()==1) && ($invoice_date==$Todaydate))
         {
             RetailPosSummaryDateWise::where('report_date',$Todaydate)
+            ->where('store_id',$this->sdc->storeID())
             ->update([
                'stockin_invoice_quantity' => \DB::raw('stockin_invoice_quantity - 1'),
                'stockin_product_quantity' => \DB::raw('stockin_product_quantity - '.$total_quantity_invoice),
@@ -670,17 +673,18 @@ class ProductStockinController extends Controller
         $tab->updated_by=$this->sdc->UserID();
         $tab->save();
 
-        RetailPosSummary::where('id',1)
+        RetailPosSummary::where('store_id',$this->sdc->storeID())
         ->update([
            'stockin_invoice_quantity' => \DB::raw('stockin_invoice_quantity + 1'),
            'stockin_product_quantity' => \DB::raw('stockin_product_quantity + '.$total_quantity_invoice),
            'product_quantity' => \DB::raw('product_quantity + '.$total_quantity_invoice)
         ]);
 
-        if(RetailPosSummaryDateWise::where('report_date',$Todaydate)->count()==0)
+        if(RetailPosSummaryDateWise::where('report_date',$Todaydate)->where('store_id',$this->sdc->storeID())->count()==0)
         {
             RetailPosSummaryDateWise::insert([
                'report_date'=>$Todaydate,
+               'store_id'=>$this->sdc->storeID(),
                'stockin_invoice_quantity' => \DB::raw('1'),
                'stockin_product_quantity' => \DB::raw($total_quantity_invoice),
                'product_quantity' => \DB::raw($total_quantity_invoice)
@@ -689,6 +693,7 @@ class ProductStockinController extends Controller
         else
         {
             RetailPosSummaryDateWise::where('report_date',$Todaydate)
+            ->where('store_id',$this->sdc->storeID())
             ->update([
                'stockin_invoice_quantity' => \DB::raw('stockin_invoice_quantity + 1'),
                'stockin_product_quantity' => \DB::raw('stockin_product_quantity + '.$total_quantity_invoice),
@@ -724,7 +729,7 @@ class ProductStockinController extends Controller
 
         $this->sdc->log("product","Product stockin deleted");
 
-        RetailPosSummary::where('id',1)
+        RetailPosSummary::where('store_id',$this->sdc->storeID())
         ->update([
            'stockin_invoice_quantity' => \DB::raw('stockin_invoice_quantity - 1'),
            'stockin_product_quantity' => \DB::raw('stockin_product_quantity - '.$total_quantity_invoice),
@@ -733,9 +738,10 @@ class ProductStockinController extends Controller
 
         $invoice_date=date('Y-m-d',strtotime($tab->created_at));
         $Todaydate=date('Y-m-d');
-        if((RetailPosSummaryDateWise::where('report_date',$Todaydate)->count()==1) && ($invoice_date==$Todaydate))
+        if((RetailPosSummaryDateWise::where('report_date',$Todaydate)->where('store_id',$this->sdc->storeID())->count()==1) && ($invoice_date==$Todaydate))
         {
             RetailPosSummaryDateWise::where('report_date',$Todaydate)
+            ->where('store_id',$this->sdc->storeID())
             ->update([
                'stockin_invoice_quantity' => \DB::raw('stockin_invoice_quantity - 1'),
                'stockin_product_quantity' => \DB::raw('stockin_product_quantity - '.$pro->quantity),
