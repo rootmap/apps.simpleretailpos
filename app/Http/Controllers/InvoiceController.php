@@ -2194,6 +2194,137 @@ class InvoiceController extends Controller
         return view('apps.pages.pos.index',$systemArray);
     }
 
+    public function posterminal(Request $request)
+    {
+        $defualtCustomer=$this->genarateDefaultCustomer();
+        $this->getSalesCartTokenID();
+        $filter=$this->GenaratePageDataFilter();
+        //$tab_customer=Customer::where('store_id',$this->sdc->storeID())->get();
+        $Cart = $request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+        if(isset($Cart))
+        {
+            if(empty($Cart->invoiceID))
+            {
+                $Ncart = new Pos($Cart);
+                $Ncart->genarateInvoiceID();
+                $request->session()->put('Pos', $Ncart);
+                $Cart =$request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+            }
+
+            if(empty($Cart->customerID))
+            {
+                $Ncart = new Pos($Cart);
+                $Ncart->addCustomerID($defualtCustomer);
+                $request->session()->put('Pos', $Ncart);
+                $Cart =$request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+            }
+        }
+        else
+        {
+            $Ncart = new Pos($Cart);
+            $Ncart->genarateInvoiceID();
+            $Ncart->addCustomerID($defualtCustomer);
+            Session::put('Pos', $Ncart);
+            $Cart = $request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+        }
+
+        if (empty($Cart->customerID)) {
+            $Cart->addCustomerID($defualtCustomer);
+        }
+
+
+
+        if(Invoice::count()>0)
+        {
+            $sql_invoice_id=Invoice::select("id")->orderBy("id","DESC")->first();
+            $last_invoice_id=$sql_invoice_id->id;
+        }
+        else
+        {
+            $last_invoice_id=0;
+        }
+
+        $ps=PosSetting::find(1);
+        //$pro=Product::where('store_id',$this->sdc->storeID())->where('general_sale',0)->get();
+        //dd($pro);
+        /*->when($filter, function($query) use ($filter){
+            if($filter=='id-desc'){ return $query->orderby('id','desc'); }
+            elseif($filter=='price:asc'){ return $query->orderby('price','asc'); }
+            elseif($filter=='price:desc'){ return $query->orderby('price','desc'); }
+            elseif($filter=='name:asc'){ return $query->orderby('name','asc'); }
+            elseif($filter=='name:desc'){ return $query->orderby('name','desc'); }
+            elseif($filter=='quantity:desc'){ return $query->orderby('quantity','desc'); }
+            elseif($filter=='position:asc'){ return $query->orderby('id','desc'); }
+            else{ return $query->orderby('id','desc'); }                    
+        })
+        ->paginate($this->GenaratePageDataLimit());*/
+
+        $CounterDisplay=$this->counterDisplayCheck();
+
+        $tender=Tender::where('store_id',$this->sdc->storeID())->get();
+        //$authorizeNettender=Tender::where('authorizenet',1)->get();
+        $payPaltender=Tender::where('paypal',1)->get();
+
+        $drawerStatus=OpenDrawer::where('store_id',$this->sdc->storeID())
+                            ->where('store_status','Open')
+                            ->count();
+
+        $catInfo=Category::where('store_id',$this->sdc->storeID())->get();
+
+        $stripe='';
+        $stripe_store_settings=\DB::table('stripe_store_settings')->where('module_status',1)->where('store_id',$this->sdc->storeID())->count();
+        if($stripe_store_settings>0)
+        {
+           $stripe=\DB::table('stripe_store_settings')->where('store_id',$this->sdc->storeID())->first();
+        }
+
+        $cardPointe='';
+        $cardPointe_store_settings=\DB::table('cardpointe_store_settings')->where('store_id',$this->sdc->storeID())->count();
+        if($cardPointe_store_settings>0)
+        {
+           $cardPointe=\DB::table('cardpointe_store_settings')->where('store_id',$this->sdc->storeID())->first();
+        }
+
+        $authorizeNettender='';
+        $stripe_store_settings=\DB::table('authorize_net_payments')->where('active_module',1)->where('store_id',$this->sdc->storeID())->count();
+        if($stripe_store_settings>0)
+        {
+           $authorizeNettender=Tender::where('authorizenet',1)->get();
+        }
+
+        $square = '';
+        $square_store_settings = SquareAccount::where('module_status', 1)->where('store_id', $this->sdc->storeID())->count();
+        if ($square_store_settings > 0) {
+            $square = SquareAccount::where('store_id', $this->sdc->storeID())->first();
+        }
+
+        $systemArray=[
+                //'product'=>$pro,
+                'tender'=>$tender,
+                'catInfo'=>$catInfo,
+                'addPartialPayment'=>0,
+                'payPaltender'=>$payPaltender,
+                'drawerStatus'=>$drawerStatus,
+                'authorizeNettender'=>$authorizeNettender,
+                'ps'=>$ps,'cart'=>$Cart,
+                //'customerData'=>$tab_customer,
+                "last_invoice_id"=>$last_invoice_id,
+                'CounterDisplay'=>$CounterDisplay,
+                'cardpointe'=>$cardPointe,
+                'stripe'=>$stripe,
+                'square' => $square,
+            ];
+
+        $chkPS=ProductSettings::select('id')->where('store_id',$this->sdc->storeID())->count();
+        if($chkPS>0)
+        {
+            $chkPSData=ProductSettings::select('product_image_status')->where('store_id',$this->sdc->storeID())->first();
+            $systemArray = array_merge($systemArray,['product_image_status'=>$chkPSData]);
+        }
+
+        return view('apps.pages.pos.index-terminal',$systemArray);
+    }
+
     public function loadPartialPaidInvoiceOnly()
     {
         $loadInvoices=Invoice::join('customers','invoices.customer_id','=','customers.id')

@@ -369,6 +369,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/sales', 'InvoiceController@index');
 	Route::post('/slide-menu/slide/status', 'InvoiceController@slide');
 	Route::get('/pos', 'InvoiceController@pos');
+	Route::get('/posterminal', 'InvoiceController@posterminal');
 	Route::get('/pos/clear', 'InvoiceController@posclear');
 	Route::post('/open/store', 'InvoiceController@openStore');
 	Route::post('/cart/pos/payout', 'InvoiceController@savePayout');
