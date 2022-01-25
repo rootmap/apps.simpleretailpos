@@ -177,7 +177,7 @@ class Pos {
 
     public function add($item, $id) {
 
-        $storeditem = ['qty' => 0, 'price' => $item->price,'tax' =>0, 'unitprice' => $item->price, 'item' => $item->name, 'item_id' => $id];
+        $storeditem = ['qty' => 0, 'price' => $item->price,'tax' =>0, 'unitprice' => $item->price, 'item' => $item->name, 'item_id' => $id, 'item_type' =>'Normal'];
         if ($this->items) {
             if (array_key_exists($id, $this->items)) {
                 $storeditem = $this->items[$id];
@@ -195,7 +195,7 @@ class Pos {
 
     public function addCustomPrice($item, $id,$price) {
 
-        $storeditem = ['qty' => 0, 'price' => $price,'tax' =>0, 'unitprice' => $price, 'item' => $item->name, 'item_id' => $id];
+        $storeditem = ['qty' => 0, 'price' => $price,'tax' =>0, 'unitprice' => $price, 'item' => $item->name, 'item_id' => $id, 'item_type' =>'Normal'];
         if ($this->items) {
             if (array_key_exists($id, $this->items)) {
                 $storeditem = $this->items[$id];
@@ -214,7 +214,7 @@ class Pos {
 
     public function addCustomQuantity($item, $id,$quantity) {
 
-        $storeditem = ['qty' => 0, 'price' => $item->price,'tax' =>0, 'unitprice' => $item->price, 'item' => $item->name, 'item_id' => $id];
+        $storeditem = ['qty' => 0, 'price' => $item->price,'tax' =>0, 'unitprice' => $item->price, 'item' => $item->name, 'item_id' => $id, 'item_type' =>'Normal'];
         if ($this->items) {
             if (array_key_exists($id, $this->items)) {
                 $storeditem = $this->items[$id];
@@ -247,7 +247,8 @@ class Pos {
                         'tax' =>0, 
                         'unitprice' =>$price, 
                         'item' => $item->name, 
-                        'item_id' => $id
+                        'item_id' => $id, 
+                        'item_type' =>'Normal'
                     ];
                     
         if ($this->items) {
@@ -346,7 +347,7 @@ class Pos {
     }
 
     public function ClearCart() {
-        $storeditem = ['qty' => 0, 'price' => 0,'tax' =>0, 'unitprice' => 0, 'item' => null, 'item_id' =>0];
+        $storeditem = ['qty' => 0, 'price' => 0,'tax' =>0, 'unitprice' => 0, 'item' => null, 'item_id' =>0, , 'item_type' =>'Normal'];
         $this->items = null;
         $this->invoiceID = null;
         $this->totalQty = 0;

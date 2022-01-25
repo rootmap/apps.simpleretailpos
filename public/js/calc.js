@@ -264,22 +264,18 @@ function reset_calc() {
 
 // backspacing value
 function backspace() {
+
   if ( display.text() !== '' && display.text() !== '0' ) {
-
-    
-
     display.text( display.text().substring(0, display.text().length - 1) );
     if ( is_a === true ) {
         a = parseFloat(a.toString().substring(0, a.toString().length - 1 ));
     } else {
         b = parseFloat(b.toString().substring(0, b.toString().length - 1 ));
     }
-
     if(display.text().length==0)
     {
         display.text(0);
     }
-
   } else {
     write('Nothing Left to Backspace');
   }
@@ -421,6 +417,7 @@ jQuery('#calc_neg').click(function() {
 
 // click backspace
 jQuery('#calc_back').click(function() {
+
   backspace();
 });
 
@@ -508,29 +505,23 @@ jQuery(document).keypress(function (e) {
 
 // keydown for backspace and return
 jQuery(document).keydown(function (e) {
+      // the character code
+      var charCode = e.which;
 
-  // the character code
-  var charCode = e.which;
+      // backspace
 
-  // backspace
-  if ( charCode === 8 ) {
-    backspace();
-    animateButton(jQuery('#calc_back'));
-    return false;
-  }
+      if ( charCode === 8 ) {
+        
+        backspace();
+        animateButton(jQuery('#calc_back'));
+        return false;
+      }
 
-  // clear
-  if ( charCode === 12 ) {
-    reset_calc();
-    animateButton(jQuery('#calc_clear'));
-    return false;
-  }
-
-  // return
-  if ( charCode === 13 ) {
-    submit_calc();
-    animateButton(jQuery('#calc_eval'));
-    return false;
-  }
+      // clear
+      if ( charCode === 12 ) {
+        reset_calc();
+        animateButton(jQuery('#calc_clear'));
+        return false;
+      }
 
 });

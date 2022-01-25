@@ -515,7 +515,7 @@
                                 <button id="calc_back" value="&larr;" >&larr;</button>
                             </div>
                             <div id="extra-buttons" class="button-row">
-                                <button id="calc_denom" value="Give a name to this item" ><i class="fa fa-database"></i> Give Name To Item</button>
+                                <button id="calc_denom" value="Give a name to this item"><i class="fa fa-database"></i> Give Name To Item</button>
                                 <button id="calc_clear" value="C/E" >C/E</button>
                                 <button id="calc_sqrt" value="Add Item To Card" ><i class="fa fa-cart-plus"></i> Add Item To Card</button>
                             </div>
