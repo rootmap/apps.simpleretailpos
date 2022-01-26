@@ -445,6 +445,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 	//----------------POS Route Start--------------------------//
 	Route::post('/sales/cart/add/{pid}', 'InvoiceProductController@getAddToCart');
+	Route::post('/sales/vt/cart/add/{pid}', 'InvoiceProductController@getAddVTToCart');
 	//Route::post('/sales/cart/custom/add/{pid}/{quantity}', 'InvoiceProductController@getCustomQuantityToCart');
 	Route::post('/sales/cart/custom/add/{pid}/{quantity}/{price}', 'InvoiceProductController@getCustomQuantityToCart');
 	Route::post('/sales/cart/row/delete/{pid}', 'InvoiceProductController@getDelRowFRMCart');

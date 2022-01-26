@@ -5650,39 +5650,73 @@ class InvoiceController extends Controller
             {
                 $invoice_id=time();
             }
+            
+
 
             foreach($cart->items as $row):
                 $pid=$row['item_id'];
                 $quantity=$row['qty'];
                 $unitprice=$row['unitprice'];
-                $pro=Product::find($pid);
-                $tab_stock=new InvoiceProduct;
-                $tab_stock->invoice_id=$invoice_id;
-                $tab_stock->product_id=$pid;
-                $tab_stock->tax_percent=$cart->TaxRate;
-                $tab_stock->tax_amount=$row['tax'];
-                $tab_stock->quantity=$quantity;
-                $tab_stock->price=$unitprice;
-                $tab_stock->cost=$pro->cost;
-                $tab_stock->total_price=($quantity*$unitprice);
-                $tab_stock->total_cost=($quantity*$pro->cost);
-                $tab_stock->store_id=$this->sdc->storeID();
-                $tab_stock->created_by=$this->sdc->UserID();
-                $tab_stock->save();
 
-                Product::where('id',$pid)
-                ->update([
-                   'quantity' => \DB::raw('quantity - '.$quantity),
-                   'sold_times' => \DB::raw('sold_times + 1')
-                ]);
+                if($row['item_type']="VT")
+                {
+                    //$pro=Product::find($pid);
+                    $tab_stock=new InvoiceProduct;
+                    $tab_stock->invoice_id=$invoice_id;
+                    $tab_stock->product_id=$pid;
+                    $tab_stock->product_type="VT";
+                    $tab_stock->tax_percent=$cart->TaxRate;
+                    $tab_stock->tax_amount=$row['tax'];
+                    $tab_stock->quantity=$quantity;
+                    $tab_stock->price=$unitprice;
+                    $tab_stock->cost=$unitprice;
+                    $tab_stock->total_price=($quantity*$unitprice);
+                    $tab_stock->total_cost=($quantity*$unitprice);
+                    $tab_stock->store_id=$this->sdc->storeID();
+                    $tab_stock->created_by=$this->sdc->UserID();
+                    $tab_stock->save();
 
-                $amount_invoice=($quantity*$unitprice);
-                $cost_invoice=($quantity*$pro->cost);
-                $profit_invoice=$amount_invoice-$cost_invoice;
-                $total_amount_invoice+=$amount_invoice;
-                $total_cost_invoice+=$cost_invoice;
-                $total_profit_invoice+=$profit_invoice;
-                $total_sold_quantity+=$quantity;
+                    $amount_invoice=($quantity*$unitprice);
+                    $cost_invoice=($quantity*$unitprice);
+                    $profit_invoice=$amount_invoice-$cost_invoice;
+                    $total_amount_invoice+=$amount_invoice;
+                    $total_cost_invoice+=$cost_invoice;
+                    $total_profit_invoice+=$profit_invoice;
+                    $total_sold_quantity+=$quantity;
+                }
+                else
+                {
+                    $pro=Product::find($pid);
+                    $tab_stock=new InvoiceProduct;
+                    $tab_stock->invoice_id=$invoice_id;
+                    $tab_stock->product_id=$pid;
+                    $tab_stock->tax_percent=$cart->TaxRate;
+                    $tab_stock->tax_amount=$row['tax'];
+                    $tab_stock->quantity=$quantity;
+                    $tab_stock->price=$unitprice;
+                    $tab_stock->cost=$pro->cost;
+                    $tab_stock->total_price=($quantity*$unitprice);
+                    $tab_stock->total_cost=($quantity*$pro->cost);
+                    $tab_stock->store_id=$this->sdc->storeID();
+                    $tab_stock->created_by=$this->sdc->UserID();
+                    $tab_stock->save();
+
+                    Product::where('id',$pid)
+                    ->update([
+                    'quantity' => \DB::raw('quantity - '.$quantity),
+                    'sold_times' => \DB::raw('sold_times + 1')
+                    ]);
+
+                    $amount_invoice=($quantity*$unitprice);
+                    $cost_invoice=($quantity*$pro->cost);
+                    $profit_invoice=$amount_invoice-$cost_invoice;
+                    $total_amount_invoice+=$amount_invoice;
+                    $total_cost_invoice+=$cost_invoice;
+                    $total_profit_invoice+=$profit_invoice;
+                    $total_sold_quantity+=$quantity;
+                }
+
+                
             endforeach;
 
             
@@ -5832,6 +5866,11 @@ class InvoiceController extends Controller
 
             $Ncart = new Pos($cart);
             $Ncart->ClearCart();
+
+            $defualtCustomer=$this->genarateDefaultCustomer();
+            $cart->addCustomerID($defualtCustomer);
+            $this->getSalesCartTokenID();
+
             Session::put('Pos', $Ncart);
             if($request->printData==1)
             {

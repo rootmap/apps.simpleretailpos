@@ -77,6 +77,54 @@ class InvoiceProductController extends Controller
         return response()->json(1);
     }
 
+    public function getAddVTToCart(Request $request, $pid) {
+
+        $defualtCustomer=$this->genarateDefaultCustomer();
+
+        if(isset($request->price))
+        {
+            $product=[
+                'id'=>$pid,
+                'name'=>$request->ProductName,
+                'barcode'=>$pid,
+                'detail'=>$request->ProductName,
+                'price'=>$request->price,
+                'cost'=>$request->price,
+                'image'=>'VT001'
+            ];
+            
+            $oldCart = $request->session()->has('Pos') ?  $request->session()->get('Pos') : null;
+            $cart = new Pos($oldCart);
+            $cart->addCustomVTPrice($product, $pid,$request->price);
+        }
+        else
+        {
+            $product=[
+                'id'=>$pid,
+                'name'=>$request->ProductName,
+                'barcode'=>$pid,
+                'detail'=>$request->ProductName,
+                'price'=>$request->price,
+                'cost'=>$request->price,
+                'image'=>'VT001'
+            ];
+            
+            $oldCart = $request->session()->has('Pos') ?  $request->session()->get('Pos') : null;
+            $cart = new Pos($oldCart);
+            $cart->addVT($product,$pid);
+        }
+
+        if(empty($cart->customerID))
+        {
+            $cart = new Pos($cart);
+            $cart->addCustomerID($defualtCustomer);
+        }
+
+        
+        $request->session()->put('Pos', $cart);
+        return response()->json(1);
+    }
+
     public function getCustomQuantityToCart(Request $request,$pid=0,$quantity=0,$price=0) {
 
         $product = Product::find($pid);
@@ -110,14 +158,13 @@ class InvoiceProductController extends Controller
    }
 
     public function getPaidCart(Request $request) {
-
         $paidAmount=$request->paidAmount;
         $paymentID=$request->paymentID;
         $oldCart = $request->session()->has('Pos') ? $request->session()->get('Pos') : null;
         $cart = new Pos($oldCart);
         $cart->addPayment($paidAmount, $paymentID);
         $request->session()->put('Pos', $cart);
-            return response()->json(1);
+        return response()->json(1);
     }
 
     public function getPaidCartPublic(Request $request) {

@@ -1,5 +1,18 @@
 var csrftLarVe = $('meta[name="pos-token"]').attr("content");
 
+function moneyFormatConvent(nStr)
+{
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
+}
+
 function liveRowCartEdit(rowID) {
     var rowData = $("#" + rowID).children("td:eq(1)").html();
     if ($("#" + rowID).children("td:eq(1)").children("input").val()) {
@@ -570,6 +583,106 @@ function add_pos_cart(ProductID, ProductPrice, ProductName) {
         'dataType': 'json',
         'url': AddPOSUrl,
         'data': { 'product_id': ProductID, 'price': ProductPrice, '_token': csrftLarVe },
+        'success': function(data) {
+            //tmp = data;
+            $("#cartMessageProShow").html(successMessage("Product Added To Cart Successfully."));
+            //console.log("Processing : "+data);
+        }
+    });
+    //------------------------Ajax POS End---------------------------//
+
+}
+
+function add_pos_vt_cart(ProductID, ProductPrice, ProductName) {
+    $(".emptCRTMSG").remove();
+    $("#cartMessageProShow").html(loadingOrProcessing("Processing, Please Wait....!!!!"));
+    if ($("#dataCart tr").length > 0) {
+        if($("#dataCart tr").length==1)
+        {
+            if($("#dataCart > tr:first-child").children('td:eq(0)').children('h3').length==1)
+            {
+                $("#dataCart > tr:first-child").remove();
+            }
+        }
+
+        if ($("#dataCart tr[id=" + ProductID + "]").length) {
+
+            if ($("#dataCart tr[id=" + ProductID + "]").find("td:eq(2)").children("span").children("input").length) {
+                $("#cartMessageProShow").html(warningMessage("Failed, Product in edit mode."));
+                return false;
+            }
+            var ProductPrice = parseFloat($("#dataCart tr[id=" + ProductID + "]").find("td:eq(2)").children("span").html()).toFixed(2);
+            var ExQuantity = $("#dataCart tr[id=" + ProductID + "]").find("td:eq(1)").children('div').children('input').val();
+            if (ExQuantity == 1) {
+                console.log('WOrking did', ExQuantity);
+                $("#dataCart tr[id=" + ProductID + "]").children('td:eq(1)').children('div').children('span:eq(0)').children('i').attr('class', 'icon-minus');
+            }
+            var NewQuantity = (ExQuantity - 0) + (1 - 0);
+            var NewPrice = (ProductPrice * NewQuantity).toFixed(2);
+            var taxAmount = parseFloat((NewPrice * taxRate) / 100).toFixed(2);
+            $("#dataCart tr[id=" + ProductID + "]").find("td:eq(1)").children('div').children('input').val(NewQuantity);
+            $("#dataCart tr[id=" + ProductID + "]").find("td:eq(3)").children("span").html(parseFloat(NewPrice).toFixed(2));
+            $("#dataCart tr[id=" + ProductID + "]").find("td:eq(2)").attr("data-tax", taxAmount);
+        } else {
+            var quantityPlaceFUnc = "javascript:add_pos_cart(" + ProductID + "," + ProductPrice + ",'" + ProductName + "');";
+            var quantityPlace = "";
+            quantityPlace += '<div class="input-group" style="border-spacing: 0px !important;">';
+            quantityPlace += '  <span class="input-group-addon dedmoreqTv4Ex">';
+            quantityPlace += '     <i class="icon-remove"></i>';
+            quantityPlace += '  </span>';
+            quantityPlace += '  <input style="text-align: center;" type="text" class="form-control directquantitypos" value="1">';
+            quantityPlace += '  <span onlclick="' + quantityPlaceFUnc + '" class="input-group-addon addmoreqTv4">';
+            quantityPlace += '     <i class="icon-plus addmoreqTv4Ex"></i>';
+            quantityPlace += '  </span>';
+            quantityPlace += '</div>';
+
+            var taxAmount = parseFloat(((ProductPrice * 1) * taxRate) / 100).toFixed(2);
+            var strHTML = '<tr id="' + ProductID + '"><td style="line-height: 35px;">' + ProductName + '</td>';
+            strHTML += '<td >' + quantityPlace + '</td>';
+            strHTML += '<td  class="priceEdit"  style="line-height: 35px;" data-tax="' + taxAmount + '"  data-price="' + ProductPrice + '">$<span>' + ProductPrice + '</span></td>';
+            strHTML += '<td  class="priceEdit"  style="line-height: 35px;">$<span>' + parseFloat(ProductPrice).toFixed(2) + '</span></td>';
+            strHTML += '</tr>';
+
+            $("#dataCart").append(strHTML);
+        }
+    } else {
+
+        console.log('Total Row Length = ',$("#dataCart tr").length);
+
+        var quantityPlaceFUnc = "javascript:add_pos_cart(" + ProductID + "," + ProductPrice + ",'" + ProductName + "');";
+        var quantityPlace = '';
+        quantityPlace += '<div class="input-group" style="border-spacing: 0px !important;">';
+        quantityPlace += '  <span class="input-group-addon dedmoreqTv4Ex">';
+        quantityPlace += '     <i class="icon-remove"></i>';
+        quantityPlace += '  </span>';
+        quantityPlace += '  <input style="text-align: center; " type="text" class="form-control directquantitypos" value="1">';
+        quantityPlace += '  <span onlclick="' + quantityPlaceFUnc + '"  class="input-group-addon addmoreqTv4">';
+        quantityPlace += '     <i class="icon-plus addmoreqTv4Ex"></i>';
+        quantityPlace += '  </span>';
+        quantityPlace += '</div>';
+
+        var taxAmount = parseFloat(((ProductPrice * 1) * taxRate) / 100).toFixed(2);
+        var strHTML = '<tr id="' + ProductID + '"><td style="line-height: 35px;">' + ProductName + '</td>';
+        strHTML += '<td style="line-height: 35px;">' + quantityPlace + '</td>';
+        strHTML += '<td  class="priceEdit"  style="line-height: 35px;" data-tax="' + taxAmount + '"  data-price="' + ProductPrice + '">$<span>' + ProductPrice + '</span></td>';
+        strHTML += '<td  class="priceEdit"  style="line-height: 35px;">$<span>' + parseFloat(ProductPrice).toFixed(2) + '</span></td>';
+        strHTML += '</tr>';
+
+        $("#dataCart").append(strHTML);
+    }
+
+
+    genarateSalesTotalCart();
+    $("#cartMessageProShow").html(loadingOrProcessing("Adding To Cart, Please Wait...!!!!"));
+    //------------------------Ajax POS Start-------------------------//
+    var AddPOSUrl = AddSalesVTCartAddUrl + "/" + ProductID;
+    $.ajax({
+        'async': false,
+        'type': "POST",
+        'global': false,
+        'dataType': 'json',
+        'url': AddPOSUrl,
+        'data': { 'product_id': ProductID, 'product_name': ProductName, 'price': ProductPrice, '_token': csrftLarVe },
         'success': function(data) {
             //tmp = data;
             $("#cartMessageProShow").html(successMessage("Product Added To Cart Successfully."));
@@ -2108,14 +2221,15 @@ $(document).ready(function() {
         if (c) {
             var amount_to_pay = $("input[name=amount_to_pay]").val();
             console.log(amount_to_pay, payment_id, $.trim(payment_text));
-            var expaid = $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html();
+            var expaid = $("#posCartSummary tr:eq(4)").find("td:eq(3)").children("span").html();
+            //expaid = expaid.replace(',','');
             if ($.trim(expaid) == 0) {
                 var parseNewPayment = parseFloat(amount_to_pay).toFixed(2);
-                $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html(parseNewPayment);
+                $("#posCartSummary tr:eq(4)").find("td:eq(3)").children("span").html(parseNewPayment);
             } else {
                 var newpayment = (expaid - 0) + (amount_to_pay - 0);
                 var parseNewPayment = parseFloat(newpayment).toFixed(2);
-                $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html(parseNewPayment);
+                $("#posCartSummary tr:eq(4)").find("td:eq(3)").children("span").html(parseNewPayment);
             }
             genarateSalesTotalCart();
             $("#payModal").modal("hide");
@@ -2491,7 +2605,10 @@ $(document).ready(function() {
             return false;
         }
         console.log($(this).val());
-        var dues = $("#posCartSummary tr:eq(5)").find("td:eq(1)").children("span").html();
+        var dues = $("#totalCartDueToPay").html();
+        console.log('Dues 1 = ', dues);
+        dues=dues.replace(",", "");
+        console.log('Dues 2 = ', dues);
         var amp = $(this).val();
         if ($.isNumeric($.trim(amp))) {
             var newAMP = amp;
@@ -3483,7 +3600,9 @@ function genarateSalesTotalCart() {
             if($(row).find("td:eq(3)").length)
             {
                 var rowPrice = $(row).find("td:eq(3)").children("span").html();
-                console.log('rowPrice = ',rowPrice);
+                console.log('rowPrice 1 = ',rowPrice);
+                var rowPrice=rowPrice.replace(",", "");
+                console.log('rowPrice 2 = ',rowPrice);
                 var rowTax = $(row).find("td:eq(2)").attr("data-tax");
                 subTotalPrice += (rowPrice - 0);
                 TotalTax += (rowTax - 0);
@@ -3534,20 +3653,20 @@ function genarateSalesTotalCart() {
         }
 
         $("#posCartSummary tr:eq(2)").find("th").children("span").html(discount + "%");
-        $("#posCartSummary tr:eq(0)").find("td:eq(2)").children("span").html(newsubTotalPrice);
-        $("#posCartSummary tr:eq(1)").find("td:eq(2)").children("span").html(newTotalTax);
-        $("#posCartSummary tr:eq(2)").find("td:eq(2)").children("span").html(newDiscount);
-        $("#posCartSummary tr:eq(3)").find("td:eq(2)").children("span").html(newPriceTotal);
-        $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html(paid);
-        $("#posCartSummary tr:eq(5)").find("td:eq(2)").children("span").html(newdues);
+        $("#posCartSummary tr:eq(0)").find("td:eq(2)").children("span").html(moneyFormatConvent(newsubTotalPrice));
+        $("#posCartSummary tr:eq(1)").find("td:eq(2)").children("span").html(moneyFormatConvent(newTotalTax));
+        $("#posCartSummary tr:eq(2)").find("td:eq(2)").children("span").html(moneyFormatConvent(newDiscount));
+        $("#posCartSummary tr:eq(3)").find("td:eq(2)").children("span").html(moneyFormatConvent(newPriceTotal));
+        $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html(moneyFormatConvent(paid));
+        $("#posCartSummary tr:eq(5)").find("td:eq(2)").children("span").html(moneyFormatConvent(newdues));
         if (parseFloat(paid) > 0) { $("#posCartSummary tr:eq(4)").show(); } else { $("#posCartSummary tr:eq(4)").hide(); }
         if (parseFloat(newTotalTax) > 0) { $("#posCartSummary tr:eq(1)").show(); } else { $("#posCartSummary tr:eq(1)").hide(); }
         if (parseFloat(newDiscount) > 0) { $("#posCartSummary tr:eq(2)").show(); } else { $("#posCartSummary tr:eq(2)").hide(); }
-        $("#cartTotalAmount").html(newPriceTotal);
+        $("#cartTotalAmount").html(moneyFormatConvent(newPriceTotal));
         $("input[name=amount_to_pay]").val(newdues);
         console.log($("input[name=amount_to_pay]").val());
         $("#prmDue").html(newdues);
-        $("#totalCartDueToPay").html(newdues);
+        $("#totalCartDueToPay").html(moneyFormatConvent(newdues));
         $(".posQL").show();
         $(".emptCRTMSG").show();
     } else {

@@ -193,9 +193,45 @@ class Pos {
         $this->calculateTax();
     }
 
+    public function addVT($item, $id) {
+
+        $storeditem = ['qty' => 0, 'price' => $item['price'],'tax' =>0, 'unitprice' => $item['price'], 'item' => $item['name'], 'item_id' => $id, 'item_type' =>'VT'];
+        if ($this->items) {
+            if (array_key_exists($id, $this->items)) {
+                $storeditem = $this->items[$id];
+            }
+        }
+        $storeditem['qty'] ++;
+        $storeditem['price'] = $item['price'] * $storeditem['qty'];
+        $storeditem['tax'] = (($storeditem['price'] * $this->TaxRate)/100);
+        $this->items[$id] = $storeditem;
+        $this->totalQty++;
+        $this->totalPrice += $item['price'];
+        $this->totalTax += $storeditem['tax'];
+        $this->calculateTax();
+    }
+
     public function addCustomPrice($item, $id,$price) {
 
         $storeditem = ['qty' => 0, 'price' => $price,'tax' =>0, 'unitprice' => $price, 'item' => $item->name, 'item_id' => $id, 'item_type' =>'Normal'];
+        if ($this->items) {
+            if (array_key_exists($id, $this->items)) {
+                $storeditem = $this->items[$id];
+            }
+        }
+        $storeditem['qty'] ++;
+        $storeditem['price'] = $price * $storeditem['qty'];
+        $storeditem['tax'] = (($storeditem['price'] * $this->TaxRate)/100);
+        $this->items[$id] = $storeditem;
+        $this->totalQty++;
+        $this->totalPrice += $price;
+        $this->totalTax += $storeditem['tax'];
+        $this->calculateTax();
+    }
+
+    public function addCustomVTPrice($item, $id,$price) {
+
+        $storeditem = ['qty' => 0, 'price' => $price,'tax' =>0, 'unitprice' => $price, 'item' => $item['name'], 'item_id' => $id, 'item_type' =>'VT'];
         if ($this->items) {
             if (array_key_exists($id, $this->items)) {
                 $storeditem = $this->items[$id];
@@ -347,9 +383,9 @@ class Pos {
     }
 
     public function ClearCart() {
-        $storeditem = ['qty' => 0, 'price' => 0,'tax' =>0, 'unitprice' => 0, 'item' => null, 'item_id' =>0, , 'item_type' =>'Normal'];
+        // $storeditem = ['qty' => 0, 'price' => 0,'tax' =>0, 'unitprice' => 0, 'item' => null, 'item_id' =>0, , 'item_type' =>'Normal'];
         $this->items = null;
-        $this->invoiceID = null;
+        $this->invoiceID = time();
         $this->totalQty = 0;
         $this->totalPrice = 0;
         $this->totalTax = 0;

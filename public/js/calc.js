@@ -12,7 +12,7 @@ var a = 0,
   first_b = true,
   is_submission = false,
   soft_sub = false,
-  display = jQuery('#total');
+  display = jQuery('#totalVT');
 
 
 
@@ -312,7 +312,7 @@ function newResult(a,o,b,answer) {
   jQuery('.calc_use').off('click').on('click', function() {
     var i = jQuery(this).parent('.use').siblings('.answer').text();
     jQuery(this).parents('.result').animate({'opacity': '0.5'},200).animate({'opacity': '1'},200);
-    jQuery('#total').animate({'opacity': '0.5'},200).animate({'opacity': '1'},200);
+    jQuery('#totalVT').animate({'opacity': '0.5'},200).animate({'opacity': '1'},200);
     memory(i);
     return false;
   });
@@ -441,8 +441,34 @@ jQuery('#calc_square').click(function() {
 
 // click denominator
 jQuery('#calc_denom').click(function() {
-  alert('Name popup for item');
+  $('#virtualTerminalModal').modal('show');
   return false;
+});
+
+function uuidv4() {
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  );
+}
+
+jQuery('.modalBtnAddItemTocard').click(function() {
+    var itemName=$("input[name='vtFidName']").val();
+    var itemPrice=$('#totalVT').text();
+    console.log('itemName = ',itemName);
+    console.log('itemPrice = ',itemPrice);
+    //return false;
+    // if(itemName.length==0)
+    // {
+    //     $("#vtMSG").html(warningMessage("Wrong credential, Verification Failed."));
+    //     return false;
+    // }
+    if(itemName.length==0)
+    {
+        itemName="item";
+    }
+    var uuidv=uuidv4();
+    add_pos_vt_cart(uuidv,itemPrice,itemName);
+
 });
 
 
@@ -510,12 +536,12 @@ jQuery(document).keydown(function (e) {
 
       // backspace
 
-      if ( charCode === 8 ) {
+      // if ( charCode === 8 ) {
         
-        backspace();
-        animateButton(jQuery('#calc_back'));
-        return false;
-      }
+      //   backspace();
+      //   animateButton(jQuery('#calc_back'));
+      //   return false;
+      // }
 
       // clear
       if ( charCode === 12 ) {
