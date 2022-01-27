@@ -5715,8 +5715,6 @@ class InvoiceController extends Controller
                     $total_profit_invoice+=$profit_invoice;
                     $total_sold_quantity+=$quantity;
                 }
-
-                
             endforeach;
 
             
