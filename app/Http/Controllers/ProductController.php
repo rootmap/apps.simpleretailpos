@@ -52,7 +52,7 @@ class ProductController extends Controller
     }
     public function profitQuery($request)
     {
-        $invoice=Product::where('store_id',$this->sdc->storeID())->get();
+        $invoice=Product::where('store_id',$this->sdc->storeID())->where('vt_product',0)->get();
 
         return $invoice;
     }
@@ -427,6 +427,7 @@ class ProductController extends Controller
         if(empty($start_date) && empty($end_date) && empty($dateString))
         {
             $invoice = Product::where('products.store_id',$this->sdc->storeID())
+                     ->where('vt_product',0)
                      ->when($dateString, function ($query) use ($dateString) {
                             return $query->whereRaw($dateString);
                      })
@@ -437,6 +438,7 @@ class ProductController extends Controller
         else
         {
             $invoice = Product::where('products.store_id',$this->sdc->storeID())
+                     ->where('vt_product',0)
                      ->when($dateString, function ($query) use ($dateString) {
                             return $query->whereRaw($dateString);
                      })
@@ -484,6 +486,7 @@ class ProductController extends Controller
         }
 
         $invoice = Product::where('products.store_id',$this->sdc->storeID())
+                     ->where('vt_product',0)
                      ->when($dateString, function ($query) use ($dateString) {
                             return $query->whereRaw($dateString);
                      })
@@ -991,6 +994,7 @@ class ProductController extends Controller
                      ->when($dateString, function ($query) use ($dateString) {
                             return $query->whereRaw($dateString);
                      })
+                     ->where('vt_product',0)
                      ->take(100)
                      ->orderBy('id','DESC')
                      ->get();
@@ -998,6 +1002,7 @@ class ProductController extends Controller
         else
         {
             $invoice=Product::where('store_id',$this->sdc->storeID())
+                     ->where('vt_product',0)
                      ->when($product_id, function ($query) use ($product_id) {
                             return $query->where('id','=', $product_id);
                      })
@@ -1035,7 +1040,7 @@ class ProductController extends Controller
 
         $invoice=$this->productProfitSQL($request);
 
-        $tab_customer=Product::where('store_id',$this->sdc->storeID())->get();
+        $tab_customer=Product::where('store_id',$this->sdc->storeID())->where('vt_product',0)->get();
    
 
         return view('apps.pages.report.product-profit',

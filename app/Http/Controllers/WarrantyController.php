@@ -149,7 +149,7 @@ class WarrantyController extends Controller
 
         //print_r($tabInvoiceProduct); die();             
 
-        $tab_product=Product::select('id','name','quantity')->where('store_id',$this->sdc->storeID())->get();
+        $tab_product=Product::select('id','name','quantity')->where('vt_product',0)->where('store_id',$this->sdc->storeID())->get();
 
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
 

@@ -598,7 +598,7 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        $pro=Product::where('store_id', $this->sdc->storeID())->get();
+        $pro=Product::where('store_id', $this->sdc->storeID())->where('vt_product',0)->get();
         $cat=Category::where('store_id', $this->sdc->storeID())->get();
         return view('apps.pages.purchase.purchase',['productData'=> $pro,'catData'=>$cat]);
     }

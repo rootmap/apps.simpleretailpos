@@ -23,6 +23,9 @@
                   <button type="button" class="btn text-center btn-info btn-lighten-2 btn-responsive  modalBtnAddItemTocard" >
                       <i class="fa fa-cart-plus"></i>  Add Item To Card
                   </button>
+                  <button type="button" class="btn text-center btn-info btn-lighten-4 btn-responsive  btnAddItemTocard" >
+                      <i class="fa fa-cart-plus"></i>  Add Item To Card Without Name
+                  </button>
           </div>
         </form>
       </div>

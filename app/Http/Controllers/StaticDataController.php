@@ -375,6 +375,22 @@ class StaticDataController extends Facade {
         return 1;
     }
 
+    public static function getVTItemName(){
+        $store_id=Auth::user()->store_id;
+        $countInvoiceLayout=PosSetting::where('store_id',$store_id)->count();
+        if($countInvoiceLayout==0)
+        {
+            $itemName="VT Item";
+        }
+        else
+        {
+            $invoiceLayout=PosSetting::where('store_id',$store_id)->first();
+            $itemName=$invoiceLayout->vt_item_name;
+        }
+
+        return $itemName;
+    }
+
     public static function InvoiceLayout($store_id=0) 
     {
         if(empty($store_id))
@@ -438,7 +454,7 @@ class StaticDataController extends Facade {
         $spreadsheet = new Spreadsheet();
         
         $sheet = $spreadsheet->getActiveSheet();
-        $spreadsheet->getActiveSheet()->setTitle($excelArray['report_title']." ".time());
+        $spreadsheet->getActiveSheet()->setTitle(substr($excelArray['report_title'],0,15)." ".time());
 
         $characterMerge=65+count($excelArray['data'][0]);
         $characterMergeName=chr($characterMerge-1);
@@ -536,7 +552,7 @@ class StaticDataController extends Facade {
         
         $writer = new Xlsx($spreadsheet);
         //$writer->save('hello world.xlsx');
-        $fileName=$excelArray['report_name'].".xlsx";
+        $fileName=substr($excelArray['report_name'],0,29).".xlsx";
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment; filename="'.$fileName.'"');
         $writer->save('php://output');

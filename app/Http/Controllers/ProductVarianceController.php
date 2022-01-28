@@ -21,7 +21,7 @@ class ProductVarianceController extends Controller
 
     public function index()
     {
-        $tab=Product::where('store_id',$this->sdc->storeID())->select('id','name')->get();
+        $tab=Product::where('store_id',$this->sdc->storeID())->where('vt_product',0)->select('id','name')->get();
         return view('apps.pages.variance.create',['dataTable'=>$tab]);
     }
 

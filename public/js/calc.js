@@ -456,19 +456,49 @@ jQuery('.modalBtnAddItemTocard').click(function() {
     var itemPrice=$('#totalVT').text();
     console.log('itemName = ',itemName);
     console.log('itemPrice = ',itemPrice);
-    //return false;
-    // if(itemName.length==0)
-    // {
-    //     $("#vtMSG").html(warningMessage("Wrong credential, Verification Failed."));
-    //     return false;
-    // }
     if(itemName.length==0)
     {
-        itemName="item";
+        swalErrorMsg("You wanted to give a name, but your item name is empty.");
+        return false;
     }
-    var uuidv=uuidv4();
-    add_pos_vt_cart(uuidv,itemPrice,itemName);
 
+    if(parseFloat(itemPrice)===0)
+    {
+        swalErrorMsg("Please enter price.");
+        return false;
+    }
+
+    var uuidv=uuidv4();
+    $('#virtualTerminalModal').modal('hide');
+    add_pos_vt_cart(uuidv,parseFloat(itemPrice),itemName);
+
+    $("input[name='vtFidName']").val("");
+    $('#totalVT').text("0");
+    
+
+});
+
+jQuery('.btnAddItemTocard').click(function() {
+  var itemName=$("input[name='getVTItemName']").val();
+  var itemPrice=$('#totalVT').text();
+  console.log('itemName = ',itemName);
+  console.log('itemPrice = ',itemPrice);
+
+  if(parseFloat(itemPrice)===0)
+  {
+      swalErrorMsg("Please enter price.");
+      return false;
+  }
+
+  var uuidv=uuidv4();
+  add_pos_vt_cart(uuidv,parseFloat(itemPrice),itemName);
+  $('#totalVT').text("0");
+});
+
+jQuery('.vtSales').click(function() {
+    $(".vtOff").toggle('slow');
+    $("#virtual-terminal").toggle('slow');
+    $(".vtcloseOn").toggle('slow');
 });
 
 
@@ -487,67 +517,67 @@ jQuery('#result_clear').click(function() {
 */
 
 // key press for integers and operators
-jQuery(document).keypress(function (e) {
-  // the character code
-  var charCode = e.which;
-  // the key
-  var key = String.fromCharCode(charCode);
+// jQuery(document).keypress(function (e) {
+//   // the character code
+//   var charCode = e.which;
+//   // the key
+//   var key = String.fromCharCode(charCode);
 
-  // key integers & decimal
-  if ( charCode >= 46 && charCode <= 58 && charCode !== 47 ) {
-    if ( !is_submission ) {
-      if ( is_a ) {
-        set_a(key);
-      } else {
-        set_b(key);
-      }
-    } else if ( soft_sub ) {
-      set_b(key);
-    } else {
-      reset_calc();
-      set_a(key);
-    }
-  }
+//   // key integers & decimal
+//   if ( charCode >= 46 && charCode <= 58 && charCode !== 47 ) {
+//     if ( !is_submission ) {
+//       if ( is_a ) {
+//         set_a(key);
+//       } else {
+//         set_b(key);
+//       }
+//     } else if ( soft_sub ) {
+//       set_b(key);
+//     } else {
+//       reset_calc();
+//       set_a(key);
+//     }
+//   }
 
-  // key operators
-  if ( charCode >= 42 && charCode <= 45 && charCode !== 44 || charCode === 47 ) {
-    set_o(key);
-  }
+//   // key operators
+//   if ( charCode >= 42 && charCode <= 45 && charCode !== 44 || charCode === 47 ) {
+//     set_o(key);
+//   }
 
-  // key equals
-  if ( charCode === 61 ) {
-    submit_calc();
-  }
+//   // key equals
+//   if ( charCode === 61 ) {
+//     submit_calc();
+//   }
 
-  // animate the corrosponding button
-  jQuery('button').each(function() {
-    var value = jQuery(this).val();
-    if ( value === key ) {
-      animateButton(jQuery(this));
-    }
-  });
+//   // animate the corrosponding button
+//   jQuery('button').each(function() {
+//     var value = jQuery(this).val();
+//     if ( value === key ) {
+//       animateButton(jQuery(this));
+//     }
+//   });
 
-});
+// });
 
 // keydown for backspace and return
-jQuery(document).keydown(function (e) {
-      // the character code
-      var charCode = e.which;
+// jQuery(document).keydown(function (e) {
+//       // the character code
+//       var charCode = e.which;
 
-      // backspace
+//       // backspace
 
-      // if ( charCode === 8 ) {
+//       // if ( charCode === 8 ) {
         
-      //   backspace();
-      //   animateButton(jQuery('#calc_back'));
-      //   return false;
-      // }
+//       //   backspace();
+//       //   animateButton(jQuery('#calc_back'));
+//       //   return false;
+//       // }
 
-      // clear
-      if ( charCode === 12 ) {
-        reset_calc();
-        animateButton(jQuery('#calc_clear'));
-        return false;
-      }
+//       // clear
+//       if ( charCode === 12 ) {
+//         reset_calc();
+//         animateButton(jQuery('#calc_clear'));
+//         return false;
+//       }
 
-});
+// });

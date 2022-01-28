@@ -6,6 +6,7 @@
     $dataMenuAssigned=array();
     $dataMenuAssigned=StaticDataController::dataMenuAssigned();
     $userguideInit=StaticDataController::userguideInit();
+    $getVTItemName=StaticDataController::getVTItemName();
 
     //dd($dataMenuAssigned);
 ?>
@@ -22,6 +23,7 @@
                 
                 <div class="col-md-6" @if($userguideInit==1)  data-step="1" data-intro="Barcode Sales, Product could be sold by barcode." @endif>
                     <form method="post" action="javascript:loadCartProBar();" style="margin-top: -15px;">
+                            <input type="hidden" name="getVTItemName" value="{{$getVTItemName}}">
                             <label class="col-md-12 text-xs-center"><b>Enter Barcode</b></label>
                             <input type="text"  autocomplete="off" class="form-control col-md-6" name="barcode" placeholder="Enter Your Barcode & Press Enter.">
                     </form>
@@ -41,7 +43,7 @@
                         <div class="p-1">
                             <p class="text-xs-left mb-0">
                                 <a href="javascript:void(0);"  data-toggle="modal" data-target="#General_Sale" style="text-decoration: none;">
-                                    <i class="icon-database"></i> General Sale
+                                    <i class="icon-database"></i> General Sale 
                                 </a>
                             </p>         
                         </div>
@@ -49,11 +51,26 @@
                 </div>
             </div>
 
+            <div class="col-md-4">
+                <div class="card mb-1">
+                    <div class="card-body collapse in">
+                        <div class="bg-info bg-lighten-4 height-10"></div>
+                        <div class="p-1">
+                            <p class="text-xs-left mb-0">
+                                <a href="javascript:void(0);" class="vtSales" style="text-decoration: none;">
+                                    <i class="icon-monitor"></i> Virtual Terminal <i style="display:none;" class="icon-close vtcloseOn"></i> 
+                                </a>
+                            </p>         
+                        </div>
+                    </div>    
+                </div>
+            </div>
+            <div class="clearfix"></div>
             @if(isset($catInfo) && count($catInfo)>0)
                 <?php $i=1; ?>
                 @foreach($catInfo as $cat)
                 @if($cat->name=="Repair")
-                    <div class="col-md-3">
+                    <div class="col-md-3 vtOff">
                         <div class="card mb-1">
                             <div class="card-body collapse in">
                                 <div class="bg-info bg-lighten-{{$i}} height-10"></div>
@@ -68,7 +85,7 @@
                         </div>
                     </div>
                 @elseif($cat->name=="Ticket")
-                    <div class="col-md-3">
+                    <div class="col-md-3 vtOff">
                         <div class="card mb-1">
                             <div class="card-body collapse in">
                                 <div class="bg-info bg-lighten-{{$i}} height-10"></div>
@@ -83,7 +100,7 @@
                         </div>
                     </div>
                 @else
-                    <div class="col-md-3">
+                    <div class="col-md-3 vtOff">
                         <div class="card mb-1">
                             <div class="card-body collapse in">
                                 <div class="bg-info bg-lighten-{{$i}} height-10"></div>
@@ -107,7 +124,7 @@
                 ?>
                 @endforeach 
             @else
-                <div class="col-md-12">
+                <div class="col-md-12 vtOff">
                     <h2  class="text-xs-center">No categories found. <br>  <br> 
                         <a href="{{url('category')}}" class="btn btn-info"><i class="icon-ios-plus-outline"></i> Create Now</a>
                     </h2>

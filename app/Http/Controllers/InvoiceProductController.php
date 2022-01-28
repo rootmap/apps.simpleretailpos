@@ -85,9 +85,9 @@ class InvoiceProductController extends Controller
         {
             $product=[
                 'id'=>$pid,
-                'name'=>$request->ProductName,
+                'name'=>$request->product_name,
                 'barcode'=>$pid,
-                'detail'=>$request->ProductName,
+                'detail'=>$request->product_name,
                 'price'=>$request->price,
                 'cost'=>$request->price,
                 'image'=>'VT001'
@@ -101,9 +101,9 @@ class InvoiceProductController extends Controller
         {
             $product=[
                 'id'=>$pid,
-                'name'=>$request->ProductName,
+                'name'=>$request->product_name,
                 'barcode'=>$pid,
-                'detail'=>$request->ProductName,
+                'detail'=>$request->product_name,
                 'price'=>$request->price,
                 'cost'=>$request->price,
                 'image'=>'VT001'

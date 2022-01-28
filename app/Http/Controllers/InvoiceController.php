@@ -5660,7 +5660,24 @@ class InvoiceController extends Controller
 
                 if($row['item_type']="VT")
                 {
-                    //$pro=Product::find($pid);
+                    //$catInfo=Category::where('name',"Virtual Terminal")->first();
+                    $catInfo=\DB::table('categories')->where('name',"Virtual Terminal")->first();
+                    //dd($catInfo);
+                    $tabVTProduct=new Product();
+                    $tabVTProduct->category_id=$catInfo->id;
+                    $tabVTProduct->category_name=$catInfo->name;
+                    $tabVTProduct->name=$row['item'];
+                    $tabVTProduct->barcode="VT";
+                    $tabVTProduct->quantity=1;
+                    $tabVTProduct->price=$row['unitprice'];
+                    $tabVTProduct->cost=$row['unitprice'];
+                    $tabVTProduct->general_sale=1;
+                    $tabVTProduct->vt_product=1;
+                    $tabVTProduct->store_id=$this->sdc->storeID();
+                    $tabVTProduct->created_by=$this->sdc->UserID();
+                    $tabVTProduct->save();
+                    $pid=$tabVTProduct->id;
+
                     $tab_stock=new InvoiceProduct;
                     $tab_stock->invoice_id=$invoice_id;
                     $tab_stock->product_id=$pid;

@@ -24,7 +24,7 @@ class ProductStockinController extends Controller
 
     public function index()
     {
-        $tab_product=Product::where('store_id',$this->sdc->storeID())->get();
+        $tab_product=Product::where('store_id',$this->sdc->storeID())->where('vt_product',0)->get();
         $tab=ProductStockin::join('products as p','product_stockins.product_id','=','p.id')
                             ->where('product_stockins.store_id',$this->sdc->storeID())
                             ->select('product_stockins.*','p.name as product_name')
@@ -69,7 +69,8 @@ class ProductStockinController extends Controller
             'req_name'=>$request->name,
             'req_price'=>$request->price,
             'autoOrderID'=>$autoOrderID,
-            'vendorData'=>$vendorInfo]);
+            'vendorData'=>$vendorInfo
+        ]);
     }
 
     /**

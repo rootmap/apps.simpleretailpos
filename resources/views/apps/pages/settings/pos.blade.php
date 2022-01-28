@@ -45,6 +45,21 @@
 							</div>
 							<div class="form-body">
 	                			<div class="form-group row last">
+	                        		<label class="col-md-4 label-control">Virtual Terminal Item</label>
+	                        		<div class="col-md-7">
+										<div class="form-group">
+											<input type="text" id="eventRegInput1" class="form-control border-primary" placeholder="Default item Name" 
+											@if(isset($ps))
+												value="{{$ps->vt_item_name}}"  
+											@endif 
+											 name="vt_item_name">
+											 <code> Default Item Name For Virtual Terminal</code>
+										</div>
+									</div>
+		                        </div>
+							</div>
+							<div class="form-body">
+	                			<div class="form-group row last">
 	                        		<label class="col-md-4 label-control">Sales Tax Rate (%)</label>
 	                        		<div class="col-md-7">
 										<div class="form-group">
