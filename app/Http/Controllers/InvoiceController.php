@@ -2191,7 +2191,8 @@ class InvoiceController extends Controller
             $systemArray = array_merge($systemArray,['product_image_status'=>$chkPSData]);
         }
 
-        return view('apps.pages.pos.index',$systemArray);
+        //return view('apps.pages.pos.index',$systemArray);
+        return view('apps.pages.pos.index-terminal',$systemArray);
     }
 
     public function posterminal(Request $request)

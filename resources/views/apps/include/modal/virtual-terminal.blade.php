@@ -21,10 +21,10 @@
           </div>
           <div class="modal-footer" style="text-align: center;">
                   <button type="button" class="btn text-center btn-info btn-lighten-2 btn-responsive  modalBtnAddItemTocard" >
-                      <i class="fa fa-cart-plus"></i>  Add Item To Card
+                      <i class="fa fa-cart-plus"></i>  Add Item To Cart
                   </button>
                   <button type="button" class="btn text-center btn-info btn-lighten-4 btn-responsive  btnAddItemTocard" >
-                      <i class="fa fa-cart-plus"></i>  Add Item To Card Without Name
+                      <i class="fa fa-cart-plus"></i>  Add Item To Cart Without Name
                   </button>
           </div>
         </form>

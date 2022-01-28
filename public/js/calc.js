@@ -474,7 +474,7 @@ jQuery('.modalBtnAddItemTocard').click(function() {
 
     $("input[name='vtFidName']").val("");
     $('#totalVT').text("0");
-    
+    $("#calc_clear").trigger('click');
 
 });
 
@@ -491,8 +491,10 @@ jQuery('.btnAddItemTocard').click(function() {
   }
 
   var uuidv=uuidv4();
+  $('#virtualTerminalModal').modal('hide');
   add_pos_vt_cart(uuidv,parseFloat(itemPrice),itemName);
   $('#totalVT').text("0");
+  $("#calc_clear").trigger('click');
 });
 
 jQuery('.vtSales').click(function() {
