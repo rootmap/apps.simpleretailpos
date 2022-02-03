@@ -3,18 +3,22 @@
 namespace App\Http\Controllers\LoyaltyProgram\Setting;
 
 use App\Http\Controllers\Controller;
+use App\Model\LoyaltyCardSetting;
 use Illuminate\Http\Request;
 
 class CardSetupController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct(LoyaltyCardSetting $loyalty)
+    {
+        $this->model = $loyalty;
+
+    }
+
+
     public function index()
     {
-        //
+        return $this->model->paginate(request()->get('per_page',10));
     }
 
     /**
