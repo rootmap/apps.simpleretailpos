@@ -15,6 +15,17 @@ class CreateLoyaltyCardSettingsTable extends Migration
     {
         Schema::create('loyalty_card_settings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('store_id');
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by');
+
+            $table->string('name');
+
+            // is an array  object of different datas like Should display Company name, card name, Customer name, Text color, Membership Since
+            $table->string('properties_object');
+
+            $table->string('card_pic_path');
+
             $table->timestamps();
         });
     }
