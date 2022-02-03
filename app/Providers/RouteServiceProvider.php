@@ -46,6 +46,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapLoyaltyProgramRoutes();
         //
     }
 
@@ -76,5 +77,20 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * Define the "Loyanty_program" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapLoyaltyProgramRoutes()
+    {
+        Route::prefix('loyalty')
+            ->middleware('web')
+            ->namespace('App\Http\Controllers\LoyaltyProgram')
+            ->group(base_path('routes/Extra/loyaltyRoutes.php'));
     }
 }

@@ -24,7 +24,7 @@ Route::get('/', 'ActivityController@forceRedirectToLogin');
 //     return redirect('login');
 // });
 
-Auth::routes();
+//Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
@@ -146,7 +146,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/master/chat/alluser', 'ChatController@allchatUser');
 	Route::post('/master/chat/load/conversation', 'ChatController@loadMasterConversation');
 	Route::post('/master/chat/save/conversation', 'ChatController@saveConversation');
-	
+
 	Route::post('/chat/conv/usr/image', 'ChatController@saveUserConvPhoto');
 	Route::post('/master/chat/conv/usr/image', 'ChatController@saveMasterConvPhoto');
 
@@ -171,7 +171,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/customer/pos/ajax/add', 'CustomerController@posCustomerAdd');
 	Route::get('/customer/import', 'CustomerController@importCustomer');
 	Route::post('/customer/import/save', 'CustomerController@importCustomerSave');
-	Route::get('/customer/report/{id}', 'CustomerController@customerReport'); 
+	Route::get('/customer/report/{id}', 'CustomerController@customerReport');
 
 	//customer lead
 	Route::get('/customer/lead/new', 'CustomerLeadController@index');
@@ -181,13 +181,13 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/customer/lead/delete/{id}', 'CustomerLeadController@destroy');
 	Route::post('/customer/lead/modify/{id}', 'CustomerLeadController@update');
 
-	//category 
+	//category
 	Route::get('/category', 'CategoryController@index');
 	Route::post('/category/save', 'CategoryController@store');
 	Route::get('/category/edit/{id}', 'CategoryController@edit');
 	Route::get('/category/delete/{id}', 'CategoryController@destroy');
 	Route::post('/category/modify/{id}', 'CategoryController@update');
-	
+
 	//user controller
 	Route::get('user', 'CustomerController@user');
 	Route::get('user/list', 'CustomerController@userList');
@@ -238,7 +238,7 @@ Route::group(['middleware' => ['auth']], function () {
 	//------------------SupportTicket route End--------------------//
 
 	//------------------Product route start--------------------//
-	Route::get('/product', 'ProductController@index')->name('customer');
+	Route::get('/product', 'ProductController@index')->name('product');
 	Route::get('/product/list', 'ProductController@show');
 	Route::get('/product/report', 'ProductController@report');
 	Route::post('/product/save', 'ProductController@store');
@@ -274,7 +274,7 @@ Route::group(['middleware' => ['auth']], function () {
 	// ------------------------tender route end------------------//
 
 	// ------------------------Role Wise Menu route start------------------//
-	Route::get('/RoleWiseMenu', 'RoleWiseMenuController@index')->name('tender');
+	Route::get('/RoleWiseMenu', 'RoleWiseMenuController@index')->name('roleWiseMenu');
 	Route::post('/RoleWiseMenu/ajax', 'RoleWiseMenuController@showAjax');
 	Route::post('/RoleWiseMenu/save', 'RoleWiseMenuController@store');
 	// ------------------------Role Wise Menu route end------------------//
@@ -294,7 +294,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/AssignUserRole/delete/{id}', 'AssignUserRoleController@destroy');
 	Route::post('/AssignUserRole/modify/{id}', 'AssignUserRoleController@update');
 	// ------------------------AssignUserRole route end------------------//
-	
+
 	// ------------------------menu-item route start------------------//
 	Route::get('/menu-item', 'MenuPageController@index');
 	//Route::post('/menu-item/create', 'RoleWiseMenuController@create');
@@ -525,7 +525,7 @@ Route::group(['middleware' => ['auth']], function () {
 	//------------------warranty route end--------------------//
 
 
-	
+
 
 	//------------------variancereport route start--------------------//
 	//Route::get('/variance/report', 'HomeController@variancereport')->name('variancereport');
@@ -541,13 +541,13 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('pos/settings/update/{id}', 'PosSettingController@update');
 
 	Route::get('site/navigation', 'SiteSettingController@navigation');
-	
+
 	Route::get('setting/printer/print-paper/size', 'PrinterPrintSizeController@index');
 	Route::post('setting/printer/print-paper/size/save', 'PrinterPrintSizeController@store');
 	Route::post('setting/printer/print-paper/size/update/{id}', 'PrinterPrintSizeController@update');
-	
+
 	Route::post('site/navigation/save', 'SiteSettingController@navigationstore');
-	Route::post('site/navigation/update/{id}', 'SiteSettingController@navigationupdate');	
+	Route::post('site/navigation/update/{id}', 'SiteSettingController@navigationupdate');
 
 	Route::get('site/color', 'ColorPlateController@index');
 	Route::post('site/color/save', 'ColorPlateController@store');
@@ -663,7 +663,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/cardpointe/pos/payment','CardPointeeController@cardpointePayment');
 
 	Route::post('/cardpointe/partial/payment','CardPointeeController@cardpointePartialPayment');
-	
+
 
 	Route::get('/cardpointe/payment/history','CardPointeeController@index');
 	Route::post('/cardpointe/payment/data/json','CardPointeeController@datajson');

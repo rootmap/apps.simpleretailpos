@@ -23,11 +23,11 @@ class CardPointeeController extends Controller
 
     private $moduleName="CardPointe ";
     private $sdc;
-    public function __construct(){ 
-        $this->sdc = new StaticDataController(); 
+    public function __construct(){
+        $this->sdc = new StaticDataController();
     }
 
-    
+
     public function boltPing(Request $request){
 
             $storeMerchantSetBoltCheck=CardpointeStoreSetting::where('store_id',$this->sdc->storeID())->where('bolt_status',1)->count();
@@ -69,12 +69,12 @@ class CardPointeeController extends Controller
                             $response = curl_exec($curl);
                             curl_close($curl);
 
-                            
+
                             return response()->json(json_decode($response,true));
-                            
 
 
-                            
+
+
                             //return response()->json(['connected'=>true]);
                     }
                     else
@@ -175,8 +175,8 @@ class CardPointeeController extends Controller
 
                     //echo $merchantId; die();
 
-                    $dayDate=date('Y-m-d', strtotime('+1 day')); 
-                    $dayDateTime=date('H:i:s'); 
+                    $dayDate=date('Y-m-d', strtotime('+1 day'));
+                    $dayDateTime=date('H:i:s');
 
                     $dayString=$dayDate."T".$dayDateTime."Z";
 
@@ -317,9 +317,9 @@ class CardPointeeController extends Controller
                                         $invoice->tender_id=$tender_id;
                                         $invoice->tender_name=$tender_name;
                                         $invoice->save();
-                                        
 
-                                        
+
+
 
                                         $invoicePay=new InvoicePayment;
                                         $invoicePay->invoice_id=$invoice_id;
@@ -344,7 +344,7 @@ class CardPointeeController extends Controller
                                         $partialPay->store_id=$this->sdc->storeID();
                                         $partialPay->created_by=$this->sdc->UserID();
                                         $partialPay->save();
-                                        
+
                                         $invoice->invoice_status=$load_invoice_status;
                                         $invoice->save();
 
@@ -363,7 +363,7 @@ class CardPointeeController extends Controller
                                 }
 
 
-                                
+
 
                                 //echo $response;
 
@@ -399,8 +399,8 @@ class CardPointeeController extends Controller
 
                     //echo $merchantId; die();
 
-                    $dayDate=date('Y-m-d', strtotime('+1 day')); 
-                    $dayDateTime=date('H:i:s'); 
+                    $dayDate=date('Y-m-d', strtotime('+1 day'));
+                    $dayDateTime=date('H:i:s');
 
                     $dayString=$dayDate."T".$dayDateTime."Z";
 
@@ -499,7 +499,7 @@ class CardPointeeController extends Controller
                                 }
 
 
-                                
+
 
                                 //echo $response;
 
@@ -527,7 +527,7 @@ class CardPointeeController extends Controller
         $cart = Session::has('Pos') ? Session::get('Pos') : null;
         $invoice_id=$cart->invoiceID;
         $refId=$invoice_id;
-        $cardNumber=trim(str_replace(" ","",$request->cardNumber)); 
+        $cardNumber=trim(str_replace(" ","",$request->cardNumber));
         $cardMonth=trim($request->cardMonth);
         $cardYear=trim($request->cardYear);
 
@@ -544,7 +544,7 @@ class CardPointeeController extends Controller
 
         if(!$expireDate)
         {
-           return response()->json(['status'=>0,'message'=>'Card Expire date invalid.']);
+            return response()->json(['status'=>0,'message'=>'Card Expire date invalid.']);
         }
 
         if(empty($request->amountToPay))
@@ -552,8 +552,8 @@ class CardPointeeController extends Controller
             return response()->json(['status'=>0,'message'=>'Pay amount should not be empty.']);
         }
 
-        $gCAT=$this->makePayment($cardNumber,$request->amountToPay,$expireDate,$cart->invoiceID,$request);
-        
+        $gCAT=$this->makePayment($request, $cardNumber,$request->amountToPay,$expireDate,$cart->invoiceID);
+
 
         if(isset($gCAT->status))
         {
@@ -561,7 +561,7 @@ class CardPointeeController extends Controller
             {
                 return response()->json(['status'=>0,'message'=>$gCAT->resptext,'datares'=>$gCAT]);
             }
-            
+
         }
 
         if(isset($gCAT['respstat']))
@@ -607,7 +607,7 @@ class CardPointeeController extends Controller
                // dd($gCAT->resptext);
         }
 
-        
+
 
     }
 
@@ -616,7 +616,7 @@ class CardPointeeController extends Controller
 
         $invoice_id=$request->invoice_id;
         $refId=$invoice_id;
-        $cardNumber=trim(str_replace(" ","",$request->cardNumber)); 
+        $cardNumber=trim(str_replace(" ","",$request->cardNumber));
         $cardMonth=trim($request->cardMonth);
         $cardYear=trim($request->cardYear);
 
@@ -629,7 +629,7 @@ class CardPointeeController extends Controller
 
         //$invoice=Invoice::where('invoice_id',$invoice_id)->first();
        // dd($invoice);
-        
+
         $amountPaid=$request->amountToPay;
 
         if(!$expireDate)
@@ -642,7 +642,7 @@ class CardPointeeController extends Controller
             return response()->json(['status'=>0,'message'=>'Pay amount should not be empty.']);
         }
 
-        $gCAT=$this->makePayment($cardNumber,$request->amountToPay,$expireDate,$invoice_id,$request);
+        $gCAT=$this->makePayment($request, $cardNumber,$request->amountToPay,$expireDate,$invoice_id);
         //dd($gCAT); die();
 
         if(isset($gCAT->datares))
@@ -650,7 +650,7 @@ class CardPointeeController extends Controller
             return response()->json(['status'=>0,'message'=>$gCAT->resptext,'datares'=>$gCAT]);
         }
 
-     
+
         if(isset($gCAT['respstat']))
         {
             if($gCAT['resptext']=="Approval" && $gCAT['respstat']=="A"){
@@ -732,7 +732,7 @@ class CardPointeeController extends Controller
                 $invoice->tender_id=$tender_id;
                 $invoice->tender_name=$tender_name;
                 $invoice->save();
-                
+
 
                 $invoicePay=new InvoicePayment;
                 $invoicePay->invoice_id=$invoice_id;
@@ -758,7 +758,7 @@ class CardPointeeController extends Controller
                 $partialPay->created_by=$this->sdc->UserID();
                 $partialPay->save();
 
-                
+
 
                 $invoice->invoice_status=$load_invoice_status;
                 $invoice->save();
@@ -779,7 +779,7 @@ class CardPointeeController extends Controller
                // dd($gCAT->resptext);
         }
 
-        
+
 
     }
 
@@ -806,7 +806,7 @@ class CardPointeeController extends Controller
             //dd($storeMerchantSet);
         }
 
-        
+
         $client = new CardPointe($merchant_id, $user, $pass, $server);
 
 
@@ -815,7 +815,7 @@ class CardPointeeController extends Controller
         if($boolean==true){
             $obj=$this->reFundTrans($client,$auth_retref);
             return $obj;
-                        
+
         }
         else
         {
@@ -826,7 +826,7 @@ class CardPointeeController extends Controller
         //dd($boolean);
     }
 
-    private function makePayment($cardNum='',$amount='',$expiry='',$invoice_id=0,$request){
+    private function makePayment($request, $cardNum='',$amount='',$expiry='',$invoice_id=0){
 
         $storeMerchantSetCount=CardpointeStoreSetting::where('store_id',$this->sdc->storeID())->count();
         if($storeMerchantSetCount==0){
@@ -850,19 +850,19 @@ class CardPointeeController extends Controller
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-              CURLOPT_URL => $server,
-              CURLOPT_RETURNTRANSFER => true,
-              CURLOPT_ENCODING => "",
-              CURLOPT_MAXREDIRS => 10,
-              CURLOPT_TIMEOUT => 0,
-              CURLOPT_FOLLOWLOCATION => true,
-              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-              CURLOPT_CUSTOMREQUEST => "PUT",
-              CURLOPT_POSTFIELDS =>"{\n    \"merchid\": \"$merchant_id\",\n    \"account\": \"$cardNum\",\n    \"expiry\": \"$expiry\",\n    \"amount\": \"$amountReady\",\n    \"orderid\": \"$invoice_id\",\n    \"currency\": \"USD\",\n    \"name\": \"$cardHName\",\n    \"capture\": \"y\",\n    \"receipt\": \"y\"\n}",
-              CURLOPT_HTTPHEADER => array(
+                CURLOPT_URL => $server,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "PUT",
+                CURLOPT_POSTFIELDS =>"{\n    \"merchid\": \"$merchant_id\",\n    \"account\": \"$cardNum\",\n    \"expiry\": \"$expiry\",\n    \"amount\": \"$amountReady\",\n    \"orderid\": \"$invoice_id\",\n    \"currency\": \"USD\",\n    \"name\": \"$cardHName\",\n    \"capture\": \"y\",\n    \"receipt\": \"y\"\n}",
+                CURLOPT_HTTPHEADER => array(
                 "Authorization: Basic ".$authkey,
                 "Content-Type: application/json"
-              ),
+                ),
             ));
 
             $response = curl_exec($curl);
@@ -892,10 +892,10 @@ class CardPointeeController extends Controller
             //dd($storeMerchantSet);
         }
 
-      
+
     }
 
-    
+
 
     private function captureAuthTrans($client,$auth_retref=""){
         $params = []; // optional
@@ -1061,8 +1061,8 @@ class CardPointeeController extends Controller
         {
             return 0;
         }
-        
-           
+
+
     }
 
     public function index()
@@ -1165,7 +1165,7 @@ class CardPointeeController extends Controller
                      })
                      ->orderBy("id","DESC")
                      ->get();
-         // dd($tab);                 
+         // dd($tab);
         return view('apps.pages.report.card-payment-history-cardpointe',
             [
                 'dataTable'=>$tab,
@@ -1258,11 +1258,11 @@ class CardPointeeController extends Controller
          * @param  \App\ProductStockin  $productStockin
          * @return \Illuminate\Http\Response
          */
-        
-        public function ExcelReport(Request $request) 
+
+        public function ExcelReport(Request $request)
         {
             // dd($request);
-            //excel 
+            //excel
             $total_paid_amount=0;
             $data=array();
             $array_column=array('Invoice ID','Card Number','Transaction ID','Paid Amount','Date');
@@ -1303,7 +1303,7 @@ class CardPointeeController extends Controller
             );
 
             $this->sdc->ExcelLayout($excelArray);
-            
+
         }
 
 
@@ -1311,8 +1311,8 @@ class CardPointeeController extends Controller
         {
 
             $data=array();
-            
-           
+
+
             $reportName="CardPointe Payment History Report";
             $report_title="CardPointe Payment History Report";
             $report_description="Report Genarated : ".formatDateTime(date('d-M-Y H:i:s a'));
@@ -1333,7 +1333,7 @@ class CardPointeeController extends Controller
 
                         $inv=$this->AuthReport($request);
                         foreach($inv as $index=>$voi):
-        
+
                             $html .='<tr>
                             <td>'.$voi->invoice_id.'</td>
                             <td>************'.(substr($voi->card_number,-4)).'</td>
@@ -1346,9 +1346,9 @@ class CardPointeeController extends Controller
 
 
 
-                            
 
-                 
+
+
                     /*html .='<tr style="border-bottom: 5px #000 solid;">
                     <td style="font-size:12px;">Subtotal </td>
                     <td style="font-size:12px;">Total Item : 4</td>
