@@ -88,8 +88,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapLoyaltyProgramRoutes()
     {
-        Route::prefix('loyalty')
-            ->middleware('web')
+        Route::middleware('web')
             ->namespace('App\Http\Controllers\LoyaltyProgram')
             ->group(base_path('routes/Extra/loyaltyRoutes.php'));
     }

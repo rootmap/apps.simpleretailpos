@@ -19,13 +19,18 @@ class CreateLoyaltyCardSettingsTable extends Migration
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by');
 
-            $table->string('name');
-
-            // is an array  object of different datas like Should display Company name, card name, Customer name, Text color, Membership Since
-            $table->string('properties_object');
-
+            $table->string('membership_name')->unique();
             $table->string('card_pic_path');
 
+            // is an array  object of different datas like Should display Company name, card name, Customer name, Text color, Membership Since
+            $table->text('card_display_config');
+            $table->integer('point_range_from');
+            $table->integer('point_range_to');
+            $table->integer('min_purchase_amount');
+
+            $table->integer('purchase_amount_to_point_conversion_rate');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }
