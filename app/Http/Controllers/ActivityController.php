@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Activity;
 use Illuminate\Http\Request;
 use Auth;
+use Exception;
 use PDO;
 class ActivityController extends Controller
 {
@@ -45,7 +46,7 @@ class ActivityController extends Controller
         {
             return response()->json(2);
         }
-        
+
     }
 
 
@@ -132,7 +133,7 @@ class ActivityController extends Controller
 
     }
 
-    private function gzCompressFile($fn){ 
+    private function gzCompressFile($fn){
         $file = "databasebk/".$fn;
 
         // Name of the gz file we're creating
@@ -169,7 +170,7 @@ class ActivityController extends Controller
         // upload a file
         if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
 
-         unlink($fileTrans);   
+         unlink($fileTrans);
          echo "successfully uploaded $file\n";
         } else {
          echo "There was a problem while uploading $file\n";
@@ -177,7 +178,7 @@ class ActivityController extends Controller
 
         // close the connection
         ftp_close($conn_id);
-    } 
+    }
 
 
     /**

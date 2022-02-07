@@ -1,21 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\LoyaltyProgram\Setting;
 
-use App\Model\LoyaltyCardSetting;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Loyalty\Setup\LoyaltyStoreSetupRequest;
+use App\Model\Loyalty\LoyaltyStoreSetting;
 
-class LoyaltyCardSettingController extends Controller
+class StoreSetupController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct(LoyaltyStoreSetting $store)
+    {
+        $this->model = $store;
+
+    }
+
+
     public function index()
     {
-        //
+        return $this->model->paginate(request()->get('per_page',10));
     }
 
     /**
@@ -34,18 +37,18 @@ class LoyaltyCardSettingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LoyaltyStoreSetupRequest $request)
     {
-        //
+        return $request->all();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\LoyaltyCardSetting  $loyaltyCardSetting
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(LoyaltyCardSetting $loyaltyCardSetting)
+    public function show($id)
     {
         //
     }
@@ -53,10 +56,10 @@ class LoyaltyCardSettingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\LoyaltyCardSetting  $loyaltyCardSetting
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(LoyaltyCardSetting $loyaltyCardSetting)
+    public function edit($id)
     {
         //
     }
@@ -65,21 +68,21 @@ class LoyaltyCardSettingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\LoyaltyCardSetting  $loyaltyCardSetting
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LoyaltyCardSetting $loyaltyCardSetting)
+    public function update(LoyaltyStoreSetupRequest $request, $id)
     {
-        //
+        return $request->all();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\LoyaltyCardSetting  $loyaltyCardSetting
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LoyaltyCardSetting $loyaltyCardSetting)
+    public function destroy($id)
     {
         //
     }
