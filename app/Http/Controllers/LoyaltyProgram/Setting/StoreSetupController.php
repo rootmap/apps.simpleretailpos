@@ -3,22 +3,27 @@
 namespace App\Http\Controllers\LoyaltyProgram\Setting;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\StaticDataController;
 use App\Http\Requests\Loyalty\Setup\LoyaltyStoreSetupRequest;
 use App\Model\Loyalty\LoyaltyStoreSetting;
 
 class StoreSetupController extends Controller
 {
 
-    public function __construct(LoyaltyStoreSetting $store)
+    public function __construct(LoyaltyStoreSetting $card, StaticDataController $sdc)
     {
-        $this->model = $store;
-
+        $this->model = $card;
+        $this->sdc = $sdc;
     }
 
 
     public function index()
     {
-        return $this->model->paginate(request()->get('per_page',10));
+        $data =  $this->model
+                //->where('store_id',$this->sdc->storeID())
+                ->get();
+        return $data;
+        //        return view('',['data' => $data]);
     }
 
     /**
@@ -31,59 +36,64 @@ class StoreSetupController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(LoyaltyStoreSetupRequest $request)
     {
-        return $request->all();
+        $data = $request->only([
+            'is_in_loyalty_program', 'allow_cash_withdrawal_by_loyanty_point',
+            'currency_to_loyalty_conversion_rate',
+            'min_purchase_amount'
+        ]);
+        $result =new LoyaltyStoreSetting();
+
+        $result->store_id = 1;
+        //$result->store_id = $this->sdc->storeID();
+        $result->is_in_loyalty_program = $data['is_in_loyalty_program'];
+        $result->allow_cash_withdrawal_by_loyanty_point = $data['allow_cash_withdrawal_by_loyanty_point'];
+        $result->currency_to_loyalty_conversion_rate = $data['currency_to_loyalty_conversion_rate'];
+        $result->min_purchase_amount  = $data['min_purchase_amount '];
+
+        $result->save();
+        return $result;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        return $this->model
+                //->where('store_id',$this->sdc->storeID())
+                ->where('id',$id)
+                ->first();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $data =  $this->model
+                //->where('store_id',$this->sdc->storeID())
+                ->where('id',$id)
+                ->first();
+        return view('', ['data' => $data]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(LoyaltyStoreSetupRequest $request, $id)
     {
-        return $request->all();
+        $data = $request->all();
+        $result = $this->model
+                    //->where('store_id',$this->sdc->storeID())
+                    ->where('id',$id)
+                    ->first();
+        $result->is_in_loyalty_program = $data['is_in_loyalty_program'];
+        $result->allow_cash_withdrawal_by_loyanty_point = $data['allow_cash_withdrawal_by_loyanty_point'];
+        $result->currency_to_loyalty_conversion_rate = $data['currency_to_loyalty_conversion_rate'];
+        $result->min_purchase_amount  = $data['min_purchase_amount'];
+        $result->save();
+        return $data;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $data = $this->model
+                    //->where('store_id',$this->sdc->storeID())
+                    ->where('id',$id)
+                    ->delete();
+        return $data;
     }
 }

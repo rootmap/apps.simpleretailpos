@@ -26,9 +26,7 @@ class CreateLoyaltyCardSettingsTable extends Migration
             $table->text('card_display_config');
             $table->integer('point_range_from');
             $table->integer('point_range_to');
-            $table->integer('min_purchase_amount');
-
-            $table->integer('purchase_amount_to_point_conversion_rate');
+            $table->integer('status');
 
             $table->softDeletes();
             $table->timestamps();

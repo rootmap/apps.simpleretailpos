@@ -8,10 +8,11 @@ trait LoyaltyStoreSettingRules
     public function createdRules()
     {
         return [
-            "store_id" => "required|numeric",
+            //"store_id" => "nullable|numeric",
             "is_in_loyalty_program" => "required|boolean",
             "allow_cash_withdrawal_by_loyanty_point" => "required|boolean",
             "currency_to_loyalty_conversion_rate" => "required|numeric",
+            "min_purchase_amount" => "required|numeric",
         ];
     }
 

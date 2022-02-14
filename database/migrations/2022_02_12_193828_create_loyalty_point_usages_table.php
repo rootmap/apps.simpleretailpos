@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLoyaltyUsersTable extends Migration
+class CreateLoyaltyPointUsagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,22 @@ class CreateLoyaltyUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('loyalty_users', function (Blueprint $table) {
+        Schema::create('loyalty_point_usages', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('store_id');
             $table->unsignedBigInteger('user_id');
 
             $table->string('name');
-            $table->string('email')->nullable();
             $table->string('phone');
-            $table->integer('total_invoices');
-            $table->integer('total_purchase_amount');
-            $table->integer('total_point');
-
-            $table->integer('membership_card_type');
+            $table->string('email')->nullable();
+            $table->integer('used_loyalty_point')->nullable();
+            $table->enum('used_for',['purchase','cash']);
+            $table->integer('invoice_id')->nullable();
+            $table->integer('amount');
 
             $table->softDeletes();
+
             $table->timestamps();
         });
     }
@@ -39,6 +40,6 @@ class CreateLoyaltyUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('loyalty_users');
+        Schema::dropIfExists('loyalty_point_usages');
     }
 }

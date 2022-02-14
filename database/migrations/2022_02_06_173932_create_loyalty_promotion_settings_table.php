@@ -20,10 +20,11 @@ class CreateLoyaltyPromotionSettingsTable extends Migration
             $table->unsignedBigInteger('created_by');
 
             $table->string('promotion_title');
-            $table->string('for_membership_type');
-            $table->string('promotion_type');
-            $table->string('promotion_value');
-
+            $table->string('for_membership_type')->nullable();
+            $table->string('currency_to_loyalty_conversion_rate');
+            $table->string('start_at');
+            $table->string('end_at');
+            $table->enum('status',['active','inactive','draft']);
 
             $table->softDeletes();
             $table->timestamps();

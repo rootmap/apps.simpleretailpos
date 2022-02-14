@@ -13,10 +13,8 @@ trait LoyaltyCardSettingRules
             "card_display_config" => "required|array",
             "point_range_from" => "required|numeric",
             "point_range_to" => "required|numeric",
-            "min_purchase_amount" => "required|numeric",
-            "purchase_amount_to_point_conversion_rate" => "required|numeric|min:0",
-            "min_purchase_amount" => "required|numeric|min:0",
-            "created_by" => "required|exists:users,id"
+            "created_by" => "required|exists:users,id",
+            "status" => "required|string"
         ];
     }
 
@@ -28,9 +26,7 @@ trait LoyaltyCardSettingRules
             "card_display_config" => "nullable|array",
             "point_range_from" => "nullable|numeric",
             "point_range_to" => "nullable|numeric",
-            "min_purchase_amount" => "nullable|numeric",
-            "purchase_amount_to_point_conversion_rate" => "nullable|numeric|min:0",
-            "created_by" => "nullable|exists:users,id"
+            "status" => "nullable|string",
         ];
     }
 

@@ -8,12 +8,13 @@ trait LoyaltyPromotionSettingRules
     public function createdRules()
     {
         return [
-            "store_id" => "required|numeric",
-            "created_by" => "required|numeric",
+            //"store_id" => "required|numeric",
             "promotion_title" => "required|string",
-            "for_membership_type" => "required|string",
-            "promotion_type" => "required|string",
-            "promotion_value" => "nullable|string",
+            "for_membership_type" => "nullable|string",
+            "start_at" => "required|string",
+            "end_at" => "required|string",
+            "currency_to_loyalty_conversion_rate" => "required|numeric",
+            "status" => "required|numeric",
 
         ];
     }
@@ -21,12 +22,12 @@ trait LoyaltyPromotionSettingRules
     public function updatedRules()
     {
         return [
-            "store_id" => "nullable|numeric",
-            "created_by" => "nullable|numeric",
             "promotion_title" => "nullable|string",
             "for_membership_type" => "nullable|string",
-            "promotion_type" => "nullable|string",
-            "promotion_value" => "nullable|string",
+            "start_at" => "nullable|string",
+            "end_at" => "nullable|string",
+            "currency_to_loyalty_conversion_rate" => "nullable|numeric",
+            "status" => "nullable|numeric",
         ];
     }
 }

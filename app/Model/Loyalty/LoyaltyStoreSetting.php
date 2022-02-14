@@ -13,6 +13,7 @@ class LoyaltyStoreSetting extends Model
         'store_id',
         'is_in_loyalty_program',
         'allow_cash_withdrawal_by_loyanty_point',
-        'currency_to_loyalty_conversion_rate'
+        'currency_to_loyalty_conversion_rate',
+        'min_purchase_amount'
     ];
 }

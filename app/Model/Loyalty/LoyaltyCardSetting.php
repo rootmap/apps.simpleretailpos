@@ -4,17 +4,18 @@ namespace App\Model\Loyalty;
 
 use App\Model\Loyalty\Traits\Rules\LoyaltyCardSettingRules;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class LoyaltyCardSetting extends Model
 {
-    use LoyaltyCardSettingRules;
+
+    use SoftDeletes, LoyaltyCardSettingRules;
     protected $fillable = [
-        'store_id',
         'membership_name',
         'properties_object',
         'card_pic_path',
-        'purchase_amount_to_point_conversion_rate',
-        'min_purchase_amount',
+        'point_range_from',
+        'point_range_to',
     ];
 
 

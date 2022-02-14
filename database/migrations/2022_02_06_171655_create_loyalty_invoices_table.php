@@ -20,7 +20,8 @@ class CreateLoyaltyInvoicesTable extends Migration
             $table->unsignedBigInteger('invoice_id');
 
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->nullable();
+            $table->string('phone');
             $table->integer('purchase_amount');
             $table->integer('promotion_id')->nullable();
             $table->integer('earned_point');

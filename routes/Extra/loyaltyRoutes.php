@@ -12,6 +12,8 @@ Route::prefix('loyalty')->name('loyalty.')->group(function () {
         Route::resource('/card','Setting\CardSetupController');
         Route::resource('/store','Setting\StoreSetupController');
         Route::resource('/promotion','Setting\PromotionSetupController');
+        Route::patch('/promotion/{id}/change-status','Setting\PromotionSetupController@changePromotionStatus')
+                    ->name('promotion.change_status');
     });
 
     Route::get('/users','User\LoyaltyUserController@index')->name('get.users');
@@ -21,6 +23,7 @@ Route::prefix('loyalty')->name('loyalty.')->group(function () {
     Route::post('/users/{id}/cash-withdrawal','User\LoyaltyUserController@cashWithdraw')->name('withdrawCash.byLoyaltyPoint');
 
     Route::get('/invoices','LoyaltyInvoiceController@index')->name('get.invoices');
+    Route::get('/loyalty-point-usage','LoyaltyUsageController@index')->name('get.usage');
 
     Route::get('/promotional-programs','Promotion\LoyaltyPromotionController@index')->name('get.promotionalPrograms');
     Route::post('/promotional-programs','Promotion\LoyaltyPromotionController@store')->name('store.promotionalPrograms');

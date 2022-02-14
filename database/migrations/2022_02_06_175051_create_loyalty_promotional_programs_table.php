@@ -19,8 +19,6 @@ class CreateLoyaltyPromotionalProgramsTable extends Migration
             $table->unsignedBigInteger('store_id');
             $table->unsignedBigInteger('promotion_id');
 
-            $table->datetime('promotion_start_at');
-            $table->datetime('promotion_end_at');
             $table->integer('total_invoices');
             $table->integer('total_purchase_amount');
             $table->integer('total_loyalty_points');
