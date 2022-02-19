@@ -20,24 +20,24 @@ class LoyaltyInvoiceService{
         $this->config= $config;
         $this->store_id = $config['store_id'];
         // {
-            //     "store_id"  :"",
-            //     'user_info' :{
-            //         'name':"",
-            //         'email':"",
-            //         'phone':"",
-            //         'id':"",
-            //     },
-            //     "invoice_info" : {
-            //         "invoice_id":"",
-            //         "purchase_amount":"",
-            //         "tender_id":"",
-            //         "tender_name":"",
-            //     },
-            //     "withdeaw" : {
-            //         "amount" : "",
-            //          "ref_id"   : ""
-            //     }
-            // }
+        //     "store_id"  :"241",
+        //     "user_info" :{
+        //         "name":"Md. Mohiuddin khan",
+        //         "email":"mohiuddin@mail.com",
+        //         "phone":"017283848494",
+        //         "id":"36"
+        //     },
+        //     "invoice_info" : {
+        //         "invoice_id":"12",
+        //         "purchase_amount":"100",
+        //         "tender_id":"1",
+        //         "tender_name":"Debit Card"
+        //     },
+        //     "withdeaw" : {
+        //         "amount" : "10",
+        //             "ref_id"   : "1"
+        //         }
+        // }
 
     }
 
@@ -78,43 +78,40 @@ class LoyaltyInvoiceService{
 
     private function update($invoiceId, $cardType, $amount)
     {
+        /* Check If Tender name is "Loyalty Point"
+            if loyalty point then check if purchase amout is >= loyalty equavalent point
+                if yes then  update invoice, user, loyalty usage
+                if no then return false message
+        If not loyalty point then, check -
+            has promotion- if yes
+                then, get promotional loyalty point, update, invoice, promotion, user
+            If No, then update invoice, user
+        */
         $tanderName = $this->config['invoice_info']['tender_name'];
-        $invoice = LoyaltyInvoice::find($invoiceId);
-
-        $promo = new LoyaltyStoreCardService($this->config);
-        $promotion = $promo->convert($cardType);
-        $total_point = 0;
-        if(! $tanderName === "Loyalty Point"){
-            $invoice->promotion_id = "";
-            $invoice->earned_point = $total_point;
-            $invoice->save();
-            $llt_usage = new LoyaltyUsageService($this->config);
-            $llt_usage->setUsage($usued_for = "Cash Withdrawal", $promotion );
-
-            return ;
+        $user = new LoyaltyUserService($this->config);
+        if($tanderName === "Loyalty Point"){
+            $data = $user->purchase();
+            $usage = new LoyaltyUsageService($this->config);
+            $usage->setUsage( $data['withdrawn']['loyalty_points'], "Purchase");
+            return $data;
         }
-
-        $promo = new LoyaltyPromotionService($this->config);
+        $promo= new LoyaltyPromotionService($this->config);
         $promotion = $promo->getLatestPromotionDetails ( $amount, $cardType);
 
-        if($promotion['total_point'] > 0 ){
-            $p_data = $promo['data'];
-            $invoice->promotion_id = $p_data['id'];
-            $total_point = $promotion['total_point'];
-            $invoice->earned_point = $total_point;
-            $invoice->save();
+        $point = "";
+        if($promotion){
+            $point = $promotion['point'];
+            $data = $promotion['data'];
+            $promotionId = $data['id'];
+            $invoiceId = $this->config['invoice_info']['invoice_id'];
+            $purchaseAmount = $this->config['invoice_info']['purchase_amount'];
 
-            // Update Promotional Program table
-            $promo->updatePromotionProgram($p_data['id'], $invoiceId, $amount,$total_point);
+            $promo->updatePromotionProgram($promotionId, $invoiceId, $purchaseAmount,$point);
         }
 
-        $promo = new LoyaltyStoreCardService($this->config);
-        $total_point = $promo->convert($cardType);
-
         $user = new LoyaltyUserService($this->config);
-        $user->updateUserInvoice($invoiceId,$amount,$total_point);
+        return $user->updateUserInvoice($invoiceId, $amount, $point);
 
-        return;
     }
 
 

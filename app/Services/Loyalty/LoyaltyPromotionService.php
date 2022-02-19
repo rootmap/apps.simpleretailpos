@@ -59,26 +59,28 @@ class LoyaltyPromotionService{
     public function convert( $purchaseAmount, $membershipType)
     {
         $store = $this->getLatestPromotionRate($membershipType, "");
-        return   (isset($store['currency_to_loyalty_conversion_rate'])) ? $purchaseAmount * $store['currency_to_loyalty_conversion_rate'] : false;
+        return (isset($store['currency_to_loyalty_conversion_rate'])) ? $purchaseAmount * $store['currency_to_loyalty_conversion_rate'] : false;
     }
 
-    public function getLatestPromotionDetails ($purchaseAmount = 0, $membershipType, $date = "")
+    public function getLatestPromotionDetails ($purchaseAmount, $membershipType, $date = "")
     {
         if($date == ""){
-            $date =date("y-m-d h:m:s");
+            $date =date("y-m-d");
         }
         $data = LoyaltyPromotionSetting::
                             where('store_id',$this->store_id)
                             ->where('status','active')
                             ->whereRaw(' ? BETWEEN start_at AND end_at',[$date])
-                            ->whereRaw(' 1 = IF(`for_membership_type` is NULL, 1, for_membership_type = ? )',[$membershipType])
+                            ->whereRaw(' 1 = IF(`for_membership_type` is NULL OR `for_membership_type`="",1 ,for_membership_type = ? )',[$membershipType])
                             ->orderBy('currency_to_loyalty_conversion_rate', 'desc')
                             ->first();
-
-        return [
-            "total_point" =>  (isset($data['currency_to_loyalty_conversion_rate'])) ? $purchaseAmount * $data['currency_to_loyalty_conversion_rate'] : 0,
-            "data" => $data
-        ];
+        if(isset($data->id)){
+            return [
+                "point" => $purchaseAmount / $data['currency_to_loyalty_conversion_rate'],
+                'data' => $data
+            ];
+        }
+        return false;
     }
 
     public function updatePromotionProgram($promotionId, $invoiceId, $purchaseAmount,$point)
@@ -101,10 +103,10 @@ class LoyaltyPromotionService{
     private function insertPromotionProgram($promotionId, $invoiceId, $purchaseAmount,$point)
     {
         $result = new LoyaltyPromotionalProgram();
-
-        $result->total_invoices = $result->total_invoices + 1;
-        $result->total_purchase_amount = $result->total_purchase_amount + $purchaseAmount;
-        $result->total_loyalty_points = $result->total_loyalty_points + $point;
+        $result->promotion_id =  $promotionId;
+        $result->total_invoices =  1;
+        $result->total_purchase_amount =  $purchaseAmount;
+        $result->total_loyalty_points =  $point;
 
         $result->save();
         return $result;

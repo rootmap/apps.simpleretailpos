@@ -1,13 +1,28 @@
 <?php
 
-namespace App\Model\Loyalty\Traits\Rules;
+namespace App\Http\Requests\Loyalty\User;
 
-trait LoyaltyUserRules
+use Illuminate\Foundation\Http\FormRequest;
+
+class LoyaltyUserRequestNew extends FormRequest
 {
-
-    public function createdRules()
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
     {
-        dd("Hello World");
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
         return [
             'store_id'=> "required|numeric",
             'user_info'=> "required|array",
@@ -24,13 +39,6 @@ trait LoyaltyUserRules
                 'withdeaw.withdeaw'=> "nullable|numeric",
                 'withdeaw.ref_id'=> "nullable|numeric"
 
-
-        ];
-    }
-
-    public function updatedRules()
-    {
-        return [
 
         ];
     }

@@ -10,27 +10,28 @@ class LoyaltyStoreCardService{
 
     public function __construct($config)
     {
+        // dd($config);
         $this->config =$config;
         $this->store_id =$config['store_id'];
         // {
-            //     "store_id"  :"",
-            //     'user_info' :{
-            //         'name':"",
-            //         'email':"",
-            //         'phone':"",
-            //         'id':"",
-            //     },
-            //     "invoice_info" : {
-            //         "invoice_id":"",
-            //         "purchase_amount":"",
-            //         "tender_id":"",
-            //         "tender_name":"",
-            //     },
-            //     "withdeaw" : {
-            //         "amount" : "",
-            //          "ref_id"   : ""
-            //     }
-            // }
+        //     "store_id"  :"241",
+        //     "user_info" :{
+        //         "name":"Md. Mohiuddin khan",
+        //         "email":"mohiuddin@mail.com",
+        //         "phone":"017283848494",
+        //         "id":"36"
+        //     },
+        //     "invoice_info" : {
+        //         "invoice_id":"12",
+        //         "purchase_amount":"100",
+        //         "tender_id":"1",
+        //         "tender_name":"Debit Card"
+        //     },
+        //     "withdeaw" : {
+        //         "amount" : "10",
+        //             "ref_id"   : "1"
+        //         }
+        // }
     }
 
     public function getMinPurchaseAmount($amount= "")
@@ -38,7 +39,7 @@ class LoyaltyStoreCardService{
 
         $record = LoyaltyStoreSetting::
                         //select('min_purchase_amount')
-                        where('sore_id',$this->store_id)
+                        where('store_id',$this->store_id)
                         ->first();
 
         if($amount != ""){
@@ -52,16 +53,22 @@ class LoyaltyStoreCardService{
     {
 
         return LoyaltyStoreSetting::
-                        where('sore_id',$this->store_id)
+                        where('store_id',$this->store_id)
                         ->first();
 
     }
 
     public function convert($value, $convertTo = "point")
     {
+
         $store = $this->store_details();
+        // dd($convertTo);
         $convertionRate = $store['currency_to_loyalty_conversion_rate'];
-        return ($convertTo = "point") ? $value * $convertionRate : $value / $convertionRate;
+        return [
+            "total_point" => ($convertTo === "point") ? $value / $convertionRate : $value ,
+            "conversion_rate" => $convertionRate,
+            "balance" => ($convertTo === "point") ? $value : $value * $convertionRate
+        ];
     }
 
     public function getCardDetails($membershipType)
@@ -72,13 +79,24 @@ class LoyaltyStoreCardService{
                             ->where('membership_name', $membershipType)
                             ->first();
     }
+
     public function getMembershipByPoint($point)
     {
-        return LoyaltyCardSetting::select('membership_name')
+        $data = LoyaltyCardSetting::select('membership_name')
                             ->where('store_id',$this->store_id)
                             ->where('status','active')
                             ->whereRaw('? BETWEEN point_range_from AND point_range_to',[$point])
                             ->first();
+
+        if(isset($data['membership_name'])){
+            return $data;
+        }
+        return LoyaltyCardSetting::select('membership_name')
+                            ->where('store_id',$this->store_id)
+                            ->where('status','active')
+                            ->orderBy('point_range_to','DESC')
+                            ->first();
+
     }
 
 

@@ -17,9 +17,14 @@ class LoyaltyPromotionController extends Controller
     }
     public function index()
     {
-        return $this->model
-                //->where('store_id',$this->sdc->storeID())
+        $data = $this->model
+                ->select('loyalty_promotion_settings.*','loyalty_promotional_programs.total_invoices', 'loyalty_promotional_programs.total_purchase_amount', 'loyalty_promotional_programs.total_loyalty_points')
+                ->join('loyalty_promotion_settings','loyalty_promotion_settings.id','=','loyalty_promotional_programs.promotion_id')
+                ->where('loyalty_promotion_settings.store_id',$this->sdc->storeID())
+                ->where('loyalty_promotion_settings.status','active')
                 ->get();
+
+        return view('apps.pages.loyalty_program.promotions', ['dataTable'=>$data]);
     }
 
     public function store(LoyaltyPromotionalProgramRequest $request)

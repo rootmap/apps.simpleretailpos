@@ -36,8 +36,8 @@ class LoyaltyUsageController extends Controller
                     $query->where('purchase_amount', '>=', request()->get('purchase_amount') );
                 })// query string search by greater then or equal purchase amount
                 ->get();
-        return $data;
-        // return view('',['data' => $data]);
+
+        return view('apps.pages.loyalty_program.loyalty_usage', ['dataTable'=>$data]);
     }
 
 }

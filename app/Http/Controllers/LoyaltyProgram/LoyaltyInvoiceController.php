@@ -4,8 +4,10 @@ namespace App\Http\Controllers\LoyaltyProgram;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\StaticDataController;
+use App\Http\Requests\Loyalty\User\LoyaltyUserRequestNew;
 use App\Model\Loyalty\LoyaltyInvoice;
 use App\Services\Loyalty\LoyaltyService;
+use Exception;
 use Illuminate\Http\Request;
 
 class LoyaltyInvoiceController extends Controller
@@ -38,8 +40,8 @@ class LoyaltyInvoiceController extends Controller
                     $query->where('purchase_amount', '>=', request()->get('purchase_amount') );
                 })// query string search by greater then or equal purchase amount
                 ->get();
-        return $data;
-        // return view('',['data' => $data]);
+
+            return view('apps.pages.loyalty_program.invoice', ['dataTable'=>$data]);
     }
 
     private function makeDataArray($request)
@@ -50,36 +52,38 @@ class LoyaltyInvoiceController extends Controller
             ,"withdraw_amount", "withdraw_ref_id"
         ]);
 
-        return [
-            "store_id"  => $this->sdc->storeID(),
-            'user_info' =>[
-                'id'=>$data['user_id'],
-                'name'=> $data['name'],
-                'email'=> $data['email'],
-                'phone'=>$data['phone']
-            ],
-            "invoice_info" => [
-                "invoice_id"=>$data['invoice_id'],
-                "purchase_amount"=>$data['purchase_amount'],
-                "tender_id"=>$data['tender_id'],
-                "tender_name"=>$data['tender_name'],
-            ],
-            "withdeaw" => [
-                "amount" => $data['withdraw_amount'],
-                    "ref_id"   => $data['withdraw_ref_id']
-            ]
-        ];
+        try{
+            return [
+                "store_id"  =>$data['store_id'],
+                'user_info' =>[
+                    'id'=>$data['user_info']['id'],
+                    'name'=> $data['user_info']['name'],
+                    'email'=> $data['user_info']['email'],
+                    'phone'=>$data['user_info']['phone']
+                ],
+                "invoice_info" => [
+                    "invoice_id"=>$data['invoice_info']['invoice_id'],
+                    "purchase_amount"=>$data['invoice_info']['purchase_amount'],
+                    "tender_id"=>$data['invoice_info']['tender_id'],
+                    "tender_name"=>$data['invoice_info']['tender_name'],
+                ],
+                "withdraw" => [
+                    "amount" => $data['withdeaw']['amount'],
+                    "ref_id"   => $data['withdeaw']['ref_id']
+                ]
+            ];
+        }
+        catch(Exception $e){
+            return false;
+        }
 
     }
 
-    public function addInvoiceToLoyaltyProgram(Request $request)
+    public function addInvoiceToLoyaltyProgram(LoyaltyUserRequestNew $request)
     {
         $data = $this->makeDataArray($request);
 
         $service = new LoyaltyService();
-        return $service
-                    ->set($data)
-                    ->setInvoice()
-                    ->get();
+        return $service->setInvoice();
     }
 }

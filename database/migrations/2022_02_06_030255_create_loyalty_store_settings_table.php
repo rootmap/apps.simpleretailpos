@@ -19,8 +19,8 @@ class CreateLoyaltyStoreSettingsTable extends Migration
 
             $table->boolean('is_in_loyalty_program');
             $table->boolean('allow_cash_withdrawal_by_loyanty_point');
-            $table->integer('currency_to_loyalty_conversion_rate');
-            $table->string('min_purchase_amount ');
+            $table->double('currency_to_loyalty_conversion_rate');
+            $table->string('min_purchase_amount');
 
             $table->timestamps();
         });

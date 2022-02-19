@@ -13,25 +13,24 @@ class LoyaltyService{
     {
         $this->config= $config;
         // {
-            //     "store_id"  :"",
-            //     'user_info' :{
-            //         'name':"",
-            //         'email':"",
-            //         'phone':"",
-            //         'id':"",
-            //     },
-            //     "invoice_info" : {
-            //         "invoice_id":"",
-            //         "purchase_amount":"",
-            //         "tender_id":"",
-            //         "tender_name":"",
-            //     },
-            //     "withdeaw" : {
-            //         "amount" : "",
-            //          "ref_id"   : ""
-            //     }
-        //}
-
+        //     "store_id"  :"241",
+        //     "user_info" :{
+        //         "name":"Md. Mohiuddin khan",
+        //         "email":"mohiuddin@mail.com",
+        //         "phone":"017283848494",
+        //         "id":"36"
+        //     },
+        //     "invoice_info" : {
+        //         "invoice_id":"12",
+        //         "purchase_amount":"100",
+        //         "tender_id":"1",
+        //         "tender_name":"Debit Card"
+        //     },
+        //     "withdeaw" : {
+        //         "amount" : "10",
+        //             "ref_id"   : "1"
+        //         }
+        // }
         $this->user = new LoyaltyUserService($config);
         $this->lltStoreCard = new LoyaltyStoreCardService($config);
         $this->lltInvoice = new LoyaltyInvoiceService($config);
@@ -43,26 +42,23 @@ class LoyaltyService{
     }
     public function join()
     {
-        $this->result = $this->user->join();
-        return $this;
+        return $this->user->join();
     }
 
     public function setInvoice()
     {
-        $this->result = $this->lltInvoice->set();
-        return $this;
+        return $this->lltInvoice->set();
     }
 
     public function QueryBalance()
     {
-        $this->result = $this->user->queryBalance();
-        return $this;
+        return $this->user->queryBalance();
     }
 
     public function withdraw()
     {
-        $this->result = $this->user->withdraw($this->config['withdraw']['amount']);
-        return $this;
+        $data =$this->user->withdraw($this->config['withdraw']['amount']);
+        dd($data);
     }
     public function get()
     {

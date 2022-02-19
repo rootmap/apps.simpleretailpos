@@ -22,9 +22,10 @@ class CardSetupController extends MainController
 
     public function index()
     {
-        return $this->model
-                //->where('store_id',$this->sdc->storeID())
+        $data = $this->model
+                ->where('store_id',$this->sdc->storeID())
                 ->get();
+        return view('apps.pages.loyalty_program.setting.card_list',["dataTable" => $data]);
     }
 
     /**
@@ -34,54 +35,58 @@ class CardSetupController extends MainController
      */
     public function create()
     {
-        //
+        return view('apps.pages.loyalty_program.setting.card_setup');
     }
 
-    public function storeImage($request, $fieldName)
+    private function storeImage($request, $fieldName)
     {
+
         if (!empty($request->file($fieldName))) {
             $img = $request->file($fieldName);
             $upload = 'upload/card_templates/';
             $filename = time() . "." . $img->getClientOriginalExtension();
             $success = $img->move($upload, $filename);
-            return $$upload."/".$filename;
+            return $upload."/".$filename;
         }
         return "";
     }
 
     public function store(CardSetupRequest $request)
     {
+
         $data = $request->only([
             'membership_name', 'point_range_from', 'point_range_to',
-            'min_purchase_amount', 'purchase_amount_to_point_conversion_rate',
-            'card_display_config', 'created_by','status'
+            'min_purchase_amount',
+            'card_display_config', 'status'
         ]);
 
-        $data['card_display_config'] = (is_array($data['card_display_config'])) ? json_encode($data['card_display_config']) : "";
+        //dd($request->all());
+        $data['card_display_config'] = (isset($data['card_display_config']) && is_array($data['card_display_config'])) ? json_encode($data['card_display_config']) : "";
 
         $result =new LoyaltyCardSetting();
 
-        //$result->store_id = $this->sdc->storeID();
+        $result->store_id = $this->sdc->storeID();
         $result->membership_name = $data['membership_name'];
         $result->card_display_config = $data['card_display_config'];
-        $result->card_image_path = $this->storeImage($request, 'card_image_path' );
+        $result->card_pic_path = $this->storeImage($request, 'card_pic_path' );
         $result->point_range_from = $data['point_range_from'];
         $result->point_range_to = $data['point_range_to'];
         $result->status = $data['status'];
 
-        //$result->created_by = Auth::id();
-        $result->created_by = 1;
+        $result->created_by = Auth::id();
 
         $result->save();
-        return $result;
+        //return $result;
+        return redirect()->route('loyalty.setting.card.show', [$result['id']]);
     }
 
     public function show($id)
     {
-        return $this->model
-                //->where('store_id',$this->sdc->storeID())
+        $data = $this->model
+                ->where('store_id',$this->sdc->storeID())
                 ->where('id',$id)
                 ->first();
+        return view('apps.pages.loyalty_program.setting.view_card', ["data" =>$data]);
     }
 
     public function edit($id)
@@ -89,24 +94,36 @@ class CardSetupController extends MainController
         //
     }
 
+    public function checkUpdatedMembershipCard($inputName, $membershipCard)
+    {
+        if(trim($inputName) !== trim($membershipCard)){
+            $result = $this->model
+                        //->where('store_id',$this->sdc->storeID())
+                        ->where('membership_name',$inputName)
+                        ->first();
+            return (!isset($result['membership_name']))? $inputName : $membershipCard;
+        }
+        return $inputName;
+
+    }
     public function update(CardSetupRequest $request, $id)
     {
         $data = $request->all();
         $result = $this->model
-                    //->where('store_id',$this->sdc->storeID())
+                    ->where('store_id',$this->sdc->storeID())
                     ->where('id',$id)
                     ->first();
 
-        $result->membership_name = $data['membership_name'];
-        $result->card_display_config = $data['card_display_config'];
-        $result->card_image_path = $this->storeImage($request, 'card_image_path' );
+        $result->membership_name = isset($data['membership_name']) ? $this->checkUpdatedMembershipCard($data['membership_name'], $result->membership_name) : $result->membership_name;
+        $result->card_display_config = isset($data['card_display_config']) ? $data['card_display_config'] : $result->card_display_config;
+        $result->card_pic_path = isset($data['card_pic_path']) ? $this->storeImage($request, 'card_pic_path' ) : $result->card_pic_path;
 
-        $result->point_range_from = $data['point_range_from'];
-        $result->point_range_to = $data['point_range_to'];
-        $result->status = $data['status'];
+        $result->point_range_from = isset($data['point_range_from']) ? $data['point_range_from'] : $result->point_range_from;
+        $result->point_range_to = isset($data['point_range_to']) ? $data['point_range_to'] : $result->point_range_to;
+        $result->status = isset($data['status']) ? $data['status'] : $result->status;
 
         $result->save();
-        return $data;
+        return redirect()->route('loyalty.setting.card.show', [$result['id']]);
     }
 
     public function destroy($id)

@@ -25,7 +25,7 @@ class CreateLoyaltyUsersTable extends Migration
             $table->integer('total_purchase_amount');
             $table->integer('total_point');
 
-            $table->integer('membership_card_type');
+            $table->string('membership_card_type');
 
             $table->softDeletes();
             $table->timestamps();

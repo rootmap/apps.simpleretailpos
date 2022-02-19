@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\StaticDataController;
 use App\Http\Requests\Loyalty\Setup\LoyaltyStoreSetupRequest;
 use App\Model\Loyalty\LoyaltyStoreSetting;
+use LDAP\Result;
 
 class StoreSetupController extends Controller
 {
@@ -20,10 +21,9 @@ class StoreSetupController extends Controller
     public function index()
     {
         $data =  $this->model
-                //->where('store_id',$this->sdc->storeID())
-                ->get();
-        return $data;
-        //        return view('',['data' => $data]);
+                ->where('store_id',$this->sdc->storeID())
+                ->first();
+        return view('apps.pages.loyalty_program.setting.store_setup',["edit" => $data]);
     }
 
     /**
@@ -33,7 +33,7 @@ class StoreSetupController extends Controller
      */
     public function create()
     {
-        //
+        return view('apps.pages.loyalty_program.setting.store_setup');
     }
 
     public function store(LoyaltyStoreSetupRequest $request)
@@ -43,25 +43,28 @@ class StoreSetupController extends Controller
             'currency_to_loyalty_conversion_rate',
             'min_purchase_amount'
         ]);
-        $result =new LoyaltyStoreSetting();
 
-        $result->store_id = 1;
-        //$result->store_id = $this->sdc->storeID();
+        $result = LoyaltyStoreSetting::where("store_id",$this->sdc->storeID())->first();
+        if(! isset($result['store_id'])){
+            $result =new LoyaltyStoreSetting();
+        }
+        $result->store_id = $this->sdc->storeID();
         $result->is_in_loyalty_program = $data['is_in_loyalty_program'];
         $result->allow_cash_withdrawal_by_loyanty_point = $data['allow_cash_withdrawal_by_loyanty_point'];
         $result->currency_to_loyalty_conversion_rate = $data['currency_to_loyalty_conversion_rate'];
-        $result->min_purchase_amount  = $data['min_purchase_amount '];
+        $result->min_purchase_amount  = $data['min_purchase_amount'];
 
         $result->save();
-        return $result;
+        return redirect()->route('loyalty.setting.store.index');
     }
 
     public function show($id)
     {
-        return $this->model
-                //->where('store_id',$this->sdc->storeID())
-                ->where('id',$id)
-                ->first();
+        $data =  $this->model
+                ->where('store_id',$id)
+                ->get();
+        return $data;
+        return view('apps.pages.loyalty_program.setting.store_setup',["edit" => $data]);
     }
 
     public function edit($id)
@@ -70,7 +73,7 @@ class StoreSetupController extends Controller
                 //->where('store_id',$this->sdc->storeID())
                 ->where('id',$id)
                 ->first();
-        return view('', ['data' => $data]);
+        return view('apps.pages.loyalty_program.setting.store_setup',["edit" => $data]);
     }
 
     public function update(LoyaltyStoreSetupRequest $request, $id)
@@ -85,7 +88,7 @@ class StoreSetupController extends Controller
         $result->currency_to_loyalty_conversion_rate = $data['currency_to_loyalty_conversion_rate'];
         $result->min_purchase_amount  = $data['min_purchase_amount'];
         $result->save();
-        return $data;
+        return redirect()->route('loyalty.setting.store.index');
     }
 
     public function destroy($id)

@@ -32,8 +32,9 @@ class LoyaltyUsageService{
             // }
     }
 
-    public function setUsage($usued_for = "Cash Withdrawal", $loyalty_point)
+    public function setUsage( $loyalty_point, $usued_for = "Cash Withdrawal")
     {
+        // dd($this->config);
         $result = new LoyaltyPointUsage();
 
         $result->store_id = $this->store_id;
@@ -42,7 +43,7 @@ class LoyaltyUsageService{
         $result->email = $this->config['user_info']['email'];
         $result->phone = $this->config['user_info']['phone'];
         $result->used_loyalty_point = $loyalty_point;
-        $result->use_for = ($usued_for === "Cash Withdrawal")? "Cash Withdrawal" : "Purchase" ;
+        $result->used_for = ($usued_for === "Cash Withdrawal")? "Cash Withdrawal" : "Purchase" ;
         $result->invoice_id = ($usued_for === "Cash Withdrawal")? $this->config['withdraw']['ref_id']??"" : $this->config['invoice_info']['invoice_id'];
         $result->amount = ($usued_for === "Cash Withdrawal")?$this->config['withdraw']['amount'] : $this->config['invoice_info']['purchase_amount'];
 

@@ -21,7 +21,7 @@ class CreateLoyaltyPromotionSettingsTable extends Migration
 
             $table->string('promotion_title');
             $table->string('for_membership_type')->nullable();
-            $table->string('currency_to_loyalty_conversion_rate');
+            $table->double('currency_to_loyalty_conversion_rate');
             $table->string('start_at');
             $table->string('end_at');
             $table->enum('status',['active','inactive','draft']);

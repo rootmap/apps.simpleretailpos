@@ -14,7 +14,7 @@ trait LoyaltyPromotionSettingRules
             "start_at" => "required|string",
             "end_at" => "required|string",
             "currency_to_loyalty_conversion_rate" => "required|numeric",
-            "status" => "required|numeric",
+            "status" => "required|string",
 
         ];
     }
@@ -27,7 +27,7 @@ trait LoyaltyPromotionSettingRules
             "start_at" => "nullable|string",
             "end_at" => "nullable|string",
             "currency_to_loyalty_conversion_rate" => "nullable|numeric",
-            "status" => "nullable|numeric",
+            "status" => "nullable|string",
         ];
     }
 }

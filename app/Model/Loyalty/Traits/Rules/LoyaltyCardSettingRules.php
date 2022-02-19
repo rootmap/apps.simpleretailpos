@@ -10,10 +10,10 @@ trait LoyaltyCardSettingRules
         return [
             "membership_name" => "required|string|unique:loyalty_card_settings,membership_name",
             "card_pic_path" => "nullable|image|mimes:jpg,png",
-            "card_display_config" => "required|array",
+            "card_display_config" => "nullable|array",
             "point_range_from" => "required|numeric",
             "point_range_to" => "required|numeric",
-            "created_by" => "required|exists:users,id",
+            //"created_by" => "required|exists:users,id",
             "status" => "required|string"
         ];
     }
@@ -21,7 +21,7 @@ trait LoyaltyCardSettingRules
     public function updatedRules()
     {
         return [
-            "membership_name" => "nullable|string|unique:loyalty_card_settings,membership_name",
+            "membership_name" => "nullable|string",
             "card_pic_path" => "nullable|image|mimes:jpg,png",
             "card_display_config" => "nullable|array",
             "point_range_from" => "nullable|numeric",

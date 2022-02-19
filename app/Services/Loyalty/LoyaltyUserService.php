@@ -11,25 +11,26 @@ class LoyaltyUserService{
     public function __construct($config)
     {
         $this->config= $config;
+        $this->store_id = $config['store_id'];
         // {
-            //     "store_id"  :"",
-            //     'user_info' :{
-            //         'name':"",
-            //         'email':"",
-            //         'phone':"",
-            //         'id':"",
-            //     },
-            //     "invoice_info" : {
-            //         "invoice_id":"",
-            //         "purchase_amount":"",
-            //         "tender_id":"",
-            //         "tender_name":"",
-            //     },
-            //     "withdeaw" : {
-            //         "amount" : "",
-            //          "ref_id"   : ""
-            //     }
-            // }
+        //     "store_id"  :"241",
+        //     "user_info" :{
+        //         "name":"Md. Mohiuddin khan",
+        //         "email":"mohiuddin@mail.com",
+        //         "phone":"017283848494",
+        //         "id":"36"
+        //     },
+        //     "invoice_info" : {
+        //         "invoice_id":"12",
+        //         "purchase_amount":"100",
+        //         "tender_id":"1",
+        //         "tender_name":"Debit Card"
+        //     },
+        //     "withdeaw" : {
+        //         "amount" : "10",
+        //             "ref_id"   : "1"
+        //         }
+        // }
 
     }
 
@@ -43,7 +44,7 @@ class LoyaltyUserService{
         $card = new LoyaltyStoreCardService($this->config);
         $card_type = $card->getMembershipByPoint(0);
         $result->store_id = $this->config['store_id'];
-        $result->user_id = $user_info['user_id'];
+        $result->user_id = $user_info['id'];
         $result->email = $user_info['email'];
         $result->name = $user_info['name'];
         $result->name = $user_info['phone'];
@@ -61,21 +62,29 @@ class LoyaltyUserService{
         $result = new LoyaltyUser();
         $hasData = $result
                     ->where('store_id', $this->config['store_id'])
-                    ->where('user_id', $this->config['user_id'])
+                    ->where('user_id', $this->config['user_info']['id'])
                     ->first();
-        if($hasData->user_id){
+        if(isset($hasData->user_id)){
             return $hasData;
         }
         return false;
     }
 
-    public function updateUserInvoice($invoiceId,$purchaseAmount,$LoyaltyPoint)
+    public function updateUserInvoice($invoiceId,$purchaseAmount,$loyaltyPoint = "")
     {
+        $loyaltyPoint = "";
         $result = LoyaltyUser::
                     where('store_id',$this->store_id)
                     ->where('user_id',$this->config['user_info']['id'])
                     ->first();
-        $lPoint = $result->total_point + $LoyaltyPoint;
+        if($loyaltyPoint=== "" || $loyaltyPoint <=0){
+            $card = new LoyaltyStoreCardService($this->config);
+            $data = $card->convert($purchaseAmount, "point");
+            //dd("Inside Update User------", $data);
+            $loyaltyPoint = $data['total_point'];
+        }
+        $lPoint = $result->total_point + $loyaltyPoint;
+
         $card = new LoyaltyStoreCardService($this->config);
         $card_type = $card->getMembershipByPoint($lPoint);
 
@@ -96,12 +105,10 @@ class LoyaltyUserService{
     public function queryBalance()
     {
         $data = $this->getLoyaltyUser();
+        // dd($data);
         if($data['id']){
             $card = new LoyaltyStoreCardService($this->config);
-            return [
-                "loyalty_points"=> $data['total_points'],
-                "balance"=> $card->convert($data['total_points'], "withdraw")
-            ];
+            return $card->convert($data['total_point'], "withdraw");
         }
         return [
             'status' =>400,
@@ -111,12 +118,13 @@ class LoyaltyUserService{
     public function withdraw($balance)
     {
         $data = $this->queryBalance();
-        if(isset($data['loyalty_points'])){
+        // dd($data);
+        if(isset($data['loyaltytotal_point_point'])){
             if($balance <= $data['balance'] ){
                 $data = $this->calcWithdrawBalance($balance);
                 if(isset($data['withdrawn'])){
                     $usage = new LoyaltyUsageService($this->config);
-                    $usage->setUsage("Cash Withdrawal", $data['withdrawn']['loyalty_points']);
+                    $usage->setUsage( $data['withdrawn']['loyalty_points'], "Cash Withdrawal");
                     return $data;
                 }
                 return [
@@ -124,17 +132,24 @@ class LoyaltyUserService{
                     "message" => "Invalid Balance Query."
                 ];
             }
-            return [
-                'status' =>200,
-                "message" => "Insufficient balance."
-            ];
+            return false;
         }
-        return [
-            'status' =>400,
-            "message" => "User yet not in Loyalty Program."
-        ];
+        return false;
     }
-    private function calcWithdrawBalance($balance)
+    public function purchase()
+    {
+        $balance = $this->config['invoice_info']['purchase_amount'];
+        $data = $this->queryBalance();
+        if(isset($data['total_point'])){
+            if($balance <= $data['balance'] ){
+
+                return $this->calcWithdrawBalance($balance, true);
+            }
+            return false;
+        }
+        return false;
+    }
+    private function calcWithdrawBalance($balance, $isPurchase = false)
     {
         $result = LoyaltyUser::
                     where('store_id',$this->store_id)
@@ -142,13 +157,14 @@ class LoyaltyUserService{
                     ->first();
         $card = new LoyaltyStoreCardService($this->config);
 
-        $withdrawd = $card->convert($balance,"Withdraw");
-        $lPoint = $result->total_point - $withdrawd;
-        $card = new LoyaltyStoreCardService($this->config);
+        $withdrawd = $card->convert($balance,"point");
+        $lPoint = $result->total_point - $withdrawd['total_point'];
         $card_type = $card->getMembershipByPoint($lPoint);
-
-        $updatedBalance = $result->total_purchase_amount - $balance;
-        $result->total_purchase_amount = $updatedBalance;
+        if($isPurchase){
+            $updatedBalance = $result->total_purchase_amount + $balance;
+            $result->total_invoices = $result->total_invoices +1;
+            $result->total_purchase_amount = $updatedBalance;
+        }
         $result->total_point = $lPoint;
         $result->membership_card_type = $card_type['membership_name'];
         $result->save();
@@ -158,9 +174,10 @@ class LoyaltyUserService{
                 "balance"=> $updatedBalance
             ],
             "withdrawn" =>[
-                "loyalty_points"=> $withdrawd,
+                "loyalty_points"=> $withdrawd['total_point'],
                 "balance"=> $balance
             ]
         ];
     }
+
 }
