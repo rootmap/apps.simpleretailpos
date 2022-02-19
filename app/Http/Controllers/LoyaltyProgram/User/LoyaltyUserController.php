@@ -134,8 +134,22 @@ class LoyaltyUserController extends Controller
     {
         $data = $this->makeDataArray($request);
         if($data){
-        $service = new LoyaltyService($data);
-        return $service->withdraw();
+            $service = new LoyaltyService($data);
+            $result = $service->withdraw();
+            return ($result) ? $result : ["status" => false, "message" => "Invalid Payment Query" ];
+        }
+        return [
+            "status" => "400",
+            "message" => "Invalid Argument Pass"
+        ];
+    }
+    public function query(LoyaltyUserRequestNew $request)
+    {
+        $data = $this->makeDataArray($request);
+        if($data){
+            $service = new LoyaltyService($data);
+            $result = $service->queryBalance();
+            return ($result) ? $result : ["status" => false, "message" => "Invalid Request paremeters." ];
         }
         return [
             "status" => "400",
