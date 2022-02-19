@@ -12,7 +12,7 @@ class LoyaltyUser extends Model
         'store_id',
         'user_id',
         'name',
-        'email',
+        'phone',
         'total_invoices',
         'total_purchase_amount',
         'total_point',

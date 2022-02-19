@@ -49,7 +49,7 @@
     	<link rel="stylesheet" type="text/css" href="{{url('theme/app-assets/vendors/css/calendars/fullcalendar.min.css')}}">
     	<link rel="stylesheet" type="text/css" href="{{url('theme/app-assets/css/plugins/calendars/fullcalendar.min.css')}}">
     @endif
-    
+
 @endsection
 
 @section('js')
@@ -99,7 +99,7 @@
 	<script src="{{url('theme/app-assets/js/scripts/forms/checkbox-radio.min.js')}}" type="text/javascript"></script>
     <script src="{{url('theme/app-assets/js/scripts/forms/switch.min.js')}}" type="text/javascript"></script>
     <script src="{{url('theme/app-assets/js/scripts/forms/input-groups.min.js')}}" type="text/javascript"></script>
-    
+
 	@endif
 
 	@if(isset($addproduct))
@@ -155,7 +155,7 @@
 		}
 	</script>
 	@endif
-	
+
 	@if(isset($JDataTable))
     <script src="{{url('theme/app-assets/vendors/js/tables/jquery.dataTables.min.js')}}" type="text/javascript"></script>
     <script src="{{url('theme/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js')}}" type="text/javascript"></script>
@@ -195,12 +195,12 @@
 			    	{
 			    		$(".expense_id").fadeOut('fast');
 			    		$(".expense_head_name").fadeIn('slow');
-			    		
+
 			    	}
 			    });
 			});
 	    </script>
-    @endif 
+    @endif
 
     @if(isset($customer_lead))
     	<script type="text/javascript">
@@ -347,13 +347,13 @@
 			}
 
 			function genarateSL()
-			{	
+			{
 				var totalQuantity=0;
 				var total=$('.sl').size();
 				if(total)
 				{
 					$('.sl').each(function(index){
-						
+
 						$(this).html((index-0)+(1-0));
 						var rowtotal=$(this).parent('tr').find('.typed_quantity').val();
 						if(rowtotal<=0)
@@ -370,7 +370,7 @@
 				$("#shoppingCartQuantityTotal").html(totalQuantity);
 			}
 
-			
+
 		</script>
     @endif
 
@@ -383,7 +383,7 @@
 
 				$("form").attr("action",getURL);
 				//console.log($("select[name=customer_id]").val());
-				
+
 				$("button[type=submit]").click();
 			});
     	});
@@ -398,7 +398,7 @@
 
 				$("#salesSu").attr("action",getURL);
 				//console.log($("select[name=customer_id]").val());
-				
+
 				$("#salesSUSub").click();
 			});
     	});
