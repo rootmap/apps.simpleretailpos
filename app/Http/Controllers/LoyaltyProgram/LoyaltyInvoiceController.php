@@ -46,12 +46,9 @@ class LoyaltyInvoiceController extends Controller
 
     private function makeDataArray($request)
     {
-        $data = $request->only([
-            'user_id', 'email', "name", "phone"
-            ,"invoice_id","purchase_amount", "tender_id", "tender_name"
-            ,"withdraw_amount", "withdraw_ref_id"
-        ]);
 
+        $data = $request->all();
+        // dd($data);
         try{
             return [
                 "store_id"  =>$data['store_id'],
@@ -82,8 +79,15 @@ class LoyaltyInvoiceController extends Controller
     public function addInvoiceToLoyaltyProgram(LoyaltyUserRequestNew $request)
     {
         $data = $this->makeDataArray($request);
+        if($data){
+            $service = new LoyaltyService($data);
+            $result = $service->setInvoice();
+            return ($result) ? $result : ["status" => false, "message" => "Invalid Request paremeters." ];
+        }
 
-        $service = new LoyaltyService();
-        return $service->setInvoice();
+        return [
+            "status" => "400",
+            "message" => "Invalid Argument Pass"
+        ];
     }
 }

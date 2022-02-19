@@ -48,6 +48,7 @@ class LoyaltyUsageService{
         $result->amount = ($usued_for === "Cash Withdrawal")?$this->config['withdraw']['amount'] : $this->config['invoice_info']['purchase_amount'];
 
         $result->save();
+        //dd($result);
         return $result;
     }
 }

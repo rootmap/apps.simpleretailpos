@@ -50,6 +50,7 @@ class LoyaltyInvoiceService{
         // Update User's Purchase related information, Also try to update user membership type by total Loyalty Point.
         // Update Promotion related information(if promotion ongoing).
         // Update Loyalty_point_usages table (If Purchased throught loyalty Point)
+
         $this->user = new LoyaltyUserService($this->config);
         $result = $this->user->getLoyaltyUser();
         if(! isset($result->id)){
@@ -74,6 +75,13 @@ class LoyaltyInvoiceService{
         $invoice->earned_point = 0;
         $invoice->save();
         $data = $this->update( $invoice['id'], $result['membership_card_type'], $this->config['invoice_info']['purchase_amount'] );
+
+        if(isset($data)  && $data === "promo"){
+
+            return $invoice;
+        }
+        return $data;
+
     }
 
     private function update($invoiceId, $cardType, $amount)
@@ -93,7 +101,7 @@ class LoyaltyInvoiceService{
             $data = $user->purchase();
             $usage = new LoyaltyUsageService($this->config);
             $usage->setUsage( $data['withdrawn']['loyalty_points'], "Purchase");
-            return $data;
+            return "promo";
         }
         $promo= new LoyaltyPromotionService($this->config);
         $promotion = $promo->getLatestPromotionDetails ( $amount, $cardType);

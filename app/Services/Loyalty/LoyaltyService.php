@@ -50,15 +50,15 @@ class LoyaltyService{
         return $this->lltInvoice->set();
     }
 
-    public function QueryBalance()
+    public function queryBalance()
     {
         return $this->user->queryBalance();
     }
 
     public function withdraw()
     {
-        $data =$this->user->withdraw($this->config['withdraw']['amount']);
-        dd($data);
+        return $this->user->withdraw($this->config['withdraw']['amount']);
+
     }
     public function get()
     {

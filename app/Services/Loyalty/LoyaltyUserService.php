@@ -10,6 +10,7 @@ class LoyaltyUserService{
 
     public function __construct($config)
     {
+
         $this->config= $config;
         $this->store_id = $config['store_id'];
         // {
@@ -119,18 +120,16 @@ class LoyaltyUserService{
     {
         $data = $this->queryBalance();
         // dd($data);
-        if(isset($data['loyaltytotal_point_point'])){
+        if(isset($data['total_point'])){
             if($balance <= $data['balance'] ){
+                // dd($data, $balance);
                 $data = $this->calcWithdrawBalance($balance);
                 if(isset($data['withdrawn'])){
                     $usage = new LoyaltyUsageService($this->config);
                     $usage->setUsage( $data['withdrawn']['loyalty_points'], "Cash Withdrawal");
                     return $data;
                 }
-                return [
-                    'status' =>200,
-                    "message" => "Invalid Balance Query."
-                ];
+                return false;
             }
             return false;
         }
@@ -160,6 +159,7 @@ class LoyaltyUserService{
         $withdrawd = $card->convert($balance,"point");
         $lPoint = $result->total_point - $withdrawd['total_point'];
         $card_type = $card->getMembershipByPoint($lPoint);
+        $updatedBalance = $result->total_purchase_amount - $balance;
         if($isPurchase){
             $updatedBalance = $result->total_purchase_amount + $balance;
             $result->total_invoices = $result->total_invoices +1;
