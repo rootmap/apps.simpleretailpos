@@ -80,6 +80,19 @@
 										@endif 
 										 id="eventRegInput1" readonly="readonly" class="form-control border-primary" placeholder="Store ID" name="store_id">
 		                        </div>
+		                        <div class="form-group">
+	                            	<label for="projectinput1"> 
+										<input type="checkbox" 
+										@if(isset($edit))
+											@if($edit->is_loyalty_program==1)
+												checked="checked" 
+											@endif
+										@endif 
+										id="eventRegInput1" class="form-control-inline border-primary" name="is_loyalty_program"> 
+										Is Loyalty Program Enabled 
+									</label>
+		                            	
+		                        </div>
 							<div class="form-actions center">
 								<button type="reset" class="btn btn-info btn-lighten-2 mr-1" @if($userguideInit==1) data-step="3" data-intro="if you want clear all information then click the cancel button." @endif>
 									<i class="icon-cross2"></i> Cancel

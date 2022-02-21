@@ -31,6 +31,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                                <th>Loyalty Status</th>
                                 <th style="width: 100px;">Action</th>
                             </tr>
                         </thead>
@@ -43,6 +44,7 @@
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->email}}</td>
                                 <td>{{$row->phone}}</td>
+                                <td>{{$row->is_loyalty_program==1?'Enable':'Disable'}}</td>
                                 <td>
                                         <a href="{{url('store-shop/edit/'.$row->id)}}" title="Edit" class="btn btn-sm btn-outline-info" @if($userguideInit==1) data-step="2" data-intro="If you want you can modify your information when you click this button." @endif><i class="icon-pencil22"></i></a>
                                         <a  href="{{url('store-shop/delete/'.$row->id)}}" title="Delete" class="btn btn-sm btn-outline-info btn-darken-2" @if($userguideInit==1) data-step="3" data-intro="If you want delect then click this button." @endif><i class="icon-cross"></i></a>
