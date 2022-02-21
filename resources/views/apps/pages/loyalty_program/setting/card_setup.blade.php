@@ -67,7 +67,7 @@
                                         <div class="col-md-6">
                                             <div class="custom-file-container" data-upload-id="myUniqueUploadId">
                                                 <label>Upload Membership card Picture <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image" ></a></label>
-                                                <label class="custom-file-container__custom-file" style="display: none;">
+                                                <label class="custom-file-container__custom-file">
                                                     <input
                                                         type="file"
                                                         name = "card_pic_path"

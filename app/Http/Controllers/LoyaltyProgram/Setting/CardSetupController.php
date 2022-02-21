@@ -77,7 +77,7 @@ class CardSetupController extends MainController
 
         $result->save();
         //return $result;
-        return redirect()->route('loyalty.setting.card.show', [$result['id']]);
+        return redirect()->route('loyalty.setting.card.index');
     }
 
     public function show($id)
