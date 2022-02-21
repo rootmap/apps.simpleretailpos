@@ -382,6 +382,55 @@
                 </ul>
             </li>
             @endif 
+
+            @if(in_array('loyalty', $dataMenuAssigned)) 
+            <li class="submenu">
+                <a href="javascript:void(0);">
+                    <span class="icon"><i class="fa fa-home"></i></span>
+                    <span class="text">Loyalty Program</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul>
+                    @if(in_array('loyalty/users', $dataMenuAssigned)) 
+                    <li class="{{ Request::path() == 'loyalty/users' ? 'active' : '' }}  border-bottom-purple"><a href="{{url('/loyalty/users')}}" class="menu-item">User Report</a></li>
+                    @endif 
+                    @if(in_array('loyalty/invoices', $dataMenuAssigned)) 
+                    <li class="{{ Request::path() == 'loyalty/invoices' ? 'active' : '' }}  border-bottom-purple"><a href="{{url('/loyalty/invoices')}}" class="menu-item">Invoice Report</a></li>
+                    @endif 
+                    
+                    @if(in_array('loyalty/point-usage', $dataMenuAssigned)) 
+                    <li class="{{ Request::path() == 'loyalty/point-usage' ? 'active' : '' }}  border-bottom-purple"><a href="{{url('/loyalty/point-usage')}}" class="menu-item">Point Usages Report</a></li>
+                    @endif 
+                    
+                    @if(in_array('loyalty/promotional-programs', $dataMenuAssigned)) 
+                    <li class="{{ Request::path() == 'loyalty/promotional-programs' ? 'active' : '' }}  border-bottom-purple"><a href="{{url('/loyalty/promotional-programs')}}" class="menu-item">Promotional Program Report</a></li>
+                    @endif 
+
+                    <li class="submenu">
+                        <a href="javascript:void(0);">
+                            <span class="icon"><i class="fa fa-home"></i></span>
+                            <span class="text">Loyalty Settings</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul>
+                            @if(in_array('loyalty/setting/store', $dataMenuAssigned)) 
+                            <li class="{{ Request::path() == 'loyalty/setting/store' ? 'active' : '' }}  border-bottom-black"><a href="{{url('/loyalty/setting/store')}}" class="menu-item">Store Settings</a></li>
+                            @endif 
+                            @if(in_array('loyalty/setting/card', $dataMenuAssigned)) 
+                            <li class="{{ Request::path() == 'loyalty/setting/card' ? 'active' : '' }}  border-bottom-black"><a href="{{url('/loyalty/setting/card')}}" class="menu-item">Membership Settings</a></li>
+                            @endif 
+                            
+                            @if(in_array('loyalty/setting/promotion', $dataMenuAssigned)) 
+                            <li class="{{ Request::path() == 'loyalty/setting/promotion' ? 'active' : '' }}  border-bottom-black"><a href="{{url('/loyalty/setting/promotion')}}" class="menu-item">Promotion Settings</a></li>
+                            @endif 
+                            
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </li>
+            @endif 
+
             <!--/ End navigation - blog -->
             @if(in_array('help-desk', $dataMenuAssigned))
             <li class="sidebar-category">
