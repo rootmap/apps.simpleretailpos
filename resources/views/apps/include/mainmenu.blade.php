@@ -403,13 +403,12 @@
                     @endif 
                     
                     @if(in_array('loyalty/promotional-programs', $dataMenuAssigned)) 
-                    <li class="{{ Request::path() == 'loyalty/promotional-programs' ? 'active' : '' }}  border-bottom-purple"><a href="{{url('/loyalty/promotional-programs')}}" class="menu-item">Promotional Program Report</a></li>
+                    <li class="{{ Request::path() == 'loyalty/promotional-programs' ? 'active' : '' }}  border-bottom-purple"><a href="{{url('/loyalty/promotional-programs')}}" class="menu-item">Promotional Report</a></li>
                     @endif 
 
                     <li class="submenu">
                         <a href="javascript:void(0);">
-                            <span class="icon"><i class="fa fa-home"></i></span>
-                            <span class="text">Loyalty Settings</span>
+                            <span class="text"> Settings</span>
                             <span class="arrow"></span>
                         </a>
                         <ul>
