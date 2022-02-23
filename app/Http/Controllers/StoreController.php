@@ -79,6 +79,7 @@ class StoreController extends Controller
             'store_id'=>'required|unique:stores|max:255',
         ]);
 
+        $is_loyalty_program=$request->is_loyalty_program?1:0;
 
         $tab=new Store;
         $tab->name=$request->name;
@@ -86,6 +87,7 @@ class StoreController extends Controller
         $tab->phone=$request->phone;
         $tab->email=$request->email;
         $tab->store_id=$request->store_id;
+        $tab->is_loyalty_program=$is_loyalty_program;
         $tab->created_by=$this->sdc->UserID();
         $tab->save();
 
@@ -177,12 +179,14 @@ class StoreController extends Controller
             'email'=>'required',
         ]);
 
+        $is_loyalty_program=$request->is_loyalty_program?1:0;
 
         $tab=Store::find($id);
         $tab->name=$request->name;
         $tab->address=$request->address;
         $tab->phone=$request->phone;
         $tab->email=$request->email;
+        $tab->is_loyalty_program=$is_loyalty_program;
         $tab->store_id=$request->store_id;
         $tab->updated_by=$this->sdc->UserID();
         $tab->save();

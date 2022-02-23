@@ -61,21 +61,50 @@ class StaticDataController extends Facade {
         return Auth::user()->store_id;
     }
 
+    public static function isLoyaltyEnable() 
+    {
+        if(is_null(self::storeID()))
+        {
+            $store=Store::orderBy('id','ASC')->first();
+            return $store->is_loyalty_program;
+        }
+        else 
+        {
+            $storeInfoCheck = Store::where('store_id', self::storeID())->count();
+            if($storeInfoCheck > 0)
+            {
+                $store=Store::where('store_id', self::storeID())->first();
+                return $store->is_loyalty_program;
+            }
+            else 
+            {
+                $store=Store::orderBy('id', 'ASC')->first();
+                return $store->is_loyalty_program;
+            }
+        }
+        
+        return 0;
+    }
+
     public static function storeName() 
     {
         return "Simple Retail Pos";
     }
 
     public static function StoreInfo(){
-        if(is_null(self::storeID())){
+        if(is_null(self::storeID()))
+        {
             return Store::orderBy('id','ASC')->first();;
         }
-        else {
+        else 
+        {
             $storeInfoCheck = Store::where('store_id', self::storeID())->count();
-            if($storeInfoCheck > 0){
+            if($storeInfoCheck > 0)
+            {
                 return Store::where('store_id', self::storeID())->first();;
             }
-            else {
+            else 
+            {
                 return Store::orderBy('id', 'ASC')->first();
             }
         }
@@ -241,6 +270,8 @@ class StaticDataController extends Facade {
             foreach ($menuList as $key => $row) {
                 array_push($menuarray,$row->url);
             }
+
+            Session()->put('isLoyaltyEnable',self::isLoyaltyEnable());
 
             Session()->put('dataMenuAssigned',$menuarray);
             $dataMenuAssigned = Session()->has('dataMenuAssigned') ?  Session()->get('dataMenuAssigned') : null;

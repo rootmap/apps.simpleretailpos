@@ -2,11 +2,12 @@
     $dataMenuAssigned=array();
     $dataMenuAssigned=StaticDataController::dataMenuAssigned();
     $currentPageURL=StaticDataController::currentPageURL();
+    $isLoyaltyEnable=StaticDataController::isLoyaltyEnable();
 ?>
-
 <aside id="sidebar-left" class="sidebar-circle">
         <style type="text/css">
-            .avatarside img {
+            .avatarside img 
+            {
                 width: 100%;
                 max-width: 100%;
                 height: auto;
@@ -51,10 +52,10 @@
                 </a>
                 <ul>
                     @if(in_array('dashboard', $dataMenuAssigned))
-                    <li class="{{ Request::path() == 'dashboard' ? 'active' : '' }}  border-bottom-purple"><a href="{{url('dashboard')}}" class="menu-item">Dashboard</a></li>
+                        <li class="{{ Request::path() == 'dashboard' ? 'active' : '' }}  border-bottom-purple"><a href="{{url('dashboard')}}" class="menu-item">Dashboard</a></li>
                     @endif
                     @if(in_array('analytical/dashboard', $dataMenuAssigned))
-                    <li class="{{ Request::path() == 'analytical/dashboard' ? 'active' : '' }}  border-bottom-purple"><a href="{{url('analytical/dashboard')}}" class="menu-item">Analytical Dashboard</a></li>
+                        <li class="{{ Request::path() == 'analytical/dashboard' ? 'active' : '' }}  border-bottom-purple"><a href="{{url('analytical/dashboard')}}" class="menu-item">Analytical Dashboard</a></li>
                     @endif
                 </ul>
             </li>
@@ -383,10 +384,10 @@
             </li>
             @endif 
 
-            @if(in_array('loyalty', $dataMenuAssigned)) 
+            @if(in_array('loyalty', $dataMenuAssigned) && $isLoyaltyEnable==1) 
             <li class="submenu">
                 <a href="javascript:void(0);">
-                    <span class="icon"><i class="fa fa-home"></i></span>
+                    <span class="icon"><i class="fa fa-user"></i></span>
                     <span class="text">Loyalty Program</span>
                     <span class="arrow"></span>
                 </a>
@@ -403,13 +404,12 @@
                     @endif 
                     
                     @if(in_array('loyalty/promotional-programs', $dataMenuAssigned)) 
-                    <li class="{{ Request::path() == 'loyalty/promotional-programs' ? 'active' : '' }}  border-bottom-purple"><a href="{{url('/loyalty/promotional-programs')}}" class="menu-item">Promotional Program Report</a></li>
+                    <li class="{{ Request::path() == 'loyalty/promotional-programs' ? 'active' : '' }}  border-bottom-purple"><a href="{{url('/loyalty/promotional-programs')}}" class="menu-item">Promotional Report</a></li>
                     @endif 
 
                     <li class="submenu">
                         <a href="javascript:void(0);">
-                            <span class="icon"><i class="fa fa-home"></i></span>
-                            <span class="text">Loyalty Settings</span>
+                            <span class="text"> Settings</span>
                             <span class="arrow"></span>
                         </a>
                         <ul>
