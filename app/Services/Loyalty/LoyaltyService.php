@@ -11,6 +11,7 @@ class LoyaltyService{
     protected $result = [];
     public function __construct($config = [])
     {
+        //dd($config);
         $this->config= $config;
         // {
         //     "store_id"  :"241",

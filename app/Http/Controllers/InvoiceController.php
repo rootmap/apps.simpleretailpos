@@ -49,6 +49,10 @@ use App\StripeTransactionHistory;
 use App\ProductSettings;
 use App\SquareAccount;
 use App\PartialPayment;
+use App\Http\Controllers\StaticDataController;
+use App\Http\Controllers\LoyaltyProgram\User\LoyaltyUserController;
+use App\Http\Requests\Loyalty\User\LoyaltyUserRequestNew;
+use App\Services\Loyalty\LoyaltyService;
 
 class InvoiceController extends Controller
 {
@@ -60,7 +64,14 @@ class InvoiceController extends Controller
     private $moduleName="Sales";
     private $sdc;
     private $_api_content;
-    public function __construct(){ 
+
+    // public function __construct(LoyaltyUserController $loyaltyProgram, StaticDataController $sdc)
+    // {
+    //     $this->loyalty = $loyaltyProgram;
+    //     $this->sdc = $sdc;
+
+    // }
+    public function __construct(LoyaltyUserController $loyaltyProgram, StaticDataController $sdc){ 
         
         $paypal_conf=\Config::get('paypal');
         $this->_api_content= new ApiContext(new OAuthTokenCredential(
@@ -70,8 +81,10 @@ class InvoiceController extends Controller
 
         $this->_api_content->setConfig($paypal_conf['settings']);
 
-        $this->sdc = new StaticDataController(); 
+        //$this->sdc = new StaticDataController(); 
         $this->authorizenet = new AuthorizeNetPaymentController(); 
+        $this->loyalty = $loyaltyProgram;
+        $this->sdc = $sdc;
     }
 
     public function posclear(Request $request)
@@ -2065,6 +2078,8 @@ class InvoiceController extends Controller
 
     public function pos(Request $request)
     {
+        // echo $this->loyalty->assign($request);
+        // die();
         $defualtCustomer=$this->genarateDefaultCustomer();
         $this->getSalesCartTokenID();
         $filter=$this->GenaratePageDataFilter();
@@ -5880,6 +5895,32 @@ class InvoiceController extends Controller
             $tabsse->created_by=$this->sdc->UserID();
             $tabsse->save();
 
+            $customerID = $cart->customerID;
+            $customerInfo=Customer::find($customerID);
+            $dataRequest=[
+                "store_id"  =>$this->sdc->storeID(),
+                'user_info' =>[
+                    'id'=>$customerInfo->id,
+                    'name'=>$customerInfo->name,
+                    'email'=>$customerInfo->email,
+                    'phone'=>$customerInfo->phone
+                ],
+                "invoice_info" => [
+                    "invoice_id"=>$tab->invoice_id,
+                    "purchase_amount"=>$tab->total_amount,
+                    "tender_id"=>$tab->tender_id,
+                    "tender_name"=>$tab->tender_name,
+                ],
+                "withdraw" => [
+                    "amount" => 0,
+                    "ref_id"   => ""
+                ]
+            ];
+
+            $service = new LoyaltyService($dataRequest);
+            $dataService = $service->join();
+            $dataResponse=$service->setInvoice();
+            //dd($dataResponse);
             $Ncart = new Pos($cart);
             $Ncart->ClearCart();
 

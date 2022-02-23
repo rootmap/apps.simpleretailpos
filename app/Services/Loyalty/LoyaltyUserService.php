@@ -10,7 +10,7 @@ class LoyaltyUserService{
 
     public function __construct($config)
     {
-
+        // dd($config['store_id']);
         $this->config= $config;
         $this->store_id = $config['store_id'];
         // {
@@ -37,6 +37,7 @@ class LoyaltyUserService{
 
     public function join()
     {
+        //dd($this->config['user_info']);
         $user_info = $this->config['user_info'];
         if( $result = $this->is_esists($user_info['id'])){
             return $result;
@@ -44,6 +45,7 @@ class LoyaltyUserService{
         $result = new LoyaltyUser();
         $card = new LoyaltyStoreCardService($this->config);
         $card_type = $card->getMembershipByPoint(0);
+        //dd($card_type);
         $result->store_id = $this->config['store_id'];
         $result->user_id = $user_info['id'];
         $result->email = $user_info['email'];

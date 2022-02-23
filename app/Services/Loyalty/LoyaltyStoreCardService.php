@@ -89,6 +89,7 @@ class LoyaltyStoreCardService{
                             ->first();
 
         if(isset($data['membership_name'])){
+            
             return $data;
         }
         return LoyaltyCardSetting::select('membership_name')
