@@ -35,7 +35,9 @@ class CardSetupController extends MainController
      */
     public function create()
     {
-        return view('apps.pages.loyalty_program.setting.card_setup');
+        $store = StaticDataController::StoreInfo();
+
+        return view('apps.pages.loyalty_program.setting.card_setup', ['store'=>$store]);
     }
 
     private function storeImage($request, $fieldName)

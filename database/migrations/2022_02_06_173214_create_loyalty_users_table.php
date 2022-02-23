@@ -22,8 +22,8 @@ class CreateLoyaltyUsersTable extends Migration
             $table->string('email')->nullable();
             $table->string('phone');
             $table->integer('total_invoices');
-            $table->integer('total_purchase_amount');
-            $table->integer('total_point');
+            $table->double('total_purchase_amount');
+            $table->double('total_point');
 
             $table->string('membership_card_type');
 

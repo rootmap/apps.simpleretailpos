@@ -107,6 +107,7 @@ class LoyaltyInvoiceService{
         $promotion = $promo->getLatestPromotionDetails ( $amount, $cardType);
 
         $point = "";
+        $promotionId = "";
         if($promotion){
             $point = $promotion['point'];
             $data = $promotion['data'];
@@ -116,6 +117,17 @@ class LoyaltyInvoiceService{
 
             $promo->updatePromotionProgram($promotionId, $invoiceId, $purchaseAmount,$point);
         }
+        else{
+            $promo = new LoyaltyStoreCardService($this->config);
+            $convert = $promo->convert($amount,"");
+            $point = $convert['total_point'];
+            $purchaseAmount = $amount;
+        }
+        $invoice = LoyaltyInvoice::where('invoice_id', $invoiceId)->first();
+
+        $invoice->promotion_id = $promotionId;
+        $invoice->earned_point = $point;
+        $invoice->save();
 
         $user = new LoyaltyUserService($this->config);
         return $user->updateUserInvoice($invoiceId, $amount, $point);
