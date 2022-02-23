@@ -45,7 +45,7 @@ class LoyaltyPromotionService{
     public function getLatestPromotionRate ($membershipType, $date = "")
     {
         if($date == ""){
-            $date =date("y-m-d h:m:s");
+            $date =date("Y-m-d h:m:s");
         }
         return LoyaltyPromotionSetting::select('currency_to_loyalty_conversion_rate')
                             ->where('store_id',$this->store_id)
@@ -65,7 +65,7 @@ class LoyaltyPromotionService{
     public function getLatestPromotionDetails ($purchaseAmount, $membershipType, $date = "")
     {
         if($date == ""){
-            $date =date("y-m-d");
+            $date =date("Y-m-d");
         }
         $data = LoyaltyPromotionSetting::
                             where('store_id',$this->store_id)
@@ -76,7 +76,7 @@ class LoyaltyPromotionService{
                             ->first();
         if(isset($data->id)){
             return [
-                "point" => $purchaseAmount / $data['currency_to_loyalty_conversion_rate'],
+                "point" => $purchaseAmount * $data['currency_to_loyalty_conversion_rate'],
                 'data' => $data
             ];
         }
