@@ -43,7 +43,7 @@
                                                 <label for="projectinput1">Status </label>
                                                 <select required  name="status" class="element form-control border-info">
                                                     <option>--Select One--</option>
-                                                    <option value="activee">Active</option>
+                                                    <option value="active">Active</option>
                                                     <option value="draft">Draft</option>
                                                 </select>
                                             </div>

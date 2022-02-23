@@ -60,14 +60,18 @@ class LoyaltyStoreCardService{
 
     public function convert($value, $convertTo = "point")
     {
-
+        //$convertTo="point";
         $store = $this->store_details();
-        // dd($convertTo);
+        //dd($convertTo);
         $convertionRate = $store['currency_to_loyalty_conversion_rate'];
+
+        $balance = $value;
+        $point = ($convertTo === "point") ? $value : $value * $convertionRate;
+
         return [
-            "total_point" => ($convertTo === "point") ? $value / $convertionRate : $value ,
+            "balance" => $balance,
             "conversion_rate" => $convertionRate,
-            "balance" => ($convertTo === "point") ? $value : $value * $convertionRate
+            "total_point" =>$point
         ];
     }
 

@@ -74,7 +74,7 @@ class LoyaltyInvoiceService{
         $invoice->promotion_id = "";
         $invoice->earned_point = 0;
         $invoice->save();
-        $data = $this->update( $invoice['id'], $result['membership_card_type'], $this->config['invoice_info']['purchase_amount'] );
+        $data = $this->update($this->config['invoice_info']['invoice_id'], $result['membership_card_type'], $this->config['invoice_info']['purchase_amount'] );
 
         if(isset($data)  && $data === "promo"){
 
@@ -104,8 +104,8 @@ class LoyaltyInvoiceService{
             return "promo";
         }
         $promo= new LoyaltyPromotionService($this->config);
-        $promotion = $promo->getLatestPromotionDetails ( $amount, $cardType);
-
+        $promotion = $promo->getLatestPromotionDetails ($amount, $cardType);
+        //dd($this->config['invoice_info']);
         $point = "";
         $promotionId = "";
         if($promotion){
@@ -116,6 +116,7 @@ class LoyaltyInvoiceService{
             $purchaseAmount = $this->config['invoice_info']['purchase_amount'];
 
             $promo->updatePromotionProgram($promotionId, $invoiceId, $purchaseAmount,$point);
+            $convert="";
         }
         else{
             $promo = new LoyaltyStoreCardService($this->config);
@@ -123,7 +124,12 @@ class LoyaltyInvoiceService{
             $point = $convert['total_point'];
             $purchaseAmount = $amount;
         }
+
+        //dd($convert);
+
         $invoice = LoyaltyInvoice::where('invoice_id', $invoiceId)->first();
+
+        //dd($point);
 
         $invoice->promotion_id = $promotionId;
         $invoice->earned_point = $point;

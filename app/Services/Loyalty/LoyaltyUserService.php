@@ -75,7 +75,7 @@ class LoyaltyUserService{
 
     public function updateUserInvoice($invoiceId,$purchaseAmount,$loyaltyPoint = "")
     {
-        $loyaltyPoint = "";
+        //$loyaltyPoint = "";
         $result = LoyaltyUser::
                     where('store_id',$this->store_id)
                     ->where('user_id',$this->config['user_info']['id'])
@@ -83,6 +83,7 @@ class LoyaltyUserService{
         if($loyaltyPoint=== "" || $loyaltyPoint <=0){
             $card = new LoyaltyStoreCardService($this->config);
             $data = $card->convert($purchaseAmount, "point");
+            //dd($data);
             //dd("Inside Update User------", $data);
             $loyaltyPoint = $data['total_point'];
         }
