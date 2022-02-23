@@ -22,10 +22,10 @@ class CreateLoyaltyPointUsagesTable extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('email')->nullable();
-            $table->integer('used_loyalty_point')->nullable();
+            $table->double('used_loyalty_point')->nullable();
             $table->enum('used_for',['purchase','cash']);
             $table->integer('invoice_id')->nullable();
-            $table->integer('amount');
+            $table->double('amount')->nullable();
 
             $table->softDeletes();
 

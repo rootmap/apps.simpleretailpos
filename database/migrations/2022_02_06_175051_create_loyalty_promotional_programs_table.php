@@ -20,8 +20,8 @@ class CreateLoyaltyPromotionalProgramsTable extends Migration
             $table->unsignedBigInteger('promotion_id');
 
             $table->integer('total_invoices');
-            $table->integer('total_purchase_amount');
-            $table->integer('total_loyalty_points');
+            $table->double('total_purchase_amount');
+            $table->double('total_loyalty_points');
 
             $table->softDeletes();
             $table->timestamps();

@@ -22,9 +22,9 @@ class CreateLoyaltyInvoicesTable extends Migration
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('phone');
-            $table->integer('purchase_amount');
+            $table->double('purchase_amount');
             $table->integer('promotion_id')->nullable();
-            $table->integer('earned_point');
+            $table->double('earned_point');
             $table->integer('tender_id');
             $table->string('tender_name');
 

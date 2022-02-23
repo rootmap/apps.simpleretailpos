@@ -81,7 +81,7 @@
                                                     ></span>
                                                 </label>
                                                 <div class="custom-file-container__image-preview"
-                                                    style="overflow: hidden; hight: 220px; width:350px; border:2px solid #CCCCCC; border-radius:3%; transition: all 0.2s; -webkit-transition: all 0.2s;"></div>
+                                                    style="overflow: hidden; hight: 220px; width:420px; border:2px solid #CCCCCC; border-radius:3%; transition: all 0.2s; -webkit-transition: all 0.2s;"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-6" style="background-color: #eff4ff">
