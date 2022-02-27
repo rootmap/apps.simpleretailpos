@@ -2,7 +2,7 @@
 <div class="modal fade text-xs-left" id="NewCustomerDash" tabindex="-3" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                      <div class="modal-header">
+                    <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                       </button>
@@ -13,13 +13,13 @@
                         <div class="form-group row">
                             <label class="col-md-4 label-control" for="projectinput1">Name</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" value="" placeholder="Customer Name" name="new_customer_name">
+                                <input type="text" class="form-control" value="" placeholder="Enter Customer Name" name="new_customer_name">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4 label-control" for="projectinput1">Address</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" value=""  name="new_customer_address" placeholder="new_customer_address">
+                                <input type="text" class="form-control" value=""  name="new_customer_address" placeholder="Enter Address">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -31,7 +31,14 @@
                         <div class="form-group row">
                             <label class="col-md-4 label-control" for="projectinput1">E-mail</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" value=""  name="new_customer_email" placeholder="Email Address">
+                                <input type="text" class="form-control" value=""  name="new_customer_email" placeholder="Enter Email Address">
+                            </div>
+                        </div>                                                
+                        <div class="form-group row">
+                            <label class="col-md-4 label-control" for="projectinput1"> &nbsp; </label>
+                            <div class="col-md-8">
+                                <input type="checkbox"  name="new_customer_loyalty">
+                                Add Customer To Loyalty Program
                             </div>
                         </div>                                                
                     </div>
@@ -40,7 +47,7 @@
                             <i class="icon-check2"></i> Save Customer
                         </button>
                     </div>
-                </form>
+                    </form>
             </div>
         </div>
         </div>

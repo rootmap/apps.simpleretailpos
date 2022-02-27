@@ -64,9 +64,11 @@ class LoyaltyPromotionService{
 
     public function getLatestPromotionDetails ($purchaseAmount, $membershipType, $date = "")
     {
-        if($date == ""){
+        if($date == "")
+        {
             $date =date("Y-m-d");
         }
+        
         $data = LoyaltyPromotionSetting::
                             where('store_id',$this->store_id)
                             ->where('status','active')
