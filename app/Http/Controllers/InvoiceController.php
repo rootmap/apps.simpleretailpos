@@ -2078,9 +2078,25 @@ class InvoiceController extends Controller
 
     public function pos(Request $request)
     {
+        
         // echo $this->loyalty->assign($request);
         // die();
         $defualtCustomer=$this->genarateDefaultCustomer();
+
+        $customerID = $defualtCustomer;
+        $customerInfo=Customer::find($customerID);
+        $dataRequest=[
+            "store_id"  =>$this->sdc->storeID(),
+            'user_info' =>[
+                'id'=>$customerInfo->id
+            ]
+        ];
+
+        $service = new LoyaltyService($dataRequest);
+        $dataLoyaltyUser = $service->queryBalance();
+        $customer_existing_points=$dataLoyaltyUser['total_point']?$dataLoyaltyUser['total_point']:0;
+        //dd($dataLoyaltyUser);
+
         $this->getSalesCartTokenID();
         $filter=$this->GenaratePageDataFilter();
         //$tab_customer=Customer::where('store_id',$this->sdc->storeID())->get();
@@ -2190,15 +2206,17 @@ class InvoiceController extends Controller
                 'payPaltender'=>$payPaltender,
                 'drawerStatus'=>$drawerStatus,
                 'authorizeNettender'=>$authorizeNettender,
-                'ps'=>$ps,'cart'=>$Cart,
+                'ps'=>$ps,
+                'cart'=>$Cart,
                 //'customerData'=>$tab_customer,
                 "last_invoice_id"=>$last_invoice_id,
                 'CounterDisplay'=>$CounterDisplay,
                 'cardpointe'=>$cardPointe,
                 'stripe'=>$stripe,
                 'square' => $square,
+                'customer_existing_points'=>$customer_existing_points
             ];
-
+        //dd($systemArray);
         $chkPS=ProductSettings::select('id')->where('store_id',$this->sdc->storeID())->count();
         if($chkPS>0)
         {

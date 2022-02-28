@@ -27,15 +27,17 @@
                                                   <div class="col-md-8">
                                                     <span id="prmDue">$0.00</span>
                                                 </div>
-                                            </div>
+                                              </div>
+                                              <div class="form-group row">
+                                                  <label class="col-md-4 label-control" for="Description">Use Loyalty Points</label>
+                                                  <div class="col-md-8">
+                                                    <span id="prmLoyaltyPoints">{{number_format($customer_existing_points,2)}}</span>
+                                                </div>
+                                              </div>
 
                                             <div class="form-group row">
                                               <div class="payModal-message-area"></div>
                                             </div>
-
-                                            
-
-
                                         </div>
                                         <div class="modal-footer">
                                           <style type="text/css">
