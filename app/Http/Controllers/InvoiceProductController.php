@@ -158,13 +158,27 @@ class InvoiceProductController extends Controller
    }
 
     public function getPaidCart(Request $request) {
-        $paidAmount=$request->paidAmount;
-        $paymentID=$request->paymentID;
-        $oldCart = $request->session()->has('Pos') ? $request->session()->get('Pos') : null;
-        $cart = new Pos($oldCart);
-        $cart->addPayment($paidAmount, $paymentID);
-        $request->session()->put('Pos', $cart);
-        return response()->json(1);
+        if(isset($request->loyaltyPaymentID))
+        {
+            $paidAmount=$request->paidAmount;
+            $paymentID=$request->loyaltyPaymentID;
+            $oldCart = $request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+            $cart = new Pos($oldCart);
+            $cart->addLoyaltyPoints($paidAmount, $paymentID);
+            $request->session()->put('Pos', $cart);
+            return response()->json(1);
+        }
+        else
+        {
+            $paidAmount=$request->paidAmount;
+            $paymentID=$request->paymentID;
+            $oldCart = $request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+            $cart = new Pos($oldCart);
+            $cart->addPayment($paidAmount, $paymentID);
+            $request->session()->put('Pos', $cart);
+            return response()->json(1);
+        }
+        
     }
 
     public function getPaidCartPublic(Request $request) {

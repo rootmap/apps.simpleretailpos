@@ -2215,6 +2215,50 @@ $(document).ready(function() {
 
 
 
+    $(".customer-loyalty").click(function() {
+
+
+        var customerID = $.trim($("select[name=customer_id]").val());
+        if (customerID.length == 0) {
+            alert("Please select a customer to make payment.");
+            return false;
+        }
+
+        var loyalty_points_to_pay = $.trim($("input[name=loyalty_points_to_pay]").val());
+        if (loyalty_points_to_pay.length == 0) {
+            alert("Please enter the loyalty points you want to use.");
+            return false;
+        }
+
+        var payment_id = $(this).attr("data-id");
+        var payment_text = $(this).html();
+        var c = confirm("Are you sure to proced with " + $.trim(payment_text) + " ?.");
+        if (c) {
+            var loyalty_points_to_pay = $("input[name=loyalty_points_to_pay]").val();
+            console.log(loyalty_points_to_pay, payment_id, $.trim(payment_text));
+            var expaid = $("#posCartSummary tr:eq(4)").find("td:eq(3)").children("span").html();
+            //expaid = expaid.replace(',','');
+            if ($.trim(expaid) == 0) {
+                var parseNewPayment = parseFloat(loyalty_points_to_pay).toFixed(2);
+                $("#posCartSummary tr:eq(4)").find("td:eq(3)").children("span").html(parseNewPayment);
+            } else {
+                var newpayment = (expaid - 0) + (loyalty_points_to_pay - 0);
+                var parseNewPayment = parseFloat(newpayment).toFixed(2);
+                $("#posCartSummary tr:eq(4)").find("td:eq(3)").children("span").html(parseNewPayment);
+            }
+            genarateSalesTotalCart();
+            $("#payModal").modal("hide");
+            //------------------------Ajax POS Start-------------------------//
+            $.post(salesCartPayment, { 'loyaltyPaymentID': payment_id, 'paidAmount': parseNewPayment, '_token': csrftLarVe }, function(response) {
+                //showCompleteSaleModal();
+                console.log('Loyalty response = ',response);
+            });
+            //------------------------Ajax POS End---------------------------//
+        }
+
+    });
+
+
     $(".make-payment").click(function() {
 
 
@@ -3667,7 +3711,7 @@ function genarateSalesTotalCart() {
         $("#posCartSummary tr:eq(2)").find("td:eq(2)").children("span").html(moneyFormatConvent(newDiscount));
         $("#posCartSummary tr:eq(3)").find("td:eq(2)").children("span").html(moneyFormatConvent(newPriceTotal));
         $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html(moneyFormatConvent(paid));
-        $("#posCartSummary tr:eq(5)").find("td:eq(2)").children("span").html(moneyFormatConvent(newdues));
+        $("#posCartSummary tr:eq(6)").find("td:eq(2)").children("span").html(moneyFormatConvent(newdues));
         if (parseFloat(paid) > 0) { $("#posCartSummary tr:eq(4)").show(); } else { $("#posCartSummary tr:eq(4)").hide(); }
         if (parseFloat(newTotalTax) > 0) { $("#posCartSummary tr:eq(1)").show(); } else { $("#posCartSummary tr:eq(1)").hide(); }
         if (parseFloat(newDiscount) > 0) { $("#posCartSummary tr:eq(2)").show(); } else { $("#posCartSummary tr:eq(2)").hide(); }

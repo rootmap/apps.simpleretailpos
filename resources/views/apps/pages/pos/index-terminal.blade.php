@@ -351,6 +351,18 @@
                                         </span></td>
                                     </tr>
                                     <tr style="display: none;">
+                                        <th>Used Loyalty Points</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td>$<span>
+                                            @if(isset($cart->loyaltyPointPaid))
+                                                {{$cart->loyaltyPointPaid}}
+                                            @else
+                                                0.00
+                                            @endif
+                                        </span></td>
+                                    </tr>
+                                    <tr style="display: none;">
                                         <th>Due</th>
                                         <td></td>
                                         <td></td>
