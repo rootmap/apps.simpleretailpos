@@ -485,7 +485,7 @@
            @include('apps.include.modal.cardPointeCardModal')
            @include('apps.include.modal.cardPointepartialCardModal')
            @include('apps.include.modal.squareupPartial')
-           @include('apps.include.modal.paymodal',compact('stripe'))
+           @include('apps.include.modal.paymodal',compact('stripe','customer_existing_points'))
            @include('apps.include.modal.open-drawer')
            @include('apps.include.modal.close-drawer')
            @include('apps.include.modal.time_clock')

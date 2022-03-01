@@ -6,6 +6,7 @@ use App\Store;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
+use App\Tender;
 
 class StoreController extends Controller
 {
@@ -90,6 +91,23 @@ class StoreController extends Controller
         $tab->is_loyalty_program=$is_loyalty_program;
         $tab->created_by=$this->sdc->UserID();
         $tab->save();
+
+        
+        $loyaltyTender="Loyalty Points";
+        $checkLoyaltyTender=Tender::where('store_id',$request->store_id)->where('name',$loyaltyTender)->count();
+        //dd($checkLoyaltyTender);
+        if($checkLoyaltyTender==0)
+        {
+
+            $tab_tender=new Tender;
+            $tab_tender->name=$loyaltyTender;
+            $tab_tender->store_id=$request->store_id;
+            $tab_tender->tender_class='customer_loyalty';
+            $tab_tender->created_by=$this->sdc->UserID();
+            $tab_tender->save();
+        }
+
+
 
         
         /*\DB::statement("INSERT INTO lsp_roles (name, store_id, created_by)
@@ -190,6 +208,21 @@ class StoreController extends Controller
         $tab->store_id=$request->store_id;
         $tab->updated_by=$this->sdc->UserID();
         $tab->save();
+
+        $loyaltyTender="Loyalty Points";
+        $checkLoyaltyTender=Tender::where('store_id',$request->store_id)->where('name',$loyaltyTender)->count();
+        //dd($checkLoyaltyTender);
+        if($checkLoyaltyTender==0)
+        {
+
+            $tab_tender=new Tender;
+            $tab_tender->name=$loyaltyTender;
+            $tab_tender->store_id=$request->store_id;
+            $tab_tender->tender_class='customer_loyalty';
+            $tab_tender->created_by=$this->sdc->UserID();
+            $tab_tender->save();
+        }
+        
 
         
         $this->sdc->log("Store","Store info updated.");

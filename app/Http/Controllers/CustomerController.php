@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 use App\Invoice;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\StaticDataController;
+use App\Http\Controllers\LoyaltyProgram\User\LoyaltyUserController;
+use App\Http\Requests\Loyalty\User\LoyaltyUserRequestNew;
+use App\Services\Loyalty\LoyaltyService;
+
 
 use Excel;
 use Auth;
@@ -27,7 +32,10 @@ class CustomerController extends Controller
 
     private $moduleName="Customer";
     private $sdc;
-    public function __construct(){ $this->sdc = new StaticDataController(); }
+    public function __construct(LoyaltyUserController $loyaltyProgram, StaticDataController $sdc){ 
+        $this->loyalty = $loyaltyProgram;
+        $this->sdc = $sdc;
+    }
 
     public function user()
     {
@@ -429,8 +437,28 @@ class CustomerController extends Controller
         $tab->created_by=$this->sdc->UserID();
         $tab->save();
 
-        
+        if(isset($request->customer_loyalty))
+        {
+            if($request->customer_loyalty==1)
+            {
+                $customerID = $tab->id;
+                $customerInfo=Customer::find($customerID);
+                $dataRequest=[
+                    "store_id"  =>$this->sdc->storeID(),
+                    'user_info' =>[
+                        'id'=>$customerInfo->id,
+                        'name'=>$customerInfo->name,
+                        'email'=>$customerInfo->email,
+                        'phone'=>$customerInfo->phone
+                    ]
+                ];
 
+                $service = new LoyaltyService($dataRequest);
+                $service->join();
+            }
+        }
+        
+        
         return $tab->id;
     }
 

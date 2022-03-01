@@ -2165,6 +2165,15 @@ $(document).ready(function() {
             return false;
         }
 
+        var customer_loyalty=0;
+        
+        if($("input[name=new_customer_loyalty]").is(":checked"))
+        {
+            customer_loyalty=1;
+        }
+        //alert(customer_loyalty);
+        //return false;
+
         $(".save-new-customer-parent").html(" Processing please wait.....");
 
         //------------------------Ajax Customer Start-------------------------//
@@ -2174,7 +2183,7 @@ $(document).ready(function() {
             'global': false,
             'dataType': 'json',
             'url': customerPosAjaxAdd,
-            'data': { 'name': name, 'phone': phone, 'email': email, 'address': address, '_token': csrftLarVe },
+            'data': { 'name': name, 'phone': phone, 'email': email, 'address': address,'customer_loyalty': customer_loyalty, '_token': csrftLarVe },
             'success': function(data) {
                 $("select[name=customer_id]").append('<option value="' + data + '">' + name + '</option>');
                 $("select[name=customer_id] option[value='" + data + "']").prop("selected", true);
@@ -2190,7 +2199,7 @@ $(document).ready(function() {
                     'global': false,
                     'dataType': 'json',
                     'url': AddCustomerPOSUrl,
-                    'data': { '_token': csrftLarVe },
+                    'data': { 'customer_loyalty': customer_loyalty, '_token': csrftLarVe },
                     'success': function(datas) {
                         console.log("Assigning custome to cart : " + datas);
                     }
