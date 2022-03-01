@@ -36,13 +36,11 @@ class CardSetupController extends MainController
     public function create()
     {
         $store = StaticDataController::StoreInfo();
-
         return view('apps.pages.loyalty_program.setting.card_setup', ['store'=>$store]);
     }
 
     private function storeImage($request, $fieldName)
     {
-
         if (!empty($request->file($fieldName))) {
             $img = $request->file($fieldName);
             $upload = 'upload/card_templates/';

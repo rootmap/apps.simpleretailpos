@@ -35,7 +35,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="projectinput1"> Membership Name </label>
-                                                <input type="text" required name="membership_name" class="element form-control border-info"/>
+                                                <input type="text" onchange="changeCard(this, '')" required name="membership_name" class="element form-control border-info"/>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -81,7 +81,21 @@
                                                     ></span>
                                                 </label>
                                                 <div class="custom-file-container__image-preview"
-                                                    style="overflow: hidden; hight: 220px; width:420px; border:2px solid #CCCCCC; border-radius:3%; transition: all 0.2s; -webkit-transition: all 0.2s;"></div>
+                                                    style=" position : relative; overflow: hidden; hight: 220px; width:420px; border:2px solid #CCCCCC; border-radius:3%; transition: all 0.2s; -webkit-transition: all 0.2s;">
+
+                                                    <div class="row" style=" padding: 8px 5px;">
+                                                        <div class="col-md-12"  id="storeDisplay"> <h3 id="display_store_name" style="text-align: center; text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;" class="contentBlock">{{ $store->name }}</h3></div>
+                                                        <div class="col-md-6"  id="customerDisplay" style="position: absolute; top:45%; left : 0px;"> <h5  class="contentBlock" style="text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;">Md. Customer Name</h5> </div>
+                                                        <div class="col-md-6"  id="mobileDisplay" style="position: absolute; top:45%; right : 0px; text-align: right;"><h5  class="contentBlock">+880 1729 129 858</h5></div>
+                                                        <div class="col-md-6"  id="cardDisplay" style="position: absolute; bottom:0px; left : 0px;"><h3  class="contentBlock" >Gold</h3></div>
+                                                        <div class="col-md-6"  id="sinceDisplay" style="position: absolute; bottom:0px; right : 0px; text-align: right;">
+                                                            Member Since
+                                                            <h6 class="contentBlock">June, 2022</h6>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6" style="background-color: #eff4ff">
@@ -90,19 +104,19 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <div class="checkbox checkbox-primary">
-                                                            <input type="checkbox" class="element" name="card_display_config[name]" value="1">
+                                                            <input type="checkbox" id="customerCheck"  onchange="changeCustomer(this)" class="element" name="card_display_config[name]" value="1">
                                                             <label for="subject_card">Customer Name</label>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="checkbox checkbox-primary">
-                                                            <input type="checkbox" class="element"  name="card_display_config[mobile]" value="1">
+                                                            <input type="checkbox"  id="mobileCheck" class="element" onchange="changeMobile(this)"  name="card_display_config[mobile]" value="1">
                                                             <label for="subject_card">Mobile_number</label>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="checkbox checkbox-primary">
-                                                            <input type="checkbox" class="element"  name="card_display_config[store_name]" value="1">
+                                                            <input type="checkbox" id="storeCheck" class="element"  onchange="changeStore(this)"  name="card_display_config[store_name]" value="1">
                                                             <label for="subject_card">Store Name</label>
                                                         </div>
                                                     </div>
@@ -110,13 +124,13 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <div class="checkbox checkbox-primary">
-                                                            <input type="checkbox" class="element"  name="card_display_config[membership_type]" value="1">
+                                                            <input type="checkbox" id="cardCheck" onchange="changeCard('', this)" class="element"  name="card_display_config[membership_type]" value="1">
                                                             <label for="subject_card">Membership Type</label>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="checkbox checkbox-primary">
-                                                            <input type="checkbox"  class="element" name="card_display_config[joined_date]" value="1">
+                                                            <input type="checkbox" id="sinceCheck" onchange="changeSince(this)"  class="element" name="card_display_config[joined_date]" value="1">
                                                             <label for="subject_card">Member Since</label>
                                                         </div>
                                                     </div>
@@ -137,7 +151,85 @@
 <script src="https://unpkg.com/file-upload-with-preview@4.1.0/dist/file-upload-with-preview.min.js"></script>
 
 <script>
-    var upload = new FileUploadWithPreview("myUniqueUploadId");
+    var upload = new FileUploadWithPreview("myUniqueUploadId"),
+    storeDisplay = document.getElementById('storeDisplay'),
+    cardDisplay = document.getElementById('cardDisplay'),
+    customerDisplay = document.getElementById('customerDisplay'),
+    mobileDisplay = document.getElementById('mobileDisplay'),
+    sinceDisplay = document.getElementById('sinceDisplay');
+
+
+    window.onload = function(){
+        storeDisplay.style.display = "none";
+        cardDisplay.style.display = "none";
+        customerDisplay.style.display = "none";
+        mobileDisplay.style.display = "none";
+        sinceDisplay.style.display = "none";
+
+    }
+    function changeCard(card, visibility){
+        if(card!== ""){
+            var card = card.value;
+            var block = cardDisplay.getElementsByClassName('contentBlock')[0];
+            block.innerHTML = card;
+        }
+        if(visibility !== ""){
+
+            if(visibility.checked){
+                cardDisplay.style.display = "block";
+            }
+            else{
+                cardDisplay.style.display = "none";
+            }
+        }
+    }
+
+    function changeStore(visibility){
+        if(visibility !== ""){
+
+            if(visibility.checked){
+                storeDisplay.style.display = "block";
+            }
+            else{
+                storeDisplay.style.display = "none";
+            }
+        }
+    }
+    function changeCustomer(visibility){
+        if(visibility !== ""){
+
+            if(visibility.checked){
+                customerDisplay.style.display = "block";
+            }
+            else{
+                customerDisplay.style.display = "none";
+            }
+        }
+    }
+    function changeMobile(visibility){
+        if(visibility !== ""){
+
+            if(visibility.checked){
+                mobileDisplay.style.display = "block";
+            }
+            else{
+                mobileDisplay.style.display = "none";
+            }
+        }
+    }
+    function changeSince(visibility){
+        if(visibility !== ""){
+
+            if(visibility.checked){
+                sinceDisplay.style.display = "block";
+            }
+            else{
+                sinceDisplay.style.display = "none";
+            }
+        }
+    }
+
+
 </script>
 
 </section>
