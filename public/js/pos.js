@@ -110,10 +110,25 @@ $('body').on('click','.paybuttontrigger',function(){
 function showCompleteSaleModal()
 {
     console.log("Initiated opoup");
-    $("#completeSalesModal").modal({backdrop: 'static', keyboard: false, show: true});
+    
     $(".comprint > .dropdown-menu").css("left","unset");
     $(".comprint > .dropdown-menu").css("right","0");
-    completeSaleAutomatically();
+
+    let loyalty_points=parseFloat($.trim($("#posCartSummary").children('tr:eq(5)').children('td:eq(2)').children('span').html())).toFixed(2);
+    let paidAmount=parseFloat($.trim($("#posCartSummary").children('tr:eq(4)').children('td:eq(2)').children('span').html())).toFixed(2);
+    let dueAmount=parseFloat($.trim($("#posCartSummary").children('tr:eq(6)').children('td:eq(2)').children('span').html())).toFixed(2);
+    let cartTotal=parseFloat($.trim($("#cartTotalAmount").html())).toFixed(2);
+
+    let totalPaid=(loyalty_points - 0) + (paidAmount - 0);
+    console.log('cartTotal = ',cartTotal);
+    console.log('totalPaid = ',totalPaid);
+    if(totalPaid==cartTotal)
+    {
+        $("#completeSalesModal").modal({backdrop: 'static', keyboard: false, show: true});
+        console.log(totalPaid,cartTotal);
+        completeSaleAutomatically();
+    }
+    
 }
 
 function loadCloseDrawer() {
@@ -2236,21 +2251,24 @@ $(document).ready(function() {
         if (c) {
             var loyalty_points_to_pay = $("input[name=loyalty_points_to_pay]").val();
             console.log(loyalty_points_to_pay, payment_id, $.trim(payment_text));
-            var expaid = $("#posCartSummary tr:eq(4)").find("td:eq(3)").children("span").html();
+            var expaid = $("#posCartSummary tr:eq(5)").find("td:eq(2)").children("span").html();
             //expaid = expaid.replace(',','');
             if ($.trim(expaid) == 0) {
                 var parseNewPayment = parseFloat(loyalty_points_to_pay).toFixed(2);
-                $("#posCartSummary tr:eq(4)").find("td:eq(3)").children("span").html(parseNewPayment);
+                $("#posCartSummary tr:eq(5)").find("td:eq(2)").children("span").html($.trim(parseNewPayment));
             } else {
                 var newpayment = (expaid - 0) + (loyalty_points_to_pay - 0);
                 var parseNewPayment = parseFloat(newpayment).toFixed(2);
-                $("#posCartSummary tr:eq(4)").find("td:eq(3)").children("span").html(parseNewPayment);
+                $("#posCartSummary tr:eq(5)").find("td:eq(2)").children("span").html($.trim(parseNewPayment));
             }
+            
             genarateSalesTotalCart();
+            //alert(parseNewPayment);
+            //return false;
             $("#payModal").modal("hide");
             //------------------------Ajax POS Start-------------------------//
             $.post(salesCartPayment, { 'loyaltyPaymentID': payment_id, 'paidAmount': parseNewPayment, '_token': csrftLarVe }, function(response) {
-                //showCompleteSaleModal();
+                showCompleteSaleModal();
                 console.log('Loyalty response = ',response);
             });
             //------------------------Ajax POS End---------------------------//
@@ -2274,15 +2292,15 @@ $(document).ready(function() {
         if (c) {
             var amount_to_pay = $("input[name=amount_to_pay]").val();
             console.log(amount_to_pay, payment_id, $.trim(payment_text));
-            var expaid = $("#posCartSummary tr:eq(4)").find("td:eq(3)").children("span").html();
+            var expaid = $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html();
             //expaid = expaid.replace(',','');
             if ($.trim(expaid) == 0) {
                 var parseNewPayment = parseFloat(amount_to_pay).toFixed(2);
-                $("#posCartSummary tr:eq(4)").find("td:eq(3)").children("span").html(parseNewPayment);
+                $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html(parseNewPayment);
             } else {
                 var newpayment = (expaid - 0) + (amount_to_pay - 0);
                 var parseNewPayment = parseFloat(newpayment).toFixed(2);
-                $("#posCartSummary tr:eq(4)").find("td:eq(3)").children("span").html(parseNewPayment);
+                $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html(parseNewPayment);
             }
             genarateSalesTotalCart();
             $("#payModal").modal("hide");
@@ -3649,6 +3667,13 @@ function genarateSalesTotalCart() {
             var paid = expaid;
         }
 
+        var loyaltyPoints = $.trim($("#posCartSummary tr:eq(5)").find("td:eq(2)").children("span").html());
+        if (loyaltyPoints == "0") {
+            var exloyaltyPointsPaid = 0;
+        } else {
+            var exloyaltyPointsPaid = loyaltyPoints;
+        }
+
         $.each($("#dataCart").find("tr"), function(index, row) {
             if($(row).find("td:eq(3)").length)
             {
@@ -3680,7 +3705,7 @@ function genarateSalesTotalCart() {
         var sumPriceTotal = ((subTotalPrice - 0) + (TotalTax - 0));
         //var calcDisc=((sumPriceTotal*discount)/100);
         sumPriceTotal = sumPriceTotal - calcDisc;
-        var sumdues = sumPriceTotal - paid;
+        var sumdues = sumPriceTotal - paid - exloyaltyPointsPaid;
         var newdues = parseFloat(sumdues).toFixed(2);
         var newPriceTotal = parseFloat(sumPriceTotal).toFixed(2);
         var newDiscount = parseFloat(calcDisc).toFixed(2);
@@ -3713,6 +3738,7 @@ function genarateSalesTotalCart() {
         $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html(moneyFormatConvent(paid));
         $("#posCartSummary tr:eq(6)").find("td:eq(2)").children("span").html(moneyFormatConvent(newdues));
         if (parseFloat(paid) > 0) { $("#posCartSummary tr:eq(4)").show(); } else { $("#posCartSummary tr:eq(4)").hide(); }
+        if (parseFloat(exloyaltyPointsPaid) > 0) { $("#posCartSummary tr:eq(5)").show(); } else { $("#posCartSummary tr:eq(5)").hide(); }
         if (parseFloat(newTotalTax) > 0) { $("#posCartSummary tr:eq(1)").show(); } else { $("#posCartSummary tr:eq(1)").hide(); }
         if (parseFloat(newDiscount) > 0) { $("#posCartSummary tr:eq(2)").show(); } else { $("#posCartSummary tr:eq(2)").hide(); }
         $("#cartTotalAmount").html(moneyFormatConvent(newPriceTotal));
@@ -3734,6 +3760,7 @@ function genarateSalesTotalCart() {
         $("#posCartSummary tr:eq(3)").find("td:eq(2)").children("span").html("0.00");
         $("#posCartSummary tr:eq(4)").find("td:eq(2)").children("span").html("0.00");
         $("#posCartSummary tr:eq(5)").find("td:eq(2)").children("span").html("0.00");
+        $("#posCartSummary tr:eq(6)").find("td:eq(2)").children("span").html("0.00");
 
         $("#cartTotalAmount").html("0.00");
         $("input[name=amount_to_pay]").val("0.00");
