@@ -23,16 +23,16 @@
                                                 </div>
 
                                                 <div class="form-group row">
-                                                  <label class="col-md-4 label-control" for="projectinput1">Loyalty Points To Pay</label>
-                                                  <div class="col-md-8">
-                                                      <div class="input-group">
-                                                          <input type="text"  name="loyalty_points_to_pay"  class="form-control" placeholder="0.00" aria-describedby="button-addon2" data-amount="">
-                                                          <span class="input-group-btn" id="button-addon2">
-                                                              <button class="btn btn-info currentPointBalance" type="button">Current Points : {{number_format($customer_existing_points,2)}}</button>
-                                                          </span>
-                                                      </div>
-                                                  </div>
-                                              </div>
+                                                    <label class="col-md-4 label-control" for="projectinput1">Loyalty Points To Pay</label>
+                                                    <div class="col-md-8">
+                                                        <div class="input-group">
+                                                            <input type="text"  name="loyalty_points_to_pay"  class="form-control" placeholder="0.00" aria-describedby="button-addon2" data-amount="">
+                                                            <span class="input-group-btn" id="button-addon2">
+                                                                <button class="btn btn-info currentPointBalance" type="button">Current Points : <span id="ex_loyalty_points" data-id="{{number_format($customer_existing_points,2)}}">{{number_format($customer_existing_points,2)}}</span></button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                                 <div class="form-group row">
                                                   <label class="col-md-4 label-control" for="Description">Payment Due</label>

@@ -2227,7 +2227,21 @@ $(document).ready(function() {
 
 
 
-
+    $("input[name=loyalty_points_to_pay]").keyup(function() {
+        let currentLoyaltyPoints=$.trim($("#ex_loyalty_points").html());
+        let currentFixedLoyaltyPoints=$.trim($("#ex_loyalty_points").attr('data-id'));
+        let UserLoyaltyInput=$.trim($(this).val());
+        let currentLoyaltyBalance=parseFloat(currentFixedLoyaltyPoints-UserLoyaltyInput).toFixed(2);
+        $("#ex_loyalty_points").html(currentLoyaltyBalance);
+        console.log('currentLoyaltyBalance = ', currentLoyaltyBalance);
+        if(currentLoyaltyBalance < 0)
+        {
+            alert("Customer have insuffiecient balance to use.");
+            $("#ex_loyalty_points").html(currentFixedLoyaltyPoints);
+            $(this).val("");
+            return false;
+        }
+    });
 
 
     $(".customer-loyalty").click(function() {
@@ -2265,6 +2279,13 @@ $(document).ready(function() {
             genarateSalesTotalCart();
             //alert(parseNewPayment);
             //return false;
+
+            let currentFixedLoyaltyPoints=$.trim($("#ex_loyalty_points").attr('data-id'));
+            let UserLoyaltyInput=$.trim(loyalty_points_to_pay);
+            let currentLoyaltyBalance=parseFloat(currentFixedLoyaltyPoints-UserLoyaltyInput).toFixed(2);
+            $("#ex_loyalty_points").html(currentLoyaltyBalance);
+            $("#ex_loyalty_points").attr('data-id',currentLoyaltyBalance);
+            $("input[name=loyalty_points_to_pay]").val("");
             $("#payModal").modal("hide");
             //------------------------Ajax POS Start-------------------------//
             $.post(salesCartPayment, { 'loyaltyPaymentID': payment_id, 'paidAmount': parseNewPayment, '_token': csrftLarVe }, function(response) {
