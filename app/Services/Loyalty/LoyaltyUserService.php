@@ -112,7 +112,11 @@ class LoyaltyUserService{
         // dd($data);
         if(isset($data['id'])){
             $card = new LoyaltyStoreCardService($this->config);
-            return $card->convert($data['total_point'], "withdraw");
+            return [
+                "balance" => floatval($data['total_point']),
+                "conversion_rate" => 0,
+                "total_point" =>floatval($data['total_point'])
+            ];
         }
         else
         {

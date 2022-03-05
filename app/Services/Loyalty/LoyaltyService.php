@@ -4,6 +4,7 @@ namespace App\Services\Loyalty;
 
 use App\Model\Loyalty\LoyaltyCardSetting;
 use App\Model\Loyalty\LoyaltyUser;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class LoyaltyService{
     protected $config = [];
@@ -54,6 +55,7 @@ class LoyaltyService{
     public function queryBalance()
     {
         return $this->user->queryBalance();
+        
     }
 
     public function withdraw()
