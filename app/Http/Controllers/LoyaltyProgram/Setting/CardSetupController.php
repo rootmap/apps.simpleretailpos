@@ -86,7 +86,8 @@ class CardSetupController extends MainController
                 ->where('store_id',$this->sdc->storeID())
                 ->where('id',$id)
                 ->first();
-        return view('apps.pages.loyalty_program.setting.view_card', ["data" =>$data]);
+        $store = StaticDataController::StoreInfo();
+        return view('apps.pages.loyalty_program.setting.view_card', ["data" =>$data, "store" => $store]);
     }
 
     public function edit($id)

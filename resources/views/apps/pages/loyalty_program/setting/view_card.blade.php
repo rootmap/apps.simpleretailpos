@@ -25,8 +25,8 @@
                     $image = isset($data) ? $data['card_pic_path'] : '';
                     $config = isset($data) ? $data['card_display_config'] : '';
                     $config = json_decode($config);
+                    @endphp
 
-                @endphp
                 @if (!isset($data))
                     <div class="card">
                         <div class="card-body">
@@ -60,7 +60,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> Membership Name </label>
-                                                            <input disabled type="text" required name="membership_name" value="{{ $membership_name }}"
+                                                            <input disabled type="text"  onchange="changeCard(this, '')" required name="membership_name" value="{{ $membership_name }}"
                                                                 class="element form-control border-info" />
                                                         </div>
                                                     </div>
@@ -70,8 +70,8 @@
                                                             <select required name="status" disabled
                                                                 class="element form-control border-info">
                                                                 <option>--Select One--</option>
-                                                                <option value="activee" {{ ($status === "active")? "selected" : "" }}>Active</option>
-                                                                <option value="draft" {{ ($status !== "draft")? "selected" : "" }}>Draft</option>
+                                                                <option value="active" {{ ($status === "active")? "selected" : "" }}>Active</option>
+                                                                <option value="draft" {{ ($status === "draft")? "selected" : "" }}>Draft</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -111,8 +111,35 @@
                                                                 <span
                                                                     class="custom-file-container__custom-file__custom-file-control"></span>
                                                             </label>
+                                                            @php
+                                                                $config = json_decode($data->card_display_config);
+                                                                // dd(isset($config->aname));
+                                                                $style_block = "display:block";
+                                                                $style_none = "display:none";
+
+                                                                $storeDisplay = (isset($config->store_name) && $config->store_name == 1) ? $style_block : $style_none;
+                                                                $customerDisplay = (isset($config->name) && $config->name == 1) ? $style_block : $style_none;
+                                                                $mobileDisplay = (isset($config->mobile) && $config->mobile == 1) ? $style_block : $style_none;
+                                                                $cardDisplay = (isset($config->membership_type) && $config->membership_type == 1) ? $style_block : $style_none;
+                                                                $sinceDisplay = (isset($config->joined_date) && $config->joined_date == 1) ? $style_block : $style_none;
+                                                            @endphp
+
                                                             <div id="image_preview" class="custom-file-container__image-preview"
-                                                                style="overflow: hidden; hight: 220px; width:350px; border:2px solid #CCCCCC; border-radius:3%; transition: all 0.2s; -webkit-transition: all 0.2s;">
+                                                                style="overflow: hidden; position:relative; hight: 220px; width:420px; border:2px solid #CCCCCC; border-radius:3%; transition: all 0.2s; -webkit-transition: all 0.2s;">
+                                                                <div class="row" style=" padding: 8px 5px;">
+                                                                    <div class="col-md-12"  id="storeDisplay" style="{{ $storeDisplay }}"> <h3 id="display_store_name" style="text-align: center; text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;" class="contentBlock">{{ $store->name }}</h3></div>
+                                                                    <div class="col-md-12" style="position: absolute; top:42%; left : 0px;">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12"  id="customerDisplay"  style="{{ $customerDisplay }}"> <h5  class="contentBlock" style="text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;">Md. Customer Name</h5> </div>
+                                                                            <div class="col-md-12"  id="mobileDisplay" style="{{ $mobileDisplay }}"><h5  class="contentBlock">+880 1729 129 858</h5></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6"  id="cardDisplay" style="position: absolute; bottom:0px; left : 0px; {{ $mobileDisplay }}"><h3  class="contentBlock" >{{ $membership_name }}</h3></div>
+                                                                    <div class="col-md-6"  id="sinceDisplay" style="position: absolute; bottom:0px; right : 0px; text-align: right; {{ $sinceDisplay }}">
+                                                                        Member Since
+                                                                        <h6 class="contentBlock">June, 2022</h6>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -122,21 +149,21 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <div class="checkbox checkbox-primary">
-                                                                        <input type="checkbox" class="element"
+                                                                        <input disabled type="checkbox"  id="customerCheck"  onchange="changeCustomer(this)"  class="element"
                                                                             name="card_display_config[name]" value="1" {{ isset($config->name) ?  "checked": "" }}>
                                                                         <label for="subject_card">Customer Name</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <div class="checkbox checkbox-primary">
-                                                                        <input   type="checkbox" class="element"
+                                                                        <input disabled type="checkbox"  id="mobileCheck" class="element" onchange="changeMobile(this)" class="element"
                                                                             name="card_display_config[mobile]" value="1" {{ isset($config->mobile) ?  "checked": "" }}>
                                                                         <label for="subject_card">Mobile_number</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <div class="checkbox checkbox-primary">
-                                                                        <input type="checkbox" class="element" {{ isset($config->store_name) ?  "checked": "" }}
+                                                                        <input disabled type="checkbox" id="storeCheck" class="element"  onchange="changeStore(this)" class="element" {{ isset($config->store_name) ?  "checked": "" }}
                                                                             name="card_display_config[store_name]"
                                                                             value="1">
                                                                         <label for="subject_card">Store Name</label>
@@ -146,7 +173,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <div class="checkbox checkbox-primary">
-                                                                        <input type="checkbox" class="element"
+                                                                        <input disabled type="checkbox" id="cardCheck" onchange="changeCard('', this)" class="element"
                                                                             name="card_display_config[membership_type]" {{ isset($config->membership_type) ?  "checked": "" }}
                                                                             value="1">
                                                                         <label for="subject_card">Membership Type</label>
@@ -154,7 +181,7 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <div class="checkbox checkbox-primary">
-                                                                        <input type="checkbox" class="element"
+                                                                        <input disabled type="checkbox" id="sinceCheck" onchange="changeSince(this)" class="element"
                                                                             name="card_display_config[joined_date]" {{ isset($config->joined_date) ?  "checked": "" }}
                                                                             value="1">
                                                                         <label for="subject_card">Member Since</label>
@@ -208,6 +235,88 @@
                 }
             }
         </script>
+
+<script>
+    var upload = new FileUploadWithPreview("myUniqueUploadId"),
+    storeDisplay = document.getElementById('storeDisplay'),
+    cardDisplay = document.getElementById('cardDisplay'),
+    customerDisplay = document.getElementById('customerDisplay'),
+    mobileDisplay = document.getElementById('mobileDisplay'),
+    sinceDisplay = document.getElementById('sinceDisplay');
+
+
+    // window.onload = function(){
+    //     storeDisplay.style.display = "none";
+    //     cardDisplay.style.display = "none";
+    //     customerDisplay.style.display = "none";
+    //     mobileDisplay.style.display = "none";
+    //     sinceDisplay.style.display = "none";
+
+    // }
+    function changeCard(card, visibility){
+        if(card!== ""){
+            var card = card.value;
+            var block = cardDisplay.getElementsByClassName('contentBlock')[0];
+            block.innerHTML = card;
+        }
+        if(visibility !== ""){
+
+            if(visibility.checked){
+                cardDisplay.style.display = "block";
+            }
+            else{
+                cardDisplay.style.display = "none";
+            }
+        }
+    }
+
+    function changeStore(visibility){
+        if(visibility !== ""){
+
+            if(visibility.checked){
+                storeDisplay.style.display = "block";
+            }
+            else{
+                storeDisplay.style.display = "none";
+            }
+        }
+    }
+    function changeCustomer(visibility){
+        if(visibility !== ""){
+
+            if(visibility.checked){
+                customerDisplay.style.display = "block";
+            }
+            else{
+                customerDisplay.style.display = "none";
+            }
+        }
+    }
+    function changeMobile(visibility){
+        if(visibility !== ""){
+
+            if(visibility.checked){
+                mobileDisplay.style.display = "block";
+            }
+            else{
+                mobileDisplay.style.display = "none";
+            }
+        }
+    }
+    function changeSince(visibility){
+        if(visibility !== ""){
+
+            if(visibility.checked){
+                sinceDisplay.style.display = "block";
+            }
+            else{
+                sinceDisplay.style.display = "none";
+            }
+        }
+    }
+
+
+</script>
 
     </section>
 @endsection

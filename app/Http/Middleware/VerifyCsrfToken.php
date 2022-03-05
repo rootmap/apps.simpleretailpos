@@ -13,7 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
                             'loyalty/users/Assign-to-Membership-program',
-                            'loyalty/users/cash-withdrawal',
+                            'loyalty/users/cash-withdraw',
                             'loyalty/users/query-balance',
                             'loyalty/add-invoices'
                         ];
