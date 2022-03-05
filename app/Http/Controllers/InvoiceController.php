@@ -2198,6 +2198,11 @@ class InvoiceController extends Controller
             $square = SquareAccount::where('store_id', $this->sdc->storeID())->first();
         }
 
+        if(isset($Cart->loyaltyPointPaid))
+        {
+            $customer_existing_points = $customer_existing_points-$Cart->loyaltyPointPaid;
+        }
+
         $systemArray=[
                 //'product'=>$pro,
                 'tender'=>$tender,
@@ -5862,6 +5867,7 @@ class InvoiceController extends Controller
             $tabInPay->created_by=$this->sdc->UserID();
             $tabInPay->save();
 
+            
             $this->sdc->log("sales","Invoice Created, Invoice ID : ".$invoice_id);
 
             RetailPosSummary::where('store_id',$this->sdc->storeID())
@@ -5935,9 +5941,35 @@ class InvoiceController extends Controller
                 ]
             ];
 
+            if(isset($cart->loyaltyPaymentMethodID))
+            {
+
+                $clTender=Tender::find($cart->loyaltyPaymentMethodID);
+
+                $tabInPayCL=new InvoicePayment;
+                $tabInPayCL->invoice_id=$invoice_id;
+                $tabInPayCL->customer_id=$cart->customerID;
+                $tabInPayCL->customer_name=$customer_name;
+                $tabInPayCL->tender_id=$cart->loyaltyPaymentMethodID;
+                $tabInPayCL->tender_name=$clTender->name;
+                $tabInPayCL->total_amount=$total_amount_invoice;
+                $tabInPayCL->paid_amount=$cart->loyaltyPointPaid;
+                $tabInPayCL->store_id=$this->sdc->storeID();
+                $tabInPayCL->created_by=$this->sdc->UserID();
+                $tabInPayCL->save();
+
+                $dataRequest['withdraw']['amount']=$cart->loyaltyPointPaid;
+                $dataRequest['withdraw']['ref_id']=$invoice_id;
+            }
+
+
             $service = new LoyaltyService($dataRequest);
-            $dataService = $service->join();
-            $dataResponse=$service->setInvoice();
+            $service->join();
+            $service->setInvoice();
+            if(isset($cart->loyaltyPaymentMethodID))
+            {
+                $service->withdraw();
+            }
             //dd($dataResponse);
             $Ncart = new Pos($cart);
             $Ncart->ClearCart();

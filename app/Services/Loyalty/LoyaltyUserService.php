@@ -110,14 +110,23 @@ class LoyaltyUserService{
     {
         $data = $this->getLoyaltyUser();
         // dd($data);
-        if($data['id']){
+        if(isset($data['id'])){
             $card = new LoyaltyStoreCardService($this->config);
-            return $card->convert($data['total_point'], "withdraw");
+            return [
+                "balance" => floatval($data['total_point']),
+                "conversion_rate" => 0,
+                "total_point" =>floatval($data['total_point'])
+            ];
         }
-        return [
-            'status' =>400,
-            "message" => "User yet not in Loyalty Program."
-        ];
+        else
+        {
+            return [
+                "balance" => 0,
+                "conversion_rate" => 0,
+                "total_point" =>0
+            ];
+        }
+
     }
     public function withdraw($balance)
     {

@@ -157,6 +157,13 @@ class Pos {
         $this->calculateTax();
     } 
 
+    public function addLoyaltyPoints($paidAmount,$paymentID)
+    {
+        $this->loyaltyPaymentMethodID = $paymentID;
+        $this->loyaltyPointPaid = $paidAmount;
+        $this->calculateTax();
+    } 
+
     public function getAssignDiscountToCart($discountType,$discount_amount)
     {
         $this->discount_type = $discountType;

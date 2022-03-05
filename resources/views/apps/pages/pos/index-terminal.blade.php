@@ -351,6 +351,18 @@
                                         </span></td>
                                     </tr>
                                     <tr style="display: none;">
+                                        <th>Used Loyalty Points</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td>$<span>
+                                            @if(isset($cart->loyaltyPointPaid))
+                                            {{$cart->loyaltyPointPaid}}
+                                            @else
+                                            0.00
+                                            @endif
+                                        </span></td>
+                                    </tr>
+                                    <tr style="display: none;">
                                         <th>Due</th>
                                         <td></td>
                                         <td></td>
@@ -391,7 +403,7 @@
                         <div class="col-sm-6 col-xs-6">
                             <div class="col-md-12"><h2 class="gray hellvetia text-xs-center">Amount Due</h2></div>
                             <div class="col-md-12" style="padding:0px; margin: 0px;">
-                                <h3 class="text-xs-center yellow" style="padding:0px; margin: 0px;">$<span id="totalCartDueToPay">0.00</span></h3>
+                                <h3 class="text-xs-center red" style="padding:0px; margin: 0px;">$<span id="totalCartDueToPay">0.00</span></h3>
                             </div>
                         </div>
                     </div>

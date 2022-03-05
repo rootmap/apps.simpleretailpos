@@ -23,15 +23,21 @@
                                                 </div>
 
                                                 <div class="form-group row">
+                                                    <label class="col-md-4 label-control" for="projectinput1">Loyalty Points To Pay</label>
+                                                    <div class="col-md-8">
+                                                        <div class="input-group">
+                                                            <input type="text"  name="loyalty_points_to_pay"  class="form-control" placeholder="0.00" aria-describedby="button-addon2" data-amount="">
+                                                            <span class="input-group-btn" id="button-addon2">
+                                                                <button class="btn btn-info currentPointBalance" type="button">Current Points : <span id="ex_loyalty_points" data-id="{{number_format($customer_existing_points,2)}}">{{number_format($customer_existing_points,2)}}</span></button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
                                                   <label class="col-md-4 label-control" for="Description">Payment Due</label>
                                                   <div class="col-md-8">
                                                     <span id="prmDue">$0.00</span>
-                                                </div>
-                                              </div>
-                                              <div class="form-group row">
-                                                  <label class="col-md-4 label-control" for="Description">Use Loyalty Points</label>
-                                                  <div class="col-md-8">
-                                                    <span id="prmLoyaltyPoints">{{number_format($customer_existing_points,2)}}</span>
                                                 </div>
                                               </div>
 
@@ -114,15 +120,21 @@
 
 
                                           @if(isset($tender))
-                                            @foreach($tender as $ten)
-                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1  btn-group">
-                                              
-                                                <button  data-id="{{$ten->id}}" type="button" class="btn btn-block btn-info btn-responsive margin-all-bottom-button make-payment pull-right mr-1" >
-                                                    {{$ten->name}}
-                                                </button>  
-                                                     
-                                            </div>
-                                            @endforeach
+                                              @foreach($tender as $ten)
+                                                  @if($ten->tender_class=="customer_loyalty")
+                                                    <div class="col-xs-8 col-sm-7 col-md-6 col-lg-4 button button1  btn-group">
+                                                        <button  data-id="{{$ten->id}}" type="button" class="btn btn-block btn-info btn-responsive margin-all-bottom-button customer-loyalty pull-right mr-1" >
+                                                            {{$ten->name}}
+                                                        </button>  
+                                                    </div>
+                                                  @else
+                                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 button button1  btn-group">
+                                                        <button  data-id="{{$ten->id}}" type="button" class="btn btn-block btn-info btn-responsive margin-all-bottom-button make-payment pull-right mr-1" >
+                                                            {{$ten->name}}
+                                                        </button>  
+                                                    </div>
+                                                  @endif
+                                              @endforeach
                                           @endif 
 
                                             
