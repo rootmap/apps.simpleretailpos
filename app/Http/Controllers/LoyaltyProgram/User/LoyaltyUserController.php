@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\LoyaltyProgram\User;
 
+use App\Customer;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\StaticDataController;
 use App\Http\Requests\Loyalty\User\LoyaltyUserRequest;
 use App\Http\Requests\Loyalty\User\LoyaltyUserRequestNew;
+use App\Model\Loyalty\LoyaltyCardSetting;
 use App\Model\Loyalty\LoyaltyInvoice;
 use App\Model\Loyalty\LoyaltyUser;
 use App\Services\Loyalty\LoyaltyService;
@@ -64,21 +66,31 @@ class LoyaltyUserController extends Controller
     public function getDetails($id)
     {
         //
-        $user = User::select('users.*','roles.name as role_name','stores.name as store_name',
+        $user = Customer::select('customers.*','stores.name as store_name',
                             'loyalty_users.total_invoices', 'loyalty_users.total_purchase_amount',
                             'loyalty_users.total_point', 'loyalty_users.membership_card_type' )
-                    ->join('loyalty_users','users.id','=','loyalty_users.user_id')
-                    ->leftJoin('roles','users.user_type','=','roles.id')
-                    ->leftJoin('stores','users.store_id','=','stores.store_id')
-                    ->where('users.id',$id)
+                    ->join('loyalty_users','customers.id','=','loyalty_users.user_id')
+                    ->leftJoin('stores','customers.store_id','=','stores.store_id')
+                    ->where('customers.id',$id)
                     ->first();
+
+        //$user=LoyaltyUser::where('loyalty_users.user_id',$id)->first();
+
+        // dd($user);
 
         $invoices = LoyaltyInvoice::
                         where('store_id',$this->sdc->storeID())
                         ->where('user_id',$id)->get();
 
+        $data = [];
+        if(isset($user) && $user->id > 0){
+            $data =LoyaltyCardSetting::where('store_id',$this->sdc->storeID())
+                        ->where('membership_name', $user['membership_card_type'])
+                        ->first();
+        }
+
         return view('apps.pages.loyalty_program.user.user_details',
-        ["edit"=> $user,'dataTable'=>$invoices]);
+        ["edit"=> $user,'dataTable'=>$invoices, 'data' => $data]);
     }
 
     private function makeDataArray($request)

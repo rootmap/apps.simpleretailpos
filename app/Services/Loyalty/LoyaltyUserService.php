@@ -50,7 +50,7 @@ class LoyaltyUserService{
         $result->user_id = $user_info['id'];
         $result->email = $user_info['email'];
         $result->name = $user_info['name'];
-        $result->name = $user_info['phone'];
+        $result->phone = $user_info['phone'];
         $result->total_invoices = 0;
         $result->total_purchase_amount = 0;
         $result->total_point = 0;
