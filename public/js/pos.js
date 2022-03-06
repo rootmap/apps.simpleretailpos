@@ -72,6 +72,44 @@ function storecloseLTTheme(name, price) {
     return data;
 }
 
+function loadCustomerCardUrlLoad() {
+
+    //------------------------Ajax Customer Start-------------------------//
+    $.ajax({
+        'async': false,
+        'type': "GET",
+        'global': true,
+        'dataType': 'json',
+        'url': customerCardLoadUrl,
+        'success': function(data) {
+            console.log("Card Customer : " + data.status);
+            if(data.status==1)
+            {
+                $(".loyaltyCardCompanyName").html(data.customer_company);
+                $(".loyaltyCardMemberShipType").html(data.customer_membership_type);
+                $(".loyaltyCardCustomerName").html(data.customer_name);
+                $(".loyaltyCardCustomerPhone").html(data.customer_phone);
+                $(".loyaltyCardCustomerSince").html(data.customer_member_since);
+                var cardBackurl = data.customer_card_background;
+                var image_preview = document.getElementById("image_preview");
+                if(cardBackurl != "")
+                {
+                    image_preview.style.backgroundImage = "url("+cardBackurl+")";
+                }
+
+                $("#file-exporaat").show();
+            }
+            else
+            {
+                $("#file-exporaat").hide();
+            }
+                
+        }
+    });
+    //------------------------Ajax Customer End---------------------------//
+}
+
+
 function completeSaleAutomatically() {
 
     Swal.showLoading();
@@ -833,6 +871,7 @@ var typingTimer; //timer identifier
 var doneTypingInterval = 1000; //time in ms, 5 second for example
 
 $(document).ready(function() {
+    loadCustomerCardUrlLoad();
     $('body').on('click', '.dedmoreqTv4Ex', function() {
         var product_ex = $(this).parent().children('.directquantitypos').val();
 
@@ -2146,7 +2185,8 @@ $(document).ready(function() {
             'url': AddCustomerUrl,
             'data': { '_token': csrftLarVe },
             'success': function(data) {
-                console.log("Assigning custome to cart : " + data)
+                console.log("Assigning custome to cart : " + data);
+                loadCustomerCardUrlLoad();
             }
         });
         //------------------------Ajax Customer End---------------------------//

@@ -2057,7 +2057,7 @@ class InvoiceController extends Controller
         return response()->json($session_id);
     }  
 
-    private function genarateDefaultCustomer()
+    public function genarateDefaultCustomer()
     {
         $chkCus=Customer::where('store_id',$this->sdc->storeID())->where('name','No Customer')->count();
         if($chkCus==0)
@@ -2076,6 +2076,8 @@ class InvoiceController extends Controller
         return $cus->id;
     }
 
+
+
     public function pos(Request $request)
     {
         
@@ -2085,6 +2087,15 @@ class InvoiceController extends Controller
 
         $customerID = $defualtCustomer;
         $customerInfo=Customer::find($customerID);
+
+        // $loyaltyCustomerCardData = Customer::select('customers.*','stores.name as store_name',
+        //                                     'loyalty_users.total_invoices', 'loyalty_users.total_purchase_amount',
+        //                                     'loyalty_users.total_point', 'loyalty_users.membership_card_type' )
+        //                             ->join('loyalty_users','customers.id','=','loyalty_users.user_id')
+        //                             ->leftJoin('stores','customers.store_id','=','stores.store_id')
+        //                             ->where('customers.id',$id)
+        //                             ->first();
+
         $dataRequest=[
             "store_id"  =>$this->sdc->storeID(),
             'user_info' =>[

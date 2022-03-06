@@ -15,6 +15,7 @@ use App\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Pos;
 
 class LoyaltyUserController extends Controller
 {
@@ -91,6 +92,124 @@ class LoyaltyUserController extends Controller
 
         return view('apps.pages.loyalty_program.user.user_details',
         ["edit"=> $user,'dataTable'=>$invoices, 'data' => $data]);
+    }
+
+    public function genarateDefaultCustomer()
+    {
+        $chkCus=Customer::where('store_id',$this->sdc->storeID())->where('name','No Customer')->count();
+        if($chkCus==0)
+        {
+            $tab_customer=new Customer;
+            $tab_customer->name="No Customer";
+            $tab_customer->store_id=$this->sdc->storeID();
+            $tab_customer->phone="00000000000";
+            $tab_customer->email="nocustomer".$this->sdc->storeID()."@simpleretailpos.com";
+            $tab_customer->created_by=\Auth::user()->id;
+            $tab_customer->save();
+        }
+
+        $cus=Customer::where('store_id',$this->sdc->storeID())->where('name','No Customer')->first();
+
+        return $cus->id;
+    }
+
+    public function getDetailsAjax(Request $request)
+    {
+        
+        $defualtCustomer= $this->genarateDefaultCustomer();
+        //dd($defualtCustomer);
+        //$tab_customer=Customer::where('store_id',$this->sdc->storeID())->get();
+        $Cart = $request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+        if(isset($Cart))
+        {
+            if(empty($Cart->invoiceID))
+            {
+                $Ncart = new Pos($Cart);
+                $Ncart->genarateInvoiceID();
+                $request->session()->put('Pos', $Ncart);
+                $Cart =$request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+            }
+
+            if(empty($Cart->customerID))
+            {
+                $Ncart = new Pos($Cart);
+                $Ncart->addCustomerID($defualtCustomer);
+                $request->session()->put('Pos', $Ncart);
+                $Cart =$request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+            }
+        }
+        else
+        {
+            $Ncart = new Pos($Cart);
+            $Ncart->genarateInvoiceID();
+            $Ncart->addCustomerID($defualtCustomer);
+            Session::put('Pos', $Ncart);
+            $Cart = $request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+        }
+
+        if (empty($Cart->customerID)) {
+            $Cart->addCustomerID($defualtCustomer);
+            $request->session()->put('Pos', $Cart);
+            $Cart =$request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+        }
+
+        //dd($Cart);
+        $customerID=$Cart->customerID;
+        //
+
+        $userCount = Customer::select('customers.*',
+                            'stores.name as store_name',
+                            'loyalty_users.total_invoices', 'loyalty_users.total_purchase_amount',
+                            'loyalty_users.total_point', 'loyalty_users.membership_card_type',
+                            'loyalty_users.created_at as member_since')
+                    ->join('loyalty_users','customers.id','=','loyalty_users.user_id')
+                    ->Join('stores','customers.store_id','=','stores.store_id')
+                    ->where('customers.id',$customerID)
+                    ->count();
+        if($userCount==0)
+        {
+            $response_data=[
+                "msg"=>"Not Added To Loyalty Customer",
+                "status"=>0
+            ];
+        }
+        else
+        {
+            $user = Customer::select('customers.*',
+                                    'stores.name as store_name',
+                                    'loyalty_users.total_invoices', 'loyalty_users.total_purchase_amount',
+                                    'loyalty_users.total_point', 'loyalty_users.membership_card_type',
+                                    'loyalty_users.created_at as member_since')
+                            ->join('loyalty_users','customers.id','=','loyalty_users.user_id')
+                            ->Join('stores','customers.store_id','=','stores.store_id')
+                            ->where('customers.id',$customerID)
+                            ->first();
+
+                $data = [];
+                if(isset($user) && $user->id > 0){
+                    $data =LoyaltyCardSetting::where('store_id',$this->sdc->storeID())
+                                ->select(
+                                    'membership_name',
+                                    'card_pic_path',
+                                    'card_display_config'
+                                    )
+                                ->where('membership_name', $user['membership_card_type'])
+                                ->first();
+                }
+
+                $response_data=[
+                    "customer_company"=>$user->store_name,
+                    "customer_membership_type"=>$user->membership_card_type,
+                    "customer_name"=>$user->name,
+                    "customer_phone"=>$user->phone,
+                    "customer_member_since"=>formatDate($user->member_since),
+                    "customer_card_background"=>$data->card_pic_path,
+                    "status"=>1
+                ];
+        }
+        
+
+        return response()->json($response_data); 
     }
 
     private function makeDataArray($request)

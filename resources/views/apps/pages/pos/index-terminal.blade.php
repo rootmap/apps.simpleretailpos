@@ -478,6 +478,29 @@
 
                                 <!-- Quick Links End -->
                             </div>
+
+                            <div class="col-xs-12"  id="file-exporaat">
+                                <div id="image_preview" style="position: relative; margin: 30px auto;  overflow: hidden; max-width:450px; -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+                                -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+                                box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);" class="custom-file-container__image-preview"
+                                    style="overflow: hidden; position:relative; hight: 220px; width:420px !important; border:2px solid #CCCCCC; border-radius:3%; transition: all 0.2s; -webkit-transition: all 0.2s;">
+                                    <div class="row" style=" padding: 8px 5px;">
+                                        <div class="col-md-12"  id="storeDisplay"> <h3 id="display_store_name" style="text-align: center; text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;" class="contentBlock loyaltyCardCompanyName">Company Name</h3></div>
+                                        <div class="col-md-12" style="position: absolute; top:42%; left : 0px;">
+                                            <div class="row">
+                                                <div class="col-md-12"  id="customerDisplay"> <h5  class="contentBlock loyaltyCardCustomerName" style="text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;"> Customer Name </h5> </div>
+                                                <div class="col-md-12"  id="mobileDisplay"><h5  class="contentBlock loyaltyCardCustomerPhone">234234234234324</h5></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6"  id="cardDisplay" style="position: absolute; bottom:0px; left : 0px; text-shadow: 2px 2px 2px #5c5a5a; font-weight: bold;"><h3  class="contentBlock loyaltyCardMemberShipType" >SILVER</h3></div>
+                                        <div class="col-md-6"  id="sinceDisplay" style="position: absolute; bottom:0px; right : 0px; text-align: right;">
+                                            <span style="text-shadow: 2px 2px 2px #5c5a5a; font-weight: bold;">Member Since</span>
+                                            <h6 class="contentBlock loyaltyCardCustomerSince">Date</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
                     </div>
                 </div>
 
@@ -555,6 +578,7 @@
 <link rel="stylesheet" type="text/css" href="{{url('assets/css/pos.css')}}">
 <link rel="stylesheet" type="text/css" href="{{url('theme/app-assets/vendors/css/forms/selects/select2.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{url('theme/app-assets/css/pages/invoice.min.css')}}">
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/file-upload-with-preview@4.1.0/dist/file-upload-with-preview.min.css" />
 @endsection
 
 @section('js')
@@ -673,6 +697,7 @@ var verifyManagerLogin="{{url('ma/verify')}}";
 var cartProductImgUrl="{{url('upload/product')}}";
 var defaultProductimgURLCartPOSvfour="{{url('images/product-avater-2.jpg')}}";
 var loadingSVGProduct="{{url('images/loading.svg')}}";
+var customerCardLoadUrl="{{url('loyalty/users-card/get-details')}}";
 
 var product_image_status=0;
 @if(isset($product_image_status))

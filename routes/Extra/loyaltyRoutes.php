@@ -18,6 +18,7 @@ Route::prefix('loyalty')->name('loyalty.')->group(function () {
 
     Route::get('/users','User\LoyaltyUserController@index')->name('get.users');
     Route::get('/users/{id}/get-details','User\LoyaltyUserController@getDetails')->name('get.userDetails');
+    Route::get('/users-card/get-details','User\LoyaltyUserController@getDetailsAjax')->name('userCardDetailsAjax');
     Route::post('/users/Assign-to-Membership-program','User\LoyaltyUserController@assign')->name('assign.user');
     //Route::post('/users/purchase-by-loyalty-point','User\LoyaltyUserController@purchase')->name('purchase.byLoyaltyPoint');
     Route::post('/users/cash-withdraw','User\LoyaltyUserController@cashWithdraw')->name('withdrawCash.byLoyaltyPoint');

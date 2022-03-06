@@ -101,7 +101,6 @@
             // dd(isset($config->aname));
             $style_block = "display:block";
             $style_none = "display:none";
-
             $storeDisplay = (isset($config->store_name) && $config->store_name == 1) ? $style_block : $style_none;
             $customerDisplay = (isset($config->name) && $config->name == 1) ? $style_block : $style_none;
             $mobileDisplay = (isset($config->mobile) && $config->mobile == 1) ? $style_block : $style_none;
@@ -118,10 +117,10 @@
                         <div class="col-md-12"  id="mobileDisplay" style="{{ $mobileDisplay }}"><h5  class="contentBlock">{{ $edit->phone }} </h5></div>
                     </div>
                 </div>
-                <div class="col-md-6"  id="cardDisplay" style="position: absolute; bottom:0px; left : 0px; {{ $cardDisplay }}"><h3  class="contentBlock" >{{ $edit->membership_card_type }}</h3></div>
+                <div class="col-md-6"  id="cardDisplay" style="position: absolute; bottom:0px; left : 0px; text-shadow: 2px 2px 2px #5c5a5a; font-weight: bold; {{ $cardDisplay }}"><h3  class="contentBlock" >{{ $edit->membership_card_type }}</h3></div>
                 <div class="col-md-6"  id="sinceDisplay" style="position: absolute; bottom:0px; right : 0px; text-align: right; {{ $sinceDisplay }}">
-                    Member Since
-                    <h6 class="contentBlock">{{ $edit->created_at }}</h6>
+                    <span style="text-shadow: 2px 2px 2px #5c5a5a; font-weight: bold;">Member Since</span>
+                    <h6 class="contentBlock">{{ formatDate($edit->created_at) }}</h6>
                 </div>
             </div>
         </div>
