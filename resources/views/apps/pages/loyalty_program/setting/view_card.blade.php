@@ -134,7 +134,7 @@
                                                                             <div class="col-md-12"  id="mobileDisplay" style="{{ $mobileDisplay }}"><h5  class="contentBlock">+880 1729 129 858</h5></div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-6"  id="cardDisplay" style="position: absolute; bottom:0px; left : 0px; {{ $mobileDisplay }}"><h3  class="contentBlock" >{{ $membership_name }}</h3></div>
+                                                                    <div class="col-md-6"  id="cardDisplay" style="position: absolute; bottom:0px; left : 0px; {{ $cardDisplay }}"><h3  class="contentBlock" >{{ $membership_name }}</h3></div>
                                                                     <div class="col-md-6"  id="sinceDisplay" style="position: absolute; bottom:0px; right : 0px; text-align: right; {{ $sinceDisplay }}">
                                                                         Member Since
                                                                         <h6 class="contentBlock">June, 2022</h6>
