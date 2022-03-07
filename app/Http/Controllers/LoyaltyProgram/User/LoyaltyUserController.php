@@ -170,6 +170,7 @@ class LoyaltyUserController extends Controller
         {
             $response_data=[
                 "msg"=>"Not Added To Loyalty Customer",
+                "total_point"=>0,
                 "status"=>0
             ];
         }
@@ -204,6 +205,7 @@ class LoyaltyUserController extends Controller
                     "customer_phone"=>$user->phone,
                     "customer_member_since"=>formatDate($user->member_since),
                     "customer_card_background"=>$data->card_pic_path,
+                    "total_point"=>$user->total_point,
                     "status"=>1
                 ];
         }

@@ -84,6 +84,8 @@ function loadCustomerCardUrlLoad() {
         'url': customerCardLoadUrl,
         'success': function(data) {
             console.log("Card Customer : " + data.status);
+            $("#ex_loyalty_points").html(data.total_point);
+            $("#ex_loyalty_points").attr('data-id',data.total_point);
             if(data.status==1)
             {
                 $(".loyaltyCardCompanyName").html(data.customer_company);
@@ -110,6 +112,7 @@ function loadCustomerCardUrlLoad() {
                 $("#existing_customer_add_to_loyalty").prop('checked',false);
                 $("#file-exporaat-new").show();
                 $("#file-exporaat").hide();
+                $(".customer-loyalty").hide();
             }
                 
         }
