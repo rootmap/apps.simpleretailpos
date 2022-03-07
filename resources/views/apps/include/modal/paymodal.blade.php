@@ -22,7 +22,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group row">
+                                                <div class="form-group row paylocaltyPointsAreaModal">
                                                     <label class="col-md-4 label-control" for="projectinput1">Loyalty Points To Pay</label>
                                                     <div class="col-md-8">
                                                         <div class="input-group">

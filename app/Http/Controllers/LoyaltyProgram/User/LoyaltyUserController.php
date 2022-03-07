@@ -16,6 +16,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Pos;
+use App\Store;
 
 class LoyaltyUserController extends Controller
 {
@@ -157,6 +158,9 @@ class LoyaltyUserController extends Controller
         $customerID=$Cart->customerID;
         //
 
+        $storeElegibityCheck=Store::where('store_id',$this->sdc->storeID())->select('is_loyalty_program')->first();
+        //dd($storeElegibityCheck);
+
         $userCount = Customer::select('customers.*',
                             'stores.name as store_name',
                             'loyalty_users.total_invoices', 'loyalty_users.total_purchase_amount',
@@ -166,12 +170,14 @@ class LoyaltyUserController extends Controller
                     ->Join('stores','customers.store_id','=','stores.store_id')
                     ->where('customers.id',$customerID)
                     ->count();
+
         if($userCount==0)
         {
             $response_data=[
                 "msg"=>"Not Added To Loyalty Customer",
                 "total_point"=>0,
-                "status"=>0
+                "status"=>0,
+                "storeElegibityCheck"=>$storeElegibityCheck->is_loyalty_program
             ];
         }
         else
@@ -206,12 +212,34 @@ class LoyaltyUserController extends Controller
                     "customer_member_since"=>formatDate($user->member_since),
                     "customer_card_background"=>$data->card_pic_path,
                     "total_point"=>$user->total_point,
-                    "status"=>1
+                    "status"=>1,
+                    "storeElegibityCheck"=>$storeElegibityCheck->is_loyalty_program
                 ];
         }
         
 
         return response()->json($response_data); 
+    }
+
+    public function ImageToBlackAndWhite($im) {
+
+        for ($x = imagesx($im); $x--;) {
+            for ($y = imagesy($im); $y--;) {
+                $rgb = imagecolorat($im, $x, $y);
+                $r = ($rgb >> 16) & 0xFF;
+                $g = ($rgb >> 8 ) & 0xFF;
+                $b = $rgb & 0xFF;
+                $gray = ($r + $g + $b) / 3;
+                if ($gray < 0xFF) {
+    
+                    imagesetpixel($im, $x, $y, 0xFFFFFF);
+                }else
+                    imagesetpixel($im, $x, $y, 0x000000);
+            }
+        }
+    
+        imagefilter($im, IMG_FILTER_NEGATE);
+    
     }
 
     private function makeDataArray($request)

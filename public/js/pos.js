@@ -86,34 +86,45 @@ function loadCustomerCardUrlLoad() {
             console.log("Card Customer : " + data.status);
             $("#ex_loyalty_points").html(data.total_point);
             $("#ex_loyalty_points").attr('data-id',data.total_point);
-            if(data.status==1)
+            if(data.storeElegibityCheck > 0)
             {
-                $(".loyaltyCardCompanyName").html(data.customer_company);
-                $(".loyaltyCardMemberShipType").html(data.customer_membership_type);
-                $(".loyaltyCardCustomerName").html(data.customer_name);
-                $(".loyaltyCardCustomerPhone").html(data.customer_phone);
-                $(".loyaltyCardCustomerSince").html(data.customer_member_since);
-                var cardBackurl = data.customer_card_background;
-                var image_preview = document.getElementById("image_preview");
-                if(cardBackurl != "")
+                if(data.status==1)
                 {
-                    image_preview.style.backgroundImage = "url("+cardBackurl+")";
+                    $(".loyaltyCardCompanyName").html(data.customer_company);
+                    $(".loyaltyCardMemberShipType").html(data.customer_membership_type);
+                    $(".loyaltyCardCustomerName").html(data.customer_name);
+                    $(".loyaltyCardCustomerPhone").html(data.customer_phone);
+                    $(".loyaltyCardCustomerSince").html(data.customer_member_since);
+                    var cardBackurl = data.customer_card_background;
+                    var image_preview = document.getElementById("image_preview");
+                    if(cardBackurl != "")
+                    {
+                        image_preview.style.backgroundImage = "url("+cardBackurl+")";
+                    }
+    
+                    $("#file-exporaat").show();
+                    $("#existing_customer_add_to_loyalty").prop('checked',true);
+    
+                    $("#file-exporaat-new").hide();
+                    $("#file-exporaat").show();
                 }
-
-                $("#file-exporaat").show();
-                $("#existing_customer_add_to_loyalty").prop('checked',true);
-
-                $("#file-exporaat-new").hide();
-                $("#file-exporaat").show();
+                else
+                {
+                    $("#file-exporaat").hide();
+                    $("#existing_customer_add_to_loyalty").prop('checked',false);
+                    $("#file-exporaat-new").show();
+                    $("#file-exporaat").hide();
+                    $(".customer-loyalty").hide();
+                }
             }
             else
             {
+                $("#file-exporaat-new").hide();
                 $("#file-exporaat").hide();
-                $("#existing_customer_add_to_loyalty").prop('checked',false);
-                $("#file-exporaat-new").show();
-                $("#file-exporaat").hide();
-                $(".customer-loyalty").hide();
+                $(".paylocaltyPointsAreaModal").hide();
             }
+
+
                 
         }
     });

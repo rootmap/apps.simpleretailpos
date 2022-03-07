@@ -489,7 +489,7 @@
                             </div>
 
                             <div class="col-xs-12 d-none"  id="file-exporaat">
-                                <div id="image_preview" style="position: relative; margin: 30px auto;  overflow: hidden; max-width:450px; -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+                                <div id="image_preview" style="position: relative; margin: 30px auto; border:2px #ccc solid; border-radius:15px;  overflow: hidden; max-width:450px; -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
                                 -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
                                 box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);" class="custom-file-container__image-preview"
                                     style="overflow: hidden; position:relative; hight: 220px; width:420px !important; border:2px solid #CCCCCC; border-radius:3%; transition: all 0.2s; -webkit-transition: all 0.2s;">
