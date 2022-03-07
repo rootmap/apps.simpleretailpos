@@ -479,7 +479,16 @@
                                 <!-- Quick Links End -->
                             </div>
 
-                            <div class="col-xs-12"  id="file-exporaat">
+                            <div class="col-xs-12 d-none"  id="file-exporaat-new">
+                                
+                                <label class="mt-2  border-info p-1 d-block" style="margin-left: auto; margin-right: auto;  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+                                -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+                                box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75); font-weight: bolder;">
+                                    <input type="checkbox" name="existing_customer_add_to_loyalty" id="existing_customer_add_to_loyalty"> Join Loyalty Program
+                                </label>
+                            </div>
+
+                            <div class="col-xs-12 d-none"  id="file-exporaat">
                                 <div id="image_preview" style="position: relative; margin: 30px auto;  overflow: hidden; max-width:450px; -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
                                 -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
                                 box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);" class="custom-file-container__image-preview"
@@ -571,7 +580,6 @@
 <script src="{{url('theme/app-assets/vendors/js/forms/toggle/switchery.min.js')}}" type="text/javascript"></script>
 <script src="{{url('theme/app-assets/js/scripts/forms/switch.min.js')}}" type="text/javascript"></script>
 <script src="{{url('js/calc.js')}}" type="text/javascript"></script>
-
 @endsection
 
 @section('css')

@@ -21,8 +21,8 @@ class ActivityController extends Controller
     public function __construct() {
         $this->sdc = new StaticDataController();
         try{
-            $this->dbInstance = new PDO("mysql:host=".env('DB_HOST').";dbname=".env('DB_DATABASE'),env('DB_USERNAME'),env('DB_PASSWORD'));
-        } catch(Exception $e) {
+            //$this->dbInstance = new PDO("mysql:host=".env('DB_HOST').";dbname=".env('DB_DATABASE'),env('DB_USERNAME'),env('DB_PASSWORD'));
+        } catch(Exception $e) { 
             die("Error ".$e->getMessage());
         }
         $this->suffix = date('Ymd');

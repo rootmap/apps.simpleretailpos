@@ -73,7 +73,8 @@ function storecloseLTTheme(name, price) {
 }
 
 function loadCustomerCardUrlLoad() {
-
+    $("#file-exporaat-new").hide();
+    $("#file-exporaat").hide();
     //------------------------Ajax Customer Start-------------------------//
     $.ajax({
         'async': false,
@@ -98,9 +99,16 @@ function loadCustomerCardUrlLoad() {
                 }
 
                 $("#file-exporaat").show();
+                $("#existing_customer_add_to_loyalty").prop('checked',true);
+
+                $("#file-exporaat-new").hide();
+                $("#file-exporaat").show();
             }
             else
             {
+                $("#file-exporaat").hide();
+                $("#existing_customer_add_to_loyalty").prop('checked',false);
+                $("#file-exporaat-new").show();
                 $("#file-exporaat").hide();
             }
                 
@@ -113,6 +121,12 @@ function loadCustomerCardUrlLoad() {
 function completeSaleAutomatically() {
 
     Swal.showLoading();
+
+    let existing_customer_add_to_loyalty=0;
+    if ($("#existing_customer_add_to_loyalty").is(':checked')) {
+        existing_customer_add_to_loyalty=1;
+    }
+
     //------------------------Ajax Customer Start-------------------------//
     var AddHowMowKhaoUrl = AddHowMowKhaoUrlCartPOSvfour;
     $.ajax({
@@ -121,7 +135,7 @@ function completeSaleAutomatically() {
         'global': false,
         'dataType': 'json',
         'url': AddHowMowKhaoUrl,
-        'data': { '_token': csrftLarVe },
+        'data': { '_token': csrftLarVe, 'existing_customer_add_to_loyalty':existing_customer_add_to_loyalty },
         'success': function(data) {
             Swal.close();
             //console.log("Completing Sales : " + data);
@@ -133,6 +147,7 @@ function completeSaleAutomatically() {
             {
                 Swal.close();
                 clearPosScreenCart();
+                loadCustomerCardUrlLoad();
             }
         }
     });

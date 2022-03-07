@@ -5973,14 +5973,19 @@ class InvoiceController extends Controller
                 $dataRequest['withdraw']['ref_id']=$invoice_id;
             }
 
-
-            $service = new LoyaltyService($dataRequest);
-            $service->join();
-            $service->setInvoice();
-            if(isset($cart->loyaltyPaymentMethodID))
+            if($request->existing_customer_add_to_loyalty==1)
             {
-                $service->withdraw();
+                $service = new LoyaltyService($dataRequest);
+                $service->join();
+                $service->setInvoice();
+                if(isset($cart->loyaltyPaymentMethodID))
+                {
+                    $service->withdraw();
+                }
             }
+            
+
+
             //dd($dataResponse);
             $Ncart = new Pos($cart);
             $Ncart->ClearCart();
