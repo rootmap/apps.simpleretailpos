@@ -78,10 +78,9 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="projectinput1"> Start date</label>
+                                                <label for="projectinput1"> End date</label>
                                                 <input required  name="end_at" type="date" class="element form-control border-info"/>
                                             </div>
-
                                         </div>
                                     </div>
                                     <input id="pormotion_submit"  type="submit" class="btn btn-primary" name="submit" value="submit" />

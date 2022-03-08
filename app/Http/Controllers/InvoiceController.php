@@ -5681,6 +5681,9 @@ class InvoiceController extends Controller
        $cart = Session::has('Pos') ? Session::get('Pos') : null;
        //print_r($cart);
 
+       $customerDBElegibility=$this->loyalty->checkCustomerLoyalty($request);
+
+       //dd($customerDBElegibility);
 
        $countItems=count($cart->items);
        
@@ -5973,7 +5976,9 @@ class InvoiceController extends Controller
                 $dataRequest['withdraw']['ref_id']=$invoice_id;
             }
 
-            if($request->existing_customer_add_to_loyalty==1)
+            
+
+            if($request->existing_customer_add_to_loyalty==1 || $customerDBElegibility['status']==1)
             {
                 $service = new LoyaltyService($dataRequest);
                 $service->join();

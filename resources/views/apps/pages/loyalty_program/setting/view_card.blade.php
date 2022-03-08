@@ -130,8 +130,8 @@
                                                                     <div class="col-md-12"  id="storeDisplay" style="{{ $storeDisplay }}"> <h3 id="display_store_name" style="text-align: center; text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;" class="contentBlock">{{ $store->name }}</h3></div>
                                                                     <div class="col-md-12" style="position: absolute; top:42%; left : 0px;">
                                                                         <div class="row">
-                                                                            <div class="col-md-12"  id="customerDisplay"  style="{{ $customerDisplay }}"> <h5  class="contentBlock" style="text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;">Md. Customer Name</h5> </div>
-                                                                            <div class="col-md-12"  id="mobileDisplay" style="{{ $mobileDisplay }}"><h5  class="contentBlock">+880 1729 129 858</h5></div>
+                                                                            <div class="col-md-12"  id="customerDisplay"  style="{{ $customerDisplay }}"> <h5  class="contentBlock" style="text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;">Customer Name</h5> </div>
+                                                                            <div class="col-md-12"  id="mobileDisplay" style="{{ $mobileDisplay }}"><h5  class="contentBlock">+1 000 000 000</h5></div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6"  id="cardDisplay" style="position: absolute; bottom:0px; left : 0px; {{ $cardDisplay }}"><h3  class="contentBlock" >{{ $membership_name }}</h3></div>

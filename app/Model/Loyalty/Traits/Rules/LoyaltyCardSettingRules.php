@@ -8,7 +8,7 @@ trait LoyaltyCardSettingRules
     public function createdRules()
     {
         return [
-            "membership_name" => "required|string|unique:loyalty_card_settings,membership_name",
+            "membership_name" => "required",
             "card_pic_path" => "nullable|image|mimes:jpg,png",
             "card_display_config" => "nullable|array",
             "point_range_from" => "required|numeric",

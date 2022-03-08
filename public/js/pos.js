@@ -2286,6 +2286,7 @@ $(document).ready(function() {
                     'data': { 'customer_loyalty': customer_loyalty, '_token': csrftLarVe },
                     'success': function(datas) {
                         console.log("Assigning custome to cart : " + datas);
+                        loadCustomerCardUrlLoad();
                     }
                 });
                 //------------------------Ajax Customer End---------------------------//

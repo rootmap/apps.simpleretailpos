@@ -221,6 +221,113 @@ class LoyaltyUserController extends Controller
         return response()->json($response_data); 
     }
 
+    public function checkCustomerLoyalty(Request $request)
+    {
+        
+        $defualtCustomer= $this->genarateDefaultCustomer();
+        //dd($defualtCustomer);
+        //$tab_customer=Customer::where('store_id',$this->sdc->storeID())->get();
+        $Cart = $request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+        if(isset($Cart))
+        {
+            if(empty($Cart->invoiceID))
+            {
+                $Ncart = new Pos($Cart);
+                $Ncart->genarateInvoiceID();
+                $request->session()->put('Pos', $Ncart);
+                $Cart =$request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+            }
+
+            if(empty($Cart->customerID))
+            {
+                $Ncart = new Pos($Cart);
+                $Ncart->addCustomerID($defualtCustomer);
+                $request->session()->put('Pos', $Ncart);
+                $Cart =$request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+            }
+        }
+        else
+        {
+            $Ncart = new Pos($Cart);
+            $Ncart->genarateInvoiceID();
+            $Ncart->addCustomerID($defualtCustomer);
+            Session::put('Pos', $Ncart);
+            $Cart = $request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+        }
+
+        if (empty($Cart->customerID)) {
+            $Cart->addCustomerID($defualtCustomer);
+            $request->session()->put('Pos', $Cart);
+            $Cart =$request->session()->has('Pos') ? $request->session()->get('Pos') : null;
+        }
+
+        //dd($Cart);
+        $customerID=$Cart->customerID;
+        //
+
+        $storeElegibityCheck=Store::where('store_id',$this->sdc->storeID())->select('is_loyalty_program')->first();
+        //dd($storeElegibityCheck);
+
+        $userCount = Customer::select('customers.*',
+                            'stores.name as store_name',
+                            'loyalty_users.total_invoices', 'loyalty_users.total_purchase_amount',
+                            'loyalty_users.total_point', 'loyalty_users.membership_card_type',
+                            'loyalty_users.created_at as member_since')
+                    ->join('loyalty_users','customers.id','=','loyalty_users.user_id')
+                    ->Join('stores','customers.store_id','=','stores.store_id')
+                    ->where('customers.id',$customerID)
+                    ->count();
+
+        if($userCount==0)
+        {
+            $response_data=[
+                "msg"=>"Not Added To Loyalty Customer",
+                "total_point"=>0,
+                "status"=>0,
+                "storeElegibityCheck"=>$storeElegibityCheck->is_loyalty_program
+            ];
+        }
+        else
+        {
+            $user = Customer::select('customers.*',
+                                    'stores.name as store_name',
+                                    'loyalty_users.total_invoices', 'loyalty_users.total_purchase_amount',
+                                    'loyalty_users.total_point', 'loyalty_users.membership_card_type',
+                                    'loyalty_users.created_at as member_since')
+                            ->join('loyalty_users','customers.id','=','loyalty_users.user_id')
+                            ->Join('stores','customers.store_id','=','stores.store_id')
+                            ->where('customers.id',$customerID)
+                            ->first();
+
+                $data = [];
+                if(isset($user) && $user->id > 0){
+                    $data =LoyaltyCardSetting::where('store_id',$this->sdc->storeID())
+                                ->select(
+                                    'membership_name',
+                                    'card_pic_path',
+                                    'card_display_config'
+                                    )
+                                ->where('membership_name', $user['membership_card_type'])
+                                ->first();
+                }
+
+                $response_data=[
+                    "customer_company"=>$user->store_name,
+                    "customer_membership_type"=>$user->membership_card_type,
+                    "customer_name"=>$user->name,
+                    "customer_phone"=>$user->phone,
+                    "customer_member_since"=>formatDate($user->member_since),
+                    "customer_card_background"=>$data->card_pic_path,
+                    "total_point"=>$user->total_point,
+                    "status"=>1,
+                    "storeElegibityCheck"=>$storeElegibityCheck->is_loyalty_program
+                ];
+        }
+        
+
+        return $response_data; 
+    }
+
     public function ImageToBlackAndWhite($im) {
 
         for ($x = imagesx($im); $x--;) {

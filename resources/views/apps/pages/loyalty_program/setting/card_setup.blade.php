@@ -88,7 +88,7 @@
 
                                                         <div class="col-md-12" style="position: absolute; top:42%; left : 0px;">
                                                             <div class="row">
-                                                                <div class="col-md-12"  id="customerDisplay"> <h5  class="contentBlock" style="text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;">Md. Customer Name</h5> </div>
+                                                                <div class="col-md-12"  id="customerDisplay"> <h5  class="contentBlock" style="text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;">Customer Name</h5> </div>
                                                                 <div class="col-md-12"  id="mobileDisplay"><h5  class="contentBlock">+880 1729 129 858</h5></div>
                                                             </div>
                                                         </div>
