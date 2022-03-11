@@ -5707,11 +5707,13 @@ class InvoiceController extends Controller
 
 
             foreach($cart->items as $row):
-                $pid=$row['item_id'];
+
+                //dd($row);
+                $pid=trim($row['item_id']);
                 $quantity=$row['qty'];
                 $unitprice=$row['unitprice'];
 
-                if($row['item_type']="VT")
+                if($row['item_type']=="VT")
                 {
                     //$catInfo=Category::where('name',"Virtual Terminal")->first();
                     $catInfo=\DB::table('categories')->where('name',"Virtual Terminal")->first();
@@ -5757,6 +5759,8 @@ class InvoiceController extends Controller
                 else
                 {
                     $pro=Product::find($pid);
+
+                   // dd($pro);
                     $tab_stock=new InvoiceProduct;
                     $tab_stock->invoice_id=$invoice_id;
                     $tab_stock->product_id=$pid;
@@ -5773,8 +5777,8 @@ class InvoiceController extends Controller
 
                     Product::where('id',$pid)
                     ->update([
-                    'quantity' => \DB::raw('quantity - '.$quantity),
-                    'sold_times' => \DB::raw('sold_times + 1')
+                        'quantity' => \DB::raw('quantity - '.$quantity),
+                        'sold_times' => \DB::raw('sold_times + 1')
                     ]);
 
                     $amount_invoice=($quantity*$unitprice);
@@ -5919,6 +5923,8 @@ class InvoiceController extends Controller
                    'sales_profit' => \DB::raw('sales_profit + '.$total_profit_invoice)
                 ]);
             }
+
+
 
             $edQr=$this->sdc->invoiceEmailTemplate();
             $emaillayoutData=$edQr['editData'];

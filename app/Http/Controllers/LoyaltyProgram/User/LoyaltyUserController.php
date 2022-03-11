@@ -192,8 +192,11 @@ class LoyaltyUserController extends Controller
                             ->where('customers.id',$customerID)
                             ->first();
 
+                //dd($user);
+
                 $data = [];
                 if(isset($user) && $user->id > 0){
+
                     $data =LoyaltyCardSetting::where('store_id',$this->sdc->storeID())
                                 ->select(
                                     'membership_name',

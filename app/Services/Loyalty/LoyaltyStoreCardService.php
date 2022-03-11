@@ -86,7 +86,7 @@ class LoyaltyStoreCardService{
 
     public function getMembershipByPoint($point)
     {
-        $data = LoyaltyCardSetting::select('membership_name')
+        $data = LoyaltyCardSetting::select('membership_name','id')
                             ->where('store_id',$this->store_id)
                             ->where('status','active')
                             ->whereRaw('? BETWEEN point_range_from AND point_range_to',[$point])
@@ -96,7 +96,7 @@ class LoyaltyStoreCardService{
             
             return $data;
         }
-        return LoyaltyCardSetting::select('membership_name')
+        return LoyaltyCardSetting::select('membership_name','id')
                             ->where('store_id',$this->store_id)
                             ->where('status','active')
                             ->orderBy('point_range_to','DESC')

@@ -54,6 +54,7 @@ class LoyaltyUserService{
         $result->total_invoices = 0;
         $result->total_purchase_amount = 0;
         $result->total_point = 0;
+        $result->membership_card_id = $card_type['id'];
         $result->membership_card_type = $card_type['membership_name'];
         $result->save();
         return $result;
