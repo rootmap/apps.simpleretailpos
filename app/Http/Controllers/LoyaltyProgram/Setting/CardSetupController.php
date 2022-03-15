@@ -7,16 +7,18 @@ use App\Http\Controllers\LoyaltyProgram\MainController;
 use App\Http\Controllers\StaticDataController;
 use App\Http\Requests\Loyalty\Setup\CardSetupRequest;
 use App\Model\Loyalty\LoyaltyCardSetting;
+use App\Model\Loyalty\LoyaltyUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CardSetupController extends MainController
 {
 
-    public function __construct(LoyaltyCardSetting $card, StaticDataController $sdc)
+    public function __construct(LoyaltyCardSetting $card, StaticDataController $sdc, LoyaltyUser $loyalUser)
     {
         $this->model = $card;
         $this->sdc = $sdc;
+        $this->loyalUser = $loyalUser;
     }
 
 
@@ -124,6 +126,12 @@ class CardSetupController extends MainController
         $result->status = isset($data['status']) ? $data['status'] : $result->status;
 
         $result->save();
+
+
+        $this->loyalUser::where('membership_card_id', $id)->where('store_id',$this->sdc->storeID())->update([
+            'membership_card_type'=>isset($data['membership_name']) ? $this->checkUpdatedMembershipCard($data['membership_name'], $result->membership_name) : $result->membership_name
+        ]);
+
         return redirect()->route('loyalty.setting.card.show', [$result['id']]);
     }
 

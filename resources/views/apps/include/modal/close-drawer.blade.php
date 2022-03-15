@@ -43,6 +43,10 @@
                       <td align="left">$<span id="storeCloseOpeningAmount">10.00</span></td>
                   </tr>
                   <tr>
+                    <td align="left">Sales Return (-)  :  </td>
+                    <td align="left">$<span id="storeCloseSalesReturnAmount">0.00</span></td>
+                  </tr>
+                  <tr>
                       <td align="left">Payout (+)(-) :  </td>
                       <td align="left">$<span id="totalPayout">0.00</span></td>
                   </tr>

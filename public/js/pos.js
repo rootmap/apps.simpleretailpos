@@ -216,8 +216,9 @@ function loadCloseDrawer() {
             var totalTax = parseFloat(data.totalTax).toFixed(2);
             var opening_amount = parseFloat(data.opening_amount).toFixed(2);
             var totalPayout = parseFloat(data.totalPayout).toFixed(2);
+            var totalSalesReturnAmount = parseFloat(data.totalSalesReturnAmount).toFixed(2);
 
-            var currectStoreTotal = (salesTotal - 0) + (opening_amount - 0) + (totalPayout - 0);
+            var currectStoreTotal = (salesTotal - 0) + (opening_amount - 0) + (totalPayout - 0) - totalSalesReturnAmount;
 
             currectStoreTotal = parseFloat(currectStoreTotal).toFixed(2);
 
@@ -226,6 +227,7 @@ function loadCloseDrawer() {
             $("#storeCloseOpeningAmount").html(opening_amount);
             $("#storeCloseTaxAmount").html(totalTax);
             $("#totalPayout").html(totalPayout);
+            $("#storeCloseSalesReturnAmount").html(totalSalesReturnAmount);
 
             //storeCloseTableTenderList
             var salesDataTendr = data.totalSalesTender;
@@ -1330,6 +1332,52 @@ $(document).ready(function() {
                     $(".openStore").fadeIn('fast');
 
                     $(".checkDrawer").fadeOut('fast');
+                } else {
+                    $("#closeStoreMsg").html(warningMessage("Failed, please try again...."));
+                    window.location.href = window.location.href;
+                }
+            }
+        });
+        //------------------------Ajax Customer End---------------------------//
+        //$(".payModal-message-area").html(warningMessage("Please select a customer."));
+    });
+
+    $(".closePrintStore").click(function() {
+        $(".closeStore").fadeOut('fast');
+        $("#closeStoreMsg").html(loadingOrProcessing("Saving close drawer info, please wait...."));
+        //------------------------Ajax Customer Start-------------------------//
+
+        $.ajax({
+            'async': false,
+            'type': "POST",
+            'global': false,
+            'dataType': 'json',
+            'url': closeStore,
+            'data': { '_token': csrftLarVe },
+            'success': function(data) {
+                console.log("Store Close ID : " + data);
+                if (data) {
+                    $("#closeStoreMsg").html(successMessage("Drawer close successfully."));
+                    $("#close-drawer").modal('hide');
+
+                    $(".cldStore").fadeOut('slow');
+                    $(".opdStore").fadeIn('fast');
+                    $(".openStore").fadeIn('fast');
+
+                    $(".checkDrawer").fadeOut('fast');
+
+                    var PrintLocation = closeStorePrintLocationAddHowMowKhaoUrlCartPOSvfour + "/" + data;
+                    //window.location.href=PrintLocation;
+
+                    var win = window.open(PrintLocation);
+                    if (win) {
+                        //Browser has allowed it to be opened
+                        win.focus();
+                        window.location.href = window.location.href;
+                    } else {
+                        alert('Please allow popups for this website');
+                    }
+
                 } else {
                     $("#closeStoreMsg").html(warningMessage("Failed, please try again...."));
                     window.location.href = window.location.href;

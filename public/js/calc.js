@@ -26,7 +26,20 @@ function write(x) {
 }
 // add int to current display value
 function changeDisplayVal(i) {
-  display.text(display.text() + i);
+  var exDisplay=display.text();
+  if(exDisplay=="0" && i==".")
+  {
+      display.text(display.text() + i); 
+  }
+  else if(exDisplay!="0")
+  {
+    display.text(display.text() + i); 
+  }
+  else
+  {
+    display.text(i); 
+  }
+  
 }
 // make * into ×
 function  visOps(x) {
@@ -69,19 +82,24 @@ function set_a(i) {
       i = '0.';
     }
     // first_a time, we need to clear the display
+    console.log(i);
     if ( first_a === true ) {
       if ( i === '0' ) {
         i = '';
       } else {
             // set display value
-            setDisplayVal(i);
-            // no longer first_a
-            first_a = false;
+              setDisplayVal(i);
+              // no longer first_a
+              first_a = false;
+
+            
         
       }
     } else {
       // add int to current display value
-                changeDisplayVal(i);
+        var aData = display.text();
+        changeDisplayVal(i);
+
     }
 
     a = display.text();

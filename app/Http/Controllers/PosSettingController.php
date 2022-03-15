@@ -287,11 +287,11 @@ class PosSettingController extends Controller
         $pos_item=$request->pos_item?$request->pos_item:0;
         $invoice_layout=$request->invoice_layout?$request->invoice_layout:0;
         $discount_type=$request->discount_type?$request->discount_type:0;
-        $vt_item_name=$request->vt_item_name;
+        $vt_item_names=$request->vt_item_name;
 
         $tab=$posSetting::find($id);
         $tab->pos_item=$pos_item;
-        $tab->vt_item_name=$vt_item_name;
+        $tab->vt_item_name=$vt_item_names;
         $tab->sales_tax=$sales_tax;
         $tab->invoice_layout=$invoice_layout;
         $tab->sales_discount=$sales_discount;

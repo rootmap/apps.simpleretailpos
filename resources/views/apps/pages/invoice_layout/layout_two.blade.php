@@ -104,9 +104,9 @@
 				</div>
 				<div class="col-md-6 col-sm-12 text-xs-center text-md-right">
 					<code>Not Editable</code>
-					<p><span class="text-muted">Invoice Date :</span> 06/05/2016</p>
+					<p><span class="text-muted">Invoice Date :</span> {{date('d/m/Y')}}</p>
 					<p><span class="text-muted">Terms :</span> Due on Receipt</p>
-					<p><span class="text-muted">Due Date :</span> 10/05/2016</p>
+					<p><span class="text-muted">Due Date :</span>  {{date('d/m/Y')}}</p>
 				</div>
 			</div>
 			<!--/ Invoice Customer Details -->
@@ -133,7 +133,7 @@
 						    <tr>
 						      <th scope="row">1</th>
 						      <td>
-						      	<p>Create PSD for mobile APP</p>
+						      	<p>Dummy Product 1</p>
 						      	<p class="text-muted">Simply dummy text of the printing and typesetting industry.</p>
 						      </td>
 						      <td class="text-xs-right">$ 20.00/hr</td>
@@ -143,7 +143,7 @@
 						    <tr>
 						      <th scope="row">2</th>
 						      <td>
-						      	<p>iOS Application Development</p>
+						      	<p>Dummy Product 2</p>
 						      	<p class="text-muted">Pellentesque maximus feugiat lorem at cursus.</p>
 						      </td>
 						      <td class="text-xs-right">$ 25.00/hr</td>
@@ -153,7 +153,7 @@
 						    <tr>
 						      <th scope="row">3</th>
 						      <td>
-						      	<p>WordPress Template Development</p>
+						      	<p>Dummy Product 3</p>
 						      	<p class="text-muted">Vestibulum euismod est eu elit convallis.</p>
 						      </td>
 						      <td class="text-xs-right">$ 20.00/hr</td>

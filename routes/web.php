@@ -375,6 +375,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/cart/pos/payout', 'InvoiceController@savePayout');
 	Route::post('/cart/counter-payment/status', 'InvoiceProductController@changeCounterPayStatus');
 	Route::post('/close/store', 'InvoiceController@closeStore');
+	Route::get('/close/print/store/{closing_id}', 'InvoiceController@printCloseStore');
 	Route::post('/transaction/store', 'InvoiceController@transactionStore');
 	Route::get('/invoice/pos/pay/paypal', 'InvoiceController@posPayPaypal');
 	Route::get('/invoice/counter-pos/pay/paypal', 'InvoiceController@posCounterPayPaypal');

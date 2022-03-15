@@ -1391,6 +1391,234 @@ class InvoiceController extends Controller
 
     }
 
+    public function printCloseStore($closing_id=0)
+    {
+            
+        $closeStoreData=CloseDrawer::find($closing_id);
+
+        $getStoreDateTime=$closeStoreData->opeing_time;
+        $getStoreCloseDateTime=$closeStoreData->closing_time;
+        $opening_amount=$closeStoreData->opening_amount;
+
+        $totalSales=Invoice::where('store_id',$this->sdc->storeID())
+                        ->whereRaw("created_at >= CAST('".$getStoreDateTime."' as datetime) AND  created_at <=CAST('".$getStoreCloseDateTime."' as datetime)")
+                        ->sum('total_amount');
+
+        $totalTax=Invoice::where('store_id',$this->sdc->storeID())
+                        ->whereRaw("created_at >= CAST('".$getStoreDateTime."' as datetime) AND  created_at <=CAST('".$getStoreCloseDateTime."' as datetime)")
+                        ->sum('total_tax');
+
+        $totalSalesTender=Invoice::where('store_id',$this->sdc->storeID())
+                        ->whereRaw("created_at >= CAST('".$getStoreDateTime."' as datetime) AND  created_at <=CAST('".$getStoreCloseDateTime."' as datetime)")
+                        ->select('tender_id','tender_name',\DB::Raw('SUM(total_amount) as tender_total'))
+                        ->groupBy('tender_id')
+                        ->orderBy('tender_name','ASC')
+                        ->get();
+
+        $totalPayoutPlus=Payout::where('store_id',$this->sdc->storeID())
+                        ->whereRaw("created_at >= CAST('".$getStoreDateTime."' as datetime) AND  created_at <=CAST('".$getStoreCloseDateTime."' as datetime)")
+                        ->sum('amount');
+
+        $totalPayoutMin=Payout::where('store_id',$this->sdc->storeID())
+                        ->whereRaw("created_at >= CAST('".$getStoreDateTime."' as datetime) AND  created_at <=CAST('".$getStoreCloseDateTime."' as datetime)")
+                        ->sum('negative_amount');
+
+        $totalPayout=$totalPayoutPlus-$totalPayoutMin;
+        $array=array('status'=>1,'opening_amount'=>$opening_amount,'opening_time'=>date('d/m/Y',strtotime($getStoreDateTime)),'salesTotal'=>$totalSales,'totalSalesTender'=>$totalSalesTender,'totalTax'=>$totalTax);
+
+        $closing_amount=$totalSales+$opening_amount+$totalPayout;
+
+        $cashier_id=$closeStoreData->created_by;
+        $cashier=\DB::table('users')->where('id',$cashier_id)->first();
+
+        $userFullName=$cashier->name;
+
+        $invInfo=$this->sdc->Invlayout($closeStoreData->store_id);
+        if(!file_exists('company/'.$invInfo->logo))
+        {
+            return redirect()->back()->with('error', ' Invoice failed to load, Please Set Invoice/Report Logo. !');
+        }
+        
+        
+
+        $address='';
+        if(isset($invInfo->address))
+        {
+            $address=$invInfo->address;
+        }
+
+        if(isset($invInfo->mm_four))
+        {
+            $address=$invInfo->mm_four;
+        }
+
+        $html='';
+
+        $html .='<table align="center" width="100%">
+                    <tbody>
+                        <tr>
+                            <td align="center">
+                                <img class="logo" height="45" src="'.public_path($this->companyphoto($invInfo->logo)).'" alt="brand logo"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">'.$invInfo->company_name.'</td>
+                        </tr>
+                        <tr>
+                            <td align="center">'.$invInfo->c_one.'</td>
+                        </tr>
+                        <tr>
+                            <td align="center">'.$address.'</td>
+                        </tr>
+                    </tbody>
+                </table>';
+
+                    $html .='<table align="center" width="100%" style="width:100%;">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="4"><hr></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cashier</td>
+                                            <td colspan="3">: '.$userFullName.'</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date Time</td>
+                                            <td colspan="3">: '.formatDateTime($getStoreDateTime).'</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"><hr></td>
+                                        </tr>
+                                    </tbody>
+                                </table>';
+
+        $html .='<h4 align="center"><strong>DRAWER CLOSING DETAIL </strong></h4>';
+
+        $html .='<table class="table table-striped table-bordered">
+                <tbody>
+                  <tr>
+                      <td align="left" width="80%">Opening Time  </td>
+                      <td align="left" id="storeCloseTotalCollection">';
+                      $html .=$getStoreDateTime;
+                      $html .='</td>
+                  </tr>
+                  <tr>
+                      <td align="left" width="80%">Closing Time </td>
+                      <td align="left" id="storeCloseTotalCollection">';
+                      $html .=$getStoreCloseDateTime;
+                      $html .='</td>
+                  </tr>
+                  <tr>
+                      <td colspan="2"><div style="background:rgba(51,51,51,1); display:block; height:1px;"></div> </td>
+                  </tr>
+                  <tr>
+                      <td align="left" width="80%">Total Collection :  </td>
+                      <td align="left" id="storeCloseTotalCollection">$';
+                      $html .=number_format($totalSales,2);
+                      $html .='</td>
+                  </tr>
+                </tbody>
+                <tbody id="storeCloseTableTenderList">';
+
+                  if(isset($totalSalesTender))
+                  {
+                        foreach($totalSalesTender as $row)
+                        {
+                            $html .='<tr>
+                                          <td align="left">'.$row->tender_name.' Collected (+) :  </td>
+                                          <td align="left">$';
+                                          $html .=number_format($row->tender_total,2);
+                                          $html .='</td>
+                                      </tr>';
+                        }
+                  }
+
+
+                  $html .='
+                </tbody>
+                <tbody>
+                  <tr>
+                      <td align="left">Opening Amount (+) :  </td>
+                      <td align="left">$<span id="storeCloseOpeningAmount">';
+                      $html .=number_format($opening_amount,2);
+                      $html .='</span></td>
+                  </tr>
+                  <tr>
+                      <td align="left">Payout (+)(-) :  </td>
+                      <td align="left">$<span id="totalPayout">';
+                      $html .=number_format($totalPayout,2);
+                      $html .='</span></td>
+                  </tr>';
+                  //<tr><td align="left">BuyBack ( - )  :  </td><td align="left">$0.00</td></tr>
+                  $html .='<tr>
+                      <td align="left">Tax (-)  :  </td>
+                      <td align="left">$<span id="storeCloseTaxAmount">';
+                      $html .=number_format($totalTax,2);
+                      $html .='</span></td>
+                  </tr>
+                  <tr>
+                      <td colspan="2"><div style="background:rgba(51,51,51,1); display:block; height:1px;"></div> </td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                      <td align="left"><b>Net Total :</b>  </td>
+                      <td align="left">$<span id="currectStoreTotal">';
+                      $html .=number_format($closing_amount,2); 
+                      $html .='</span></td>
+                  </tr>
+              </tbody>
+            </table>';
+
+            $html .='<table align="center" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="8"><br><br><br><br></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td align="center"><hr></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td align="center"><hr></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td align="center">Cashier Sign</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td align="center">Manager Sign</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="8"><hr></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="8" align="justify">'.$invInfo->terms.'</td>
+                                        </tr>
+                                    </tbody>
+                                </table>';
+
+            //echo $html; die();
+
+            $mpdf=new Mpdf;
+            $mpdf->SetTitle('Store Closing Detail-'.$closing_id);
+            $stylesheet=file_get_contents(public_path('assets/css/bootstrap.min.css'));
+            $stylesheet2=file_get_contents(public_path('assets/css/style.css'));
+            $mpdf->WriteHTML($stylesheet, 1);
+            $mpdf->WriteHTML($stylesheet2, 1); // The parameter 1 tells that this is css/style only and no body/html/text
+            $mpdf->WriteHTML($html, 2);
+            $mpdf->Output('store_closing_detail' . time() . '.pdf', 'I');
+            exit();
+
+
+    }
+
     public function transactionStore()
     {
         $tabCount=OpenDrawer::where('store_id',$this->sdc->storeID())
@@ -1440,9 +1668,13 @@ class InvoiceController extends Controller
 
             $totalPayout=$totalPayoutPlus-$totalPayoutMin;
 
+            $totalSalesReturnAmount=SalesReturn::where('store_id',$this->sdc->storeID())
+                            ->whereRaw("created_at >= CAST('".$getStoreDateTime."' as datetime) AND  created_at <=CAST('".$getStoreCloseDateTime."' as datetime)")
+                            ->sum('sales_return_amount');
 
 
-            $array=array('status'=>1,'opening_amount'=>$opening_amount,'opening_time'=>date('d/m/Y',strtotime($getStoreDateTime)),'salesTotal'=>$totalSales,'totalSalesTender'=>$totalSalesTender,'totalTax'=>$totalTax,'totalPayout'=>$totalPayout);
+
+            $array=array('status'=>1,'opening_amount'=>$opening_amount,'opening_time'=>date('d/m/Y',strtotime($getStoreDateTime)),'salesTotal'=>$totalSales,'totalSalesTender'=>$totalSalesTender,'totalTax'=>$totalTax,'totalPayout'=>$totalPayout,'totalSalesReturnAmount'=>$totalSalesReturnAmount);
         }
         else
         {
@@ -5707,11 +5939,13 @@ class InvoiceController extends Controller
 
 
             foreach($cart->items as $row):
-                $pid=$row['item_id'];
+
+                //dd($row);
+                $pid=trim($row['item_id']);
                 $quantity=$row['qty'];
                 $unitprice=$row['unitprice'];
 
-                if($row['item_type']="VT")
+                if($row['item_type']=="VT")
                 {
                     //$catInfo=Category::where('name',"Virtual Terminal")->first();
                     $catInfo=\DB::table('categories')->where('name',"Virtual Terminal")->first();
@@ -5757,6 +5991,8 @@ class InvoiceController extends Controller
                 else
                 {
                     $pro=Product::find($pid);
+
+                   // dd($pro);
                     $tab_stock=new InvoiceProduct;
                     $tab_stock->invoice_id=$invoice_id;
                     $tab_stock->product_id=$pid;
@@ -5773,8 +6009,8 @@ class InvoiceController extends Controller
 
                     Product::where('id',$pid)
                     ->update([
-                    'quantity' => \DB::raw('quantity - '.$quantity),
-                    'sold_times' => \DB::raw('sold_times + 1')
+                        'quantity' => \DB::raw('quantity - '.$quantity),
+                        'sold_times' => \DB::raw('sold_times + 1')
                     ]);
 
                     $amount_invoice=($quantity*$unitprice);
@@ -5919,6 +6155,8 @@ class InvoiceController extends Controller
                    'sales_profit' => \DB::raw('sales_profit + '.$total_profit_invoice)
                 ]);
             }
+
+
 
             $edQr=$this->sdc->invoiceEmailTemplate();
             $emaillayoutData=$edQr['editData'];

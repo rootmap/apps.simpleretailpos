@@ -645,6 +645,7 @@ var cartCounterPaymentStatus="{{url('cart/counter-payment/status')}}";
 var cartPosPayout="{{url('cart/pos/payout')}}";
 var openStore="{{url('open/store')}}";
 var closeStore="{{url('close/store')}}";
+var closeStorePrintLocationAddHowMowKhaoUrlCartPOSvfour="{{url('close/print/store')}}";
 var authorizeNetCapturePosPayment="{{url('authorize/net/capture/pos/payment')}}";
 
 var salesCartPayment="{{url('sales/cart/payment')}}";
