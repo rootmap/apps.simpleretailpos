@@ -97,7 +97,7 @@
             // dd($data);
             $image = isset($data) ? $data['card_pic_path'] : '';
             // dd($image);
-            $config = json_decode($data->card_display_config);
+            $config = isset($data->card_display_config)? json_decode($data->card_display_config) : [];
             // dd(isset($config->aname));
             $style_block = "display:block";
             $style_none = "display:none";
@@ -106,18 +106,23 @@
             $mobileDisplay = (isset($config->mobile) && $config->mobile == 1) ? $style_block : $style_none;
             $cardDisplay = (isset($config->membership_type) && $config->membership_type == 1) ? $style_block : $style_none;
             $sinceDisplay = (isset($config->joined_date) && $config->joined_date == 1) ? $style_block : $style_none;
+            $pointDisplay = (isset($config->total_point) && $config->total_point == 1) ? $style_block : $style_none;
         @endphp
         <div id="image_preview" class="custom-file-container__image-preview"
             style="overflow: hidden; position:relative; hight: 220px; width:420px; border:2px solid #CCCCCC; border-radius:3%; transition: all 0.2s; -webkit-transition: all 0.2s;">
             <div class="row" style=" padding: 8px 5px;">
-                <div class="col-md-12"  id="storeDisplay" style="{{ $storeDisplay }}"> <h3 id="display_store_name" style="text-align: center; text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;" class="contentBlock">{{ $edit->store_name }}</h3></div>
+                <div class="col-md-12">
+                    <div class="col-md-12"  id="storeDisplay" style="{{ $storeDisplay }}"> <h3 id="display_store_name" style="text-align: center; text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;" class="contentBlock">{{ $edit->store_name }}</h3></div>
+                    <div class="col-md-12"  id="cardDisplay" style="{{ $storeDisplay }}"> <h3 id="display_store_name" style="text-align: center; text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;" class="contentBlock">{{ $edit->membership_card_type }}</h3></div>
+
+                </div>
                 <div class="col-md-12" style="position: absolute; top:42%; left : 0px;">
                     <div class="row">
                         <div class="col-md-12"  id="customerDisplay"  style="{{ $customerDisplay }}"> <h5  class="contentBlock" style="text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;"> {{ $edit->name }} </h5> </div>
                         <div class="col-md-12"  id="mobileDisplay" style="{{ $mobileDisplay }}"><h5  class="contentBlock">{{ $edit->phone }} </h5></div>
                     </div>
                 </div>
-                <div class="col-md-6"  id="cardDisplay" style="position: absolute; bottom:0px; left : 0px; text-shadow: 2px 2px 2px #5c5a5a; font-weight: bold; {{ $cardDisplay }}"><h3  class="contentBlock" >{{ $edit->membership_card_type }}</h3></div>
+                <div class="col-md-6"  id="pointDisplay" style="position: absolute; bottom:0px; left : 0px; text-shadow: 2px 2px 2px #5c5a5a; font-weight: bold; {{ $pointDisplay }}"><h3  class="contentBlock" >{{$edit->total_point}}</h3></div>
                 <div class="col-md-6"  id="sinceDisplay" style="position: absolute; bottom:0px; right : 0px; text-align: right; {{ $sinceDisplay }}">
                     <span style="text-shadow: 2px 2px 2px #5c5a5a; font-weight: bold;">Member Since</span>
                     <h6 class="contentBlock">{{ formatDate($edit->created_at) }}</h6>

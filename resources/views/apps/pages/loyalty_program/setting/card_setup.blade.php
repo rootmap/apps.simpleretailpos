@@ -84,7 +84,10 @@
                                                     style=" position : relative; overflow: hidden; hight: 220px; width:420px; border:2px solid #CCCCCC; border-radius:3%; transition: all 0.2s; -webkit-transition: all 0.2s;">
 
                                                     <div class="row" style=" padding: 8px 5px;">
-                                                        <div class="col-md-12"  id="storeDisplay"> <h3 id="display_store_name" style="text-align: center; text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;" class="contentBlock">{{ $store->name }}</h3></div>
+                                                        <div class="col-md-12"  id="storeDisplay">
+                                                            <h3 id="display_store_name" style="text-align: center; text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;" class="contentBlock">{{ $store->name }}</h3>
+                                                            <h3 id="cardDisplay" style="text-align: center; text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;" >Membership Name</h3>
+                                                        </div>
 
                                                         <div class="col-md-12" style="position: absolute; top:42%; left : 0px;">
                                                             <div class="row">
@@ -93,11 +96,10 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-md-6"  id="cardDisplay" style="position: absolute; bottom:0px; left : 0px;"><h3  class="contentBlock" >Gold</h3></div>
+                                                        <div class="col-md-6"  id="pointDisplay" style="position: absolute; bottom:0px; left : 0px;"><h3  class="contentBlock" >Total Point</h3></div>
                                                         <div class="col-md-6"  id="sinceDisplay" style="position: absolute; bottom:0px; right : 0px; text-align: right;">
                                                             Member Since
                                                             <h6 class="contentBlock">June, 2022</h6>
-
                                                         </div>
                                                     </div>
 
@@ -140,6 +142,12 @@
                                                             <label for="subject_card">Member Since</label>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group">
+                                                        <div class="checkbox checkbox-primary">
+                                                            <input type="checkbox" id="sinceCheck" onchange="changePoint(this)"  class="element" name="card_display_config[total_point]" value="1">
+                                                            <label for="subject_card">Total Point</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -158,11 +166,12 @@
 
 <script>
     var upload = new FileUploadWithPreview("myUniqueUploadId"),
-    storeDisplay = document.getElementById('storeDisplay'),
+    storeDisplay = document.getElementById('display_store_name'),
     cardDisplay = document.getElementById('cardDisplay'),
     customerDisplay = document.getElementById('customerDisplay'),
     mobileDisplay = document.getElementById('mobileDisplay'),
     sinceDisplay = document.getElementById('sinceDisplay');
+    pointDisplay = document.getElementById('pointDisplay');
 
 
     window.onload = function(){
@@ -171,12 +180,15 @@
         customerDisplay.style.display = "none";
         mobileDisplay.style.display = "none";
         sinceDisplay.style.display = "none";
+        pointDisplay.style.display = "none";
 
     }
     function changeCard(card, visibility){
         if(card!== ""){
             var card = card.value;
-            var block = cardDisplay.getElementsByClassName('contentBlock')[0];
+
+            // var block = cardDisplay.getElementsByClassName('contentBlock');
+            var block = cardDisplay;
             block.innerHTML = card;
         }
         if(visibility !== ""){
@@ -231,6 +243,17 @@
             }
             else{
                 sinceDisplay.style.display = "none";
+            }
+        }
+    }
+    function changePoint(visibility){
+        if(visibility !== ""){
+
+            if(visibility.checked){
+                pointDisplay.style.display = "block";
+            }
+            else{
+                pointDisplay.style.display = "none";
             }
         }
     }

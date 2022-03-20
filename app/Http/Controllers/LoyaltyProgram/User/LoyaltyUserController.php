@@ -116,7 +116,7 @@ class LoyaltyUserController extends Controller
 
     public function getDetailsAjax(Request $request)
     {
-        
+
         $defualtCustomer= $this->genarateDefaultCustomer();
         //dd($defualtCustomer);
         //$tab_customer=Customer::where('store_id',$this->sdc->storeID())->get();
@@ -219,14 +219,14 @@ class LoyaltyUserController extends Controller
                     "storeElegibityCheck"=>$storeElegibityCheck->is_loyalty_program
                 ];
         }
-        
 
-        return response()->json($response_data); 
+
+        return response()->json($response_data);
     }
 
     public function checkCustomerLoyalty(Request $request)
     {
-        
+
         $defualtCustomer= $this->genarateDefaultCustomer();
         //dd($defualtCustomer);
         //$tab_customer=Customer::where('store_id',$this->sdc->storeID())->get();
@@ -326,9 +326,9 @@ class LoyaltyUserController extends Controller
                     "storeElegibityCheck"=>$storeElegibityCheck->is_loyalty_program
                 ];
         }
-        
 
-        return $response_data; 
+
+        return $response_data;
     }
 
     public function ImageToBlackAndWhite($im) {
@@ -341,15 +341,15 @@ class LoyaltyUserController extends Controller
                 $b = $rgb & 0xFF;
                 $gray = ($r + $g + $b) / 3;
                 if ($gray < 0xFF) {
-    
+
                     imagesetpixel($im, $x, $y, 0xFFFFFF);
                 }else
                     imagesetpixel($im, $x, $y, 0x000000);
             }
         }
-    
+
         imagefilter($im, IMG_FILTER_NEGATE);
-    
+
     }
 
     private function makeDataArray($request)

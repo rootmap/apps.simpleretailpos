@@ -122,19 +122,24 @@
                                                                 $mobileDisplay = (isset($config->mobile) && $config->mobile == 1) ? $style_block : $style_none;
                                                                 $cardDisplay = (isset($config->membership_type) && $config->membership_type == 1) ? $style_block : $style_none;
                                                                 $sinceDisplay = (isset($config->joined_date) && $config->joined_date == 1) ? $style_block : $style_none;
+                                                                $pointDisplay = (isset($config->total_point) && $config->total_point == 1) ? $style_block : $style_none;
                                                             @endphp
 
                                                             <div id="image_preview" class="custom-file-container__image-preview"
                                                                 style="overflow: hidden; position:relative; hight: 220px; width:420px; border:2px solid #CCCCCC; border-radius:3%; transition: all 0.2s; -webkit-transition: all 0.2s;">
                                                                 <div class="row" style=" padding: 8px 5px;">
-                                                                    <div class="col-md-12"  id="storeDisplay" style="{{ $storeDisplay }}"> <h3 id="display_store_name" style="text-align: center; text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;" class="contentBlock">{{ $store->name }}</h3></div>
+                                                                    <div class="col-md-12">
+                                                                        <div class="col-md-12"  id="storeDisplay" style="{{ $storeDisplay }}"> <h3 id="display_store_name" style="text-align: center; text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;" class="contentBlock">{{ $store->name }}</h3></div>
+                                                                        <div class="col-md-12"  id="cardDisplay" style="{{ $cardDisplay }}"><h3  class="contentBlock"  style="text-align: center">{{ $membership_name }}</h3></div>
+                                                                    </div>
+
                                                                     <div class="col-md-12" style="position: absolute; top:42%; left : 0px;">
                                                                         <div class="row">
                                                                             <div class="col-md-12"  id="customerDisplay"  style="{{ $customerDisplay }}"> <h5  class="contentBlock" style="text-shadow: 2px 2px 2px #B4ACA6; font-weight: bold;">Customer Name</h5> </div>
                                                                             <div class="col-md-12"  id="mobileDisplay" style="{{ $mobileDisplay }}"><h5  class="contentBlock">+1 000 000 000</h5></div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-6"  id="cardDisplay" style="position: absolute; bottom:0px; left : 0px; {{ $cardDisplay }}"><h3  class="contentBlock" >{{ $membership_name }}</h3></div>
+                                                                    <div class="col-md-6"  id="pointDisplay" style="display:block; position: absolute; bottom:0px; left:0px; {{ $pointDisplay }}"><h3  class="contentBlock">Total Point</h3></div>
                                                                     <div class="col-md-6"  id="sinceDisplay" style="position: absolute; bottom:0px; right : 0px; text-align: right; {{ $sinceDisplay }}">
                                                                         Member Since
                                                                         <h6 class="contentBlock">June, 2022</h6>
@@ -185,6 +190,14 @@
                                                                             name="card_display_config[joined_date]" {{ isset($config->joined_date) ?  "checked": "" }}
                                                                             value="1">
                                                                         <label for="subject_card">Member Since</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="checkbox checkbox-primary">
+                                                                        <input disabled type="checkbox" id="sinceCheck" onchange="changePoint(this)" class="element"
+                                                                            name="card_display_config[total_point]" {{ isset($config->total_point) ?  "checked": "" }}
+                                                                            value="1">
+                                                                        <label for="subject_card">Total Point</label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -243,6 +256,7 @@
     customerDisplay = document.getElementById('customerDisplay'),
     mobileDisplay = document.getElementById('mobileDisplay'),
     sinceDisplay = document.getElementById('sinceDisplay');
+    pointDisplay = document.getElementById('pointDisplay');
 
 
     // window.onload = function(){
@@ -311,6 +325,17 @@
             }
             else{
                 sinceDisplay.style.display = "none";
+            }
+        }
+    }
+    function changePoint(visibility){
+        if(visibility !== ""){
+
+            if(visibility.checked){
+                pointDisplay.style.display = "block";
+            }
+            else{
+                pointDisplay.style.display = "none";
             }
         }
     }
